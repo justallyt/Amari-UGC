@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "Madera-Regular";
+    src: url("../assets/fonts/Madera-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Madera-Medium";
+    src: url("../assets/fonts/Madera-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Madera-Bold";
+    src: url("../assets/fonts/Madera-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Madera-Thin";
+    src: url("../assets/fonts/Madera-Thin.ttf");
+}
+
+@font-face {
+    font-family: "Madera-Light";
+    src: url("../assets/fonts/Madera-Light.ttf");
+}
+
+@font-face {
+    font-family: "Madera-UltraLight";
+    src: url("../assets/fonts/Madera-Ultra-Light.ttf");
+}

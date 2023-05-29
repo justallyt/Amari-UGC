@@ -1,0 +1,348 @@
+
+.welcome-intro{
+    padding: 60px 0;
+}
+.welcome-intro-texts{
+   width: 80%;
+   margin: auto;
+}
+.welcome-intro-texts h1{
+   font-size: 65px;
+   text-align: center;
+   font-family: "Madera-Medium";
+   line-height: 80px;
+}
+
+.get-started{
+   display: flex;
+   justify-content: center;
+   margin-top: 40px;
+}
+
+
+.random-images-section{
+     width: 95%;
+     margin: auto;
+     padding-bottom: 100px;
+}
+.random-images-section .random-images-row{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 20px;
+}
+
+/* REGISTRATION PAGE */
+.registration-body-content{
+     padding: 20px 0;
+}
+
+.choice-row{
+     width: 500px;
+     margin: 30px auto;
+}
+
+.choice-row .choice-moja{
+     border: 1px solid var(--greyish-color);
+     cursor: pointer;
+     border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     -ms-border-radius: 10px;
+     -o-border-radius: 10px;
+     display: flex;
+     align-items: center;
+     padding: 20px;
+     gap: 20px;
+     margin-bottom: 20px;
+}
+.choice-moja.selected{
+      border: 2px solid var(--main-color);
+}
+.choice-moja .choice-icon{
+     border: 1px solid var(--greyish-color);
+     flex-shrink: 0;
+     width: 45px;
+     height: 45px;
+     border-radius:6px ;
+     -webkit-border-radius:6px ;
+     -moz-border-radius:6px ;
+     -ms-border-radius:6px ;
+     -o-border-radius:6px ;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.choice-moja.selected .choice-icon{
+    border: 1px solid var(--main-color);
+}
+.choice-icon span{
+    color: gray;
+}
+.choice-moja.selected .choice-icon span{
+     color: var(--main-color);
+}
+.choice-text h3{
+    font-size: 18px;
+}
+.choice-text p{
+     font-size: 13px;
+     width: 70%;
+     margin-top: 10px;
+     color: #555;
+}
+.choice-toggles{
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+.choice-toggles span{
+      font-size: 22px;
+      position: absolute;
+      color: var(--greyish-color);
+      top: 0;
+      left: 0;
+}
+.choice-toggles span.yes{
+        opacity: 0;
+        transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+}
+.choice-moja.selected .choice-toggles span{
+    color: var(--main-color);
+}
+.choice-moja.selected .choice-toggles span.yes{
+      opacity: 1;
+}
+.choice-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.create-account-body .form{
+       width: 600px;
+       margin: 30px auto;
+       padding-bottom: 20px;
+}
+
+.form-row{
+    margin-bottom: 20px;
+}
+.form-row.split{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+}
+.form-row label{
+    display: block;
+    margin-bottom: 10px;
+}
+.form-row label span{
+    color: red;
+}
+.form-row .form-control{
+     width: 100%;
+     height: 55px;
+     font-family: "Madera-Regular";
+     padding-left: 15px;
+     border: 1px solid var(--sleezy-border);
+     border-radius: 6px;
+     background: rgba(255, 255, 255, 0.582);
+     -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+     -ms-border-radius: 6px;
+     -o-border-radius: 6px;
+     outline: none;
+     font-size: 16px;
+}
+
+.form-control::placeholder{
+     color: rgb(158, 158, 156);
+     font-size: 14px;
+}
+
+.password-input {
+     display: flex;
+     align-items: center;
+     background: rgba(255, 255, 255, 0.582);
+     border: 1px solid var(--sleezy-border);
+     padding-right: 20px;
+     border-radius: 6px;
+     -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+     -ms-border-radius: 6px;
+     -o-border-radius: 6px;
+}
+.password-input .form-control{
+      border: none;
+      background: transparent;
+}
+
+.password-input .toggle-btn{
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+}
+
+.password-input .toggle-btn span{
+     font-size: 20px;
+}
+.toggle-btn span{
+     position: absolute;
+}
+.toggle-btn span.yes{
+     opacity: 0;
+     transition: all 0.5s ease;
+     -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+     -ms-transition: all 0.5s ease;
+     -o-transition: all 0.5s ease;
+}
+.toggle-btn.active span{
+    opacity: 0;
+}
+.toggle-btn.active span.yes{
+    opacity: 1;
+}
+
+
+.agreement{
+     display: flex;
+     gap: 10px;
+     align-items: center;
+     padding: 10px 5px;
+}
+.agreement input[type="checkbox"]{
+     width: 15px;
+     height: 15px;
+     accent-color: var(--main-color);
+}
+.agreement p{
+    font-size: 15px;
+    margin-top: -3px
+}
+
+.agreement p a{
+      color: var(--main-color);
+}
+
+.account-options{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.account-options p{
+      border:1px solid var(--sleezy-border);
+      padding: 10px 40px 14px 40px;
+      border-radius: 40px;
+      -webkit-border-radius: 40px;
+      -moz-border-radius: 40px;
+      -ms-border-radius: 40px;
+      -o-border-radius: 40px;
+      font-size: 15px;
+      transition: transform 0.5s ease;
+      -webkit-transition: transform 0.5s ease;
+      -moz-transition: transform 0.5s ease;
+      -ms-transition: transform 0.5s ease;
+      -o-transition: transform 0.5s ease;
+      cursor: pointer;
+}
+.account-options p:hover{
+    transform: scale(0.96);
+    -webkit-transform: scale(0.96);
+    -moz-transform: scale(0.96);
+    -ms-transform: scale(0.96);
+    -o-transform: scale(0.96);
+}
+.account-options p.active{
+     border: 2px solid var(--main-color);
+     color: var(--main-color);
+}
+
+.brand-form,
+.consumer-form{
+      width: 600px;
+      margin: 40px auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 1090px){
+    .welcome-intro-texts{
+          width: 100%;
+    }
+}
+
+@media(max-width: 768px){
+     .random-images-section .random-images-row{
+         grid-template-columns: repeat(1,1fr);
+     }
+     .welcome-intro-texts h1{
+        font-size: 55px;
+        line-height: 70px;
+   }
+ 
+   .create-account-body .form,
+   .brand-form,
+.consumer-form{
+         width: 100%;
+   }
+}
+@media(max-width: 550px){
+    .choice-row{
+        width: 100%;
+    }
+    .account-options{
+          flex-direction: column;
+    }
+    .account-options p{
+          font-size: 14px;
+          text-align: center;
+    }
+}
+
+@media(max-width:500px){
+     .form-row.split{
+            grid-template-columns: repeat(1,1fr);
+     }
+     .form-row label{
+        font-size: 15px;
+     }
+     .choice-row{
+        width: 100%;
+    }
+}
