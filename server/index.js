@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import connectToDatabase from "./config/db.js";
 import consumerRoutes from "./routes/consumerRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js"
+import cors from "cors"
 
 //Initialize dotenv for usage
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
+app.use(cors())
 /* Routes */
 app.use('/api/consumer', consumerRoutes);
 

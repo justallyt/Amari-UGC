@@ -1,18 +1,44 @@
 import { VscEye, VscEyeClosed } from "react-icons/vsc"
 import Footer from "../../components/Footer"
-import { useState } from "react"
-import { NavLink } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux"
+import { useCreateConsumerMutation } from "../../redux/apiSlice"
+import { setCredentials } from "../../redux/authSlice"
 const RegisterConsumer = () => {
    const [ status, setStatus] = useState(false);
 
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   const { userInfo } = useSelector(state => state.auth);
+
+   const [ registerconsumer ] = useCreateConsumerMutation();
 
    const { register, handleSubmit, formState: { errors }, reset } = useForm();
    
-   const createConsumer = (data) => {
 
-           console.log(data);
+  //  useEffect(()=> {
+  //      if(userInfo){
+  //           navigate('/dashboard')
+  //      }
+  //  }, [navigate, userInfo])
+
+
+   const createConsumer = async (data) => {
+          console.log(data)
+           try {
+                const res = await registerconsumer(data).unwrap();
+                dispatch(setCredentials({...res}));
+                navigate('/')
+           } catch (err) {
+                 console.log("Nothing happened")
+           }
+
+
+
+
 
          //Reset form after submission
           reset();

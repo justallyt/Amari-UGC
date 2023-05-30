@@ -1,9 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseQuery = fetchBaseQuery({ baseUrl: ' ' })
-
 export const apiSlice = createApi({
-        baseQuery,
+        baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/consumer/'}),
         tagTypes: ['Consumer'],
-        endpoints: () => ({})
+        endpoints: (build) => ({
+              createConsumer: build.mutation({
+                    query: (payload) => ({
+                          url: `register`,
+                          method: 'POST',
+                          body: payload,
+                    })
+              })
+        })
 })
+
+export const { useCreateConsumerMutation } = apiSlice

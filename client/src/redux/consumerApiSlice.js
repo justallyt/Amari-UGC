@@ -1,6 +1,6 @@
 import { apiSlice } from "./apiSlice";
 
-const CONSUMER_URL = '/api/consumer'
+const CONSUMER_URL = 'http://localhost:8080/api/consumer'
 
 export const consumerApiSlice = apiSlice.injectEndpoints({
      endpoints: (builder) => ({
@@ -10,8 +10,15 @@ export const consumerApiSlice = apiSlice.injectEndpoints({
                      method: 'POST',
                      body: data
                 })
+          }),
+          register: builder.mutation({
+                 query: (data) => ({
+                       url: `${CONSUMER_URL}/register`,
+                       method: "POST",
+                       body: data
+                 })
           })
      })
 })
 
-export const { useLoginMutation } = consumerApiSlice
+export const { useLoginMutation, useRegisterMutation } = consumerApiSlice
