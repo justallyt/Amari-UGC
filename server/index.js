@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectToDatabase from "./config/db.js";
 import consumerRoutes from "./routes/consumerRoutes.js"
+import brandRoutes from "./routes/brandRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js"
 import cors from "cors"
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(cors())
 /* Routes */
 app.use('/api/consumer', consumerRoutes);
+app.use('/api/brand', brandRoutes);
 
 //Error Handling
 app.use(notFound);
