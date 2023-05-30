@@ -6,7 +6,6 @@ import RegisterConsumer from "../components/Consumer/RegisterConsumer"
 const Register = () => {
     const { type } = useParams()
 
-    console.log(type)
   return (
     <div className="register-wrapper">
              <div className="inner-row">
