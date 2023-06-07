@@ -3,7 +3,7 @@ import { VscEye } from "react-icons/vsc"
 import { VscEyeClosed } from "react-icons/vsc"
 import { NavLink } from "react-router-dom"
 
-const LoginConsumer = () => {
+const LoginUser = () => {
   const [ status, setStatus] = useState(false);
 
   const changeStatus = () =>{
@@ -35,4 +35,4 @@ const LoginConsumer = () => {
   )
 }
 
-export default LoginConsumer
+export default LoginUser

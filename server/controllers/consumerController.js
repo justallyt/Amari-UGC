@@ -22,7 +22,7 @@ export const LoginConsumer = asyncHandler(async(req, res) => {
 
 //Register Consumer
 export const RegisterConsumer = asyncHandler(async(req, res) => {
-       const { name, email, password } = req.body;
+       const { name, email, password, role } = req.body;
 
        const userExists = await Consumer.findOne({ email });
 
@@ -34,7 +34,8 @@ export const RegisterConsumer = asyncHandler(async(req, res) => {
        const consumer = await Consumer.create({
             name,
             email,
-            password
+            password,
+            role
        });
 
        if(consumer){
@@ -43,7 +44,8 @@ export const RegisterConsumer = asyncHandler(async(req, res) => {
                res.status(201).json({
                     _id: consumer._id,
                     name: consumer.name,
-                    email: consumer.email
+                    email: consumer.email,
+                    role: consumer.role
                });
        }else{
                res.status(400);

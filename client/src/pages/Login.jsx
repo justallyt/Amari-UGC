@@ -1,15 +1,9 @@
 import { NavLink } from "react-router-dom"
 import Footer from "../components/Footer"
 import logo from "../assets/logo.png"
-import { useState } from "react"
-import LoginBrand from "../components/Brand/LoginBrand"
-import LoginConsumer from "../components/Consumer/LoginConsumer"
+import LoginUser from "../components/LoginUser"
 const Login = () => {
-    const [active, setActive] = useState(0)
 
-    const changeActive = (i) => {
-           setActive(i);
-    }
   return (
     <div className="login-wrapper">
              <div className="inner-row">
@@ -31,17 +25,8 @@ const Login = () => {
                                                        <p>Please choose your account and enter your details to log in:</p>
                                            </div>
 
-                                           <div className="account-options">
-                                                  <p className={ active === 0 ? "active" : ""} onClick={() => changeActive(0)}>Login as a Brand</p>
-                                                  <p className={ active === 1 ? "active" : ""} onClick={() => changeActive(1)}>Login as a Consumer</p>
-                                           </div>
-
                                           <div className="account-themselfu">
-                                                    { active === 0 ? 
-                                                         <LoginBrand />
-                                                         :
-                                                         <LoginConsumer /> 
-                                                     }
+                                                     <LoginUser />
                                           </div>
                                  </div>
                        </div>

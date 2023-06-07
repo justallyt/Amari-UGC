@@ -37,9 +37,6 @@ const RegisterConsumer = () => {
            }
 
 
-
-
-
          //Reset form after submission
           reset();
    }
@@ -50,7 +47,7 @@ const RegisterConsumer = () => {
   return (
     <div className="register-brand">
                <div className="small-intro tweak">
-                         <h2>Register Your Company</h2>
+                         <h2>Create your Account</h2>
                          <p>Enter your details to create your account:</p>
                </div>
 
@@ -79,7 +76,7 @@ const RegisterConsumer = () => {
                                   </div> 
 
                                   <div className="agreement">
-                                            <input type="checkbox" className="check" {...register("terms", { required: "Kindly read through our terms and policy"})} />
+                                            <input type="checkbox" className="check" {...register("consumer", { required: "Kindly read through our terms and policy"})} />
                                             <p>I agree to the <a href="s">Terms of Service</a> and <a href="s">Privacy Policy</a></p>
                                   </div>
                                   <span className="error">{errors.terms && errors.terms.message}</span>
