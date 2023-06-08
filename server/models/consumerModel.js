@@ -21,7 +21,8 @@ const consumerSchema = mongoose.Schema({
             required: true
       },
       profilePic: {
-           type: String
+           type: String,
+           default: 'null'
       }
 }, { timestamps: true });
 

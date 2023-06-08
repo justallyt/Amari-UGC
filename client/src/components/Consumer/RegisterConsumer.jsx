@@ -27,7 +27,9 @@ const RegisterConsumer = () => {
 
 
    const createConsumer = async (data) => {
-          console.log(data)
+          if(data.terms === true){
+                data.role = "Consumer";
+          }
            try {
                 const res = await registerconsumer(data).unwrap();
                 dispatch(setCredentials({...res}));
@@ -35,8 +37,6 @@ const RegisterConsumer = () => {
            } catch (err) {
                  console.log("Nothing happened")
            }
-
-
          //Reset form after submission
           reset();
    }
@@ -72,11 +72,11 @@ const RegisterConsumer = () => {
                                                             <span className="yes"><VscEyeClosed /></span>
                                                    </div>
                                           </div>
-                                          <span className="error">{errors.password && errors.password.message}</span>
+                                           
                                   </div> 
 
                                   <div className="agreement">
-                                            <input type="checkbox" className="check" {...register("consumer", { required: "Kindly read through our terms and policy"})} />
+                                            <input type="checkbox" className="check" {...register("terms", { required: "Kindly read through our terms and policy"})} />
                                             <p>I agree to the <a href="s">Terms of Service</a> and <a href="s">Privacy Policy</a></p>
                                   </div>
                                   <span className="error">{errors.terms && errors.terms.message}</span>

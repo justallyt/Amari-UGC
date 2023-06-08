@@ -22,7 +22,7 @@ const Login = () => {
                                  <div className="login-user">
                                            <div className="small-intro tweak">
                                                        <h2>Hi, Welcome Back</h2>
-                                                       <p>Please choose your account and enter your details to log in:</p>
+                                                       <p>Enter your details to log into your account:</p>
                                            </div>
 
                                           <div className="account-themselfu">

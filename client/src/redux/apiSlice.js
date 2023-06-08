@@ -10,8 +10,15 @@ export const apiSlice = createApi({
                           method: 'POST',
                           body: payload,
                     })
+              }),
+              loginConsumer: build.mutation({
+                      query: (payload) => ({
+                              url: `login`,
+                              method: 'POST',
+                              body: payload
+                      })
               })
         })
 })
 
-export const { useCreateConsumerMutation } = apiSlice
+export const { useCreateConsumerMutation, useLoginConsumerMutation } = apiSlice
