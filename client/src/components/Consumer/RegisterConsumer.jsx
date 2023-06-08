@@ -12,7 +12,7 @@ const RegisterConsumer = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
-   const { userInfo } = useSelector(state => state.auth);
+   //const { userInfo } = useSelector(state => state.auth);
 
    const [ registerconsumer ] = useCreateConsumerMutation();
 

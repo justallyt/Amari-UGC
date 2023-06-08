@@ -4,7 +4,7 @@ import { VscEye } from "react-icons/vsc"
 import { VscEyeClosed } from "react-icons/vsc"
 import { useForm } from "react-hook-form"
 import { useLoginConsumerMutation } from "../redux/apiSlice"
-import { useDispatch } from "react-redux"
+//import { useDispatch } from "react-redux"
 const LoginUser = () => {
   const [ status, setStatus] = useState(false);
 
