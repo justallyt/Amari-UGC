@@ -1,17 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
-        baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/consumer/'}),
-        tagTypes: ['Consumer'],
+        baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/user/'}),
+        tagTypes: ['User'],
         endpoints: (build) => ({
-              createConsumer: build.mutation({
+              createUser: build.mutation({
                     query: (payload) => ({
                           url: `register`,
                           method: 'POST',
                           body: payload,
                     })
               }),
-              loginConsumer: build.mutation({
+              loginUser: build.mutation({
                       query: (payload) => ({
                               url: `login`,
                               method: 'POST',
@@ -21,4 +21,4 @@ export const apiSlice = createApi({
         })
 })
 
-export const { useCreateConsumerMutation, useLoginConsumerMutation } = apiSlice
+export const { useCreateUserMutation, useLoginUserMutation } = apiSlice

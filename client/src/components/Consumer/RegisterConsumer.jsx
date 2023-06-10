@@ -1,20 +1,21 @@
 import { VscEye, VscEyeClosed } from "react-icons/vsc"
 import Footer from "../../components/Footer"
-import { useState, useEffect } from "react"
-import { NavLink, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { NavLink } from "react-router-dom"
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from "react-redux"
-import { useCreateConsumerMutation } from "../../redux/apiSlice"
-import { setCredentials } from "../../redux/authSlice"
+//import { useDispatch } from "react-redux"
+import { useCreateUserMutation } from "../../redux/apiSlice"
+//import { setCredentials } from "../../redux/authSlice"
+
 const RegisterConsumer = () => {
    const [ status, setStatus] = useState(false);
 
-   const navigate = useNavigate();
-   const dispatch = useDispatch();
+//    const navigate = useNavigate();
+//    const dispatch = useDispatch();
 
    //const { userInfo } = useSelector(state => state.auth);
 
-   const [ registerconsumer ] = useCreateConsumerMutation();
+   const [ registerconsumer ] = useCreateUserMutation();
 
    const { register, handleSubmit, formState: { errors }, reset } = useForm();
    
@@ -32,8 +33,7 @@ const RegisterConsumer = () => {
           }
            try {
                 const res = await registerconsumer(data).unwrap();
-                dispatch(setCredentials({...res}));
-                navigate('/')
+                console.log(res)
            } catch (err) {
                  console.log("Nothing happened")
            }

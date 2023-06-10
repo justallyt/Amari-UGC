@@ -3,6 +3,8 @@ import Home from "./pages/Home"
 import UserChoice from "./pages/UserChoice"
 import Register from "./pages/Register"
 import Login from "./pages/Login"
+import BrandDashboard from "./pages/BrandDashboard/BrandDashboard"
+import ConsumerDashboard from "./pages/ConsumerDashboard/ConsumerDashboard"
 function App() {
   return (
     <>
@@ -11,6 +13,10 @@ function App() {
                    <Route path="/user/register" element={<UserChoice />} />
                    <Route path="/user/register/:type" element={<Register />} />
                    <Route path="/user/login" element={<Login />} />
+                   { /* Dashboard Routes */}
+
+                   <Route path="/brand/dashboard" element={<BrandDashboard/>} />
+                   <Route path="/consumer/dashboard" element={<ConsumerDashboard />} />
            </Routes>
     </>
   )

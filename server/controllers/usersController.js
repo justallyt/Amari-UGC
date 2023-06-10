@@ -35,7 +35,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
         if(role.toLowerCase() === 'brand'){
                const { name, password, phone, country, businessType } = req.body;
 
-               const user = await User.create({ name, email, password, phone, role,  country, businessType });
+               const user = await User.create({ name, email, password, phone, address: {country}, role, businessType });
 
                if(user){
                         generateToken(res, user._id);
