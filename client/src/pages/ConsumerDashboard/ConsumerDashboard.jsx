@@ -1,3 +1,4 @@
+import DashboardBody from "../../components/Consumer/DashboardBody"
 import ConsumerSidebar from "../../components/Consumer/Sidebar"
 import "../../css/consumer/dashboard.css"
 const ConsumerDashboard = () => {
@@ -6,6 +7,7 @@ const ConsumerDashboard = () => {
         <div className="dashboard-wrapper">
                  <div className="dashboard-inner">
                           <ConsumerSidebar />
+                          <DashboardBody />
                  </div>
         </div>
     </>

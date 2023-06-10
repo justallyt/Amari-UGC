@@ -14,24 +14,28 @@ const ConsumerSidebar = () => {
                        <div className="sidebar-nav">
                                     <ul>
                                               <li>
-                                                       <NavLink to={'/'}><span><IoHomeOutline /></span> Dashboard</NavLink>
+                                                       <NavLink to={'/consumer/dashboard'}><span><IoHomeOutline /></span> Dashboard</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/'}><span><IoLayersOutline /></span> My Brands</NavLink>
+                                                       <NavLink to={'/consumer/my-brands'}><span><IoLayersOutline /></span> My Brands</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/'}><span><IoCloudUploadOutline /></span> Create</NavLink>
+                                                       <NavLink to={'/create'}><span><IoCloudUploadOutline /></span> Create</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/'}><span><BsDatabase /></span> My Creations</NavLink>
+                                                       <NavLink to={'/content'}><span><BsDatabase /></span> My Creations</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/'}><span><BsPiggyBank /></span> My Earnings</NavLink>
+                                                       <NavLink to={'/earnings'}><span><BsPiggyBank /></span> My Earnings</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/'}><span><SlSettings /></span> Settings</NavLink>
+                                                       <NavLink to={'/settings'}><span><SlSettings /></span> Settings</NavLink>
                                              </li>
                                     </ul>
+                       </div>
+
+                       <div className="help">
+                                <NavLink to={'/help'}>Need any Help?</NavLink>
                        </div>
           </div>
      )

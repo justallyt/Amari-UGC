@@ -1,5 +1,7 @@
 .dashboard-wrapper{
-      background: white;
+      background: rgb(250, 250, 250);
+      position:relative;
+       height: 100vh;
 }
 .dashboard-inner{
      width: 1450px;
@@ -13,17 +15,149 @@
      padding: 20px;
      bottom: 0;
      background: rgb(255, 255, 255);
-     backdrop-filter: blur(5px);
 }
 .sidebar-logo {
       width: 150px;
+      margin: 0px auto 50px auto;
+}
+
+.sidebar-nav ul li{
+    line-height: 50px;
+    margin-bottom: 10px;
+}
+
+.sidebar-nav ul li a{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 90%;
+    padding: 0 15px;
+    font-size: 15px;
+    margin: auto;
+    color: rgb(0, 38, 42);
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+.sidebar-nav ul li a:hover,
+.sidebar-nav ul li a.active{
+    font-family: "Madera-Medium";
+    background:rgba(220, 244, 244, 0.25);
+}
+.sidebar-nav ul li a span{
+    display: inline-flex;
+    margin-top: 2px;
+    font-size: 20px;
+}
+
+.sidebar-container .help{
+    margin: 200px auto 0px auto;
+    text-align: center;
+}
+.sidebar-container .help a{
+    font-size: 14px;
+    background:rgba(230, 242, 242, 0.386);
+    padding: 15px;
+    color: var(--main-color);
+    width: 90%;
+    margin: auto;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
 }
 
 
+.dashboard-body-wrap{
+      margin-left: 300px;
+      width: calc(100% - 300px);
+}
+.dashboard-row{
+      width: 95%;
+       margin: auto;
+       padding: 20px;
+}
 
+.search-bar{
+     width: 30%;
+     background: white;
+     height: 45px;
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     display: flex;
+     align-items: center;
+     gap: 5px;
+     padding: 0 10px;
+     box-shadow: 0px 0px 3px -2px gainsboro;
+}
+.search-bar .search-control{
+       border: none;
+       font-family: "Madera-Regular";
+       outline: none;
+       background: transparent;
+       width: 90%;
+       height: 40px;
+}
 
-
-
+.search-bar span{
+    margin-top: 3px;
+    display: inline-flex;
+}
+.topbar-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.notification-profile{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.notification{
+     position: relative;
+}
+.notification span{
+      font-size: 22px;
+}
+.notification span.red-dot{
+      width: 7px;
+      height: 7px;
+      background: red;
+      right: 2px;
+      top: 5px;
+      position: absolute;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      box-shadow: 0px 0px 8px -1px rgba(255, 0, 0, 0.916);
+}
+.profile-part{
+     width: 45px;
+     height: 45px;
+     overflow: hidden;
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     cursor: pointer;
+}
 
 
 
