@@ -1,13 +1,13 @@
-import { useEffect } from "react"
-import toast, { Toaster } from "react-hot-toast"
-
+import ConsumerSidebar from "../../components/Consumer/Sidebar"
+import "../../css/consumer/dashboard.css"
 const ConsumerDashboard = () => {
-  useEffect(() => {
-         toast.success("Login Successful")
-  }, [])
   return (
     <>
-             <Toaster />
+        <div className="dashboard-wrapper">
+                 <div className="dashboard-inner">
+                          <ConsumerSidebar />
+                 </div>
+        </div>
     </>
   )
 }

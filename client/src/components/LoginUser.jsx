@@ -18,21 +18,21 @@ const LoginUser = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector(state => state.auth);
 
-  useEffect(() => {
-         switch (userInfo.role) {
-          case 'brand':
-                  navigate('/brand/dashboard')
-            break;
-         case 'consumer':
-                 navigate('/consumer/dashboard');
-                 break;
-          case 'admin':
-                 navigate('/admin/dashboard');
-                 break;
-          default:
-            break;
-         }
-  }, [navigate, userInfo])
+  // useEffect(() => {
+  //        switch (userInfo.role) {
+  //         case 'brand':
+  //                 navigate('/brand/dashboard')
+  //           break;
+  //        case 'consumer':
+  //                navigate('/consumer/dashboard');
+  //                break;
+  //         case 'admin':
+  //                navigate('/admin/dashboard');
+  //                break;
+  //         default:
+  //           break;
+  //        }
+  // }, [navigate, userInfo])
 
 
   const [ loginUser, { isLoading } ] = useLoginUserMutation()
@@ -43,6 +43,7 @@ const authUser = async(data) => {
        try {
             const res = await loginUser(data).unwrap();
             dispatch(setCredentials({...res}));
+            navigate('/consumer/dashboard');
        } catch (error) {
              console.log(error);
              toast.error("Login failed. Please try again")

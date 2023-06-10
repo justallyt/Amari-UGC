@@ -1,0 +1,41 @@
+.dashboard-wrapper{
+      background: white;
+}
+.dashboard-inner{
+     width: 1450px;
+     margin: auto;
+     position: relative;
+}
+.sidebar-container{
+      width: 300px;
+      position: fixed;
+      top: 0;
+     padding: 20px;
+     bottom: 0;
+     background: rgb(255, 255, 255);
+     backdrop-filter: blur(5px);
+}
+.sidebar-logo {
+      width: 150px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 1480px){
+       .dashboard-inner{
+                width: 100%;
+       }
+}
