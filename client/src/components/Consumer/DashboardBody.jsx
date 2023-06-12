@@ -1,6 +1,7 @@
+import Extras from "./Extras"
 import Informationals from "./Informationals"
 import Topbar from "./Topbar"
-
+import Footer from '../Footer'
 const DashboardBody = () => {
   return (
     <div className="dashboard-body-wrap">
@@ -13,8 +14,11 @@ const DashboardBody = () => {
                                   </div>
                                   <div className="dashboard-wrapper-row">
                                                <Informationals />
+                                               <Extras />
                                   </div>
                          </div>
+
+                         <Footer />
                </div>
     </div>
   )
