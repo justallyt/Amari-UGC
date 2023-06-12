@@ -1,3 +1,4 @@
+import Informationals from "./Informationals"
 import Topbar from "./Topbar"
 
 const DashboardBody = () => {
@@ -5,6 +6,15 @@ const DashboardBody = () => {
     <div className="dashboard-body-wrap">
                <div className="dashboard-row">
                          <Topbar />
+
+                         <div className="dashbord-wrapper">
+                                  <div className="intro">
+                                            <h2>Hi, Abigail</h2>
+                                  </div>
+                                  <div className="dashboard-wrapper-row">
+                                               <Informationals />
+                                  </div>
+                         </div>
                </div>
     </div>
   )
