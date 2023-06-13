@@ -2,6 +2,7 @@ import Extras from "./Extras"
 import Informationals from "./Informationals"
 import Topbar from "./Topbar"
 import Footer from '../Footer'
+
 const DashboardBody = () => {
   return (
     <div className="dashboard-body-wrap">

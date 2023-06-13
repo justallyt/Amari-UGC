@@ -51,7 +51,7 @@ const Topbar = () => {
                                              </div>
                                    </div>
 
-                                   <NavLink to={'/'} className='profile-link'>
+                                   <NavLink to={'/consumer/profile'} className='profile-link'>
                                                <span><FaRegUser /></span>
                                                  <div className="deets">
                                                              <h4>My Account</h4>

@@ -1,0 +1,28 @@
+/* Profile Styles */
+.profile-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;;
+}
+.profile-header h2{
+   font-family: "Madera-Light";
+}
+.profile-header span{
+    width: 45px;
+    margin-top: 10px;
+    height: 45px;
+    background: rgba(230, 234, 234, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    cursor: pointer;
+}
+
+.profile-header span:hover{
+     background:rgba(226, 240, 241, 0.762);
+}
