@@ -16,7 +16,7 @@ export const LoginUser = asyncHandler(async(req, res) => {
                    id: user._id,
                    name: user.name,
                    email: user.email,
-                   role: user.role
+                   role: user.role,
              })
        }else{
                res.status(401);
@@ -44,7 +44,11 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                         generateToken(res, user._id);
 
                         res.status(201).json({
-                               message: "Brand Account created successfully"
+                               message: "Account created successfully",
+                               id: user._id,
+                               name: user.name,
+                               email: user.email,
+                               role: user.role,
                         })
                }else{
                       res.status(400);
@@ -59,7 +63,11 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                        generateToken(res, user._id);
 
                        res.status(201).json({
-                              message: "Consumer account created successfully"
+                              message: "Account created successfully",
+                              id: user._id,
+                              name: user.name,
+                              email: user.email,
+                              role: user.role,
                        })
                }else{
                          res.status(400);

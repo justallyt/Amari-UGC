@@ -6,7 +6,8 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux"
 import { useCreateUserMutation } from "../../redux/apiSlice"
 import { setCredentials } from "../../redux/authSlice"
-
+import toast, { Toaster } from "react-hot-toast"
+import Spinner from "../Spinner"
 const RegisterConsumer = () => {
    const [ status, setStatus] = useState(false);
 
@@ -15,16 +16,16 @@ const RegisterConsumer = () => {
 
    const { userInfo } = useSelector(state => state.auth);
 
-   const [ registerconsumer ] = useCreateUserMutation();
+   const [ registerconsumer, { isLoading} ] = useCreateUserMutation();
 
    const { register, handleSubmit, formState: { errors }, reset } = useForm();
    
 
-//    useEffect(()=> {
-//        if(userInfo){
-//             navigate('/consumer/dashboard')
-//        }
-//    }, [navigate, userInfo])
+   useEffect(()=> {
+       if(userInfo){
+            navigate(`/${userInfo.id}`)
+       }
+   }, [navigate, userInfo])
 
 
    const createConsumer = async (data) => {
@@ -33,11 +34,10 @@ const RegisterConsumer = () => {
           }
            try {
                 const res = await registerconsumer(data).unwrap();
-                console.log(res)
                 dispatch(setCredentials({...res}));
-                navigate('/consumer/dashboard');
+                navigate(`/${res.id}`);
            } catch (err) {
-                 console.log("Nothing happened")
+                 console.log(err);
            }
          //Reset form after submission
           reset();
@@ -48,6 +48,9 @@ const RegisterConsumer = () => {
    }
   return (
     <div className="register-brand">
+               <Toaster />
+
+               { isLoading ?  <Spinner /> : ''}
                <div className="small-intro tweak">
                          <h2>Create your Account</h2>
                          <p>Enter your details to create your account:</p>
