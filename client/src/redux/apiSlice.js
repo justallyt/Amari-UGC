@@ -17,8 +17,15 @@ export const apiSlice = createApi({
                               method: 'POST',
                               body: payload
                       })
+              }),
+              logoutUser: build.mutation({
+                    query: (payload) => ({
+                           url: 'logout',
+                           method: "POST",
+                           body: payload
+                    })
               })
         })
 })
 
-export const { useCreateUserMutation, useLoginUserMutation } = apiSlice
+export const { useCreateUserMutation, useLoginUserMutation, useLogoutUserMutation } = apiSlice

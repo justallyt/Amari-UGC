@@ -19,7 +19,7 @@ const ProfileBody = () => {
                                                   <div className="profile-form">
                                                               <div className="intro">
                                                                         <h3>User Information</h3>
-                                                                        <p>Here you can edit public information about yourself. The changes will be displayed for other users after saving.</p>
+                                                                        <p>Here you can edit public information about yourself. The changes will be displayed to other users after you have saved your details.</p>
                                                               </div>
                                                               <form>
                                                                         <div className="profile-form-row">
@@ -35,7 +35,7 @@ const ProfileBody = () => {
                                                                                              <label htmlFor="country">Country</label>
                                                                                              <input type="text" className="input-control" placeholder="Kenya" />
                                                                                     </div>
-                                                                                    
+
                                                                         </div>
                                                               </form>
                                                   </div>

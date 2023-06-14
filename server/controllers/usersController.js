@@ -12,7 +12,10 @@ export const LoginUser = asyncHandler(async(req, res) => {
              generateToken(res, user._id);
 
              res.status(201).json({
-                   message: "Login Successful. Redirecting shortly",
+                   message: "Login Successful.",
+                   id: user._id,
+                   name: user.name,
+                   email: user.email,
                    role: user.role
              })
        }else{
@@ -65,3 +68,13 @@ export const RegisterUser = asyncHandler(async(req, res) => {
         }
 
 })
+
+//Logout User
+export const LogOutUser = asyncHandler(asyncHandler(async(req,res) => {
+             res.cookie("jwt", "", {
+                     httpOnly: true,
+                     expires: new Date(0)
+             })
+
+             res.status(200).json({ message: 'You have logged out'})
+}))

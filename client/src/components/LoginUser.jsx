@@ -5,9 +5,10 @@ import { VscEyeClosed } from "react-icons/vsc"
 import { useForm } from "react-hook-form"
 import { useLoginUserMutation } from "../redux/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { setCredentials } from "../redux/authSlice"
+import { setCredentials, clearPop } from "../redux/authSlice"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "./Spinner"
+
 const LoginUser = () => {
   const [ status, setStatus] = useState(false);
 
@@ -16,8 +17,16 @@ const LoginUser = () => {
   }
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userInfo } = useSelector(state => state.auth);
+  const { pop } = useSelector(state => state.auth);
 
+  useEffect(()=> {
+    if(pop){
+      toast.success(pop.message)
+    }
+    setTimeout(()=> {
+          dispatch(clearPop());
+    }, 3000)
+  }, [pop, dispatch])
   // useEffect(() => {
   //        switch (userInfo.role) {
   //         case 'brand':
@@ -30,6 +39,7 @@ const LoginUser = () => {
   //                navigate('/admin/dashboard');
   //                break;
   //         default:
+  //               navigate('/user/login')
   //           break;
   //        }
   // }, [navigate, userInfo])
@@ -48,12 +58,12 @@ const authUser = async(data) => {
              console.log(error);
              toast.error("Login failed. Please try again")
        }
-       console.log(isLoading)
        reset();
 }
   return (
     <div className="consumer-form">
                <Toaster />
+               
               { isLoading ?  <Spinner /> : ''}
              <form onSubmit={handleSubmit(authUser)}>
                      <div className="form-row">

@@ -3,10 +3,16 @@ import { IoMdNotificationsOutline } from "react-icons/io"
 import { BsEnvelope } from "react-icons/bs" 
 import { FaRegUser } from "react-icons/fa"
 import portrait from "../../assets/portrait1.jpg"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate} from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
+import { useLogoutUserMutation } from "../../redux/apiSlice"
+import { clearCredentials } from "../../redux/authSlice"
+import { useSelector, useDispatch } from "react-redux"
+import toast, { Toaster } from "react-hot-toast"
+import Spinner from "../Spinner"
 const Topbar = () => {
   const [ status, setStatus ] = useState(false)
+  const [wait, setWait] = useState(false);
   const boxRef = useRef()
 
   useEffect(() => {
@@ -20,8 +26,33 @@ const Topbar = () => {
                  setStatus(true)
           }
   }
+
+  const {userInfo} = useSelector(state=> state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  //Logout User
+const [ logoutConsumer ] = useLogoutUserMutation();
+
+  const LogoutUser = async () => {
+         try{
+               const res = await logoutConsumer(userInfo).unwrap();
+               
+               setWait(true)
+    
+               setTimeout(() => {
+                     setWait(false)
+                     dispatch(clearCredentials({...res}));
+                     navigate('/user/login')
+               }, 1500)
+         }catch(error){
+               console.log(error);
+               toast.error("Logout Failed.Please try again");
+         }
+  }
   return (
     <div className="topbar-section">
+                  <Toaster />
+                  { wait ?  <Spinner /> : ''}
                   <div className="search-bar">
                              <span><TbSearch /></span>
                              <input type="text" placeholder="Search" className="search-control" />
@@ -46,8 +77,8 @@ const Topbar = () => {
                                                        <img src={portrait} alt="" />
                                              </div>
                                              <div className="account-details">
-                                                         <h3>Abigail Bundi</h3>
-                                                         <p><span><BsEnvelope /></span> abby@consult.com</p>
+                                                         <h3>{userInfo && userInfo.name}</h3>
+                                                         <p><span><BsEnvelope /></span> {userInfo && userInfo.email}</p>
                                              </div>
                                    </div>
 
@@ -59,7 +90,7 @@ const Topbar = () => {
                                                  </div>
                                    </NavLink>
                                    <div className="logout-btn">
-                                             <button>Logout</button>
+                                             <button onClick={LogoutUser}>Logout</button>
                                    </div>
                            </div>
                   </div>
