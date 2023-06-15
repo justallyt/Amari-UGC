@@ -5,6 +5,7 @@ const ConsumerDashboard = () => {
   return (
     <>
         <div className="dashboard-wrapper">
+          
                  <div className="dashboard-inner">
                           <ConsumerSidebar />
                           <DashboardBody />

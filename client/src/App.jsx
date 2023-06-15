@@ -4,10 +4,11 @@ import UserChoice from "./pages/UserChoice"
 import Register from "./pages/Register"
 import Login from "./pages/Login"
 import BrandDashboard from "./pages/BrandDashboard/BrandDashboard"
-import ConsumerDashboard from "./pages/ConsumerDashboard/ConsumerDashboard"
-import Profile from "./pages/ConsumerDashboard/Profile"
+import ConsumerDashboard from "./pages/Consumer/ConsumerDashboard"
+import Profile from "./pages/Consumer/Profile"
 
 function App() {
+
   return (
     <>
            <Routes>

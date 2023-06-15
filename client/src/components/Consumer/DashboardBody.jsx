@@ -5,15 +5,23 @@ import Footer from '../Footer'
 import { useSelector } from "react-redux"
 import toast, { Toaster } from "react-hot-toast";
 import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { clearMessage } from "../../redux/authSlice"
 const DashboardBody = () => {
 
   const { userInfo } = useSelector(state => state.auth);
-
+  const dispatch = useDispatch()
+  
   useEffect(() => {
-        if(userInfo){
-               toast.success(userInfo.message);
+        if(userInfo && userInfo.message){
+               toast.success(userInfo.message, {
+                      id: 'success'
+               });
+               setTimeout(()=> {
+                      dispatch(clearMessage());
+              }, 3000)
         }
-  }, [userInfo])
+  }, [userInfo, dispatch])
   return (
     <div className="dashboard-body-wrap">
                   <Toaster />
