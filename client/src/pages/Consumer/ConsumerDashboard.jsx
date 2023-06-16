@@ -1,21 +1,19 @@
 import DashboardBody from "../../components/Consumer/DashboardBody"
 import ConsumerSidebar from "../../components/Consumer/Sidebar"
 import "../../css/consumer/dashboard.css"
-import { useDispatch, useSelector } from "react-redux"
-//import { useGetUserProfileMutation } from "../../redux/apiSlice"
+import { useDispatch } from "react-redux"
+import { useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setProfile } from "../../redux/profileSlice"
-const ConsumerDashboard = () => {
-  const { profile } = useSelector(state => state.profile);
-  
+const ConsumerDashboard = () => {  
   const dispatch = useDispatch();
   //Get User Profile
-  //const [ getUser ] = useGetUserProfileMutation()
-  // try {
-  //      const res = getUser().unwrap();
-  //      dispatch(setProfile({...res}))
-  // } catch (error) {
-  //      console.log(error);
-  // }
+  const { data, isLoading } = useGetUserProfileQuery()
+  
+  if(!isLoading){
+    dispatch(setProfile({...data.user}))
+  }
+  
+  
   return (
     <>
         <div className="dashboard-wrapper">
