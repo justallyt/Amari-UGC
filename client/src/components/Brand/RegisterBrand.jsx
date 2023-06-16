@@ -4,7 +4,7 @@ import { VscEye } from "react-icons/vsc"
 import { VscEyeClosed } from "react-icons/vsc"
 import { NavLink } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { useCreateUserMutation } from "../../redux/apiSlice"
+import { useCreateUserMutation } from "../../redux/usersSlice"
 const RegisterBrand = () => {
   const [ status, setStatus] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();

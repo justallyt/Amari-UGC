@@ -77,12 +77,21 @@ export const RegisterUser = asyncHandler(async(req, res) => {
 
 })
 
+//Get User Profile
+export const GetProfile = asyncHandler(async(req, res) => {
+       const user = req.user;
+
+       res.status(200).json({ user})
+})
+
+
+
 //Logout User
-export const LogOutUser = asyncHandler(asyncHandler(async(req,res) => {
+export const LogOutUser = asyncHandler(async(req,res) => {
              res.cookie("jwt", "", {
                      httpOnly: true,
                      expires: new Date(0)
              })
 
              res.status(200).json({ message: 'You have logged out'})
-}))
+})

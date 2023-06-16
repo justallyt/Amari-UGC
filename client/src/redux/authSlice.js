@@ -48,9 +48,8 @@ function removeFromStorage() {
          allside = allside.filter(item => {
                      return item[0] !== 'message'
          });
-         console.log(allside)
+         
          const obj = Object.fromEntries(allside)
-         console.log(obj)
        
         localStorage.setItem('userInfo', JSON.stringify(obj))
 }

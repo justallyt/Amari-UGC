@@ -4,9 +4,9 @@ import { useState, useEffect } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux"
-import { useCreateUserMutation } from "../../redux/apiSlice"
+import { useCreateUserMutation } from "../../redux/usersSlice"
 import { setCredentials } from "../../redux/authSlice"
-import toast, { Toaster } from "react-hot-toast"
+import { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 const RegisterConsumer = () => {
    const [ status, setStatus] = useState(false);
