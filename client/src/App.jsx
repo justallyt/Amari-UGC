@@ -5,7 +5,7 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 import BrandDashboard from "./pages/BrandDashboard/BrandDashboard"
 import ConsumerDashboard from "./pages/Consumer/ConsumerDashboard"
-import Profile from "./pages/Consumer/Profile"
+import Settings from "./pages/Consumer/Settings"
 
 function App() {
 
@@ -22,9 +22,9 @@ function App() {
                    <Route path="/consumer/dashboard" element={<ConsumerDashboard />} />
   
                    <Route path="/:id" element={<ConsumerDashboard />} />
-
+                   <Route path="/:id/settings" element={<Settings />} />
                    {/* Consumer Routes */}
-                   <Route path="/consumer/profile" element={<Profile />} />
+      
            </Routes>
     </>
   )

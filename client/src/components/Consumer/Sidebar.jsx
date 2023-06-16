@@ -3,7 +3,9 @@ import logo from '../../assets/logo.png'
 import { IoHomeOutline, IoLayersOutline, IoCloudUploadOutline } from "react-icons/io5"
 import { BsDatabase, BsPiggyBank } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
+import { useSelector } from "react-redux"
 const ConsumerSidebar = () => {
+     const { userInfo } = useSelector(state => state.auth);
      return (
           <div className="sidebar-container">
                        <div className="sidebar-logo">
@@ -14,7 +16,7 @@ const ConsumerSidebar = () => {
                        <div className="sidebar-nav">
                                     <ul>
                                               <li>
-                                                       <NavLink to={'/consumer/dashboard'}><span><IoHomeOutline /></span> Dashboard</NavLink>
+                                                       <NavLink to={`/${userInfo.id}`}><span><IoHomeOutline /></span> Dashboard</NavLink>
                                              </li>
                                              <li>
                                                        <NavLink to={'/consumer/my-brands'}><span><IoLayersOutline /></span> My Brands</NavLink>
@@ -29,7 +31,7 @@ const ConsumerSidebar = () => {
                                                        <NavLink to={'/earnings'}><span><BsPiggyBank /></span> My Earnings</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/settings'}><span><SlSettings /></span> Settings</NavLink>
+                                                       <NavLink to={`/${userInfo.id}/settings`}><span><SlSettings /></span> Settings</NavLink>
                                              </li>
                                     </ul>
                        </div>
