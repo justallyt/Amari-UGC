@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom"
 import Topbar from "./Topbar"
-import { BsArrowLeft } from "react-icons/bs"
+import { BsArrowLeft, BsCreditCard2Back } from "react-icons/bs"
 import { useSelector } from "react-redux"
-import { MdOutlineAccountCircle } from 'react-icons/md'
+import { MdOutlineAccountCircle, MdSecurity } from 'react-icons/md'
 import { SlArrowRight } from "react-icons/sl"
+import { IoMdNotificationsOutline } from 'react-icons/io'
+import { VscDebugDisconnect } from 'react-icons/vsc'
+import { TfiBrushAlt } from "react-icons/tfi"
+import ProfileCard from "./settings/ProfileCard"
 const SettingsBody = () => {
   const { userInfo} = useSelector(state => state.auth)
   return (
@@ -26,16 +30,21 @@ const SettingsBody = () => {
                                                         <div className="settings-sidebar">
                                                                     <ul>
                                                                           <li className="active"><NavLink to={'/'}><span><MdOutlineAccountCircle /></span> Profile</NavLink></li>
-                                                                          <li><NavLink to={'/'}>Notifications</NavLink></li>
-                                                                          <li><NavLink to={'/'}>Integrations</NavLink></li>
-                                                                          <li><NavLink to={'/'}>Security</NavLink></li>
-                                                                          <li><NavLink to={'/'}>Billing</NavLink></li>
-                                                                          <li><NavLink to={'/'}>Preferences</NavLink></li>
+                                                                          <li><NavLink to={'/'}>
+                                                                            <span><IoMdNotificationsOutline /></span>
+                                                                            Notifications</NavLink></li>
+                                                                          <li><NavLink to={'/'}>
+                                                                             <span><VscDebugDisconnect /></span>
+                                                                            Integrations</NavLink></li>
+                                                                          <li><NavLink to={'/'}>
+                                                                            <span><MdSecurity /></span>Security</NavLink></li>
+                                                                          <li><NavLink to={'/'}><span><BsCreditCard2Back /></span> Billing</NavLink></li>
+                                                                          <li><NavLink to={'/'}><span><TfiBrushAlt /></span>Preferences</NavLink></li>
                                                                     </ul>
                                                         </div>
 
                                                         <div className="settings-columns">
-                                                                 
+                                                                 <ProfileCard />
                                                         </div>
                                             </div>
                                   </div>

@@ -23,6 +23,7 @@ function App() {
   
                    <Route path="/:id" element={<ConsumerDashboard />} />
                    <Route path="/:id/settings" element={<Settings />} />
+                   <Route path="/:id/settings/:type" element={<Settings />} />
                    {/* Consumer Routes */}
       
            </Routes>
