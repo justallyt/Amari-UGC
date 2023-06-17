@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
+import { uploadToCloudinary } from "../utils/cloudinary.js";
+import upload from "../utils/multer.js";
 import User from "../models/usersModel.js";
 
 //Login User
@@ -14,8 +16,6 @@ export const LoginUser = asyncHandler(async(req, res) => {
              res.status(201).json({
                    message: "Login Successful.",
                    id: user._id,
-                   name: user.name,
-                   email: user.email,
                    role: user.role,
              })
        }else{
@@ -84,7 +84,18 @@ export const GetProfile = asyncHandler(async(req, res) => {
        res.status(200).json({ user})
 })
 
+//Update User Profile
+export const UpdateProfile = asyncHandler(async(req, res) => {
 
+         const user = await User.findById( req.user._id);
+
+         if(user){
+                res.status(201).json({ message: 'Update Successful '})
+         }else{
+               res.status(401);
+               throw new Error("User account not found.")
+         }
+})
 
 //Logout User
 export const LogOutUser = asyncHandler(async(req,res) => {

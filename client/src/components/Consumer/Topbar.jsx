@@ -26,9 +26,9 @@ const Topbar = () => {
                  setStatus(true)
           }
   }
-
+  
   const {userInfo} = useSelector(state=> state.auth);
-
+  const { profile } = useSelector(state => state.profile)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //Logout User
@@ -78,12 +78,12 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                                                        <img src={portrait} alt="" />
                                              </div>
                                              <div className="account-details">
-                                                         <h3>{userInfo && userInfo.name}</h3>
-                                                         <p><span><BsEnvelope /></span> {userInfo && userInfo.email}</p>
+                                                         <h3>{profile && profile.name}</h3>
+                                                         <p><span><BsEnvelope /></span> {profile && profile.email}</p>
                                              </div>
                                    </div>
 
-                                   <NavLink to={'/consumer/profile'} className='profile-link'>
+                                   <NavLink to={'/'} className='profile-link'>
                                                <span><FaRegUser /></span>
                                                  <div className="deets">
                                                              <h4>My Account</h4>

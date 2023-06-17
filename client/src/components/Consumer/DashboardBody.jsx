@@ -10,6 +10,7 @@ import { clearMessage } from "../../redux/authSlice"
 const DashboardBody = () => {
 
   const { userInfo } = useSelector(state => state.auth);
+  const { profile } = useSelector(state => state.profile)
   const dispatch = useDispatch()
   
   useEffect(() => {
@@ -22,6 +23,7 @@ const DashboardBody = () => {
               }, 3000)
         }
   }, [userInfo, dispatch])
+  
   return (
     <div className="dashboard-body-wrap">
                   <Toaster />
@@ -30,7 +32,7 @@ const DashboardBody = () => {
 
                          <div className="dashbord-wrapper">
                                   <div className="intro">
-                                            <h2>Hi, { userInfo && userInfo.name.split(" ")[0]}</h2>
+                                            <h2>Hi, { profile && profile.name.split(" ")[0]}</h2>
                                   </div>
                                   <div className="dashboard-wrapper-row">
                                                <Informationals />

@@ -9,10 +9,9 @@ const ConsumerDashboard = () => {
   //Get User Profile
   const { data, isLoading } = useGetUserProfileQuery()
   
-  if(!isLoading){
+  if(!isLoading && data){
     dispatch(setProfile({...data.user}))
   }
-  
   
   return (
     <>
