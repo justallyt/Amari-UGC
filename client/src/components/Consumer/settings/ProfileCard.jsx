@@ -1,8 +1,14 @@
 import profileImg from "../../../assets/dummyprofile.png"
 import { useSelector } from "react-redux"
+import { RxDotFilled } from "react-icons/rx"
+import { FiCheck } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
+import { useEffect, useState } from "react"
 const ProfileCard = () => {
   const { profile } = useSelector(state => state.profile);
+  const [ userImage, setUserImage ] = useState([])
+  const [ imageUrl, setImageUrl] = useState([]);
+  const [ status, setStatus] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
                 name: profile.name,
@@ -15,7 +21,28 @@ const ProfileCard = () => {
         }
   });
   
-  const updateForm = (data) => console.log(data)
+  const uploadProfile = (e) => {
+          setUserImage([...e.target.files]); 
+  }
+  const clearImageProfile = () => {
+         setImageUrl([]);
+         setUserImage([]);
+         setStatus(false)
+  }
+  useEffect(() => {
+         if(userImage.length < 1) return;
+
+         const profileUrl = [];
+         userImage.forEach(kitu => {
+                 profileUrl.push(URL.createObjectURL(kitu))
+                 setStatus(true)
+         });
+         setImageUrl(profileUrl)
+
+  }, [userImage])
+  const updateForm = (data) => {
+        console.log(data)
+  }
   return (
     <div className="settings-tab">
                <div className="tab-title">
@@ -27,16 +54,25 @@ const ProfileCard = () => {
                                     <div className="picture-wrap">
                                                <div className="picture-box">
                                                           <div className="image-part">
-                                                                   <img src={profileImg} alt="" />
+                                                                  { status ?  <img src={imageUrl} alt="" /> :  <img src={profileImg} alt="" />}
                                                           </div>
-                                                         <div className="picture-texts">
+                                                         {/* <div className="picture-texts">
                                                                  <p>Upload new image</p>
                                                                 <span>Max file size - 2mb</span>
+                                                         </div> */}
+                                                         <div className="upload-status">
+                                                                  <div className="status-top">
+                                                                           <p className="image-name"> </p>
+                                                                           { status ? <span className="check"><FiCheck /></span>: ''}
+                                                                  </div>
                                                          </div>
                                                </div>
                                                <div className="picture-btns">
-                                                         <p>Upload</p>
-                                                         <p>Remove Image</p>
+                                                         <span  className="upload-btn">
+                                                                  <input type="file" {...register('profileImage')} onChange={uploadProfile}  />
+                                                                  <p>Upload</p>
+                                                         </span>
+                                                         <p onClick={clearImageProfile}>Remove Image</p>
                                                </div>
                                     </div>
                          </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import UserChoice from "./pages/UserChoice"

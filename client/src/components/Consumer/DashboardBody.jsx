@@ -28,7 +28,7 @@ const DashboardBody = () => {
     <div className="dashboard-body-wrap">
                   <Toaster />
                <div className="dashboard-row">
-                         <Topbar />
+                         <Topbar profile={profile} />
 
                          <div className="dashbord-wrapper">
                                   <div className="intro">
