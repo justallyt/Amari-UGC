@@ -16,6 +16,10 @@ const usersSchema = mongoose.Schema({
              unique: true,
              default: 'null'
         },
+        bio: {
+              type: String,
+              default: 'null',
+        },
         role: {
              type: String,
              required: true
