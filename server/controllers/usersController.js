@@ -86,14 +86,14 @@ export const GetProfile = asyncHandler(async(req, res) => {
 
 //Update User Profile
 export const UpdateProfile = asyncHandler(async(req, res) => {
-
          const user = await User.findById( req.user._id);
 
+         const { name } = JSON.parse(req.body.data)
          if(user){
-                res.status(201).json({ message: 'Update Successful '})
+               res.status(201).json({ message:  req.file})
          }else{
                res.status(401);
-               throw new Error("User account not found.")
+               throw new Error("Sorry, You cannot update at this time.")
          }
 })
 

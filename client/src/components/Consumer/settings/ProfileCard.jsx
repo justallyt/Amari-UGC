@@ -1,15 +1,15 @@
 import profileImg from "../../../assets/dummyprofile.png"
 import { useSelector } from "react-redux"
-import { RxDotFilled } from "react-icons/rx"
 import { FiCheck } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react"
+import { useUpdateUserProfileMutation } from "../../../redux/usersSlice"
 const ProfileCard = () => {
   const { profile } = useSelector(state => state.profile);
   const [ userImage, setUserImage ] = useState([])
   const [ imageUrl, setImageUrl] = useState([]);
   const [ status, setStatus] = useState(false)
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit } = useForm({
         defaultValues: {
                 name: profile.name,
                 username: profile.username === 'null' ? '' : profile.username,
@@ -40,15 +40,28 @@ const ProfileCard = () => {
          setImageUrl(profileUrl)
 
   }, [userImage])
-  const updateForm = (data) => {
-        console.log(data)
+
+  const [ updateUser ] = useUpdateUserProfileMutation();
+
+  const updateForm = async (data) => {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(data));
+        formData.append('profileImage', data.profileImage[0]);
+      
+         try {
+          
+               const res = await updateUser(formData);
+              console.log(res.data)
+         } catch (error) {
+               console.log(error)
+         }
   }
   return (
     <div className="settings-tab">
                <div className="tab-title">
                          <h2>Profile Settings</h2>
                </div>
-               <form onSubmit={handleSubmit(updateForm)}>
+               <form onSubmit={handleSubmit(updateForm)} encType="multipart/form-data">
                          <div className="profile-picture">
                                     <h2>Edit Profile Picture</h2>
                                     <div className="picture-wrap">

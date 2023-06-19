@@ -11,7 +11,7 @@ const profileSlice = createSlice({
                 setProfile: (state, action) => {
                         state.profile = action.payload,
                         localStorage.setItem("profileInfo", JSON.stringify(action.payload))
-                }
+                },
         }
 })
 
