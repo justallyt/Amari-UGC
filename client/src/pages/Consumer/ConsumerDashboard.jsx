@@ -11,6 +11,7 @@ const ConsumerDashboard = () => {
   
   if(!isLoading && data){
         dispatch(setProfile({...data.user}))
+        console.log(data)
   }
   
   return (

@@ -1,10 +1,12 @@
 import { v2 as cloudinary} from 'cloudinary'
-import asyncHandler from 'express-async-handler'
+import dotenv from "dotenv";
+
+dotenv.config();
 
 cloudinary.config({ 
-       cloud_name: 'dfwrvpy2t', 
-       api_key: '728155653648152', 
-       api_secret: 'r2tWARxJoJODNh7FH8n-Ul78gTo' 
+       cloud_name: process.env.CLOUD_NAME,
+       api_key: process.env.CLOUDINARY_API_KEY,
+       api_secret: process.env.CLOUDINARY_API_SECRET
      });
 
 export default cloudinary

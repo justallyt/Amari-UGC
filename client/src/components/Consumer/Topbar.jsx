@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 
-const Topbar = ({ profile }) => {
+const Topbar = () => {
   const [ status, setStatus ] = useState(false)
   const [wait, setWait] = useState(false);
   const boxRef = useRef()
@@ -30,7 +30,7 @@ const Topbar = ({ profile }) => {
   }
  
   const {userInfo} = useSelector(state=> state.auth);
-  //const { profile } = useSelector(state => state.profile)
+  const { profile } = useSelector(state => state.profile)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //Logout User

@@ -39,8 +39,8 @@ const usersSchema = mongoose.Schema({
              type: String
        },
        profilePic: {
-              type: String,
-              default: "null"
+             public_id: { type: String, default: 'null'},
+             url: { type: String, default: 'null'}
        }
 }, { timestamps: true});
 
@@ -49,7 +49,6 @@ usersSchema.pre("save", async function (next) {
         if(!this.isModified('password')){
               next();
         }
-
         const salt = await bcrypt.genSalt(10);
 
         this.password = await bcrypt.hash(this.password, salt);

@@ -78,26 +78,60 @@ export const RegisterUser = asyncHandler(async(req, res) => {
 
 //Get User Profile
 export const GetProfile = asyncHandler(async(req, res) => {
-       const user = req.user;
-
-       res.status(200).json({ user})
+       const user = await User.findById( req.user._id);
+       
+       if(user){
+              res.status(200).json({ user})
+       }else{
+               res.status(400).json({ message: "User data could not be fetched at this time."})
+       }
 })
 
 //Update User Profile
 export const UpdateProfile = asyncHandler(async(req, res) => {
-         const user = await User.findById( req.user._id);
-       //   const upload = await cloudinary.uploader.upload(req.file.path, { 
-       //          public_id: `${Date.now()}`,
-       //          resource_type: 'auto'
-       //   })
-       try{
-                 const result = await cloudinary.uploader.upload(req.file.path);
-                 console.log(result);
-       }catch(error){
-                 console.log(error)
-       }
+        const user = await User.findById( req.user._id);
 
-        res.status(200).json({ message: req.file.path})
+        if(user){
+              try{
+                     //Upload profile image to cloudinary
+                     const cloudinary_result = await cloudinary.uploader.upload(req.file.path);
+                    // console.log(result.url);
+                    // console.log(result.secure_url)
+                    const public_id = cloudinary_result.public_id;
+                    const url = cloudinary_result.secure_url;
+
+                    const {name, username, email, phone, bio, country, city} = JSON.parse(req.body.data);
+                   
+                   // console.log(req.body)
+
+                    const updatedGoal = await User.findByIdAndUpdate(user._id, {
+                              name: name,
+                              email: email,
+                              username: username,
+                              phone: phone,
+                              bio: bio,
+                              address: {
+                                     country: country,
+                                     city: city
+                              },
+                              profilePic: {
+                                      public_id: public_id,
+                                      url: url
+                              }
+                    }, { new: true});
+                    
+                    if(updatedGoal){
+                           res.status(201).json({ message: 'User updated successfully', data: updatedGoal})
+                    }else{
+                          res.status(500).json({ message: "User update failed"})
+                    }
+               }catch(error){
+                     console.log(error)
+              }
+        }else{
+              res.status(401).json({ message: 'An error occured. Not authorized to update at this time.'})
+        }
+
       
 })
 

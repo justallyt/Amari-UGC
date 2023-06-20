@@ -4,6 +4,9 @@ import { FiCheck } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react"
 import { useUpdateUserProfileMutation } from "../../../redux/usersSlice"
+import { useDispatch } from "react-redux"
+import { setProfile } from "../../../redux/profileSlice"
+
 const ProfileCard = () => {
   const { profile } = useSelector(state => state.profile);
   const [ userImage, setUserImage ] = useState([])
@@ -16,19 +19,23 @@ const ProfileCard = () => {
                 email: profile.email,
                 phone: profile.phone === 'null' ? '' : profile.phone,
                 bio: profile.bio === 'null' ? '' : profile.bio,
-                country: profile.country === 'null' ? '' : profile.country,
-                city: profile.city === 'null' ? '' : profile.city
+                country: profile.country === 'null' ? '' : profile.address.country,
+                city: profile.city === 'null' ? '' : profile.address.city
         }
   });
   
   const uploadProfile = (e) => {
           setUserImage([...e.target.files]); 
   }
+
   const clearImageProfile = () => {
          setImageUrl([]);
          setUserImage([]);
          setStatus(false)
   }
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
          if(userImage.length < 1) return;
 
@@ -66,7 +73,7 @@ const ProfileCard = () => {
                                     <div className="picture-wrap">
                                                <div className="picture-box">
                                                           <div className="image-part">
-                                                                  { status ?  <img src={imageUrl} alt="" /> :  <img src={profileImg} alt="" />}
+                                                                  { status ?  <img src={imageUrl} alt="" /> :  <img src={profile.profilePic ? profile.profilePic.url : profileImg} alt="" />}
                                                           </div>
                                                          {/* <div className="picture-texts">
                                                                  <p>Upload new image</p>
