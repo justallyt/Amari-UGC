@@ -1,7 +1,6 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
-import { uploadToCloudinary } from "../utils/cloudinary.js";
-import upload from "../utils/multer.js";
+import cloudinary from "../utils/cloudinary.js";
 import User from "../models/usersModel.js";
 
 //Login User
@@ -87,14 +86,19 @@ export const GetProfile = asyncHandler(async(req, res) => {
 //Update User Profile
 export const UpdateProfile = asyncHandler(async(req, res) => {
          const user = await User.findById( req.user._id);
+       //   const upload = await cloudinary.uploader.upload(req.file.path, { 
+       //          public_id: `${Date.now()}`,
+       //          resource_type: 'auto'
+       //   })
+       try{
+                 const result = await cloudinary.uploader.upload(req.file.path);
+                 console.log(result);
+       }catch(error){
+                 console.log(error)
+       }
 
-         const { name } = JSON.parse(req.body.data)
-         if(user){
-               res.status(201).json({ message:  req.file})
-         }else{
-               res.status(401);
-               throw new Error("Sorry, You cannot update at this time.")
-         }
+        res.status(200).json({ message: req.file.path})
+      
 })
 
 //Logout User

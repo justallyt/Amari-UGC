@@ -49,9 +49,8 @@ const ProfileCard = () => {
         formData.append('profileImage', data.profileImage[0]);
       
          try {
-          
                const res = await updateUser(formData);
-              console.log(res.data)
+               console.log(res.data)
          } catch (error) {
                console.log(error)
          }
