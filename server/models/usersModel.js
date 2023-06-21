@@ -13,8 +13,8 @@ const usersSchema = mongoose.Schema({
         },
         username: {
             type: String,
-             unique: true,
-             default: 'null'
+             default: 'null',
+             unique: true
         },
         bio: {
               type: String,

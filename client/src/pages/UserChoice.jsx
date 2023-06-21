@@ -56,7 +56,7 @@ const UserChoice = () => {
                                                                     <span><IoPersonAddOutline /></span>
                                                            </div>
                                                            <div className="choice-text">
-                                                                    <h3>I am a Consumer</h3>
+                                                                    <h3>I am a Content Creator</h3>
                                                                     <p>Earn money giving reviews to various products that you use.</p>
                                                            </div>
                                                            <div className="choice-toggles">
@@ -66,7 +66,7 @@ const UserChoice = () => {
                                                   </div>
 
                                                   <div className="choice-btn">
-                                                          <NavLink className={ selected === '' ? "btn expand inactive" : "btn background expand"} to={selected === 0 ? 'brand' : 'consumer'}>Continue</NavLink>
+                                                          <NavLink className={ selected === '' ? "btn expand inactive" : "btn background expand"} to={selected === 0 ? '/user/register/brand' : '/user/register/creator'}>Continue</NavLink>
                                                   </div>
                                         </div>
                               </div>

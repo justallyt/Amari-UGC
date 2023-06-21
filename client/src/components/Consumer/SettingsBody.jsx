@@ -11,10 +11,11 @@ import ProfileCard from "./settings/ProfileCard"
 import Footer from "../Footer"
 const SettingsBody = () => {
   const { userInfo} = useSelector(state => state.auth)
+  const { profile } = useSelector(state => state.profile)
   return (
     <div className="dashboard-body-wrap">
              <div className="dashboard-row">
-                        <Topbar />
+                        <Topbar user={profile} />
 
                         <div className="dashboard-wrapper">
                                   <NavLink to={`/${userInfo.id}`} className='back-btn'>

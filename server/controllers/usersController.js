@@ -46,8 +46,6 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                         res.status(201).json({
                                message: "Account created successfully",
                                id: user._id,
-                               name: user.name,
-                               email: user.email,
                                role: user.role,
                         })
                }else{
@@ -79,7 +77,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
 
 //Get User Profile
 export const GetProfile = asyncHandler(async(req, res) => {
-       const user = await User.findById( req.user._id);
+       const user = await User.findById( req.user._id).select('-password');
        
        if(user){
               res.status(200).json({ user})

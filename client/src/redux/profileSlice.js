@@ -12,12 +12,16 @@ const profileSlice = createSlice({
                         state.profile = action.payload,
                         localStorage.setItem("profileInfo", JSON.stringify(action.payload))
                 },
+                clearProfile: (state) => {
+                          state.profile = null,
+                          localStorage.removeItem('profileInfo')
+                },
                 clearProfilePic: (state) => {
                         state.profile.profilePic.url = null
                 }
         }
 })
 
-export const { setProfile, clearProfilePic } = profileSlice.actions
+export const { setProfile, clearProfile, clearProfilePic } = profileSlice.actions
 
 export default profileSlice.reducer;

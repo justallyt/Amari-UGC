@@ -1,14 +1,30 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Footer from "../../components/Footer"
 import { VscEye } from "react-icons/vsc"
 import { VscEyeClosed } from "react-icons/vsc"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { useCreateUserMutation } from "../../redux/usersSlice"
+import { useCreateUserMutation } from "../../redux/usersSlice";
+import { useDispatch, useSelector } from "react-redux"
+import { setCredentials } from "../../redux/authSlice"
+import toast, { Toaster } from "react-hot-toast"
+import Spinner from "../Spinner"
 const RegisterBrand = () => {
   const [ status, setStatus] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
- const [ registerbrand ] = useCreateUserMutation();
+ const [ registerbrand, { isLoading} ] = useCreateUserMutation();
+
+ const navigate = useNavigate();
+ const dispatch = useDispatch();
+
+ const { userInfo } = useSelector(state => state.auth);
+
+ useEffect(()=> {
+  if(userInfo){
+       navigate(`/brand/${userInfo.id}`)
+  }
+}, [navigate, userInfo])
+
 
  const createBrand = async (data) => {
   if(data.terms === true){
@@ -16,9 +32,12 @@ const RegisterBrand = () => {
   }
    try {
         const res = await registerbrand(data).unwrap();
-        console.log(res)
+        dispatch(setCredentials({...res}));
+        navigate(`/brand/${res.id}/`);
    } catch (err) {
-         console.log("Nothing happened")
+         console.log(err)
+
+         toast.error("Brand registration failed. Please try again", { id: 'brand-registration-error'})
    }
  //Reset form after submission
   reset();
@@ -29,6 +48,8 @@ const RegisterBrand = () => {
   }
   return (
     <div className="register-brand">
+                <Toaster />
+                { isLoading ?  <Spinner /> : ''}
                <div className="small-intro tweak">
                          <h2>Register Your Company</h2>
                          <p>Enter your details to create your account:</p>

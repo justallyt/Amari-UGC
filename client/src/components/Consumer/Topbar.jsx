@@ -7,12 +7,13 @@ import { NavLink, useNavigate} from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { useLogoutUserMutation } from "../../redux/usersSlice"
 import { clearCredentials } from "../../redux/authSlice"
+import { clearProfile } from "../../redux/profileSlice"
 import { useSelector, useDispatch } from "react-redux"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 import profileImg from "../../assets/dummyprofile.png"
 
-const Topbar = () => {
+const Topbar = ({ user}) => {
   const [ status, setStatus ] = useState(false)
   const [wait, setWait] = useState(false);
   const boxRef = useRef()
@@ -30,7 +31,7 @@ const Topbar = () => {
   }
  
   const {userInfo} = useSelector(state=> state.auth);
-  const { profile } = useSelector(state => state.profile)
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //Logout User
@@ -45,6 +46,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                setTimeout(() => {
                      setWait(false)
                      dispatch(clearCredentials({...res}));
+                     dispatch(clearProfile())
                      navigate('/user/login')
                }, 1500)
          }catch(error){
@@ -67,7 +69,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                              </div>
                              <div className="profile-part" onClick={() => setStatus(true)}>
                                          <div className="profile-image">
-                                                    <img src={profile.profilePic.url ? profile.profilePic.url : profileImg} alt="" />
+                                                    <img src={user ? user.profilePic.url : profileImg} alt="" />
                                          </div>
                              </div>
                   </div>
@@ -77,11 +79,11 @@ const [ logoutConsumer ] = useLogoutUserMutation();
 
                                    <div className="account-profile">
                                              <div className="account-image">
-                                                        <img src={profile.profilePic.url ? profile.profilePic.url : profileImg} alt="" />
+                                                        <img src={user ? user.profilePic.url : profileImg} alt="" />
                                              </div>
                                              <div className="account-details">
-                                                         <h3>{profile && profile.name}</h3>
-                                                         <p><span><BsEnvelope /></span> {profile && profile.email}</p>
+                                                         <h3>{user && user.name}</h3>
+                                                         <p><span><BsEnvelope /></span> {user && user.email}</p>
                                              </div>
                                    </div>
 

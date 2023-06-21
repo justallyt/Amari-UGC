@@ -1,7 +1,7 @@
 import { useParams, NavLink } from "react-router-dom"
 import logo from "../assets/logo.png"
 import RegisterBrand from "../components/Brand/RegisterBrand"
-import RegisterConsumer from "../components/Consumer/RegisterConsumer"
+import RegisterConsumer from "../components/Consumer/RegisterCreator"
 //import Footer from "../components/Footer"
 const Register = () => {
     const { type } = useParams()
@@ -25,7 +25,7 @@ const Register = () => {
                                            { type === 'brand' ? 
                                                  <RegisterBrand />
                                                 :
-                                                type === 'consumer' ?
+                                                type === 'creator' ?
                                                     <RegisterConsumer />
                                                 :
                                                 <p>Please select an option to register either as a brand or consumer. Thanks</p>

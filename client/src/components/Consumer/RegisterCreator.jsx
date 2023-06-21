@@ -1,5 +1,5 @@
 import { VscEye, VscEyeClosed } from "react-icons/vsc"
-import Footer from "../../components/Footer"
+import Footer from "../Footer"
 import { useState, useEffect } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
@@ -8,7 +8,7 @@ import { useCreateUserMutation } from "../../redux/usersSlice"
 import { setCredentials } from "../../redux/authSlice"
 import { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
-const RegisterConsumer = () => {
+const RegisterCreator = () => {
    const [ status, setStatus] = useState(false);
 
    const navigate = useNavigate();
@@ -30,12 +30,12 @@ const RegisterConsumer = () => {
 
    const createConsumer = async (data) => {
           if(data.terms === true){
-                data.role = "Consumer";
+                data.role = "Creator";
           }
            try {
                 const res = await registerconsumer(data).unwrap();
                 dispatch(setCredentials({...res}));
-                navigate(`/${res.id}`);
+                navigate(`/${res.role}/${res.username === 'null' ? res.id : res.username}`);
            } catch (err) {
                  console.log(err);
            }
@@ -97,4 +97,4 @@ const RegisterConsumer = () => {
   )
 }
 
-export default RegisterConsumer
+export default RegisterCreator

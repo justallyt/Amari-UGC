@@ -37,7 +37,7 @@ const authUser = async(data) => {
        try {
             const res = await loginUser(data).unwrap();
             dispatch(setCredentials({...res}));
-            navigate(`/${res.username ? res.username : res.id}/`);
+             navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ?  res.id : res.username}/`);
        } catch (error) {
              console.log(error);
              toast.error("Login failed. Please try again")
