@@ -3,7 +3,6 @@ import { TbSearch } from "react-icons/tb"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { BsEnvelope } from "react-icons/bs" 
 import { FaRegUser } from "react-icons/fa"
-import portrait from "../../assets/portrait1.jpg"
 import { NavLink, useNavigate} from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { useLogoutUserMutation } from "../../redux/usersSlice"
@@ -11,6 +10,7 @@ import { clearCredentials } from "../../redux/authSlice"
 import { useSelector, useDispatch } from "react-redux"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
+import profileImg from "../../assets/dummyprofile.png"
 
 const Topbar = () => {
   const [ status, setStatus ] = useState(false)
@@ -67,7 +67,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                              </div>
                              <div className="profile-part" onClick={() => setStatus(true)}>
                                          <div className="profile-image">
-                                                    <img src={portrait} alt="" />
+                                                    <img src={profile.profilePic.url ? profile.profilePic.url : profileImg} alt="" />
                                          </div>
                              </div>
                   </div>
@@ -77,7 +77,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
 
                                    <div className="account-profile">
                                              <div className="account-image">
-                                                       <img src={portrait} alt="" />
+                                                        <img src={profile.profilePic.url ? profile.profilePic.url : profileImg} alt="" />
                                              </div>
                                              <div className="account-details">
                                                          <h3>{profile && profile.name}</h3>

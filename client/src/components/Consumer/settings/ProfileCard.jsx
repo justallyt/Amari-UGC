@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react"
 import { useUpdateUserProfileMutation } from "../../../redux/usersSlice"
 import { useDispatch } from "react-redux"
-import { setProfile } from "../../../redux/profileSlice"
-
+import { clearProfilePic, setProfile } from "../../../redux/profileSlice"
+import toast, { Toaster } from "react-hot-toast"
+import Spinner from "../../Spinner"
 const ProfileCard = () => {
   const { profile } = useSelector(state => state.profile);
   const [ userImage, setUserImage ] = useState([])
@@ -19,11 +20,11 @@ const ProfileCard = () => {
                 email: profile.email,
                 phone: profile.phone === 'null' ? '' : profile.phone,
                 bio: profile.bio === 'null' ? '' : profile.bio,
-                country: profile.country === 'null' ? '' : profile.address.country,
-                city: profile.city === 'null' ? '' : profile.address.city
+                country: profile.address.country === 'null' ? '' : profile.address.country,
+                city: profile.address.city === 'null' ? '' : profile.address.city
         }
   });
-  
+  const dispatch = useDispatch();
   const uploadProfile = (e) => {
           setUserImage([...e.target.files]); 
   }
@@ -32,9 +33,10 @@ const ProfileCard = () => {
          setImageUrl([]);
          setUserImage([]);
          setStatus(false)
+         dispatch(clearProfilePic())
   }
 
-  const dispatch = useDispatch();
+  
 
   useEffect(() => {
          if(userImage.length < 1) return;
@@ -48,7 +50,7 @@ const ProfileCard = () => {
 
   }, [userImage])
 
-  const [ updateUser ] = useUpdateUserProfileMutation();
+  const [ updateUser, { isLoading } ] = useUpdateUserProfileMutation();
 
   const updateForm = async (data) => {
         const formData = new FormData();
@@ -57,13 +59,20 @@ const ProfileCard = () => {
       
          try {
                const res = await updateUser(formData);
-               console.log(res.data)
+               
+               dispatch(setProfile({ ...res.data.info }))
+
+               toast.success("Update Successful", { id: 'update-sucess'})
          } catch (error) {
                console.log(error)
+               toast.error("Updated Failed. Please try again.", { id: 'update-error'})
          }
   }
   return (
     <div className="settings-tab">
+                <Toaster />
+
+                 { isLoading ?  <Spinner /> : ''}
                <div className="tab-title">
                          <h2>Profile Settings</h2>
                </div>
@@ -73,7 +82,7 @@ const ProfileCard = () => {
                                     <div className="picture-wrap">
                                                <div className="picture-box">
                                                           <div className="image-part">
-                                                                  { status ?  <img src={imageUrl} alt="" /> :  <img src={profile.profilePic ? profile.profilePic.url : profileImg} alt="" />}
+                                                                  { status ?  <img src={imageUrl} alt="" /> :  <img src={profile.profilePic.url? profile.profilePic.url : profileImg} alt="" />}
                                                           </div>
                                                          {/* <div className="picture-texts">
                                                                  <p>Upload new image</p>
@@ -81,7 +90,7 @@ const ProfileCard = () => {
                                                          </div> */}
                                                          <div className="upload-status">
                                                                   <div className="status-top">
-                                                                           <p className="image-name"> </p>
+                                                                           <p className="image-name">{status ? 'Uploaded': ''}</p>
                                                                            { status ? <span className="check"><FiCheck /></span>: ''}
                                                                   </div>
                                                          </div>

@@ -8,6 +8,7 @@ import { IoMdNotificationsOutline } from 'react-icons/io'
 import { VscDebugDisconnect } from 'react-icons/vsc'
 import { TfiBrushAlt } from "react-icons/tfi"
 import ProfileCard from "./settings/ProfileCard"
+import Footer from "../Footer"
 const SettingsBody = () => {
   const { userInfo} = useSelector(state => state.auth)
   return (
@@ -49,6 +50,8 @@ const SettingsBody = () => {
                                             </div>
                                   </div>
                         </div>
+
+                        <Footer />
              </div>
     </div>
   )

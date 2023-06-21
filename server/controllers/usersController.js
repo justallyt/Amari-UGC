@@ -16,6 +16,7 @@ export const LoginUser = asyncHandler(async(req, res) => {
                    message: "Login Successful.",
                    id: user._id,
                    role: user.role,
+                   username: user.username
              })
        }else{
                res.status(401);
@@ -90,16 +91,21 @@ export const GetProfile = asyncHandler(async(req, res) => {
 //Update User Profile
 export const UpdateProfile = asyncHandler(async(req, res) => {
         const user = await User.findById( req.user._id);
-
+        
         if(user){
               try{
-                     //Upload profile image to cloudinary
-                     const cloudinary_result = await cloudinary.uploader.upload(req.file.path);
-                    // console.log(result.url);
-                    // console.log(result.secure_url)
-                    const public_id = cloudinary_result.public_id;
-                    const url = cloudinary_result.secure_url;
+                     let public_id, url;
+                     //file not uploaded
+                     if(!req.file){
+                            public_id = user.profilePic.public_id;
+                            url = user.profilePic.url;
+                     }else{
+                            const cloudinary_result = await cloudinary.uploader.upload(req.file.path, { folder: "profilephotos"});
 
+                            public_id = cloudinary_result.public_id;
+                            url = cloudinary_result.secure_url;
+                     }
+                     
                     const {name, username, email, phone, bio, country, city} = JSON.parse(req.body.data);
                    
                    // console.log(req.body)
@@ -121,7 +127,7 @@ export const UpdateProfile = asyncHandler(async(req, res) => {
                     }, { new: true});
                     
                     if(updatedGoal){
-                           res.status(201).json({ message: 'User updated successfully', data: updatedGoal})
+                           res.status(201).json({ message: 'User updated successfully', info: updatedGoal})
                     }else{
                           res.status(500).json({ message: "User update failed"})
                     }

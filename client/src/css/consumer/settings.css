@@ -264,24 +264,25 @@
 .upload-status span.check{
       color: rgb(12, 135, 12);
       font-size: 18px;
+      display: flex;
+      margin-top: 5px;
 }
-.upload-status .progress-bar{
-    width: 100%;
-    height: 5px;
-    border-radius:10px;
-    background: rgb(243, 241, 241);
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    -ms-border-radius:10px;
-    -o-border-radius:10px;
+.upload-status .status-top{
+      display: flex;
+      gap:5px;
+      align-items: center;
 }
-.progress-bar .progress-inner{
-      width: 50%;
-      background: var(--main-color);
-      height: 100%;
-      border-radius: 10px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      -ms-border-radius: 10px;
-      -o-border-radius: 10px;
+.upload-status .status-top p{
+      font-size: 13px;
+      color: green;
+      font-family: "Madera-Medium";
 }
+
+.settings-tab form{
+      height: 550px;
+      overflow-y: scroll;
+      margin-bottom: 30px;
+}
+.settings-tab form::-webkit-scrollbar {
+      width: 0px;
+  }
