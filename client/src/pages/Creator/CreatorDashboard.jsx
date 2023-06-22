@@ -1,12 +1,12 @@
-import DashboardBody from "../../components/Consumer/DashboardBody"
-import ConsumerSidebar from "../../components/Consumer/Sidebar"
-import "../../css/consumer/dashboard.css"
+import DashboardBody from "../../components/Creator/DashboardBody"
+import ConsumerSidebar from "../../components/Creator/Sidebar"
+import "../../css/creator/dashboard_creator.css"
 import { useDispatch } from "react-redux"
 import { useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setProfile } from "../../redux/profileSlice"
 import { useEffect } from "react"
 
-const ConsumerDashboard = () => {  
+const CreatorDashboard = () => {  
   const dispatch = useDispatch();
   //Get User Profile
   const { data, isLoading } = useGetUserProfileQuery()
@@ -29,4 +29,4 @@ const ConsumerDashboard = () => {
   )
 }
 
-export default ConsumerDashboard
+export default CreatorDashboard

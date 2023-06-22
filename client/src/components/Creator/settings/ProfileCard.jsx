@@ -82,7 +82,7 @@ const ProfileCard = () => {
                                     <div className="picture-wrap">
                                                <div className="picture-box">
                                                           <div className="image-part">
-                                                                  { status ?  <img src={imageUrl} alt="" /> :  <img src={profile.profilePic.url? profile.profilePic.url : profileImg} alt="" />}
+                                                                  { status ?  <img src={imageUrl} alt="" /> :  <img src={profile.profilePic.url !== 'null' ? profile.profilePic.url : profileImg} alt="" />}
                                                           </div>
                                                          {/* <div className="picture-texts">
                                                                  <p>Upload new image</p>

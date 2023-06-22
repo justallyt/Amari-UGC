@@ -5,10 +5,10 @@ import UserChoice from "./pages/UserChoice"
 import Register from "./pages/Register"
 import Login from "./pages/Login"
 import BrandDashboard from "./pages/Brand/BrandDashboard"
-import ConsumerDashboard from "./pages/Consumer/ConsumerDashboard"
-import Settings from "./pages/Consumer/Settings"
-import ConsumerRoutes from "./utils/ConsumerRoutes"
+import CreatorDashboard from "./pages/Creator/CreatorDashboard"
+import Settings from "./pages/Creator/Settings"
 import BrandRoutes from './utils/BrandRoutes'
+import CreatorRoutes from "./utils/CreatorRoutes"
 function App() {
 
   return (
@@ -20,8 +20,8 @@ function App() {
                    <Route path="/user/login" element={<Login />} />
                     
                    {/* Consumer Routes */}
-                     <Route element={<ConsumerRoutes />}>
-                               <Route path="/creator/:id/" element={<ConsumerDashboard />} />
+                     <Route element={<CreatorRoutes />}>
+                               <Route path="/creator/:id/" element={<CreatorDashboard />} />
                                <Route path="/creator/:id/settings" element={<Settings />} />
                                <Route path="/creator/:id/settings/:type" element={<Settings />} />
                      </Route>

@@ -1,6 +1,6 @@
-import SettingsBody from "../../components/Consumer/SettingsBody"
-import ConsumerSidebar from "../../components/Consumer/Sidebar"
-import "../../css/consumer/settings.css"
+import SettingsBody from "../../components/Creator/SettingsBody"
+import ConsumerSidebar from "../../components/Creator/Sidebar"
+import "../../css/creator/settings_creator.css"
 const Settings = () => {
   return (
     <div className="dashboard-wrapper">

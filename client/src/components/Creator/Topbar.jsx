@@ -69,7 +69,12 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                              </div>
                              <div className="profile-part" onClick={() => setStatus(true)}>
                                          <div className="profile-image">
-                                                    <img src={user ? user.profilePic.url : profileImg} alt="" />
+                                                   { user !== null ? 
+                                                           <img src={user.profilePic.url !== 'null' ? user.profilePic.url : profileImg} alt="" />
+                                                       :
+                                                       <img src={profileImg} alt="" />
+                                                    }
+                                                   
                                          </div>
                              </div>
                   </div>
@@ -79,7 +84,11 @@ const [ logoutConsumer ] = useLogoutUserMutation();
 
                                    <div className="account-profile">
                                              <div className="account-image">
-                                                        <img src={user ? user.profilePic.url : profileImg} alt="" />
+                                                    { user !== null ? 
+                                                           <img src={user.profilePic.url !== 'null' ? user.profilePic.url : profileImg} alt="" />
+                                                       :
+                                                       <img src={profileImg} alt="" />
+                                                    }
                                              </div>
                                              <div className="account-details">
                                                          <h3>{user && user.name}</h3>
@@ -87,7 +96,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                                              </div>
                                    </div>
 
-                                   <NavLink to={'/'} className='profile-link'>
+                                   <NavLink to={`/creator/${user._id}/settings/profile`} className='profile-link'>
                                                <span><FaRegUser /></span>
                                                  <div className="deets">
                                                              <h4>My Account</h4>

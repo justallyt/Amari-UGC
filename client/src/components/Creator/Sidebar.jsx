@@ -31,7 +31,7 @@ const ConsumerSidebar = () => {
                                                        <NavLink to={'/earnings'}><span><BsPiggyBank /></span> My Earnings</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={`/${userInfo.id}/settings`}><span><SlSettings /></span> Settings</NavLink>
+                                                       <NavLink to={`/creator/${userInfo.id}/settings`}><span><SlSettings /></span> Settings</NavLink>
                                              </li>
                                     </ul>
                        </div>

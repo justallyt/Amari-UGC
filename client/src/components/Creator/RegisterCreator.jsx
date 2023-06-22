@@ -23,7 +23,7 @@ const RegisterCreator = () => {
 
    useEffect(()=> {
        if(userInfo){
-            navigate(`/${userInfo.id}`)
+            navigate(`/creator/${userInfo.id}`)
        }
    }, [navigate, userInfo])
 
@@ -35,7 +35,7 @@ const RegisterCreator = () => {
            try {
                 const res = await registerconsumer(data).unwrap();
                 dispatch(setCredentials({...res}));
-                navigate(`/${res.role}/${res.username === 'null' ? res.id : res.username}`);
+                navigate(`/${res.role.toLowerCase}/${res.username === 'null' ? res.id : res.username}`);
            } catch (err) {
                  console.log(err);
            }
