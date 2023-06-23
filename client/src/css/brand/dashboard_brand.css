@@ -1,2 +1,51 @@
 
+.brand-sidebar{
+     width: 320px;
+     top: 0;
+     bottom: 0;
+     position: fixed;
+     padding: 30px 0;
+}
+.brand-sidebar-content{
+     width: 80%;
+     margin: auto;
+}
+.brand-sidebar .logo{
+      width: 130px;
+}
 
+.sidebar-menu{
+    margin-top: 50px;
+}
+
+.sidebar-menu ul li {
+     margin-bottom: 20px;
+}
+.sidebar-menu ul li a{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    gap: 5px;
+    padding: 12px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    color: #000d14;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+.sidebar-menu ul li a.active,
+.sidebar-menu ul li a:hover{
+      background: var(--main-color);
+      color: white;
+}
+.sidebar-menu ul li a span{
+    display: flex;
+    margin-top: 2px;
+}

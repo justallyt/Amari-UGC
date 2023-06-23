@@ -4,8 +4,8 @@
        height: auto;
 }
 .dashboard-inner{
-     width: 1450px;
      margin: auto;
+     width: 100%;
      position: relative;
 }
 .sidebar-container{
