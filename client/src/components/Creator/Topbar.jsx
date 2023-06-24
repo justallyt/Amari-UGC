@@ -96,7 +96,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                                              </div>
                                    </div>
 
-                                   <NavLink to={`/creator/${user._id}/settings/profile`} className='profile-link'>
+                                   <NavLink className='profile-link'>
                                                <span><FaRegUser /></span>
                                                  <div className="deets">
                                                              <h4>My Account</h4>

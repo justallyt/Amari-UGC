@@ -1,10 +1,11 @@
 
 .brand-sidebar{
-     width: 320px;
+     width: 300px;
      top: 0;
      bottom: 0;
      position: fixed;
      padding: 30px 0;
+     border: 1px solid rgba(156, 209, 204, 0.304)
 }
 .brand-sidebar-content{
      width: 80%;
@@ -12,6 +13,7 @@
 }
 .brand-sidebar .logo{
       width: 130px;
+      margin: auto;
 }
 
 .sidebar-menu{
@@ -29,6 +31,7 @@
     display: flex;
     align-items: center;
     width: 80%;
+    margin: auto;
     gap: 5px;
     padding: 12px;
     border-radius: 10px;
@@ -76,6 +79,7 @@
      -o-transition: all 0.6s ease;
      cursor: pointer;
      width: 80%;
+     margin:auto;
 }
 .sidebar-bottom p:hover{
     background: rgba(192, 247, 239, 0.2);
