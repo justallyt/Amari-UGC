@@ -108,8 +108,8 @@
 }
 .greeting p{
      font-size: 14px;
-     font-family: "Madera-Regular";
-     color: #555;
+     color: gray;
+     margin-top: 5px;
 }
 
 .statistics-wedge{
@@ -163,4 +163,55 @@
      line-height: 15px;
      font-family: "Madera-Thin";
      color: var(--black)
+}
+
+.performance-analytics  h3{
+      font-size: 25px;
+      margin-bottom: 20px;
+      font-family: "Madera-Light";
+}
+.performance-grid-wrap{
+         display: grid;;
+         grid-template-columns: 2fr 3fr;
+         gap: 30px;
+}
+.performance-numbers h4{
+      font-size: 20px;
+      font-family: "Madera-Thin";
+}
+.performance-numbers p{
+     font-size: 13px;
+     color: gray;
+     margin-left: 5px;
+}
+.performance-numbers p span{
+     color: var(--main-color);
+}
+
+.performance-numbers h1{
+       font-family: "Madera-Medium";
+       font-size: 40px;
+       display: flex;
+       align-items: center;
+       gap: 10px;
+       margin: 15px 0;
+}
+.performance-numbers h1 span{
+       font-size: 10px;
+       margin-top: 10px;
+       font-family: "Madera-Thin";
+       display: flex;
+       align-items: center;
+       color: var(--main-color);
+       background: rgba(192, 247, 239, 0.3);
+       padding: 3px 10px;
+       border-radius: 15px;
+       -webkit-border-radius: 15px;
+       -moz-border-radius: 15px;
+       -ms-border-radius: 15px;
+       -o-border-radius: 15px;
+}
+.performance-numbers h1 span .icon{
+     font-size: 16px;
+     margin-top: 5px;
 }
