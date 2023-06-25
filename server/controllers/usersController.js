@@ -77,7 +77,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
 
 //Get User Profile
 export const GetProfile = asyncHandler(async(req, res) => {
-       const user = await User.findById( req.user._id).select('-password');
+       const user =  await User.findById(req.user._id);
        
        if(user){
               res.status(200).json({ user})
@@ -88,7 +88,7 @@ export const GetProfile = asyncHandler(async(req, res) => {
 
 //Update User Profile
 export const UpdateProfile = asyncHandler(async(req, res) => {
-        const user = await User.findById( req.user._id);
+        const user = await User.findById(req.user._id);
         
         if(user){
               try{
@@ -145,6 +145,7 @@ export const LogOutUser = asyncHandler(async(req,res) => {
                      httpOnly: true,
                      expires: new Date(0)
              })
+            
 
              res.status(200).json({ message: 'You have logged out'})
 })

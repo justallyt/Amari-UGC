@@ -10,7 +10,7 @@ const CreatorDashboard = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector(state => state.profile)
   //Get User Profile
-  const { data, isLoading } = useGetUserProfileQuery()
+  const { data, isLoading } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
 
   useEffect(() => {
         if(!isLoading && data){
@@ -20,7 +20,7 @@ const CreatorDashboard = () => {
 
   return (
     <>
-           { profile ? 
+           { data && profile ? 
                   <div className="dashboard-wrapper">
                             <div className="dashboard-inner">
                                      <ConsumerSidebar />
@@ -29,7 +29,7 @@ const CreatorDashboard = () => {
                    </div>
                    : 
                   <div className="intermittent-wrapper">
-                            <p className="intermittent">Fetching your data. Stay tuned.</p>
+                            <p className="intermittent">Fetching your data. Just a moment.</p>
                   </div>
            }
     </>

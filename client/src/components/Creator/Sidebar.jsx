@@ -5,7 +5,7 @@ import { BsDatabase, BsPiggyBank } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
 import { useSelector } from "react-redux"
 const ConsumerSidebar = () => {
-     const { userInfo } = useSelector(state => state.auth);
+     const { profile } = useSelector(state => state.profile);
      return (
           <div className="sidebar-container">
                        <div className="sidebar-logo">
@@ -16,7 +16,7 @@ const ConsumerSidebar = () => {
                        <div className="sidebar-nav">
                                     <ul>
                                               <li>
-                                                       <NavLink to={`/${userInfo.id}`}><span><IoHomeOutline /></span> Dashboard</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}`}><span><IoHomeOutline /></span> Dashboard</NavLink>
                                              </li>
                                              <li>
                                                        <NavLink to={'/consumer/my-brands'}><span><IoLayersOutline /></span> My Brands</NavLink>
@@ -31,7 +31,7 @@ const ConsumerSidebar = () => {
                                                        <NavLink to={'/earnings'}><span><BsPiggyBank /></span> My Earnings</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={`/creator/${userInfo.id}/settings`}><span><SlSettings /></span> Settings</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/settings`}><span><SlSettings /></span> Settings</NavLink>
                                              </li>
                                     </ul>
                        </div>
