@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 import profileImg from "../../assets/dummyprofile.png"
+import { apiSlice } from "../../redux/apiSlice"
 
 const Topbar = ({ user}) => {
   const [ status, setStatus ] = useState(false)
@@ -47,6 +48,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                      setWait(false)
                      dispatch(clearCredentials({...res}));
                      dispatch(clearProfile())
+                     dispatch(apiSlice.util.resetApiState())
                      navigate('/user/login')
                }, 1500)
          }catch(error){

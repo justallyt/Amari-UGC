@@ -10,13 +10,14 @@ const CreatorDashboard = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector(state => state.profile)
   //Get User Profile
-  const { data, isLoading } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
+  const { data, isLoading, refetch } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
 
   useEffect(() => {
         if(!isLoading && data){
+              refetch();
              dispatch(setProfile({...data.user}))
          }
-  }, [data, dispatch, isLoading])
+  }, [data, dispatch,refetch, isLoading])
 
   return (
     <>
