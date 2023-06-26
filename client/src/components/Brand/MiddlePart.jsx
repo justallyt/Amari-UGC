@@ -27,11 +27,11 @@ const MiddlePart = () => {
     useEffect(()=>{
            const time = new Date().getHours();
            
-           time > 6 && time < 12 ? setGreeting("Good Morning") :
-           time > 12 && time < 17 ? setGreeting("Good Afternoon") :
-           time > 17 && time < 22 ? setGreeting("Good Evening") :
+           time >= 6 && time < 12 ? setGreeting("Good Morning") :
+           time >= 12 && time < 17 ? setGreeting("Good Afternoon") :
+           time >= 17 && time < 22 ? setGreeting("Good Evening") :
            setGreeting('Hi');
-
+             
         if(userInfo && userInfo.message){
                toast.success(userInfo.message, {
                       id: 'success'

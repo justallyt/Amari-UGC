@@ -45,13 +45,16 @@ const Transanctions = () => {
                  </div>
                  <div className="transaction-table">
                               <table>
-                                         <tr>
+                                         <thead>
+                                            <tr>
                                                  <th>Creator</th>
                                                  <th>Status</th>
                                                  <th>Date</th>
                                                  <th>Amount</th>
-                                        </tr>             
-                                        { transactions.map(item => 
+                                            </tr>         
+                                        </thead>        
+                                        <tbody>
+                                             { transactions.map(item => 
                                                 <tr key={item.id}>
                                                           <td>
                                                                  <div className="creator">
@@ -75,7 +78,8 @@ const Transanctions = () => {
                                                           <td>{item.date}</td>
                                                           <td>Ksh.{item.amount}</td>
                                                 </tr>
-                                        )}
+                                            )}
+                                        </tbody>
                              </table>
                  </div>
     </div>

@@ -6,6 +6,7 @@
      position: fixed;
      padding: 30px 0;
      border: 1px solid var(--sleezy-border);
+     z-index: 99;
 }
 .brand-sidebar-content{
      width: 80%;
@@ -366,4 +367,157 @@
 }
 .transaction-table .status.failed span{
      background: rgb(252, 18, 18);
+}
+
+/* Right Side Styles */
+.right-part-inner{
+     width: 90%;
+     margin: auto;
+}
+.right-part-header{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+.right-part-header .bell-part span{
+      position: relative;
+}
+
+.right-part-header .bell-part span.dot{
+       width: 7px;
+       height: 7px;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       background: var(--main-color);
+       position: absolute;
+       top: 0;
+       right: -1px;
+       box-shadow: 0px 0px 5px 1px rgb(69, 216, 239);
+}
+.right-part-header .search-area{
+      width: 200px;
+      height: 40px;
+      border: 1px solid var(--sleezy-border);
+      display: flex;
+      align-items: center;
+      padding-right: 5px;
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      background: rgba(250, 254, 255, 0.752);
+}
+.search-area .search-control{
+     height: 100%;
+     width: 90%;
+     border-radius: 8px 0px 0px 8px;
+     -webkit-border-radius: 8px 0px 0px 8px;
+     -moz-border-radius: 8px 0px 0px 8px;
+     -ms-border-radius: 8px 0px 0px 8px;
+     -o-border-radius: 8px 0px 0px 8px;
+     border: none;
+     background: transparent;
+     outline:none;
+     padding-left: 10px;
+     font-family: "Madera-Regular";
+}
+.search-area span{
+      font-size: 13px
+}
+
+.brand-profile-view{
+      border-bottom: 1px solid var(--sleezy-border);
+      padding-bottom: 20px;
+}
+.brand-profile-view .logo-section{
+      width: 80%;
+      height: 150px;
+      background: white;
+      margin: 30px auto 20px auto;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      box-shadow: 0px 0px 3px -1px gainsboro;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+.brand-profile-view .logo-section img{
+      object-fit: contain;
+      width: 70%;
+      height: 70%;
+}
+.brand-profile-view h3{
+      font-family: "Madera-Light";
+      font-size: 25px;
+      text-align: center;
+}
+.brand-profile-view h5{
+     font-size: 16px;
+     font-weight: 500;
+     text-align: center;
+}
+.brand-profile-view .biz{
+     display: flex;
+     justify-content: center;
+}
+.brand-profile-view p{
+     font-size: 15px;
+     text-align: center;
+     background: rgba(217, 238, 244, 0.34);
+     height: 40px;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     -ms-border-radius: 10px;
+     -o-border-radius: 10px;
+     padding-bottom: 5px;
+     margin: 10px auto;
+     padding: 5px 20px;
+}
+
+.profile-links{
+     display: grid;
+     grid-template-columns: repeat(2,1fr);
+     gap: 30px;
+     margin: 20px 0;
+}
+.profile-links a{
+       text-align: center;
+       padding: 7px 5px 10px 5px;
+       border-radius: 10px;
+       -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+       -ms-border-radius: 10px;
+       -o-border-radius: 10px;
+       font-size: 14px
+}
+.profile-links a:nth-child(1){
+      background: var(--main-color);
+      color: white;
+}
+.profile-links a:nth-child(2){
+      border: 1px solid var(--sleezy-border)
+}
+
+.creators-loft{
+     padding: 20px 0;
+}
+.creators-loft h3{
+     font-weight: 500;
+}
+.creators-loft .creator-images{
+     display: flex;
+     flex-wrap: wrap;
+     gap: 10px;
+     margin-top: 20px;
 }
