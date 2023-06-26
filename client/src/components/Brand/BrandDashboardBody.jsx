@@ -1,6 +1,6 @@
 import MiddlePart from "./MiddlePart"
 import Sidebar from "./Sidebar"
-
+import Footer from "../Footer"
 
 const BrandDashboardBody = () => {
   return (
@@ -8,9 +8,15 @@ const BrandDashboardBody = () => {
                <div className="dashboard-inner">
                          <Sidebar />
                          <div className="brand-dashboard-skewed">
-                                   <MiddlePart />
+                                   <div className="brand-dashboard-skewed-inner">
+                                            <MiddlePart />
+                                   </div>
+                                   <Footer />
                          </div>
+
+                         
                </div>
+               
     </div>
   )
 }

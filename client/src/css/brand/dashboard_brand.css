@@ -93,8 +93,11 @@
       margin-left: 300px;
       width: calc(100% - 300px);
       padding: 20px;
-      display: grid;
-      grid-template-columns: 2.5fr 1.2fr;
+}
+.brand-dashboard-skewed .brand-dashboard-skewed-inner{
+     display: grid;
+     grid-template-columns: 2.5fr 1.2fr;
+     margin-bottom: 50px;
 }
 
 .dashboard-middle-part{
@@ -165,7 +168,10 @@
      color: var(--black)
 }
 
-
+.performance-analytics{
+       border-bottom: 1px solid var(--sleezy-border);
+       padding-bottom: 30px;
+}
 .performance-analytics  h3{
       font-size: 25px;
       font-family: "Madera-Light";
@@ -233,4 +239,131 @@
 }
 .performance-bar-chart-inner{
      height: 200px;
+}
+
+.transactions-wrapper {
+      margin-top: 10px;
+}
+.transactions-wrapper h3{
+       font-size: 25px;
+       font-family: "Madera-Light";
+}
+
+.transactions-intro{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+}
+.transactions-intro .select-month{
+       position: relative;;
+}
+.select-month span{
+     color: gray;
+     position: absolute;
+     left:10px;
+     top: 50%;
+     transform: translateY(-50%);
+     -webkit-transform: translateY(-50%);
+     -moz-transform: translateY(-50%);
+     -ms-transform: translateY(-50%);
+     -o-transform: translateY(-50%);
+}
+.transactions-intro select{
+      width: 130px;
+      height: 45px;
+      padding-left: 25px;
+      font-family: "Madera-Regular";
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+      border: 1px solid rgba(128, 128, 128, 0.4);
+      background: rgb(245, 254, 255);
+      outline: none;
+      color: gray;
+}
+
+.transaction-table{
+       margin-top: 20px
+}
+
+.transaction-table table{
+     width: 100%;
+}
+.transaction-table table,
+.transaction-table tr,
+.transaction-table th{
+       text-align: left;
+}
+
+.transaction-table th{
+     border-bottom: 1px solid var(--sleezy-border);
+     padding-bottom: 15px;
+     font-family: "Madera-Thin";
+     font-size: 15px;
+     padding-left: 10px;
+}
+.transaction-table tr td{
+     border-bottom: 1px solid var(--sleezy-border);
+     padding: 15px 0;
+     font-size: 15px;
+}
+.transaction-table tr:last-of-type td{
+       border-bottom: none;
+}
+.creator{
+     display: flex;
+     gap: 10px;
+     align-items: center;
+     font-family: "Madera-Medium";
+     font-size: 17px;
+}
+
+.creator-image{
+     width: 50px;
+     height: 50px;
+     border-radius: 60px;
+     -webkit-border-radius: 60px;
+     -moz-border-radius: 60px;
+     -ms-border-radius: 60px;
+     -o-border-radius: 60px;
+     overflow: hidden;
+}
+
+.transaction-table .status{
+      border: 1px solid rgba(218, 224, 226, 0.884);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 15px 7px 15px;
+      border-radius: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+      font-size: 14px;
+}
+.transaction-table .status span{
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: flex;
+      background: black;
+      align-items: center;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      margin-top: 4px;
+}
+.transaction-table .status.success span{
+      background: rgb(46, 185, 46);
+}
+.transaction-table .status.pending span{
+     background: rgb(238, 231, 4);
+}
+.transaction-table .status.failed span{
+     background: rgb(252, 18, 18);
 }
