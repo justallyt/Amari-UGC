@@ -165,15 +165,20 @@
      color: var(--black)
 }
 
+
 .performance-analytics  h3{
       font-size: 25px;
-      margin-bottom: 20px;
       font-family: "Madera-Light";
 }
+
 .performance-grid-wrap{
          display: grid;;
          grid-template-columns: 2fr 3fr;
          gap: 30px;
+}
+.performance-numbers{
+     display: flex;
+     align-items: center;
 }
 .performance-numbers h4{
       font-size: 20px;
@@ -214,4 +219,18 @@
 .performance-numbers h1 span .icon{
      font-size: 16px;
      margin-top: 5px;
+}
+
+.performance-bar-chart h5{
+      font-size: 15px;
+      font-family: "Madera-Light";
+      margin-bottom: 20px;
+}
+.performance-bar-chart h5 span{
+     font-size: 9px;
+     font-family: "Madera-Light";
+     color: var(--main-color);
+}
+.performance-bar-chart-inner{
+     height: 200px;
 }

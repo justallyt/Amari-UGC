@@ -6,8 +6,8 @@ import { clearMessage } from "../../redux/authSlice"
 import creators from "../../assets/leader.png";
 import videos from "../../assets/photograph.png"
 import posts from "../../assets/social-media.png"
-import { RxTriangleUp } from "react-icons/rx"
-import { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Performance from "./Performance";
+import Transanctions from "./Transanctions";
 
 //Dummy data for creations
 const wedges = [
@@ -16,27 +16,7 @@ const wedges = [
   { id: 2, icon: posts, num: 33, txt: 'Posts Made'}
 ]
 
-//Dummy data for bar chart
-const data = [
-     {
-         name: 'July 1 - 31',
-         uv: 25,
-         pv: 10,
-         amt: 40,
-     },
-     {
-      name: 'Aug 1 - 31',
-      uv: 30,
-      pv: 58,
-      amt: 40,
-    },
-    {
-      name: 'Sep 1 - 30',
-      uv: 20,
-      pv: 38,
-      amt: 29,
-    },
-]
+
 const MiddlePart = () => {
     const [ greeting, setGreeting] = useState('')
 
@@ -61,6 +41,7 @@ const MiddlePart = () => {
               }, 3000)
         }
     }, [userInfo, dispatch])
+
   return (
     <div className="dashboard-middle-part">
                <Toaster />
@@ -86,34 +67,8 @@ const MiddlePart = () => {
                                               
                                        </div>
 
-                                       <div className="performance-analytics">
-                                                <h3>Performance</h3>
-                                                <div className="performance-grid-wrap">
-                                                            <div className="performance-numbers">
-                                                                         <h4>Total Impressions</h4>
-                                                                         <p>Last 90 days</p>
-
-                                                                         <h1>100k <span><RxTriangleUp className="icon" />+ 5.4%</span></h1>
-                                                                         <p><span>+ 9.3k </span>vs prev 60 days</p>
-                                                            </div>
-                                                            <div className="performance-bar-chart">
-                                                            <ResponsiveContainer width="100%" height="100%">
-                                                                            <BarChart
-                                                                                    data={data}
-                                                                                   
-                                                                              >
-                                                                                     <CartesianGrid strokeDasharray="3 3" />
-                                                                                                 <XAxis dataKey="name" axisLine={false}/>
-                                                                                                 <YAxis axisLine={false} />
-                                                                                                 <Tooltip />
-                                                                                                 <Legend />
-                                                                                                 <Bar dataKey="pv" fill="#8884d8" />
-                                                                                                 <Bar dataKey="uv" fill="#82ca9d" />
-                                                                              </BarChart>
-                                                                       </ResponsiveContainer>
-                                                            </div>
-                                                </div>
-                                       </div>
+                                       <Performance />
+                                       <Transanctions />
                           </div>
                  </div>
     </div>
