@@ -54,12 +54,12 @@ const Sidebar = () => {
 
                                 <div className="sidebar-menu">
                                              <ul>
-                                                      <li><NavLink to={'/'} className='active'><span><RxDashboard /></span> Dashboard</NavLink></li>
+                                                      <li><NavLink to={`/brand/${userInfo.id}/`}><span><RxDashboard /></span> Dashboard</NavLink></li>
                                                       <li><NavLink to={'/'}><span><GiHumanPyramid /></span>Creators</NavLink></li>
                                                       <li><NavLink to={'/'}><span><BsClipboardData /></span>Creations</NavLink></li>
                                                       <li><NavLink to={'/'}><span><VscNotebook /></span>Posts</NavLink></li>
                                                       <li><NavLink to={'/'}><span><BsCreditCard2Front /></span>Billing</NavLink></li>
-                                                      <li><NavLink to={'/'}><span><SlSettings /></span>Settings</NavLink></li>
+                                                      <li><NavLink to={`/brand/${userInfo.id}/settings`}><span><SlSettings /></span>Settings</NavLink></li>
                                              </ul>
 
                                              <div className="sidebar-bottom">

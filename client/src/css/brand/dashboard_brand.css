@@ -1,4 +1,13 @@
-
+.brand-dashboard-wrapper{
+     background: rgb(245, 254, 255);
+     position:relative;
+      height: auto;
+}
+.dashboard-inner{
+    margin: auto;
+    width: 100%;
+    position: relative;
+}
 .brand-sidebar{
      width: 300px;
      top: 0;
@@ -93,7 +102,7 @@
 .brand-dashboard-skewed{
       margin-left: 300px;
       width: calc(100% - 300px);
-      padding: 20px;
+      padding: 100px;
 }
 .brand-dashboard-skewed .brand-dashboard-skewed-inner{
      display: grid;

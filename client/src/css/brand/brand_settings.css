@@ -1,0 +1,38 @@
+.brand-settings-skewed{
+     margin-left: 300px;
+    
+     width: calc(100% - 300px);
+     padding: 30px;
+     background: rgb(245, 254, 255);;
+}
+
+.settings-header{
+     border-bottom: 1px solid var(--sleezy-border);
+     padding-bottom: 20px;
+}
+.settings-header h2{
+    font-size: 25px ;
+}
+.settings-header p{
+    color: gray;
+    font-size: 15px;
+}
+.settings-options{
+    padding: 10px 0;
+}
+.settings-options ul{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 80%;
+    background: rgba(221, 232, 235, 0.2);
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+.settings-options ul li{
+    text-align: center;
+     padding: 8px 20px 10px 20px;
+     font-size: 15px;
+}

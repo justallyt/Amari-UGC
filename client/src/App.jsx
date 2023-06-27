@@ -6,9 +6,10 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 import BrandDashboard from "./pages/Brand/BrandDashboard"
 import CreatorDashboard from "./pages/Creator/CreatorDashboard"
-import Settings from "./pages/Creator/Settings"
+import CreatorSettings from "./pages/Creator/CreatorSettings"
 import BrandRoutes from './utils/BrandRoutes'
 import CreatorRoutes from "./utils/CreatorRoutes"
+import BrandSettings from "./pages/Brand/BrandSettings"
 
 function App() {
 
@@ -23,14 +24,15 @@ function App() {
                    {/* Consumer Routes */}
                      <Route element={<CreatorRoutes />}>
                                <Route path="/creator/:id/" element={<CreatorDashboard />} />
-                               <Route path="/creator/:id/settings" element={<Settings />} />
-                               <Route path="/creator/:id/settings/:type" element={<Settings />} />
+                               <Route path="/creator/:id/settings" element={<CreatorSettings />} />
+                               <Route path="/creator/:id/settings/:type" element={<CreatorSettings />} />
                      </Route>
 
 
                      {/*Brand Routes */}
                      <Route element={<BrandRoutes />}>
                                 <Route path="/brand/:id" element={<BrandDashboard />} />
+                                <Route path="/brand/:id/settings" element={<BrandSettings />} />
                      </Route>
            </Routes>
     </>

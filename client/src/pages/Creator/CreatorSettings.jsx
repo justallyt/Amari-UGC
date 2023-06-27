@@ -1,7 +1,7 @@
 import SettingsBody from "../../components/Creator/SettingsBody"
 import ConsumerSidebar from "../../components/Creator/Sidebar"
 import "../../css/creator/settings_creator.css"
-const Settings = () => {
+const CreatorSettings = () => {
   return (
     <div className="dashboard-wrapper">
               <div className="dashboard-inner">
@@ -12,4 +12,4 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default CreatorSettings
