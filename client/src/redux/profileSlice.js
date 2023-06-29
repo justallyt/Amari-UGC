@@ -17,7 +17,7 @@ const profileSlice = createSlice({
                           localStorage.removeItem('profileInfo')
                 },
                 clearProfilePic: (state) => {
-                        state.profile.profilePic.url = null
+                        state.profile.profilePic.url = 'null'
                 }
         }
 })
