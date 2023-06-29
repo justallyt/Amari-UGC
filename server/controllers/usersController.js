@@ -77,7 +77,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
 
 //Get User Profile
 export const GetProfile = asyncHandler(async(req, res) => {
-       const user =  await User.findById(req.user._id);
+       const user =  await User.findById(req.user._id).select('-password');
        
        if(user){
               res.status(200).json({ user})
@@ -104,31 +104,59 @@ export const UpdateProfile = asyncHandler(async(req, res) => {
                             url = cloudinary_result.secure_url;
                      }
                      
-                    const {name, username, email, phone, bio, country, city} = JSON.parse(req.body.data);
-                   
-                   // console.log(req.body)
+                     //Update Brand
+                     if(user.role.toLowerCase() === 'brand'){
+                             const { name, username, email, phone, bio, country, city, businessType} = JSON.parse(req.body.data);
+                             
+                             const updatedBrand = await User.findByIdAndUpdate(user._id, {
+                                     name: name,
+                                     email: email,
+                                     username: username,
+                                     phone: phone,
+                                     businessType: businessType,
+                                     bio: bio,
+                                     address: {
+                                             country: country,
+                                             city: city
+                                     },
+                                     profilePic: {
+                                            public_id: public_id,
+                                            url: url
+                                     }
+                             }, { new: true});
 
-                    const updatedGoal = await User.findByIdAndUpdate(user._id, {
-                              name: name,
-                              email: email,
-                              username: username,
-                              phone: phone,
-                              bio: bio,
-                              address: {
-                                     country: country,
-                                     city: city
-                              },
-                              profilePic: {
-                                      public_id: public_id,
-                                      url: url
-                              }
-                    }, { new: true});
-                    
-                    if(updatedGoal){
-                           res.status(201).json({ message: 'User updated successfully', info: updatedGoal})
-                    }else{
-                          res.status(500).json({ message: "User update failed"})
-                    }
+                             if(updatedBrand){
+                                     res.status(201).json({ message: 'User updated successfully', info: updatedBrand})
+                             }else{
+                                     res.status(401).json({ message: "User update failed"})
+                             }
+                     }else{
+                            //Update Creator
+                            const {name, username, email, phone, bio, country, city} = JSON.parse(req.body.data);
+
+                            const updatedCreator = await User.findByIdAndUpdate(user._id, {
+                                      name: name,
+                                      email: email,
+                                      username: username,
+                                      phone: phone,
+                                      bio: bio,
+                                      address: {
+                                             country: country,
+                                             city: city
+                                      },
+                                      profilePic: {
+                                              public_id: public_id,
+                                              url: url
+                                      }
+                            }, { new: true});
+
+                            if(updatedCreator){
+                                   res.status(201).json({ message: 'User updated successfully', info: updatedCreator})
+                            }else{
+                                  res.status(500).json({ message: "User update failed"})
+                            }
+                     }
+
                }catch(error){
                      console.log(error)
               }

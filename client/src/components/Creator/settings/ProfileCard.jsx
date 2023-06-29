@@ -84,10 +84,6 @@ const ProfileCard = () => {
                                                           <div className="image-part">
                                                                   { status ?  <img src={imageUrl} alt="" /> :  <img src={profile.profilePic.url !== 'null' ? profile.profilePic.url : profileImg} alt="" />}
                                                           </div>
-                                                         {/* <div className="picture-texts">
-                                                                 <p>Upload new image</p>
-                                                                <span>Max file size - 2mb</span>
-                                                         </div> */}
                                                          <div className="upload-status">
                                                                   <div className="status-top">
                                                                            <p className="image-name">{status ? 'Uploaded': ''}</p>
