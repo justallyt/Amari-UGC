@@ -10,6 +10,7 @@ import CreatorSettings from "./pages/Creator/CreatorSettings"
 import BrandRoutes from './utils/BrandRoutes'
 import CreatorRoutes from "./utils/CreatorRoutes"
 import BrandSettings from "./pages/Brand/BrandSettings"
+import VideoCreate from "./pages/Creator/VideoCreate"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                    {/* Consumer Routes */}
                      <Route element={<CreatorRoutes />}>
                                <Route path="/creator/:id/" element={<CreatorDashboard />} />
+                               <Route path="/creator/:id/new" element={<VideoCreate />} />
                                <Route path="/creator/:id/settings" element={<CreatorSettings />} />
                                <Route path="/creator/:id/settings/:type" element={<CreatorSettings />} />
                      </Route>
@@ -31,7 +33,7 @@ function App() {
 
                      {/*Brand Routes */}
                      <Route element={<BrandRoutes />}>
-                                <Route path="/brand/:id" element={<BrandDashboard />} />
+                                <Route path="/brand/:id/" element={<BrandDashboard />} />
                                 <Route path="/brand/:id/settings" element={<BrandSettings />} />
                      </Route>
            </Routes>

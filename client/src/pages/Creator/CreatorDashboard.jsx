@@ -1,5 +1,5 @@
 import DashboardBody from "../../components/Creator/DashboardBody"
-import ConsumerSidebar from "../../components/Creator/Sidebar"
+import CreatorSidebar from "../../components/Creator/Sidebar"
 import "../../css/creator/dashboard_creator.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useGetUserProfileQuery } from "../../redux/usersSlice"
@@ -24,7 +24,7 @@ const CreatorDashboard = () => {
            { data && profile ? 
                   <div className="dashboard-wrapper">
                             <div className="dashboard-inner">
-                                     <ConsumerSidebar />
+                                     <CreatorSidebar />
                                      <DashboardBody />
                             </div>
                    </div>

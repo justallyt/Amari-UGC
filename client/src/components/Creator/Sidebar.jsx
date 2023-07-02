@@ -4,7 +4,7 @@ import { IoHomeOutline, IoLayersOutline, IoCloudUploadOutline } from "react-icon
 import { BsDatabase, BsPiggyBank } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
 import { useSelector } from "react-redux"
-const ConsumerSidebar = () => {
+const CreatorSidebar = () => {
      const { profile } = useSelector(state => state.profile);
      return (
           <div className="sidebar-container">
@@ -16,13 +16,13 @@ const ConsumerSidebar = () => {
                        <div className="sidebar-nav">
                                     <ul>
                                               <li>
-                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}`}><span><IoHomeOutline /></span> Dashboard</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/`}><span><IoHomeOutline /></span> Dashboard</NavLink>
                                              </li>
                                              <li>
                                                        <NavLink to={'/consumer/my-brands'}><span><IoLayersOutline /></span> My Brands</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/create'}><span><IoCloudUploadOutline /></span> Create</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}><span><IoCloudUploadOutline /></span> Create</NavLink>
                                              </li>
                                              <li>
                                                        <NavLink to={'/content'}><span><BsDatabase /></span> My Creations</NavLink>
@@ -43,4 +43,4 @@ const ConsumerSidebar = () => {
      )
 }
 
-export default ConsumerSidebar
+export default CreatorSidebar

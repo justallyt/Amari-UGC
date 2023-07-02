@@ -20,9 +20,9 @@ const RegisterBrand = () => {
  const { userInfo } = useSelector(state => state.auth);
 
  useEffect(()=> {
-  if(userInfo){
-       navigate(`/brand/${userInfo.id}`)
-  }
+        if(userInfo){
+             navigate(`/brand/${userInfo.id}`)
+        }
 }, [navigate, userInfo])
 
 
@@ -33,7 +33,7 @@ const RegisterBrand = () => {
    try {
         const res = await registerbrand(data).unwrap();
         dispatch(setCredentials({...res}));
-        navigate(`/brand/${res.id}/`);
+        navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ?  res.id : res.username}/`);
    } catch (err) {
          console.log(err)
 

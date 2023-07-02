@@ -462,6 +462,10 @@
       width: 70%;
       height: 70%;
 }
+.brand-profile-view .logo-section span{
+     font-size: 35px;
+     color: rgb(188, 188, 188);
+}
 .brand-profile-view h3{
       font-family: "Madera-Light";
       font-size: 25px;

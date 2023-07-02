@@ -1,5 +1,5 @@
 import { BsBell, BsSearch } from "react-icons/bs"
-import twiga from "../../assets/twiga.png"
+import { ImFilePicture } from "react-icons/im"
 import { useSelector } from 'react-redux'
 import { NavLink } from "react-router-dom"
 import creator1 from "../../assets/creator1.jpg"
@@ -25,7 +25,7 @@ const RightPart = () => {
 
                         <div className="brand-profile-view">
                                    <div className="logo-section">
-                                              <img src={twiga} alt="" />
+                                              { profile.profilePic.url !== 'null' ? <img src={profile.profilePic.url} /> : <span><ImFilePicture /></span>}
                                    </div>
                                    <h3>{profile.name}</h3>
                                    <h5>{profile.email}</h5>

@@ -1,11 +1,11 @@
 import SettingsBody from "../../components/Creator/SettingsBody"
-import ConsumerSidebar from "../../components/Creator/Sidebar"
+import CreatorSidebar from "../../components/Creator/Sidebar"
 import "../../css/creator/settings_creator.css"
 const CreatorSettings = () => {
   return (
     <div className="dashboard-wrapper">
               <div className="dashboard-inner">
-                            <ConsumerSidebar />
+                            <CreatorSidebar />
                             <SettingsBody />
               </div>
     </div>
