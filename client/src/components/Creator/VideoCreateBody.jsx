@@ -82,6 +82,10 @@ const VideoCreateBody = () => {
                                                          </div>
                                                    }
 
+                                                 <div className="video-form-column">
+                                                             <label htmlFor="caption">Add a Caption</label>
+                                                             <textarea name="" placeholder="Add a caption to go with it" cols="30" rows="10" {...register('caption')}></textarea>
+                                                 </div>
 
                                                    <button type="submit">Create your asset</button>
                                        </form>

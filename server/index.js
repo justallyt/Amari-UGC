@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectToDatabase from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js"
+import videoRoutes from "./routes/videoRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js"
 import cors from "cors"
 
@@ -23,7 +24,7 @@ app.use(cookieParser());
 app.use(cors())
 /* Routes */
 app.use("/api/user", userRoutes);
-
+app.use('/api/video', videoRoutes);
 
 //Error Handling
 app.use(notFound);
