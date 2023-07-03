@@ -1,3 +1,6 @@
+.dashboard-body-wrap .dashboard-row{
+       padding-bottom: 150px;
+}
 .video-create-row  h2{
     font-family: "Madera-Light";
     margin-bottom: 10px;
@@ -71,4 +74,54 @@
 }
 .upload-wrapper p{
      text-align: center;
+}
+.video-form-column span{
+      color: red;
+      font-size: 13px;
+}
+
+.video-create-row button{
+    width: 200px;
+    height: 55px;
+    font-family: "Madera-Medium";
+    background: var(--main-color);
+    color: whitesmoke;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border:none;
+    cursor: pointer;
+}
+
+.upload-status-box{
+     border: 1px solid var(--sleezy-border);
+     width: 600px;
+     padding: 20px;
+     display: flex;
+     align-items: center;
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     margin-bottom: 30px;
+}
+
+.upload-status-box span{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    background: var(--sleezy-border);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    cursor: pointer;
 }

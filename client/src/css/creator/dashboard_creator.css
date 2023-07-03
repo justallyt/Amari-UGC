@@ -1,7 +1,7 @@
 .dashboard-wrapper{
       background: rgb(250, 250, 250);
       position:relative;
-       height: 100vh;
+       height: auto;
 }
 .dashboard-inner{
      margin: auto;
