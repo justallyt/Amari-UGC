@@ -2,13 +2,16 @@ import mongoose, { Schema } from "mongoose";
 //import User from "./usersModel";
 
 const videosSchema = mongoose.Schema({
-         user: {
+         creator: {
               type: Schema.Types.ObjectId,
               ref: 'User'
          },
          created_for: {
                    type: String,
                   required: true
+         },
+         published: {
+               type: Boolean,
          },
          brand_product: {
                 type: String
@@ -17,9 +20,9 @@ const videosSchema = mongoose.Schema({
                type: String,
          },
          video: {
-                public_id: { type: String},
-                 url: { type: String},
-                 thumbnail: { type: String}
+                asset_id: { type: String},
+                 url: { type: String, required: true},
+                 thumbnail: { type: String, required: true}
          }
 }, { timestamps: true})
 
