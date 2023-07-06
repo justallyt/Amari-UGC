@@ -10,16 +10,6 @@ export const CreateVideo = asyncHandler(async(req,res) => {
         if(user){
               let asset_id, url, thumbnail;
                try {
-                     //  cloudinary.uploader.upload_large(req.file.path, { resource_type: 'video', folder: 'VideoAssets'}, (error, result) => {
-                     //            if(error){
-                     //                  console.log(error);
-                     //                  return;
-                     //            }
-                     //            asset_id = result.asset_id;
-                     //            url = result.secure_url;
-                     //             //generate thumbnail by adding jpg ext on the url
-                     //            thumbnail = `${url.slice(0, -3)}jpg`;  
-                     //  })
                      const cloud_result = await new Promise((resolve, reject) => {
                              cloudinary.uploader.upload_large(req.file.path, {
                                      resource_type: 'video',
@@ -33,7 +23,7 @@ export const CreateVideo = asyncHandler(async(req,res) => {
                              })
                      })
 
-                     const { created_for, brand_product, caption } = req.body;
+                     const { created_for, brand_product, caption } = JSON.parse(req.body);
 
                      if(cloud_result){
                             asset_id = cloud_result.asset_id;
