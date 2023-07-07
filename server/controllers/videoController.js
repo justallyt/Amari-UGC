@@ -12,7 +12,7 @@ export const CreateVideo = asyncHandler(async(req,res) => {
                try {
                      const cloud_result = await new Promise((resolve, reject) => {
                              cloudinary.uploader.upload_large(req.file.path, {
-                                     resource_type: 'video',
+                                     resource_type: 'video', 
                                      folder: 'VideoAssets'
                              }, (error, result) => {
                                    if(error){
@@ -23,7 +23,7 @@ export const CreateVideo = asyncHandler(async(req,res) => {
                              })
                      })
 
-                     const { created_for, brand_product, caption } = JSON.parse(req.body);
+                     const { brand, product, caption } = JSON.parse(req.body.data);
 
                      if(cloud_result){
                             asset_id = cloud_result.asset_id;
@@ -33,8 +33,8 @@ export const CreateVideo = asyncHandler(async(req,res) => {
 
                             const video = await Video.create({ 
                                    creator: user._id,
-                                   created_for: created_for,
-                                   brand_product: brand_product,
+                                   created_for: brand,
+                                   brand_product: product,
                                    caption: caption,
                                    video: {
                                            asset_id: asset_id,
@@ -48,9 +48,7 @@ export const CreateVideo = asyncHandler(async(req,res) => {
                               }else{
                                   res.status(401).json({ message: 'Error occurred. Please check your inputs and try again.'})
                               }
-                     }
-                     // const { created_for, brand_product, caption } = JSON.parse(req.body);
-       
+                     }   
                } catch (error) {
                      console.log(error)
                }

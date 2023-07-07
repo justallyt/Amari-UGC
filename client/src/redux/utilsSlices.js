@@ -8,7 +8,10 @@ export const utilsSlice = createSlice({
         initialState,
         reducers: {
               setUploadProgress: (state, action) => {
-                   state.videoUploadProgress = action.payload
+                     return {
+                            ...state,
+                            videoUploadProgress : action.payload
+                     }
               }
         }
 })

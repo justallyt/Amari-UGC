@@ -3,6 +3,7 @@ import authReducer from "./redux/authSlice"
 import profileReducer from "./redux/profileSlice"
 import utilsReducer from "./redux/utilsSlices"
 import { apiSlice } from "./redux/apiSlice";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
 const store = configureStore({
        reducer: {
@@ -15,4 +16,5 @@ const store = configureStore({
        devTools: true
 })
 
+setupListeners(store.dispatch)
 export default store

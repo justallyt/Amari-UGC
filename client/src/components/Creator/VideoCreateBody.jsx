@@ -8,6 +8,7 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import Footer from "../Footer"
 import VideoLoader from "./VideoLoader"
 import { useCreateAssetMutation } from "../../redux/videosSlice"
+import { setUploadProgress } from "../../redux/utilsSlices"
 import { toast } from "react-hot-toast"
 
 const VideoCreateBody = () => {
@@ -35,15 +36,21 @@ const VideoCreateBody = () => {
 
             setIsUploading(true);
             try {
-                   const response = await createAsset(formData);
-                   if(response){
-                         setIsUploading(false);
+                   const response = await createAsset(formData, setUploadProgress).unwrap();
+                   
+                   if(response) {
+                          setIsUploading(false);
+                          console.log(response)
+                          reset();
+                          resetUpload();
                    }
+                    
+
             } catch (error) {
                   console.log(error);
                   toast.error("Asset Creation Failed. Internal server error", { id: 'asset creation error'})
             }
-           reset();
+      
     }
     const resetUpload = () => {
             setSelectedFile(null)

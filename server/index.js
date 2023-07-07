@@ -21,7 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use(cors())
+const corsConfig = {
+    credentials: true,
+    origin: true,
+};
+app.use(cors(corsConfig))
 /* Routes */
 app.use("/api/user", userRoutes);
 app.use('/api/video', videoRoutes);
