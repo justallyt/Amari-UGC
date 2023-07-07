@@ -8,11 +8,11 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import Footer from "../Footer"
 import VideoLoader from "./VideoLoader"
 import { useCreateAssetMutation } from "../../redux/videosSlice"
-import { setUploadProgress } from "../../redux/utilsSlices"
 import { toast } from "react-hot-toast"
-
 const VideoCreateBody = () => {
     const { profile } = useSelector(state => state.profile)
+    const { videoUploadProgress } = useSelector(state => state.utils)
+
     const [isUploading, setIsUploading] = useState(false);
    const [ selectedFile, setSelectedFile] = useState(null)
    const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm()
@@ -27,19 +27,19 @@ const VideoCreateBody = () => {
             }
     })
 
-    const [ createAsset ] = useCreateAssetMutation();
+    const [ createAsset, { isLoading } ] = useCreateAssetMutation();
 
-    const uploadAsset = async(data) =>{
+    const uploadAsset = async(data, e) =>{
+            e.preventDefault();
             const formData = new FormData();
             formData.append('data', JSON.stringify(data));
             formData.append('userVideo', data.video[0]);
 
             setIsUploading(true);
             try {
-                   const response = await createAsset(formData, setUploadProgress).unwrap();
+                   const response = await createAsset(formData).unwrap();
                    
                    if(response) {
-                          setIsUploading(false);
                           console.log(response)
                           reset();
                           resetUpload();
@@ -69,9 +69,9 @@ const VideoCreateBody = () => {
                                        </div>
                                       
                                        { isUploading ?
-                                             <VideoLoader />
+                                             <VideoLoader percent={videoUploadProgress} uploadStatus={isLoading} resetIsUploading={setIsUploading} />
                                            : 
-                                           <form onSubmit={handleSubmit(uploadAsset)}>
+                                           <form onSubmit={handleSubmit(uploadAsset)} encType="multipart/form-data">
                                                      <div className="video-form-row">
                                                                  <div className="video-form-column">
                                                                             <label htmlFor="brand">Choose a Brand</label>
