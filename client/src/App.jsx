@@ -11,6 +11,7 @@ import BrandRoutes from './utils/BrandRoutes'
 import CreatorRoutes from "./utils/CreatorRoutes"
 import BrandSettings from "./pages/Brand/BrandSettings"
 import VideoCreate from "./pages/Creator/VideoCreate"
+import CreatorAssets from "./pages/Creator/CreatorAssets"
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
                      <Route element={<CreatorRoutes />}>
                                <Route path="/creator/:id/" element={<CreatorDashboard />} />
                                <Route path="/creator/:id/new" element={<VideoCreate />} />
+                               <Route path="/creator/:id/assets" element={<CreatorAssets />} />
                                <Route path="/creator/:id/settings" element={<CreatorSettings />} />
                                <Route path="/creator/:id/settings/:type" element={<CreatorSettings />} />
                      </Route>

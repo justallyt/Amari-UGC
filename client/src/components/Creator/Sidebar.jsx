@@ -25,7 +25,7 @@ const CreatorSidebar = () => {
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}><span><IoCloudUploadOutline /></span> Create</NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/content'}><span><BsDatabase /></span> My Creations</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/assets`}><span><BsDatabase /></span> My Creations</NavLink>
                                              </li>
                                              <li>
                                                        <NavLink to={'/earnings'}><span><BsPiggyBank /></span> My Earnings</NavLink>
