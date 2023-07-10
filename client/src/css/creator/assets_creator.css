@@ -125,7 +125,7 @@
       flex-direction: column;
 }
 .video-deets .likes span{
-      color: rgb(222, 222, 222);
+      color: rgb(238, 238, 238);
 }
 .video-deets .likes p{
     font-size: 12px;
@@ -138,4 +138,123 @@
        100%{
               box-shadow: 0px 0px 8px 1px  rgb(255, 255, 255);
        }
+}
+
+/* Video Modal */
+.video-modal-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(95, 143, 151, 0.741);
+    z-index: -99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.7s ease-in-out ;
+    -webkit-transition: all 0.7s ease-in-out ;
+    -moz-transition: all 0.7s ease-in-out ;
+    -ms-transition: all 0.7s ease-in-out ;
+    -o-transition: all 0.7s ease-in-out ;
+
+}
+.video-modal-wrapper.active{
+      opacity: 1;
+     z-index: 99;
+}
+.video-modal-wrapper .close-btn{
+     position: absolute;
+     right: 20px;
+     top: 20px;
+     color: white;
+     cursor: pointer;
+     font-size: 35px;
+}
+.video-modal-wrapper .modal-box{
+       width: 800px;
+       height: 80vh;
+       background: white;
+       box-shadow: 0px 0px 12px -1px rgb(194, 194, 194);
+       display: grid;
+       grid-template-columns: 3fr 1.8fr;
+       border-radius: 10px;
+       -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+       -ms-border-radius: 10px;
+       -o-border-radius: 10px;
+       transform: scale(0);
+       -webkit-transform: scale(0);
+       -moz-transform: scale(0);
+       -ms-transform: scale(0);
+       -o-transform: scale(0);
+       transform-origin: center;
+       transition: all 0.8s ease;
+       -webkit-transition: all 0.8s ease;
+       -moz-transition: all 0.8s ease;
+       -ms-transition: all 0.8s ease;
+       -o-transition: all 0.8s ease;
+}
+.video-modal-wrapper.active .modal-box{
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
+.modal-box .video-part{
+     padding: 30px;
+     border-right: 1px solid var(--sleezy-border);
+     position: relative;
+}
+
+.video-part .modal-video-box{
+     border-radius: 20px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     -ms-border-radius: 20px;
+     -o-border-radius: 20px;
+     overflow: hidden;
+     height: 100%;
+}
+
+.modal-box .likes-part{
+     padding: 30px;
+}
+.modal-box .likes-part h4{
+     font-family: "Madera-Light";
+     margin-bottom: 20px;
+}
+.likes-part .brand-profile{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      box-shadow: 0px 0px 3px -1px rgb(177, 176, 176);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+.likes-part .brand-profile img{
+      width: 80%;
+      height: 80%;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       object-fit: contain;
+}
+.likes-part .brand-moja{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.likes-part .brand-moja h2{
+    font-size: 15px;
+    color: #444;
 }

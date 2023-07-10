@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { 
-      videoUploadProgress: 0
+      videoUploadProgress: 0,
+      isModalOpen: false
 }
 export const utilsSlice = createSlice({
         name: 'uploadSlice',
@@ -15,9 +16,17 @@ export const utilsSlice = createSlice({
               },
               clearUploadProgress: (state) => {
                       state.videoUploadProgress = 0
-              }
+              },
+
+              //modal
+              openModal: (state) => {
+                  state.isModalOpen = true
+              },
+              closeModal: (state) => {
+                  state.isModalOpen = false
+             }
         }
 })
 
-export const { setUploadProgress, clearUploadProgress } = utilsSlice.actions
+export const { setUploadProgress, clearUploadProgress, openModal, closeModal } = utilsSlice.actions
 export default utilsSlice.reducer;

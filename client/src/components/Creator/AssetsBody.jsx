@@ -1,17 +1,26 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { NavLink } from "react-router-dom"
 import { MdOutlineVideoFile } from "react-icons/md"
 import vid from "../../assets/review5.jpg"
 import { BsPlayFill } from 'react-icons/bs'
 import { FaHeart } from 'react-icons/fa'
+import VideoModal from "./VideoModal"
+import { openModal } from "../../redux/utilsSlices"
 const AssetsBody = () => {
     const { profile } = useSelector(state => state.profile)
+    const { isModalOpen } = useSelector(state => state.utils);
+
+    const dispatch = useDispatch()
+
+    const openVideoModal = () => {
+          dispatch(openModal())
+    }
        return (
             <div className="dashboard-body-wrap">
                        <div className="dashboard-row">
                                   <Topbar user={profile} />
-
+                                 <VideoModal />
                                   <div className="assets-body-wrap">
                                              <div className="intro">
                                                      <h2>My Creations</h2>
@@ -28,7 +37,7 @@ const AssetsBody = () => {
                                                                    <div className="asset-video-moja">
                                                                               <img src={vid} alt="" />
                                                                               <div className="video-deets">
-                                                                                         <span className="play"><BsPlayFill /></span>
+                                                                                         <span onClick={openVideoModal} className="play"><BsPlayFill /></span>
                                                                                          <div className="video-tags">
                                                                                                    <h3>Standard Chartered</h3>
                                                                                                    <p>Product</p>
