@@ -24,11 +24,16 @@ const authSlice = createSlice({
               clearMessage: (state) => {
                       state.userInfo.message = null
                       removeFromStorage()
+              },
+              updateUsername: (state, action) => {
+                      //state.userInfo = { ...state.userInfo, username: action.payload}
+                      state.userInfo.username = action.payload
+                      changeUsername(action.payload)
               }
         }
 });
 
-export const { setCredentials, clearCredentials, clearPop, clearMessage } = authSlice.actions;
+export const { setCredentials, clearCredentials, clearPop, clearMessage, updateUsername } = authSlice.actions;
 
 export default authSlice.reducer;
 
@@ -37,7 +42,6 @@ function getFromStorage(){
       if(localStorage.getItem('userInfo')){
               elements = JSON.parse(localStorage.getItem('userInfo'))
       }
-     
       return elements;
 }
 
@@ -52,4 +56,12 @@ function removeFromStorage() {
          const obj = Object.fromEntries(allside)
        
         localStorage.setItem('userInfo', JSON.stringify(obj))
+}
+
+const changeUsername = (val) => {
+        let elements = getFromStorage();
+        
+       const updateVal = { ...elements, username: val}
+
+       localStorage.setItem('userInfo', JSON.stringify(updateVal))
 }

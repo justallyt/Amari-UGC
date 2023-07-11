@@ -9,7 +9,6 @@ import VideoModal from "./VideoModal"
 import { openModal } from "../../redux/utilsSlices"
 const AssetsBody = () => {
     const { profile } = useSelector(state => state.profile)
-    const { isModalOpen } = useSelector(state => state.utils);
 
     const dispatch = useDispatch()
 

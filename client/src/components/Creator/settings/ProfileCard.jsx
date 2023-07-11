@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux"
 import { clearProfilePic, setProfile } from "../../../redux/profileSlice"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../../Spinner"
+import { updateUsername } from "../../../redux/authSlice"
 const ProfileCard = () => {
   const { profile } = useSelector(state => state.profile);
   const [ userImage, setUserImage ] = useState([])
@@ -61,6 +62,8 @@ const ProfileCard = () => {
                const res = await updateUser(formData);
                
                dispatch(setProfile({ ...res.data.info }))
+
+               dispatch(updateUsername(res.data.info.username))
 
                toast.success("Update Successful", { id: 'update-sucess'})
          } catch (error) {

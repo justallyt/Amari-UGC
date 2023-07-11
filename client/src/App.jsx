@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useParams, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
 import UserChoice from "./pages/UserChoice"
 import Register from "./pages/Register"
@@ -12,9 +12,24 @@ import CreatorRoutes from "./utils/CreatorRoutes"
 import BrandSettings from "./pages/Brand/BrandSettings"
 import VideoCreate from "./pages/Creator/VideoCreate"
 import CreatorAssets from "./pages/Creator/CreatorAssets"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 
 function App() {
-
+  const locator = useLocation()
+  const [isUser, setIsUser] = useState(false)
+  const { userInfo } = useSelector(state => state.auth)
+  useEffect(()=> {
+         if(userInfo !== null && userInfo.role === import.meta.env.VITE_CONSUMER_ROLE){
+                  setIsUser(true)
+                  console.log('Something')
+         }else{ 
+                 setIsUser(false)
+                 console.log('Something Else')
+         }
+  }, [userInfo])
+  
+  //console.log([userInfo.username, userInfo.id].some((val) => val ))
   return (
     <>
            <Routes>
@@ -24,7 +39,7 @@ function App() {
                    <Route path="/user/login" element={<Login />} />
                     
                    {/* Consumer Routes */}
-                     <Route element={<CreatorRoutes />}>
+                     <Route element={<CreatorRoutes logger={isUser} />}>
                                <Route path="/creator/:id/" element={<CreatorDashboard />} />
                                <Route path="/creator/:id/new" element={<VideoCreate />} />
                                <Route path="/creator/:id/assets" element={<CreatorAssets />} />
