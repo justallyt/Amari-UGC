@@ -57,3 +57,8 @@ export const CreateVideo = asyncHandler(async(req,res) => {
                res.status(401).json({ message: 'An error occured. Not authorized to create a video.'})
         }
 })
+
+//Get User Videos
+export const getUserAssets = asyncHandler(async(req, res) => {
+       
+})

@@ -32,8 +32,14 @@ export const videosSlice = apiSlice.injectEndpoints({
                                    }               
                                }
                      }
-               })
+               }),
+              getUserAssets: builder.query({
+                     query: () => ({
+                            url: '/video/user-assets',
+                            method: 'GET'
+                     })
+              })
        })
 })
 
-export const { useCreateAssetMutation  } = videosSlice
+export const { useCreateAssetMutation, useGetUserAssetsQuery } = videosSlice

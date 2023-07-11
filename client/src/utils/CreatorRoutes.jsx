@@ -1,10 +1,14 @@
-
 import { Outlet, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const CreatorRoutes = ({ logger }) => {
-  
+const CreatorRoutes = () => {
+    const { userInfo } = useSelector(state => state.auth)
+    //const { id } = useParams();
   return (
-           logger  ? <Outlet /> : <Navigate to={'/user/login'} />
+            // userInfo !== null &&   [userInfo.username, userInfo.id].some(value => value == id) &&   
+            // userInfo.role === import.meta.env.VITE_CONSUMER_ROLE ? <Outlet /> : <Navigate to={'/user/login'} />
+            userInfo !== null &&   
+            userInfo.role === import.meta.env.VITE_CONSUMER_ROLE ? <Outlet /> : <Navigate to={'/user/login'} />
   )
 }
 

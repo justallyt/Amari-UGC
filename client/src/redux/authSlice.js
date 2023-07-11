@@ -26,7 +26,6 @@ const authSlice = createSlice({
                       removeFromStorage()
               },
               updateUsername: (state, action) => {
-                      //state.userInfo = { ...state.userInfo, username: action.payload}
                       state.userInfo.username = action.payload
                       changeUsername(action.payload)
               }
