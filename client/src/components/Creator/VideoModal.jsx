@@ -5,12 +5,13 @@ import { CgClose } from "react-icons/cg"
 import { useDispatch, useSelector } from "react-redux"
 import { closeModal } from "../../redux/utilsSlices"
 
-const VideoModal = () => {
+const VideoModal = ({ identity }) => {
     const dispatch = useDispatch()
    const { isModalOpen } = useSelector(state => state.utils);
     const closeVideoModal = () =>{
            dispatch(closeModal());
     }
+  
   return (
     <div className={isModalOpen ? "video-modal-wrapper active" : "video-modal-wrapper"}>
               <span className="close-btn" onClick={closeVideoModal}><CgClose /></span>
@@ -36,6 +37,7 @@ const VideoModal = () => {
                                                                    </div>
                                                                    <h2>Standard Chartered</h2>
                                                         </div>
+                                                        <p>{identity}</p>
                                             </div>
                                    </div>
                          </div>

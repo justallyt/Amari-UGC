@@ -4,46 +4,58 @@ import vid2 from "../../assets/vid2.jpg"
 import vid3 from "../../assets/vid3.jpg"
 import standard from "../../assets/standard.png"
 import { MdOutlineVideoFile } from "react-icons/md"
+import { useGetUserAssetsQuery } from "../../redux/videosSlice"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setVideoAssets } from "../../redux/utilsSlices"
+import { BsPlayFill } from 'react-icons/bs'
+import VideoModal from "./VideoModal"
+import { openModal } from "../../redux/utilsSlices"
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 const Informationals = () => {
-  const creations = [
-        {
-              id: 0,
-              image: vid1,
-              txt: "Fenti",
-              category: 'Beauty'
-        },
-        {
-            id: 1,
-            image: vid2,
-            txt: "Wakili Box",
-            category: 'Corporate'
-      },
-      {
-        id: 2,
-        image: vid3,
-        txt: "Orchard Juice",
-        category: 'Food & Beverage'
+  const [videoId, setVideoId] = useState(null)
+  const { videos } = useSelector(state => state.utils);
+  const { profile } = useSelector(state => state.profile)
+  const dispatch = useDispatch();
+  const { data, isLoading, refetch } = useGetUserAssetsQuery({  refetchOnMountOrArgChange: true })
+
+  useEffect(()=> {
+          if(!isLoading && data){
+                  refetch();
+                   dispatch(setVideoAssets(data.assets))
+          }
+  }, [data, isLoading, refetch, dispatch])
+
+  const openVideoModal = (id) => {
+         dispatch(openModal())
+         setVideoId(id)
   }
-  ]
+
   return (
     <div className="informationals-section">
               <div className="section-wrapper">
                        <div className="informationals-creations">
                                 <div className="creation-header">
                                             <h2>Recently Added Creations</h2>
-                                            <NavLink to={'/'}>Create New <span><MdOutlineVideoFile /></span></NavLink>
+                                            <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}>Create New <span><MdOutlineVideoFile /></span></NavLink>
                                 </div>
-
+                                <VideoModal identity={videoId} />
                                 <div className="creations-row">
-                                        { creations.map(item => 
-                                              <div className="creation-moja" key={item.id}>
-                                                        <div className="creation-thumbnail">
-                                                                 <img src={item.image} alt="" />
-                                                        </div>
-                                                        <h3>{item.txt}</h3>
-                                                        <p>{item.category}</p>
-                                            </div>
-                                        )}
+                                        { videos.slice(-3).reverse().map(item =>
+                                                <div className="creation-moja" key={item._id}>
+                                                            <div className="creation-thumbnail">
+                                                                     { isLoading ?  <Skeleton height={250} /> : <img src={item.video.thumbnail} alt="" />}
+                                                                     <div className="overlay-play">
+                                                                                <span onClick={() => openVideoModal(item._id)}><BsPlayFill /></span>
+                                                                     </div>
+                                                              </div>
+                                                           { isLoading ?  <Skeleton /> : <h3>{item.created_for}</h3>}
+                                                          { isLoading ?  <Skeleton /> : <p>{item.brand_product}</p>}
+                                                          <p>{item._id}</p>
+                                                         
+                                                 </div>
+                                          )}
                                 </div>
 
                                 <div className="activity-panel">

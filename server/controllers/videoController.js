@@ -60,5 +60,11 @@ export const CreateVideo = asyncHandler(async(req,res) => {
 
 //Get User Videos
 export const getUserAssets = asyncHandler(async(req, res) => {
-       
+       const assets = await Video.find({ creator: req.user._id})
+
+       if(assets){
+            res.status(200).json({assets})
+     }else{
+             res.status(400).json({ message: "User data could not be fetched at this time."})
+     }
 })
