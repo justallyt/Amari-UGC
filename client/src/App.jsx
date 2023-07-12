@@ -12,6 +12,8 @@ import CreatorRoutes from "./utils/CreatorRoutes"
 import BrandSettings from "./pages/Brand/BrandSettings"
 import VideoCreate from "./pages/Creator/VideoCreate"
 import CreatorAssets from "./pages/Creator/CreatorAssets"
+import AdminRoutes from "./utils/AdminRoutes"
+import AdminDashboard from "./pages/Admin/AdminDashboard"
 
 function App() {
 
@@ -37,6 +39,11 @@ function App() {
                      <Route element={<BrandRoutes />}>
                                 <Route path="/brand/:id/" element={<BrandDashboard />} />
                                 <Route path="/brand/:id/settings" element={<BrandSettings />} />
+                     </Route>
+
+                     { /* Admin Routes */}
+                     <Route element={<AdminRoutes />}>
+                                   <Route path="/admin/:id" element={<AdminDashboard />} />
                      </Route>
            </Routes>
     </>

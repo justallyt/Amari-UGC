@@ -629,16 +629,14 @@
 }
 
 
-
-
-
-
-
-
-
-
 @media(max-width: 1480px){
        .dashboard-inner{
                 width: 100%;
        }
 }
+
+@media(max-width: 1250px){
+        .sidebar-container{
+                width: 80px;
+        }
+}  

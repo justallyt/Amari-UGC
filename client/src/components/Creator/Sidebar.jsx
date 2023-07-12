@@ -16,22 +16,22 @@ const CreatorSidebar = () => {
                        <div className="sidebar-nav">
                                     <ul>
                                               <li>
-                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/`}><span><IoHomeOutline /></span> Dashboard</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/`}><span><IoHomeOutline /></span> <p>Dashboard</p></NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/consumer/my-brands'}><span><IoLayersOutline /></span> My Brands</NavLink>
+                                                       <NavLink to={'/consumer/my-brands'}><span><IoLayersOutline /></span> <p>My Brands</p></NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}><span><IoCloudUploadOutline /></span> Create</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}><span><IoCloudUploadOutline /></span> <p>Create</p></NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/assets`}><span><BsDatabase /></span> My Creations</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/assets`}><span><BsDatabase /></span> <p>My Creations</p></NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/earnings'}><span><BsPiggyBank /></span> My Earnings</NavLink>
+                                                       <NavLink to={'/earnings'}><span><BsPiggyBank /></span> <p>My Earnings</p></NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/settings`}><span><SlSettings /></span> Settings</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/settings`}><span><SlSettings /></span><p> Settings</p></NavLink>
                                              </li>
                                     </ul>
                        </div>
