@@ -5,19 +5,20 @@ import { useDispatch, useSelector } from "react-redux"
 import { useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setProfile } from "../../redux/profileSlice"
 import { useEffect } from "react"
+import Spinner2 from "../../components/Spinner2"
 
 const CreatorDashboard = () => {  
   const dispatch = useDispatch();
   const { profile } = useSelector(state => state.profile)
   //Get User Profile
-  const { data, isLoading, refetch } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
+  const { data, isLoading } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
 
   useEffect(() => {
         if(!isLoading && data){
-              refetch();
+              
              dispatch(setProfile({...data.user}))
          }
-  }, [data, dispatch,refetch, isLoading])
+  }, [data, dispatch, isLoading])
 
   return (
     <>
@@ -27,11 +28,10 @@ const CreatorDashboard = () => {
                                      <CreatorSidebar />
                                      <DashboardBody />
                             </div>
+                           
                    </div>
                    : 
-                  <div className="intermittent-wrapper">
-                            <p className="intermittent">Fetching your data. Just a moment.</p>
-                  </div>
+                   <Spinner2 />
            }
     </>
   )

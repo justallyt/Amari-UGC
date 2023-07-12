@@ -15,17 +15,17 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
-  const { videos } = useSelector(state => state.utils);
+  const { isModalOpen, videos } = useSelector(state => state.utils);
   const { profile } = useSelector(state => state.profile)
   const dispatch = useDispatch();
-  const { data, isLoading, refetch } = useGetUserAssetsQuery({  refetchOnMountOrArgChange: true })
+  const { data, isLoading } = useGetUserAssetsQuery({  refetchOnMountOrArgChange: true })
 
   useEffect(()=> {
           if(!isLoading && data){
-                  refetch();
+                  
                    dispatch(setVideoAssets(data.assets))
           }
-  }, [data, isLoading, refetch, dispatch])
+  }, [data, isLoading, dispatch])
 
   const openVideoModal = (id) => {
          dispatch(openModal())
@@ -40,7 +40,7 @@ const Informationals = () => {
                                             <h2>Recently Added Creations</h2>
                                             <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}>Create New <span><MdOutlineVideoFile /></span></NavLink>
                                 </div>
-                                <VideoModal identity={videoId} />
+                               { isModalOpen ?  <VideoModal identity={videoId} />: ''}
                                 <div className="creations-row">
                                         { videos.slice(-3).reverse().map(item =>
                                                 <div className="creation-moja" key={item._id}>
@@ -52,8 +52,6 @@ const Informationals = () => {
                                                               </div>
                                                            { isLoading ?  <Skeleton /> : <h3>{item.created_for}</h3>}
                                                           { isLoading ?  <Skeleton /> : <p>{item.brand_product}</p>}
-                                                          <p>{item._id}</p>
-                                                         
                                                  </div>
                                           )}
                                 </div>

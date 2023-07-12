@@ -1,24 +1,28 @@
-import vid from "../../assets/creator4.jpg"
+
 import logo from "../../assets/twiga.png"
 import logo2 from "../../assets/stanchart.png"
 import { CgClose } from "react-icons/cg"
 import { useDispatch, useSelector } from "react-redux"
 import { closeModal } from "../../redux/utilsSlices"
+import Video from "../Video"
 
 const VideoModal = ({ identity }) => {
     const dispatch = useDispatch()
-   const { isModalOpen } = useSelector(state => state.utils);
+   const { isModalOpen, videos } = useSelector(state => state.utils);
+   
     const closeVideoModal = () =>{
            dispatch(closeModal());
     }
   
+    const activeVideo = videos.find(vid => vid._id === identity);
+    
   return (
     <div className={isModalOpen ? "video-modal-wrapper active" : "video-modal-wrapper"}>
               <span className="close-btn" onClick={closeVideoModal}><CgClose /></span>
               <div className="modal-box">
                          <div className="video-part">
                                     <div className="modal-video-box"> 
-                                              <img src={vid} alt="" />
+                                              <Video source={activeVideo.video.url} />
                                     </div>
                          </div>
                          <div className="likes-part">
