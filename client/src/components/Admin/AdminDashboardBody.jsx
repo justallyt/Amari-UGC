@@ -30,6 +30,45 @@ const AdminDashboardBody = () => {
                                                                               <p>Since last month</p>
                                                                    </div>
                                                       </div>
+                                                      <div className="quick-number-box-moja">
+                                                                   <div className="type">
+                                                                               <div className="name-n-number">
+                                                                                         <h4>Creators</h4>
+                                                                                         <h2>1784</h2>
+                                                                               </div>
+                                                                               <span><BsPeople /></span>
+                                                                   </div>
+                                                                   <div className="percent">
+                                                                              <span><VscArrowUp />30%</span>
+                                                                              <p>Since last month</p>
+                                                                   </div>
+                                                      </div>
+                                                      <div className="quick-number-box-moja">
+                                                                   <div className="type">
+                                                                               <div className="name-n-number">
+                                                                                         <h4>Transactions</h4>
+                                                                                         <h2><figure>Ksh.</figure>124,250</h2>
+                                                                               </div>
+                                                                               <span><BsCreditCard2Front/></span>
+                                                                   </div>
+                                                                   <div className="percent">
+                                                                              <span><VscArrowUp />19%</span>
+                                                                              <p>Since last month</p>
+                                                                   </div>
+                                                      </div>
+                                                      <div className="quick-number-box-moja">
+                                                                   <div className="type">
+                                                                               <div className="name-n-number">
+                                                                                         <h4>Tasks</h4>
+                                                                                         <h2>84</h2>
+                                                                               </div>
+                                                                               <span><VscGitPullRequestGoToChanges /></span>
+                                                                   </div>
+                                                                   <div className="percent">
+                                                                              <span><VscArrowUp />4%</span>
+                                                                              <p>New Tasks</p>
+                                                                   </div>
+                                                      </div>
                                          </div>
                               </div>
                  </div>
