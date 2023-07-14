@@ -7,6 +7,8 @@
      height: 70px;
      box-shadow: 0px 4px 7px -5px gainsboro;
      background: white;
+     top: 0;
+     position: fixed;
 }
 
 .admin-inner{
@@ -114,6 +116,9 @@
 .main-topbar{
      border-bottom: 1px solid rgba(236, 233, 233, 0.818);
      height: 70px;
+     position: relative;
+     margin-top: 70px;
+     background: rgb(252, 252, 252);
 }
 .main-topbar ul{
     display: flex;
@@ -147,4 +152,90 @@
 .main-topbar ul li a span{
     display: inline-flex;
     margin-top: 3px
+}
+
+/* Admin Body Styles */
+.admin-dashboard-content{
+    padding: 20px 0;
+    position: relativ
+}
+
+.admin-dashboard-content .admin-intro h2{
+      font-size: 30px;
+}
+.admin-intro p{
+    color:rgb(68, 68, 68);
+    font-size: 15px;
+}
+
+.quick-numbers-boxes{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+.quick-numbers-boxes .quick-number-box-moja{
+       box-shadow: 0px 0px 4px 1px rgba(232, 232, 232, 0.429);
+       background-color: white;
+       padding: 30px 20px;
+       border-radius: 15px;
+       -webkit-border-radius: 15px;
+       -moz-border-radius: 15px;
+       -ms-border-radius: 15px;
+       -o-border-radius: 15px;
+}
+
+.quick-number-box-moja .type{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+}
+.quick-number-box-moja .name-n-number h4{
+       font-size: 13px;
+       color: rgb(60, 60, 60);
+}
+.quick-number-box-moja .name-n-number h2{
+    font-size: 35px;
+    font-family: "Madera-Medium";
+}
+.quick-number-box-moja .type span{
+       width: 40px;
+       height: 40px;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       color: white;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+}
+.quick-number-box-moja:nth-child(1) .type span{
+    background: purple;
+}
+.quick-number-box-moja .percent{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.quick-number-box-moja .percent span{
+     font-size: 12px;
+     padding: 5px 10px;
+     border-radius: 5px;
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     -ms-border-radius: 5px;
+     -o-border-radius: 5px;
+     display: flex;
+     font-family: "Madera-Medium";
+     align-items: center;
+     gap: 3px;
+     background:rgba(163, 241, 241, 0.368)
+}
+.quick-number-box-moja .percent p{
+     font-size: 14px;
+     font-family: "Madera-Medium";
+     color: rgb(60, 60, 60);
 }
