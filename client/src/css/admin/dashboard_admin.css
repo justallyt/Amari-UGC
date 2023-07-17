@@ -267,16 +267,7 @@
 .topbar-box button:hover{
     background:rgba(234, 254, 255, 0.605);
 }
-
-
-
-
-
-
-
-
-
-
+/* Main Topbar Styles */
 
 .main-topbar{
      border-bottom: 1px solid rgba(236, 233, 233, 0.818);
@@ -420,4 +411,129 @@
      font-size: 14px;
      font-family: "Madera-Medium";
      color: rgb(60, 60, 60);
+}
+
+/* Analytics Section Styles */
+.analytics-section{
+    display: grid;
+    grid-template-columns: 3fr 1.5fr;
+    gap: 30px;
+}
+.revenue-analytics{
+       box-shadow: 0px 0px 4px 1px rgba(232, 232, 232, 0.429);
+       background-color: white;
+       padding: 30px;
+       border-radius: 15px;
+       -webkit-border-radius: 15px;
+       -moz-border-radius: 15px;
+       -ms-border-radius: 15px;
+       -o-border-radius: 15px;
+}
+.analytics-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.analytics-header .header-texts h2{
+    font-size: 20px;
+    font-family: "Madera-Light";
+}
+.analytics-header .header-texts p{
+    font-size: 14px;
+    color: rgb(90, 90, 90)
+}
+.analytics-header .custom-select{
+     width: 150px;
+     padding: 10px;
+     border: 1px solid rgba(226, 226, 226, 0.762);
+     border-radius: 5px;
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     -ms-border-radius: 5px;
+     -o-border-radius: 5px;
+     font-family: "Madera-Light";
+     cursor:  pointer;
+     outline: none;
+}
+
+.updates-map-texts{
+    display: grid;
+    grid-template-columns: 3fr 1.3fr;
+    margin-top: 30px;
+    gap: 20px;
+}
+.time-descriptions .money-part{
+       display: flex;
+       align-items: center;
+       gap: 10px;
+       margin-bottom: 30px;
+}
+.money-part span{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    background: rgba(163, 241, 241, 0.368);
+    font-size: 18px;
+    border: 1px solid rgb(217, 246, 247);
+}
+.money-part h3{
+    font-size: 30px
+}
+.money-part p{
+     font-size: 13px;
+     color: rgb(110, 110, 110);
+}
+
+.map-description .assets-count{
+    margin-bottom: 30px;
+    display: flex;
+    gap: 5px;
+}
+
+.assets-count h4{
+     font-family: "Madera-UltraLight";
+     font-size: 14px;
+     color: rgb(110, 110, 110);
+}
+
+.assets-count span{
+     width: 12px;
+     height: 12px;
+     display: flex;
+     background: var(--main-color);
+     border-radius: 15px;
+     -webkit-border-radius: 15px;
+     -moz-border-radius: 15px;
+     -ms-border-radius: 15px;
+     -o-border-radius: 15px;
+     margin-top: 7px
+}
+.assets-count h2{
+    font-size: 20px
+}
+
+.report-btn button{
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Madera-Regular";
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border: none;
+    background: var(--main-color);
+    color:white;
+    padding-bottom: 2px;
+    cursor: pointer;;
 }
