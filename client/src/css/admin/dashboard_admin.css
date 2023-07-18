@@ -1,6 +1,7 @@
 .admin-dashboard-wrapper{
        background: rgb(252, 252, 252);
-       height: 100vh;
+       height: auto;
+       padding-bottom: 80px;
 }
 .topbar{
      width: 100%;
@@ -515,6 +516,9 @@
      -o-border-radius: 15px;
      margin-top: 7px
 }
+.assets-count span.asset{
+    background: rgb(255, 193, 34);
+}
 .assets-count h2{
     font-size: 20px
 }
@@ -536,4 +540,59 @@
     color:white;
     padding-bottom: 2px;
     cursor: pointer;;
+}
+
+.date-analytics .brand-box{
+     box-shadow: 0px 0px 4px 1px rgba(232, 232, 232, 0.429);
+      padding: 30px;
+      border-radius: 15px;
+      -webkit-border-radius: 15px;
+      -moz-border-radius: 15px;
+      -ms-border-radius: 15px;
+      -o-border-radius: 15px;
+      background: white;
+     display: grid;
+     grid-template-columns: 1.5fr 1fr;
+}
+.brand-box h3{
+    font-family: "Madera-Light";
+}
+.brand-box-content p{
+    font-size: 14px;
+    font-family: "Madera-Medium";
+}
+.brand-box-content .percent{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin: 10px 0;
+}
+.brand-box-content .percent span{
+    width: 30px;
+    height: 30px;
+    background: rgba(207, 245, 245, 0.5);
+    color: gray;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+}
+.brand-box-content .percent p{
+    font-size: 13px;
+    font-family: "Madera-Light";
+}
+.brand-box-content .percent p.profit{
+    color: green;
+}
+.brand-box-content .percent p.loss{
+      color: red;
+}
+
+.brand-box .pie-chart{
+ 
 }
