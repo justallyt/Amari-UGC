@@ -128,6 +128,12 @@ const AnalyticsSection = () => {
                                               </ResponsiveContainer>
                                    </div>
                           </div>
+
+                          <div className="creators-box">
+                                     <div className="creators-box-content">
+                                                 <h3></h3>
+                                     </div>
+                          </div>
               </div>
     </div>
   )
