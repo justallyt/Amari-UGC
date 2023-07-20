@@ -1,7 +1,6 @@
 .admin-dashboard-wrapper{
        background: rgb(252, 252, 252);
        height: auto;
-       padding-bottom: 80px;
 }
 .topbar{
      width: 100%;
@@ -311,10 +310,34 @@
     margin-top: 3px
 }
 
+.main-topbar .menu-btn{
+      position: absolute;
+      right: 30px;
+      top: 15px;
+      display: none;
+}
+.main-topbar .menu-btn span{
+       width: 40px;
+       height: 40px;
+       border: 1px solid;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       background:var(--main-color);
+       color: white;
+       cursor: pointer;
+       font-size: 20px;
+}
+
 /* Admin Body Styles */
 .admin-dashboard-content{
     padding: 20px 0;
-    position: relativ
+    position: relative;
 }
 
 .admin-dashboard-content .admin-intro h2{
@@ -419,6 +442,7 @@
     display: grid;
     grid-template-columns: 3fr 1.5fr;
     gap: 30px;
+    margin-top:20px
 }
 .revenue-analytics{
        box-shadow: 0px 0px 4px 1px rgba(232, 232, 232, 0.429);
@@ -542,6 +566,11 @@
     cursor: pointer;;
 }
 
+.date-analytics{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;;
+}
 .date-analytics .brand-box{
      box-shadow: 0px 0px 4px 1px rgba(232, 232, 232, 0.429);
       padding: 30px;
@@ -554,20 +583,34 @@
      display: grid;
      grid-template-columns: 1.5fr 1fr;
 }
-.brand-box h3{
+.creators-box{
+    box-shadow: 0px 0px 4px 1px rgba(232, 232, 232, 0.429);
+    padding: 30px 30px 0px 30px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    background: white;
+    width: 100%;
+}
+.brand-box h3,
+.creators-box h3{
     font-family: "Madera-Light";
 }
 .brand-box-content p{
     font-size: 14px;
     font-family: "Madera-Medium";
 }
-.brand-box-content .percent{
+.brand-box-content .percent,
+.creators-box-content .percent{
     display: flex;
     gap: 5px;
     align-items: center;
     margin: 10px 0;
 }
-.brand-box-content .percent span{
+.brand-box-content .percent span,
+.creators-box-content .percent span{
     width: 30px;
     height: 30px;
     background: rgba(207, 245, 245, 0.5);
@@ -582,17 +625,132 @@
     justify-content: center;
     margin-top: 3px;
 }
-.brand-box-content .percent p{
+.brand-box-content .percent p,
+.creators-box-content .percent p{
     font-size: 13px;
     font-family: "Madera-Regular";
 }
-.brand-box-content .percent p.profit{
+.brand-box-content .percent p.profit,
+.creators-box-content .percent p.profit{
     color: green;
 }
-.brand-box-content .percent p.loss{
+.brand-box-content .percent p.loss,
+.creators-box-content .percent p.loss{
       color: red;
 }
 
-.brand-box .pie-chart{
- 
+.area-chart-part{
+       height: 80px;
+       margin-top: 20px
+}
+
+
+/* Transaction List Styles */
+.transaction-list-section{
+    box-shadow: 0px 0px 4px 1px rgba(232, 232, 232, 0.429);
+    padding: 30px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    background: white;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    width: 100%;
+}
+.transaction-list-section h2{
+       font-size: 18px;
+       font-family: "Madera-Light";
+}
+.transaction-table table .small-push{
+      margin-left: 10px
+}
+
+
+
+
+/* Responsiveness */
+@media(max-width: 1250px){
+      .admin-inner{
+           width: 90%;
+      }
+      .analytics-section{
+            grid-template-columns: 1fr;
+      }
+    .date-analytics{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width: 1080px){
+       .date-analytics{
+              grid-template-columns: 1fr 1fr;
+       }
+       .quick-numbers-boxes{
+             grid-template-columns: repeat(2,1fr);
+       }
+}
+
+@media(max-width: 950px){
+    .main-topbar .menu-btn{
+            display: block;
+    }
+     .main-topbar ul{
+            position: absolute;
+            left: 0;
+            flex-direction: column;
+            height:auto;
+            align-items: flex-start;
+            background: white;
+            padding: 20px;
+            z-index: 5;
+            border-radius: 0px 0px 6px 6px;
+            -webkit-border-radius: 0px 0px 6px 6px;
+            -moz-border-radius: 0px 0px 6px 6px;
+            -ms-border-radius: 0px 0px 6px 6px;
+            -o-border-radius: 0px 0px 6px 6px;
+            box-shadow: 1px 1px 4px -2px rgb(236, 236, 236);
+            transform: translateX(-100%);
+            -webkit-transform: translateX(-100%);
+            -moz-transform: translateX(-100%);
+            -ms-transform: translateX(-100%);
+            -o-transform: translateX(-100%);
+            transition: all 0.5s ease ;
+            -webkit-transition: all 0.5s ease ;
+            -moz-transition: all 0.5s ease ;
+            -ms-transition: all 0.5s ease ;
+            -o-transition: all 0.5s ease ;
+}
+.main-topbar ul.active{
+         transform: translateX(0);
+         -webkit-transform: translateX(0);
+         -moz-transform: translateX(0);
+         -ms-transform: translateX(0);
+         -o-transform: translateX(0);
+}
+
+}
+
+
+@media(max-width: 768px){
+         .topbar-content .search-area{
+                display: none;
+         }
+          .updates-map-texts,
+          .date-analytics,
+          .quick-numbers-boxes{
+                 grid-template-columns: 1fr;
+          }
+           .transaction-list-section{
+                  overflow: scroll;
+           }
+           .transaction-list-section::-webkit-scrollbar {
+                  height: 5px;
+           }
+          
+          .transaction-table{
+                 min-width: 700px;
+          }
 }

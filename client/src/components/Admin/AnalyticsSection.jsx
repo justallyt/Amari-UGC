@@ -1,6 +1,6 @@
 import { GiTakeMyMoney } from "react-icons/gi"
 import{HiArrowSmallDown, HiArrowSmallUp} from "react-icons/hi2"
-import { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 //Dummy data for bar chart
 const data = [
     {
@@ -33,6 +33,17 @@ const pie_data = [
     { name: 'New Brands', value: 100},
     { name: 'Brand Purchases', value: 450}
 ]
+
+const creators_data = [
+  { name: 'Jan', uv: 50, pv: 400, amt: 2000},
+  { name: 'Feb', uv:10, pv: 400, amt: 2000},
+  { name: 'March', uv: 39, pv: 400, amt: 2000},
+  { name: 'April', uv: 15, pv: 400, amt: 2000},
+  { name: 'May', uv: 40, pv: 400, amt: 2000},
+  { name: 'June', uv: 5, pv: 400, amt: 2000},
+  { name: 'July', uv: 48, pv: 400, amt: 2000},
+  { name: 'August', uv: 16, pv: 400, amt: 2000}
+]
 const COLORS = ['#0088FE', '#00C49F',]
 const AnalyticsSection = () => {
   return (
@@ -55,7 +66,7 @@ const AnalyticsSection = () => {
                                     </div>
                                    <div className="updates-map-texts">
                                               <div className="update-map-container">
-                                                       <ResponsiveContainer width="100%" height="100%">
+                                                       <ResponsiveContainer width="99%" height="100%">
                                                                <BarChart data={data} barGap={10} >
                                                                         <CartesianGrid vertical={false} strokeDasharray="2 2" opacity={0.4} />
                                                                                     <XAxis dataKey="name" tickLine={false} axisLine={false} label={{ fontSize:15}}  tick={{ fontSize: "12px"}} />
@@ -117,7 +128,7 @@ const AnalyticsSection = () => {
                                                 </div>
                                    </div>
                                    <div className="pie-chart">
-                                              <ResponsiveContainer width="100%" height="100%">
+                                              <ResponsiveContainer width="99%" height="100%">
                                                       <PieChart width={200} height={200}>
                                                              <Pie data={pie_data} cx={60} cy={90} innerRadius={40} outerRadius={60} fill="#8884d8" dataKey="value">
                                                                        { pie_data.map((entry, index) => (
@@ -131,7 +142,29 @@ const AnalyticsSection = () => {
 
                           <div className="creators-box">
                                      <div className="creators-box-content">
-                                                 <h3></h3>
+                                                  <h3>Creator Earnings</h3>
+                                                  <h2>Ksh. 18,800</h2>
+                                                   <div className="percent">
+                                                           <span><HiArrowSmallUp /></span>
+                                                           <p className="profit">+39% from last month</p>
+                                                  </div>
+
+                                                  <div className="area-chart-part">
+                                                                  <ResponsiveContainer width='99%' height='100%'>
+                                                                     <AreaChart  width={300} height={80} data={creators_data} margin={{ left: -60}}>
+                                                                              <defs>
+                                                                                       <linearGradient id="color" x1='0' y1='0' x2='0' y2='1'>
+                                                                                                  <stop offset='0%' stopColor="#00c7e1" stopOpacity={0.7} />
+                                                                                                  <stop offset="90%" stopColor="#fff" stopOpacity={0.05} />
+                                                                                       </linearGradient>
+                                                                              </defs>
+                                                                               <XAxis dataKey='name' tick={false}  axisLine={false} />
+                                                                               <YAxis tick={false} axisLine={false} />
+                                                                               <Tooltip />
+                                                                               <Area type='monotone' dataKey='uv' stroke="#00c7e1" strokeWidth={2} fill="url(#color)" />
+                                                                      </AreaChart>
+                                                            </ResponsiveContainer>
+                                                  </div>
                                      </div>
                           </div>
               </div>

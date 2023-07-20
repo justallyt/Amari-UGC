@@ -4,7 +4,8 @@ import { IoBusinessOutline} from "react-icons/io5"
 import {BsPeople, BsCreditCard2Front} from "react-icons/bs"
 import { VscGitPullRequestGoToChanges, VscArrowUp } from 'react-icons/vsc'
 import AnalyticsSection from "./AnalyticsSection"
-
+import TransactionList from "./TransactionList"
+import Footer from "../Footer"
 const AdminDashboardBody = () => {
   return (
     <div className="admin-dashboard-wrapper">
@@ -74,7 +75,11 @@ const AdminDashboardBody = () => {
                               </div>
 
                               <AnalyticsSection />
+
+                              <TransactionList />
+                   
                  </div>
+                 <Footer />
     </div>
   )
 }
