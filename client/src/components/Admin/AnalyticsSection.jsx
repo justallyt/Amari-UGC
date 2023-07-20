@@ -128,7 +128,7 @@ const AnalyticsSection = () => {
                                                 </div>
                                    </div>
                                    <div className="pie-chart">
-                                              <ResponsiveContainer width="99%" height="100%">
+                                              <ResponsiveContainer width="99%" height="99%">
                                                       <PieChart width={200} height={200}>
                                                              <Pie data={pie_data} cx={60} cy={90} innerRadius={40} outerRadius={60} fill="#8884d8" dataKey="value">
                                                                        { pie_data.map((entry, index) => (
