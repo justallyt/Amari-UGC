@@ -22,7 +22,6 @@ const Informationals = () => {
 
   useEffect(()=> {
           if(!isLoading && data){
-                  
                    dispatch(setVideoAssets(data.assets))
           }
   }, [data, isLoading, dispatch])
@@ -42,7 +41,9 @@ const Informationals = () => {
                                 </div>
                                { isModalOpen ?  <VideoModal identity={videoId} />: ''}
                                 <div className="creations-row">
-                                        { videos.slice(-3).reverse().map(item =>
+                                       { videos ? 
+                                            <>
+                                              { videos.slice(-3).reverse().map(item =>
                                                 <div className="creation-moja" key={item._id}>
                                                             <div className="creation-thumbnail">
                                                                      { isLoading ?  <Skeleton height={250} /> : <img src={item.video.thumbnail} alt="" />}
@@ -53,7 +54,10 @@ const Informationals = () => {
                                                            { isLoading ?  <Skeleton /> : <h3>{item.created_for}</h3>}
                                                           { isLoading ?  <Skeleton /> : <p>{item.brand_product}</p>}
                                                  </div>
-                                          )}
+                                               )}
+                                            </>:
+                                            <p>No videos fetched yet.</p>
+                                      }
                                 </div>
 
                                 <div className="activity-panel">

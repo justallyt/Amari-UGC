@@ -15,7 +15,6 @@ const CreatorDashboard = () => {
 
   useEffect(() => {
         if(!isLoading && data){
-              
              dispatch(setProfile({...data.user}))
          }
   }, [data, dispatch, isLoading])
