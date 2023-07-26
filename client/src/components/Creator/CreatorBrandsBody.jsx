@@ -1,12 +1,23 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import twiga from "../../assets/twiga.png"
 import stanchart from "../../assets/stanchart.png"
-import { useRequestCreationPermissionMutation } from "../../redux/usersSlice"
+import { useGetBrandsQuery, useRequestCreationPermissionMutation } from "../../redux/usersSlice"
+import { useEffect } from "react"
+import { setPulledBrands } from "../../redux/utilsSlices"
 const CreatorBrandsBody = () => {
     const { profile } = useSelector(state => state.profile)
+    const { brands } = useSelector(state => state.utils);
+    const dispatch = useDispatch()
+    //get brands
+    const { data } = useGetBrandsQuery({  refetchOnMountOrArgChange: true })
 
-
+    useEffect(()=>{
+           if(data){
+                   dispatch(setPulledBrands({...data.brands}))
+           }
+    }, [data, dispatch])
+    
     const [ submitRequest ] = useRequestCreationPermissionMutation();
 
     const requestToWorkWithBrand = async (brandId) =>{
@@ -48,17 +59,19 @@ const CreatorBrandsBody = () => {
                                                  <div className="available-brands">
                                                              <h3>Available Brands</h3>
 
-                                                             <div className="available-brand-moja">
-                                                                           <div className="left-items">
-                                                                                          <div className="brand-profile">
-                                                                                                    <img src={twiga} alt="" />
-                                                                                          </div>
-                                                                                          <h4>Twiga Foods</h4>
-                                                                           </div>
-                                                                           <div className="right-items">
-                                                                                      <button onClick={() => requestToWorkWithBrand('yyyykdow')}>Request</button>
-                                                                           </div>
-                                                             </div>
+                                                             { brands != null && Object.values(brands).map(item => 
+                                                                     <div className="available-brand-moja" key={item.name}>
+                                                                     <div className="left-items">
+                                                                                    <div className="brand-profile">
+                                                                                              <img src={item.profilePic.url} alt="Brand Logo" />
+                                                                                    </div>
+                                                                                    <h4>{item.name}</h4>
+                                                                     </div>
+                                                                     <div className="right-items">
+                                                                                <button onClick={() => requestToWorkWithBrand(item._id)}>Request</button>
+                                                                     </div>
+                                                       </div>
+                                                              )}
                                                  </div>
                                       </div>
                            </div>

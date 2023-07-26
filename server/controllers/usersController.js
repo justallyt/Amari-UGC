@@ -189,7 +189,7 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
 
 //Get All Brands
 export const GetAllBrands = asyncHandler(async(req, res) => {
-          const brands = await User.find({ role: 'Brand'}).select('-password');
+          const brands = await User.find({ role: 'Brand'}).select('name bio profilePic');
 
           if(brands){
                   res.status(200).json({ brands })

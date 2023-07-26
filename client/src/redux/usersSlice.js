@@ -42,6 +42,12 @@ export const usersSlice = apiSlice.injectEndpoints({
                             method: 'POST',
                             body: payload
                      })
+              }),
+              getBrands: builder.query({
+                     query: () =>( {
+                             url: 'user/getbrands',
+                             method: 'GET'
+                     })
               })
         })
 })
@@ -52,5 +58,6 @@ export const {
        useUpdateUserProfileMutation, 
        useGetUserProfileQuery,
        useLogoutUserMutation,
-       useRequestCreationPermissionMutation
+       useRequestCreationPermissionMutation,
+       useGetBrandsQuery
 } = usersSlice;

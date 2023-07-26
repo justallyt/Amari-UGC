@@ -88,6 +88,11 @@
      align-items: center;
      justify-content: center;
 }
+.brand-profile img{
+      object-fit: contain;
+      width: 80%;
+      height: 80%;
+}
 .available-brand-moja h4{
     font-family: "madera-thin";
 }

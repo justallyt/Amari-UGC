@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = { 
       videoUploadProgress: 0,
       isModalOpen: false,
-      videos: localStorage.getItem('Videos') ? JSON.parse(localStorage.getItem('Videos')) : null
+      videos: localStorage.getItem('Videos') ? JSON.parse(localStorage.getItem('Videos')) : null,
+      brands: null
 }
 export const utilsSlice = createSlice({
         name: 'uploadSlice',
@@ -31,9 +32,20 @@ export const utilsSlice = createSlice({
               setVideoAssets: (state, action) => {
                      state.videos = action.payload
                      localStorage.setItem('Videos', JSON.stringify(action.payload))
+              },
+
+              //set brands
+              setPulledBrands: (state, action) => {
+                      state.brands = action.payload
               }
         }
 })
 
-export const { setUploadProgress, clearUploadProgress, openModal, closeModal, setVideoAssets } = utilsSlice.actions
+export const { 
+      setUploadProgress, 
+      clearUploadProgress,
+      openModal, closeModal, 
+      setVideoAssets,
+       setPulledBrands
+} = utilsSlice.actions
 export default utilsSlice.reducer;
