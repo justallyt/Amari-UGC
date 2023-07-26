@@ -174,6 +174,26 @@ export const LogOutUser = asyncHandler(async(req,res) => {
                      expires: new Date(0)
              })
             
-
              res.status(200).json({ message: 'You have logged out'})
+})
+
+
+// Send Request to Admin to approve Creator to work with brand
+export const AssetCreationRequest = asyncHandler(async(req, res) => {
+         const creator_id = req.user._id;
+         const brand = req.body
+
+         res.status(200).json({ message: brand})
+})
+
+
+//Get All Brands
+export const GetAllBrands = asyncHandler(async(req, res) => {
+          const brands = await User.find({ role: 'Brand'}).select('-password');
+
+          if(brands){
+                  res.status(200).json({ brands })
+          }else{
+               res.status(400).json({ message: 'Sorry, no brands found for your selection'})
+          }
 })

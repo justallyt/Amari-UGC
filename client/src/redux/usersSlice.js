@@ -35,8 +35,22 @@ export const usersSlice = apiSlice.injectEndpoints({
                            method: "POST",
                            body: payload
                     })
+              }),
+              requestCreationPermission: builder.mutation({
+                     query: (payload) => ({
+                            url: 'user/creation-request',
+                            method: 'POST',
+                            body: payload
+                     })
               })
         })
 })
 
-export const { useLoginUserMutation, useCreateUserMutation,useUpdateUserProfileMutation, useGetUserProfileQuery, useLogoutUserMutation } = usersSlice;
+export const { 
+       useLoginUserMutation, 
+       useCreateUserMutation,
+       useUpdateUserProfileMutation, 
+       useGetUserProfileQuery,
+       useLogoutUserMutation,
+       useRequestCreationPermissionMutation
+} = usersSlice;
