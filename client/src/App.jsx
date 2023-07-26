@@ -14,6 +14,7 @@ import VideoCreate from "./pages/Creator/VideoCreate"
 import CreatorAssets from "./pages/Creator/CreatorAssets"
 import AdminRoutes from "./utils/AdminRoutes"
 import AdminDashboard from "./pages/Admin/AdminDashboard"
+import CreatorBrands from "./pages/Creator/CreatorBrands"
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                                <Route path="/creator/:id/assets" element={<CreatorAssets />} />
                                <Route path="/creator/:id/settings" element={<CreatorSettings />} />
                                <Route path="/creator/:id/settings/:type" element={<CreatorSettings />} />
+                               <Route path="/creator/:id/my-brands" element={<CreatorBrands />}/>
                      </Route>
 
 

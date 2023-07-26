@@ -19,7 +19,7 @@ const CreatorSidebar = () => {
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/`}><span><IoHomeOutline /></span> <p>Dashboard</p></NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={'/consumer/my-brands'}><span><IoLayersOutline /></span> <p>My Brands</p></NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/my-brands`}><span><IoLayersOutline /></span> <p>My Brands</p></NavLink>
                                              </li>
                                              <li>
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}><span><IoCloudUploadOutline /></span> <p>Create</p></NavLink>

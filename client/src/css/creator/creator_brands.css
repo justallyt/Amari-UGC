@@ -1,0 +1,23 @@
+:root{
+    --gray: rgb(82, 82, 82);
+}
+.brand-list-header{
+     width: 800px;
+}
+.brand-list-header h2{
+    font-family: 'Madera-Light';
+    font-size: 22px;
+}
+.brand-list-header p{
+     font-size: 15px;
+     margin: 10px 0;
+     color: var(--gray);
+}
+.brand-list-body{
+     margin-top: 30px;
+}
+.brand-list-body h3{
+    font-family: "Madera-Light";
+    border-bottom: 1px solid var(--sleezy-border);
+    padding-bottom: 10px;
+}
