@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setProfile } from "../../redux/profileSlice"
 import { useEffect } from "react"
-import Spinner2 from "../../components/Spinner2"
+import Spinner from "../../components/Spinner"
 
 const CreatorDashboard = () => {  
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const CreatorDashboard = () => {
                            
                    </div>
                    : 
-                   <Spinner2 />
+                   <Spinner />
            }
     </>
   )

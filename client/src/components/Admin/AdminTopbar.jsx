@@ -1,15 +1,23 @@
 import logo from "../../assets/logo.png"
 import dummy from "../../assets/creator1.jpg"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { IoSearchOutline, IoNotificationsOutline } from "react-icons/io5"
 import { BsEnvelope } from "react-icons/bs"
 import { FaUserAlt } from "react-icons/fa"
 import { VscExtensions } from 'react-icons/vsc'
 import { useEffect, useRef, useState } from "react"
+import { useDispatch } from "react-redux"
+import { useLogoutUserMutation } from "../../redux/usersSlice"
+import { clearCredentials } from "../../redux/authSlice"
+import { clearProfile } from "../../redux/profileSlice"
+import { apiSlice } from "../../redux/apiSlice"
+import Spinner from "../Spinner"
 // import { BsChatRightText } from "react-icons/bs"
 // import { AiOutlineShoppingCart } from "react-icons/ai"
+import toast, { Toaster } from "react-hot-toast"
 const AdminTopbar = () => {
   const [status, setStatus] = useState(false)
+  const [wait, setWait] = useState(false)
   const adminBoxRef = useRef()
 
   useEffect(() => {
@@ -23,9 +31,34 @@ const AdminTopbar = () => {
                 setStatus(true)
          }
   }
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [ logoutAdmin ] = useLogoutUserMutation()
+
+  const logoutUser = async() => {
+        try {
+              const res = await logoutAdmin().unwrap();
+
+              setWait(true)
+
+              setTimeout(() => {
+                     setWait(false)
+                     dispatch(clearCredentials({...res}));
+                     dispatch(clearProfile())
+                     dispatch(apiSlice.util.resetApiState())
+                     navigate('/user/login')
+              }, 1500)
+
+        } catch (error) {
+              toast.error("Logout Failed. Internal Server Error", { id: 'Admin Logout Error'})
+        }
+  }
   return (
     <div className="topbar">
                 <div className="admin-inner">
+                        <Toaster />
+                         { wait ?  <Spinner /> : ''}
                            <div className="topbar-content">
                                        <div className="topbar-left">
                                                  <NavLink to={'/'}>
@@ -79,7 +112,7 @@ const AdminTopbar = () => {
                                                                                   </NavLink>
                                                                        </div>
 
-                                                                       <button>Logout</button>
+                                                                       <button onClick={logoutUser}>Logout</button>
                                                               </div>
                                                   </div>
                                        </div>
