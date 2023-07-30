@@ -6,7 +6,7 @@ import { useGetBrandsQuery } from "../../redux/usersSlice"
 import { useEffect } from "react"
 import { setPulledBrands } from "../../redux/utilsSlices"
 import RequestBtn from "./RequestBtn"
-const CreatorBrandsBody = () => {
+const CreatorBrandsBody = ({ refetchFn }) => {
     const { profile } = useSelector(state => state.profile)
     const { brands } = useSelector(state => state.utils);
     const dispatch = useDispatch()
@@ -60,7 +60,7 @@ const CreatorBrandsBody = () => {
                                                                      </div>
                                                                      <div className="right-items">
                                                                                 {/* <button className="" onClick={() => requestToWorkWithBrand(item._id)}>{requestStatus}</button> */}
-                                                                                <RequestBtn id={item._id} />
+                                                                                <RequestBtn id={item._id} refetch={refetchFn} />
                                                                      </div>
                                                        </div>
                                                               )}

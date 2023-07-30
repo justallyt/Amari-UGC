@@ -18,7 +18,7 @@ const CreatorBrands = () => {
     <div className="dashboard-wrapper">
              <div className="dashboard-inner">
                         <CreatorSidebar />
-                        <CreatorBrandsBody />
+                        <CreatorBrandsBody refetchFn={refetch} />
              </div>
     </div>
   )

@@ -43,6 +43,11 @@ export const utilsSlice = createSlice({
               //check requested brands
              setRequestedBrands: (state, action) => {
                     state.requests = action.payload
+             },
+
+             clearUtils: (state) => {
+                       state.utils = null;
+                       localStorage.removeItem("Videos")
              }
         }
 })
@@ -53,6 +58,7 @@ export const {
       openModal, closeModal, 
       setVideoAssets,
        setPulledBrands,
-       setRequestedBrands
+       setRequestedBrands,
+       clearUtils
 } = utilsSlice.actions
 export default utilsSlice.reducer;
