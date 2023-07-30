@@ -2,7 +2,9 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import cloudinary from "../utils/cloudinary.js";
 import User from "../models/usersModel.js";
-
+import Request from "../models/RequestsModel.js";
+import mongoose from "mongoose";
+import Notifications from "../models/NotificationsModel.js";
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
        const { email, password } = req.body;
@@ -180,12 +182,36 @@ export const LogOutUser = asyncHandler(async(req,res) => {
 
 // Send Request to Admin to approve Creator to work with brand
 export const AssetCreationRequest = asyncHandler(async(req, res) => {
+         const { brandId } = req.body;
          const creator_id = req.user._id;
-         const brand = req.body
+         const brand_id = new mongoose.Types.ObjectId(`${brandId}`)
+         const creator_name = await User.findById(creator_id).select('name')
+         const brand_name = await User.findById(brand_id).select('name')
 
-         res.status(200).json({ message: brand})
+         const admin_message = `${creator_name.name} requests to work with ${brand_name.name}`
+         const notification_msg = `You requested to work with ${brand_name.name}`
+         try {
+              const creator_request = await Request.create({ creator: creator_id, brand: brand_id, message: admin_message})
+              
+              if(creator_request){
+                     res.status(201).json({ status: 'Pending'})
+              }      
+         } catch (error) {
+                res.status(401).json({ message: "Request Failed. Sorry, its not your fault. Please try again later"});
+                throw new Error('Request was not created')
+         }
 })
 
+//Get Submitted Brand Requests
+export const GetUserBrandRequests = asyncHandler(async(req, res) => {
+        const user_requests = await Request.find({ creator: req.user._id}).select('brand');
+
+        if(user_requests){
+              res.status(200).json({ user_requests})
+        }else{
+              res.status(400).json({ message: 'Sorry, no request by this user'})
+        }
+})
 
 //Get All Brands
 export const GetAllBrands = asyncHandler(async(req, res) => {

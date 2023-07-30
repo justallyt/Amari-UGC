@@ -4,7 +4,8 @@ const initialState = {
       videoUploadProgress: 0,
       isModalOpen: false,
       videos: localStorage.getItem('Videos') ? JSON.parse(localStorage.getItem('Videos')) : null,
-      brands: null
+      brands: null,
+      requests: null
 }
 export const utilsSlice = createSlice({
         name: 'uploadSlice',
@@ -37,7 +38,12 @@ export const utilsSlice = createSlice({
               //set brands
               setPulledBrands: (state, action) => {
                       state.brands = action.payload
-              }
+              },
+
+              //check requested brands
+             setRequestedBrands: (state, action) => {
+                    state.requests = action.payload
+             }
         }
 })
 
@@ -46,6 +52,7 @@ export const {
       clearUploadProgress,
       openModal, closeModal, 
       setVideoAssets,
-       setPulledBrands
+       setPulledBrands,
+       setRequestedBrands
 } = utilsSlice.actions
 export default utilsSlice.reducer;

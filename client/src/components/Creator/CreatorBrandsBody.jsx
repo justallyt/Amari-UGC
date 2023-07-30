@@ -2,9 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import twiga from "../../assets/twiga.png"
 import stanchart from "../../assets/stanchart.png"
-import { useGetBrandsQuery, useRequestCreationPermissionMutation } from "../../redux/usersSlice"
+import { useGetBrandsQuery } from "../../redux/usersSlice"
 import { useEffect } from "react"
 import { setPulledBrands } from "../../redux/utilsSlices"
+import RequestBtn from "./RequestBtn"
 const CreatorBrandsBody = () => {
     const { profile } = useSelector(state => state.profile)
     const { brands } = useSelector(state => state.utils);
@@ -18,16 +19,6 @@ const CreatorBrandsBody = () => {
            }
     }, [data, dispatch])
     
-    const [ submitRequest ] = useRequestCreationPermissionMutation();
-
-    const requestToWorkWithBrand = async (brandId) =>{
-            try {
-                    const res = await submitRequest({brandId})
-                    console.log(res.data)
-            } catch (error) {
-                  console.log(error)
-            }
-    }
   return (
     <div className="dashboard-body-wrap">
                <div className="dashboard-row">
@@ -68,7 +59,8 @@ const CreatorBrandsBody = () => {
                                                                                     <h4>{item.name}</h4>
                                                                      </div>
                                                                      <div className="right-items">
-                                                                                <button onClick={() => requestToWorkWithBrand(item._id)}>Request</button>
+                                                                                {/* <button className="" onClick={() => requestToWorkWithBrand(item._id)}>{requestStatus}</button> */}
+                                                                                <RequestBtn id={item._id} />
                                                                      </div>
                                                        </div>
                                                               )}

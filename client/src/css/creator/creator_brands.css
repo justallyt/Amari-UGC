@@ -106,8 +106,14 @@
     -moz-border-radius: 7px;
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
-    background: rgba(105, 232, 238, 0.204);
+    background: var(--main-color);
+    color: white;
     border:none;
     font-size: 13px;
     cursor: pointer;
+}
+.available-brand-moja button.requested{
+    background: rgb(103, 230, 184);
+    pointer-events: none;
+    color: white;
 }

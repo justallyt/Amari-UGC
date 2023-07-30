@@ -48,6 +48,12 @@ export const usersSlice = apiSlice.injectEndpoints({
                              url: 'user/getbrands',
                              method: 'GET'
                      })
+              }),
+              checkRequests: builder.query({
+                      query: () => ({
+                             url: 'user/check-requests',
+                             method: 'GET'
+                      })
               })
         })
 })
@@ -59,5 +65,6 @@ export const {
        useGetUserProfileQuery,
        useLogoutUserMutation,
        useRequestCreationPermissionMutation,
-       useGetBrandsQuery
+       useGetBrandsQuery,
+       useCheckRequestsQuery
 } = usersSlice;

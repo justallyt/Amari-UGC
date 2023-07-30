@@ -13,11 +13,12 @@ export const CreateVideo = asyncHandler(async(req,res) => {
                      const cloud_result = await new Promise((resolve, reject) => {
                              cloudinary.uploader.upload_large(req.file.path, {
                                      resource_type: 'video', 
-                                     folder: 'VideoAssets'
+                                     folder: 'VideoAssets',
+                                     timeout: 300000
                              }, (error, result) => {
                                    if(error){
                                           reject(error);
-                                           res.status(401).json({ message: 'Error uploading to cloudinary'})
+                                           res.status(501).json({ message: 'Error uploading to cloudinary'})
                                    }
                                    resolve(result);
                              })
