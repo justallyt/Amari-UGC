@@ -72,7 +72,10 @@ const AdminTopbar = () => {
                                                  </div>
                                        </div>
                                        <div className="topbar-right">
-                                                  <span><IoNotificationsOutline /> <div className="small-pop"></div></span>
+                                                  <div className="topbar-notifications">
+                                                               <span><IoNotificationsOutline /> </span>
+                                                               <p>0</p>
+                                                  </div>
                                                   {/* <span><BsChatRightText /></span>
                                                   <span><AiOutlineShoppingCart /></span> */}
 

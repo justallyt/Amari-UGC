@@ -1,5 +1,5 @@
 import express from "express";
-import { RegisterUser, LoginUser, LogOutUser, GetProfile, UpdateProfile, AssetCreationRequest, GetAllBrands, GetUserBrandRequests } from "../controllers/usersController.js";
+import { RegisterUser, LoginUser, LogOutUser, GetProfile, UpdateProfile, AssetCreationRequest, GetAllBrands, GetUserBrandRequests, RequestCount } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
 const router = express.Router();
@@ -12,5 +12,5 @@ router.put('/update-profile', protect, upload.single('profileImage'), UpdateProf
 router.get('/getbrands', protect, GetAllBrands);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
-
+router.get('/get-requests', protect, RequestCount)
 export default router;

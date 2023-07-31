@@ -5,6 +5,10 @@ import User from "../models/usersModel.js";
 import Request from "../models/RequestsModel.js";
 import mongoose from "mongoose";
 import Notifications from "../models/NotificationsModel.js";
+import { sse } from "../sse/sse_init.js";
+/* GLOBAL VARIABLES */
+let request_count = 0;
+
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
        const { email, password } = req.body;
@@ -194,7 +198,8 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
               const creator_request = await Request.create({ creator: creator_id, brand: brand_id, message: admin_message})
               
               if(creator_request){
-                     res.status(201).json({ status: 'Your request has been received.'})
+                     res.status(201).json({ status: 'Your request has been received.'});
+                     request_count++;
               }      
          } catch (error) {
                 res.status(401).json({ message: "Request Failed. Sorry, its not your fault. Please try again later"});
@@ -225,12 +230,11 @@ export const GetAllBrands = asyncHandler(async(req, res) => {
 })
 
 //Send notification to Admin about requests
-export const RequestNotifications  =  asyncHandler(async(req, res) => {
-       const requests = await Request.find({})
-
-       if(requests){
-               res.status(200).json({ requests })
-       }else{
-              res.status(400).json({ message: 'Sorry, no requests found'})
-       }
+export const RequestCount  =  asyncHandler(async(req, res) => {
+       
+       // if(requests){
+       //         res.status(200).json({ requests })
+       // }else{
+       //        res.status(400).json({ message: 'Sorry, no requests found'})
+       // }
 })

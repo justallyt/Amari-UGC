@@ -100,21 +100,27 @@
 .topbar-right span:hover{
     background: rgba(225, 230, 230, 0.368);
 }
-.topbar-right span .small-pop{
-     width: 10px;
-     height: 10px;
-     background: var(--main-color);
-     position: absolute;
-     right: 11px;
-     top: 9px;
-     border-radius: 50%;
-     -webkit-border-radius: 50%;
-     -moz-border-radius: 50%;
-     -ms-border-radius: 50%;
-     -o-border-radius: 50%;
-     box-shadow: 0px 0px 5px 1px rgb(50, 215, 220);
+.topbar-notifications {
+      position: relative;
+      display: flex;
 }
-
+.topbar-notifications p{
+       font-family: "Madera-medium";
+       font-size: 10px;
+       background: var(--main-color);
+       display: inline-flex;
+       position: absolute;
+       line-height: 10px;
+       padding: 2px 3px 5px 2.5px;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       color: white;
+       right: 8px;
+       top: 5px;
+}
 .topbar-right .admin-profile{
       width: 45px;
       height: 45px;

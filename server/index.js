@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import connectToDatabase from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js"
 import videoRoutes from "./routes/videoRoutes.js"
+import sseRoutes from "./routes/sseRoute.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js"
 import cors from "cors"
 
@@ -29,7 +30,7 @@ app.use(cors(corsConfig))
 /* Routes */
 app.use("/api/user", userRoutes);
 app.use('/api/video', videoRoutes);
-
+app.use('/api/realtime', sseRoutes)
 //Error Handling
 app.use(notFound);
 app.use(errorHandler);
