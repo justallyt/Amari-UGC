@@ -225,6 +225,12 @@ export const GetAllBrands = asyncHandler(async(req, res) => {
 })
 
 //Send notification to Admin about requests
-export const SendRequestNotification  =  asyncHandler(async(req, res) => {
-         
+export const RequestNotifications  =  asyncHandler(async(req, res) => {
+       const requests = await Request.find({})
+
+       if(requests){
+               res.status(200).json({ requests })
+       }else{
+              res.status(400).json({ message: 'Sorry, no requests found'})
+       }
 })
