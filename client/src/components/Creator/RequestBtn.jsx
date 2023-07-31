@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useRequestCreationPermissionMutation } from "../../redux/usersSlice"
 import { useSelector } from "react-redux"
-
+import toast, { Toaster } from "react-hot-toast"
 const RequestBtn = ({id, refetch}) => {
   const [requestStatus, setRequestStatus] = useState('Request')
   const [ result, setResult] = useState(false)
@@ -28,13 +28,18 @@ const RequestBtn = ({id, refetch}) => {
                      setRequestStatus('Requested')
                      setResult(true);
                      refetch();
+                     console.log(res);
+                     toast.success(res.data.status, { id: 'request status'})
               }
          } catch (error) {
           console.log(error)
     }
   }
   return (
-       <button className={result  ? 'requested' : ''}  onClick={() => requestToWorkWithBrand(id)}>{requestStatus}</button>
+          <>
+                    <Toaster />
+                   <button className={result  ? 'requested' : ''}  onClick={() => requestToWorkWithBrand(id)}>{requestStatus}</button>
+          </>
   )
 }
 

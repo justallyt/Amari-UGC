@@ -189,12 +189,12 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
          const brand_name = await User.findById(brand_id).select('name')
 
          const admin_message = `${creator_name.name} requests to work with ${brand_name.name}`
-         const notification_msg = `You requested to work with ${brand_name.name}`
+
          try {
               const creator_request = await Request.create({ creator: creator_id, brand: brand_id, message: admin_message})
               
               if(creator_request){
-                     res.status(201).json({ status: 'Pending'})
+                     res.status(201).json({ status: 'Your request has been received.'})
               }      
          } catch (error) {
                 res.status(401).json({ message: "Request Failed. Sorry, its not your fault. Please try again later"});
@@ -222,4 +222,9 @@ export const GetAllBrands = asyncHandler(async(req, res) => {
           }else{
                res.status(400).json({ message: 'Sorry, no brands found for your selection'})
           }
+})
+
+//Send notification to Admin about requests
+export const SendRequestNotification  =  asyncHandler(async(req, res) => {
+         
 })

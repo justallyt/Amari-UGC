@@ -46,7 +46,7 @@ export const utilsSlice = createSlice({
              },
 
              clearUtils: (state) => {
-                       state.utils = null;
+                       state.videos = null;
                        localStorage.removeItem("Videos")
              }
         }
