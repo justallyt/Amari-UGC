@@ -36,9 +36,7 @@ const AdminTopbar = () => {
   const ssEvents = new EventSource(import.meta.env.VITE_EVENT_URL, { 
           withCredentials: true
   });
-  ssEvents.addEventListener('message', (e)=> {
-           console.log(JSON.parse(e.data))
-  })
+  ssEvents.onmessage = (e) => console.log(JSON.parse(e.data))
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [ logoutAdmin ] = useLogoutUserMutation()

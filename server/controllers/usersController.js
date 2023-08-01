@@ -191,7 +191,8 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
          const brand_id = new mongoose.Types.ObjectId(`${brandId}`)
          const creator_name = await User.findById(creator_id).select('name')
          const brand_name = await User.findById(brand_id).select('name')
-
+         const admin_id = await User.find({ role: "Admin"}).select('_id');
+         console.log()
          const admin_message = `${creator_name.name} requests to work with ${brand_name.name}`
 
          try {
@@ -199,7 +200,21 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
               
               if(creator_request){
                      res.status(201).json({ status: 'Your request has been received.'});
-                     request_count++;
+                     
+                     const notifications = await Notifications.create({
+                            notification_type: 'Request',
+                            sender: {
+                                   senderId: creator_request.creator,
+                                   senderMsg: creator_request.message,
+                            },
+                            receipient: {
+                                   receipientId: admin_id[0]._id,
+                                   receipientMsg: creator_request.message
+                            }
+                      })
+                      if(notifications){
+                            request_count++
+                      }
               }      
          } catch (error) {
                 res.status(401).json({ message: "Request Failed. Sorry, its not your fault. Please try again later"});
@@ -229,21 +244,6 @@ export const GetAllBrands = asyncHandler(async(req, res) => {
           }
 })
 
-//Send notification to Admin about requests
-export const RequestCount  =  asyncHandler(async(req, res) => {
-     
-       res.writeHead(200, {
-                'Content-Type': 'text/event-stream',
-                'Connection': 'keep-alive',
-                'Cache-Control': 'no-cache'
-       });
-
-       let counter = 0
-       res.write('event: connnected\n')
-       res.write(`id: ${counter}\n\n`)
-
-       req.on('close', () => {
-               console.log('Connection closed')
-       })
-    
+export const SendNotificationsCount = asyncHandler(async(req, res) => {
+          res.status(200).json({ amt: request_count})
 })
