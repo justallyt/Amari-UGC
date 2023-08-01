@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import connectToDatabase from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js"
 import videoRoutes from "./routes/videoRoutes.js"
-import sseRoutes from "./routes/sseRoute.js"
+import entryRoute from "./routes/enterRoute.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js"
 import cors from "cors"
 
@@ -24,18 +24,16 @@ app.use(cookieParser());
 
 const corsConfig = {
     credentials: true,
-    origin: true,
+    origin: `${process.env.CLIENT_APP_URL}`,
 };
 app.use(cors(corsConfig))
 /* Routes */
 app.use("/api/user", userRoutes);
 app.use('/api/video', videoRoutes);
-app.use('/api/realtime', sseRoutes)
+app.use('/', entryRoute)
 //Error Handling
 app.use(notFound);
 app.use(errorHandler);
-
-app.get("/", (req, res) => res.send("Yay Server is up and running"));
 
 app.listen(port, () => console.log(`Server listening at port ${port}`));
 

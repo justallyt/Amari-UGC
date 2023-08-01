@@ -5,7 +5,7 @@ import User from "../models/usersModel.js";
 import Request from "../models/RequestsModel.js";
 import mongoose from "mongoose";
 import Notifications from "../models/NotificationsModel.js";
-import { sse } from "../sse/sse_init.js";
+
 /* GLOBAL VARIABLES */
 let request_count = 0;
 
@@ -231,10 +231,19 @@ export const GetAllBrands = asyncHandler(async(req, res) => {
 
 //Send notification to Admin about requests
 export const RequestCount  =  asyncHandler(async(req, res) => {
-       
-       // if(requests){
-       //         res.status(200).json({ requests })
-       // }else{
-       //        res.status(400).json({ message: 'Sorry, no requests found'})
-       // }
+     
+       res.writeHead(200, {
+                'Content-Type': 'text/event-stream',
+                'Connection': 'keep-alive',
+                'Cache-Control': 'no-cache'
+       });
+
+       let counter = 0
+       res.write('event: connnected\n')
+       res.write(`id: ${counter}\n\n`)
+
+       req.on('close', () => {
+               console.log('Connection closed')
+       })
+    
 })

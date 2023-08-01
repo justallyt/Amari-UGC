@@ -12,5 +12,6 @@ router.put('/update-profile', protect, upload.single('profileImage'), UpdateProf
 router.get('/getbrands', protect, GetAllBrands);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
-router.get('/get-requests', protect, RequestCount)
+router.get('/reqcount',protect, RequestCount)
+
 export default router;
