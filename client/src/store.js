@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./redux/authSlice"
 import profileReducer from "./redux/profileSlice"
 import utilsReducer from "./redux/utilsSlices"
+import adminReducer from './redux/admin/adminUtils'
 import { apiSlice } from "./redux/apiSlice";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
@@ -10,6 +11,7 @@ const store = configureStore({
            auth: authReducer,
            profile: profileReducer,
            utils: utilsReducer,
+           admin: adminReducer,
            [apiSlice.reducerPath] : apiSlice.reducer
        },
        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),

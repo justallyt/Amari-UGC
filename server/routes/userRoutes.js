@@ -8,7 +8,8 @@ import {
     AssetCreationRequest, 
     GetAllBrands, 
     GetUserBrandRequests,
-     GetAdminNotifications
+     GetAdminNotifications,
+     GetAllRequestsToAdmin
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
@@ -24,5 +25,5 @@ router.get('/getbrands', protect, GetAllBrands);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
 router.get('/admin-notifications', protect, GetAdminNotifications)
-
+router.get('/get-all-requests', protect, GetAllRequestsToAdmin)
 export default router;

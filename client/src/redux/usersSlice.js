@@ -49,12 +49,16 @@ export const usersSlice = apiSlice.injectEndpoints({
                              method: 'GET'
                      })
               }),
+              //Check for already requested brands
               checkRequests: builder.query({
                       query: () => ({
                              url: 'user/check-requests',
                              method: 'GET'
                       })
-              })
+              }),
+              //get all admin requests
+               
+              //get all unread notifications
         })
 })
 

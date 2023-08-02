@@ -249,3 +249,14 @@ export const GetAdminNotifications = asyncHandler(async(req, res) => {
                 res.status(500).json({ message: 'Sorry, no notifications could be pulled at this time'})
          }
 })
+
+//Get All Requests to the Admin
+export const GetAllRequestsToAdmin = asyncHandler(async(req, res) => {
+        const all_requests  = await Request.find()
+
+        if(all_requests){
+                res.status(200).json({ all_requests })
+        }else{
+               res.status(500).json({ message: 'Sorry, no requests were received'})
+        }
+})

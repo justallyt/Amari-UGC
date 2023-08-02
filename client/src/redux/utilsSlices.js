@@ -8,7 +8,7 @@ const initialState = {
       requests: null
 }
 export const utilsSlice = createSlice({
-        name: 'uploadSlice',
+        name: 'UtilsSlice',
         initialState,
         reducers: {
               setUploadProgress: (state, action) => {
@@ -50,7 +50,8 @@ export const utilsSlice = createSlice({
                        state.brands = null;
                        state.requests = null;
                        localStorage.removeItem("Videos")
-             }
+             },
+
         }
 })
 

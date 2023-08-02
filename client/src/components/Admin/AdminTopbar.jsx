@@ -6,24 +6,30 @@ import { BsEnvelope } from "react-icons/bs"
 import { FaUserAlt } from "react-icons/fa"
 import { VscExtensions } from 'react-icons/vsc'
 import { useEffect, useRef, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useLogoutUserMutation } from "../../redux/usersSlice"
 import { clearCredentials } from "../../redux/authSlice"
 import { clearProfile } from "../../redux/profileSlice"
 import { apiSlice } from "../../redux/apiSlice"
+import { setAdminRequests } from "../../redux/admin/adminUtils"
 import Spinner from "../Spinner"
 // import { BsChatRightText } from "react-icons/bs"
 // import { AiOutlineShoppingCart } from "react-icons/ai"
 import toast, { Toaster } from "react-hot-toast"
-import { ssEvents } from "../../utils/sseEvents"
+import { useGetAllRequestsQuery } from "../../redux/admin/adminSlice"
+
 const AdminTopbar = () => {
   const [status, setStatus] = useState(false)
   const [wait, setWait] = useState(false)
   const adminBoxRef = useRef()
-
+ const dispatch = useDispatch()
+  const { data } = useGetAllRequestsQuery({  refetchOnMountOrArgChange: true })
   useEffect(() => {
+           if(data){
+                 dispatch(setAdminRequests([...data.all_requests]))
+           }
           document.addEventListener("click", openProfileBox, true)
-  }, [])
+  }, [data, dispatch])
 
   const openProfileBox = (e) => {
          if(adminBoxRef.current && !adminBoxRef.current.contains(e.target)){
@@ -32,13 +38,9 @@ const AdminTopbar = () => {
                 setStatus(true)
          }
   }
-  //Stream in request count
 
-  ssEvents.addEventListener("requests", (e) => {
-       console.log(JSON.parse(e.data))
-  })
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  
   const [ logoutAdmin ] = useLogoutUserMutation()
 
   const logoutUser = async() => {
@@ -59,6 +61,8 @@ const AdminTopbar = () => {
               toast.error("Logout Failed. Internal Server Error", { id: 'Admin Logout Error'})
         }
   }
+
+  const { adminRequests }  = useSelector(state => state.admin)
   return (
     <div className="topbar">
                 <div className="admin-inner">
@@ -79,7 +83,7 @@ const AdminTopbar = () => {
                                        <div className="topbar-right">
                                                   <div className="topbar-notifications">
                                                                <span><IoNotificationsOutline /> </span>
-                                                               <p>0</p>
+                                                               <p>{ adminRequests && adminRequests.length}</p>
                                                   </div>
                                                   {/* <span><BsChatRightText /></span>
                                                   <span><AiOutlineShoppingCart /></span> */}
