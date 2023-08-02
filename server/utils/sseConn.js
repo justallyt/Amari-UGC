@@ -1,3 +1,6 @@
+import SSE from 'express-sse'
+
+export const sseConnection = new SSE(["test data"])
 
 export const requestEvent = async(req, res, next) => {
      const headers = {

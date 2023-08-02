@@ -6,9 +6,6 @@ import Request from "../models/RequestsModel.js";
 import mongoose from "mongoose";
 import Notifications from "../models/NotificationsModel.js";
 
-/* GLOBAL VARIABLES */
-let request_count = 0;
-
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
        const { email, password } = req.body;
@@ -192,7 +189,6 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
          const creator_name = await User.findById(creator_id).select('name')
          const brand_name = await User.findById(brand_id).select('name')
          const admin_id = await User.find({ role: "Admin"}).select('_id');
-         console.log()
          const admin_message = `${creator_name.name} requests to work with ${brand_name.name}`
 
          try {
@@ -212,9 +208,7 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
                                    receipientMsg: creator_request.message
                             }
                       })
-                      if(notifications){
-                            request_count++
-                      }
+                
               }      
          } catch (error) {
                 res.status(401).json({ message: "Request Failed. Sorry, its not your fault. Please try again later"});
@@ -244,6 +238,14 @@ export const GetAllBrands = asyncHandler(async(req, res) => {
           }
 })
 
-export const SendNotificationsCount = asyncHandler(async(req, res) => {
-          res.status(200).json({ amt: request_count})
+
+//Get all notifications za Admin
+export const GetAdminNotifications = asyncHandler(async(req, res) => {
+         const notifications = await Notifications.find({ "receipient.receipientId": req.user._id})
+       
+         if(notifications){
+                 res.status(200).json({ notifications })
+         }else{
+                res.status(500).json({ message: 'Sorry, no notifications could be pulled at this time'})
+         }
 })

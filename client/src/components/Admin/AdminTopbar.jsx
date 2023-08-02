@@ -15,7 +15,7 @@ import Spinner from "../Spinner"
 // import { BsChatRightText } from "react-icons/bs"
 // import { AiOutlineShoppingCart } from "react-icons/ai"
 import toast, { Toaster } from "react-hot-toast"
-
+import { ssEvents } from "../../utils/sseEvents"
 const AdminTopbar = () => {
   const [status, setStatus] = useState(false)
   const [wait, setWait] = useState(false)
@@ -33,10 +33,10 @@ const AdminTopbar = () => {
          }
   }
   //Stream in request count
-  const ssEvents = new EventSource(import.meta.env.VITE_EVENT_URL, { 
-          withCredentials: true
-  });
-  ssEvents.onmessage = (e) => console.log(JSON.parse(e.data))
+
+  ssEvents.addEventListener("requests", (e) => {
+       console.log(JSON.parse(e.data))
+  })
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [ logoutAdmin ] = useLogoutUserMutation()

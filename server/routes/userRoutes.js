@@ -1,8 +1,18 @@
 import express from "express";
-import { RegisterUser, LoginUser, LogOutUser, GetProfile, UpdateProfile, AssetCreationRequest, GetAllBrands, GetUserBrandRequests, SendNotificationsCount } from "../controllers/usersController.js";
+import { 
+    RegisterUser, 
+    LoginUser, 
+    LogOutUser, 
+    GetProfile, 
+    UpdateProfile, 
+    AssetCreationRequest, 
+    GetAllBrands, 
+    GetUserBrandRequests,
+     GetAdminNotifications
+} from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
-import { requestEvent } from '../utils/sseConn.js'
+
 const router = express.Router();
 
 router.post('/login', LoginUser);
@@ -13,6 +23,6 @@ router.put('/update-profile', protect, upload.single('profileImage'), UpdateProf
 router.get('/getbrands', protect, GetAllBrands);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
-router.get('/requests', requestEvent)
-router.get('/reqcount', SendNotificationsCount)
+router.get('/admin-notifications', protect, GetAdminNotifications)
+
 export default router;
