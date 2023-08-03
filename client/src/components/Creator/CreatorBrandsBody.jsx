@@ -6,12 +6,13 @@ import { useGetBrandsQuery } from "../../redux/usersSlice"
 import { useEffect } from "react"
 import { setPulledBrands } from "../../redux/utilsSlices"
 import RequestBtn from "./RequestBtn"
+import SpinnerData from "../SpinnerData"
 const CreatorBrandsBody = ({ refetchFn }) => {
     const { profile } = useSelector(state => state.profile)
     const { brands } = useSelector(state => state.utils);
     const dispatch = useDispatch()
     //get brands
-    const { data } = useGetBrandsQuery({  refetchOnMountOrArgChange: true })
+    const { data, isLoading } = useGetBrandsQuery({  refetchOnMountOrArgChange: true })
 
     useEffect(()=>{
            if(data){
@@ -50,20 +51,28 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                  <div className="available-brands">
                                                              <h3>Available Brands</h3>
 
-                                                             { brands != null && Object.values(brands).map(item => 
-                                                                     <div className="available-brand-moja" key={item.name}>
-                                                                     <div className="left-items">
-                                                                                    <div className="brand-profile">
-                                                                                              <img src={item.profilePic.url} alt="Brand Logo" />
-                                                                                    </div>
-                                                                                    <h4>{item.name}</h4>
-                                                                     </div>
-                                                                     <div className="right-items">
-                                                                                {/* <button className="" onClick={() => requestToWorkWithBrand(item._id)}>{requestStatus}</button> */}
-                                                                                <RequestBtn id={item._id} refetch={refetchFn} />
-                                                                     </div>
-                                                       </div>
-                                                              )}
+                                                             { isLoading ? 
+                                                                  <div className="spinning-and-get-data">
+                                                                        <SpinnerData />
+                                                                  </div>   :
+                                                                  <>
+                                                                          { brands != null && Object.values(brands).map(item => 
+                                                                                 <div className="available-brand-moja" key={item.name}>
+                                                                                 <div className="left-items">
+                                                                                                <div className="brand-profile">
+                                                                                                          <img src={item.profilePic.url} alt="Brand Logo" />
+                                                                                                </div>
+                                                                                                <h4>{item.name}</h4>
+                                                                                 </div>
+                                                                                 <div className="right-items">
+                                                                                            <RequestBtn id={item._id} refetch={refetchFn} />
+                                                                                 </div>
+                                                                       </div>
+                                                                     )}
+                                                              </>
+                                                            }
+                                                              
+                                                             
                                                  </div>
                                       </div>
                            </div>

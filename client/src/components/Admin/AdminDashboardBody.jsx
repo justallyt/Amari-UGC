@@ -6,7 +6,9 @@ import { VscGitPullRequestGoToChanges, VscArrowUp } from 'react-icons/vsc'
 import AnalyticsSection from "./AnalyticsSection"
 import TransactionList from "./TransactionList"
 import Footer from "../Footer"
+import { useSelector } from "react-redux"
 const AdminDashboardBody = () => {
+  const { adminRequests } = useSelector(state => state.admin)
   return (
     <div className="admin-dashboard-wrapper">
                  <AdminTopbar />
@@ -62,7 +64,7 @@ const AdminDashboardBody = () => {
                                                                    <div className="type">
                                                                                <div className="name-n-number">
                                                                                          <h4>Tasks</h4>
-                                                                                         <h2>84</h2>
+                                                                                         <h2>{ adminRequests && adminRequests.length}</h2>
                                                                                </div>
                                                                                <span><VscGitPullRequestGoToChanges /></span>
                                                                    </div>

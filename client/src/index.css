@@ -348,6 +348,70 @@ p.redirect a{
  0% { transform: translate(-50% , -150%)}
  100% { transform: translate(-50% , 10%)}
 }
+
+.spinning-and-get-data{
+       width: 500px;
+       display: flex;
+       justify-content: center;
+       margin-top: 30px;
+}
+.spinner-circle{
+  width: 11.2px;
+  height: 11.2px;
+  animation: spinner-o824ag 1s infinite linear;
+  margin: 20px 0;
+}
+
+.spinner-circle div {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: var(--main-color);
+  border-radius: 50%;
+  animation: spinner-vse6n7 1.25s infinite ease;
+}
+
+.spinner-circle div:nth-child(1) {
+  --rotation: 90;
+}
+
+.spinner-circle div:nth-child(2) {
+  --rotation: 180;
+}
+
+.spinner-circle div:nth-child(3) {
+  --rotation: 270;
+}
+
+.spinner-circle div:nth-child(4) {
+  --rotation: 360;
+}
+
+@keyframes spinner-vse6n7 {
+  0%, 100% {
+     transform: rotate(calc(var(--rotation) * 1deg)) translateY(0);
+  }
+
+  50% {
+     transform: rotate(calc(var(--rotation) * 1deg)) translateY(200%);
+     -webkit-transform: rotate(calc(var(--rotation) * 1deg)) translateY(200%);
+     -moz-transform: rotate(calc(var(--rotation) * 1deg)) translateY(200%);
+     -ms-transform: rotate(calc(var(--rotation) * 1deg)) translateY(200%);
+     -o-transform: rotate(calc(var(--rotation) * 1deg)) translateY(200%);
+}
+}
+
+@keyframes spinner-o824ag {
+  to {
+     transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+
 /* Header Styles */
 header{
      height: 80px;
