@@ -226,10 +226,19 @@ export const GetUserBrandRequests = asyncHandler(async(req, res) => {
               res.status(400).json({ message: 'Sorry, no request by this user'})
         }
 })
+//Get Brands Partially
+export const GetAllBrandsForCreators = asyncHandler(async(req, res) => {
+       const brands = await User.find({ role: 'Brand'}).select('name bio profilePic');
 
+       if(brands){
+               res.status(200).json({ brands })
+       }else{
+            res.status(400).json({ message: 'Sorry, no brands found for your selection'})
+       }
+})
 //Get All Brands
 export const GetAllBrands = asyncHandler(async(req, res) => {
-          const brands = await User.find({ role: 'Brand'}).select('name bio profilePic');
+          const brands = await User.find({ role: 'Brand'}).select('-password');
 
           if(brands){
                   res.status(200).json({ brands })

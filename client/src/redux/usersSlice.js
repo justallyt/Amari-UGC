@@ -45,7 +45,7 @@ export const usersSlice = apiSlice.injectEndpoints({
               }),
               getBrands: builder.query({
                      query: () =>( {
-                             url: 'user/getbrands',
+                             url: 'user/getbrandsforcreators',
                              method: 'GET'
                      })
               }),

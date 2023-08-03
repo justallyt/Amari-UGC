@@ -8,7 +8,22 @@ export const adminSlice = apiSlice.injectEndpoints({
                            url: 'user/get-all-requests',
                            method: "GET"
                     })
-             })
+             }),
+             //Get all Brands
+             getAllBrands: builder.query({
+                    query: () => ({
+                            url: 'user/getallbrands',
+                            method: 'GET'
+                    })
+             }),
+             //Get All Creators
+             getAllCreators: builder.query({
+                  query: () => ({
+                         url: 'user/getallcreators',
+                         method: 'GET'
+                  })
+             }),
+             
       })
 })
 
