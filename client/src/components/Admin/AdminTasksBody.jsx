@@ -1,4 +1,7 @@
-
+import { PiCheck } from "react-icons/pi"
+import { LiaTimesSolid } from "react-icons/lia"
+import dummy1 from "../../assets/creator2.jpg"
+import dummy2 from "../../assets/stanchart.png"
 const AdminTasksBody = () => {
   return (
     <div className="admin-tasks-body">
@@ -24,12 +27,13 @@ const AdminTasksBody = () => {
                                                                                        <h3>Initiator</h3>
                                                                                         <div className="initiator-profile">
                                                                                                    <div className="profile-image">
-                                                                                                            <img src="" alt="" />
+                                                                                                            <img src={dummy1} alt="" />
                                                                                                    </div>
                                                                                                     <div className="profile-description">
                                                                                                               <h2>Omondi Fullstack Dev</h2>
                                                                                                               <h5>Creator</h5>
                                                                                                               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel nam nihil molestiae id at illum, eaque repudiandae quas neque eveniet.</p>
+                                                                                                              <button>View Creator</button>
                                                                                                     </div>
                                                                                         </div>
                                                                             </div>
@@ -37,7 +41,7 @@ const AdminTasksBody = () => {
                                                                                          <h3>Target</h3>
                                                                                          <div className="target-profile">
                                                                                                     <div className="profile-image">
-                                                                                                              <img src="" alt="" />
+                                                                                                              <img src={dummy2} alt="" />
                                                                                                     </div>
                                                                                                     <div className="profile-description">
                                                                                                                  <h2>Standard Chartered</h2>
@@ -45,8 +49,16 @@ const AdminTasksBody = () => {
                                                                                                     </div>
                                                                                          </div>
                                                                             </div>
-                                                                            <div className="actions">
-                                                                                       <button></button>
+                                                                            <div className="additionals-plus-actions">
+                                                                                           <div className="actions">
+                                                                                                      <button className="approve"><span><PiCheck /></span> Approve</button>
+                                                                                                      <button className="reject"><span><LiaTimesSolid /></span> Reject</button>
+                                                                                           </div>
+
+                                                                                           <div className="recieved-date">
+                                                                                                     <p>Received on</p>
+                                                                                                     <p>sep 24, 2023 11.10 am</p>
+                                                                                           </div>
                                                                             </div>
                                                               </div>
                                                   </div>
