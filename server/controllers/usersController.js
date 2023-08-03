@@ -237,7 +237,16 @@ export const GetAllBrands = asyncHandler(async(req, res) => {
                res.status(400).json({ message: 'Sorry, no brands found for your selection'})
           }
 })
+//Get All Creators
+export const GetAllCreators = asyncHandler(asyncHandler(async(req, res) => {
+         const creators = await User.find({ role: 'Creator'}).select('-password');
 
+         if(creators){
+                  res.status(200).json({ creators })
+         }else{
+                 res.status(500).json({ message: 'Oops, no creators found. Server error'})
+         }
+}))
 
 //Get all notifications za Admin
 export const GetAdminNotifications = asyncHandler(async(req, res) => {

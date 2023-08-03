@@ -15,6 +15,7 @@ import CreatorAssets from "./pages/Creator/CreatorAssets"
 import AdminRoutes from "./utils/AdminRoutes"
 import AdminDashboard from "./pages/Admin/AdminDashboard"
 import CreatorBrands from "./pages/Creator/CreatorBrands"
+import AdminTasks from "./pages/Admin/AdminTasks"
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
                      { /* Admin Routes */}
                      <Route element={<AdminRoutes />}>
                                    <Route path="/admin/:id" element={<AdminDashboard />} />
+                                   <Route path="/admin/tasks" element={<AdminTasks />} />
                      </Route>
            </Routes>
     </>

@@ -5,15 +5,17 @@ import { CgMenuRight } from "react-icons/cg"
 import {BsPeople, BsCreditCard2Front} from "react-icons/bs"
 import { VscGitPullRequestGoToChanges } from 'react-icons/vsc'
 import { useState } from "react"
+import { useSelector } from "react-redux"
 const MainTopbar = () => {
      const [status, setStatus] = useState(false)
 
      const toggleSidebar = () => setStatus(!status)
+     const { userInfo } = useSelector(state => state.auth)
   return (
     <div className="main-topbar">
                <div className="admin-inner">
                      <ul className={ status ? 'active' : ''}>
-                            <li><NavLink className='active' to={'/admin/dd/'}><span><RxDashboard /></span> Dashboard</NavLink></li>
+                            <li><NavLink className='active' to={`/admin/${userInfo.id}`}><span><RxDashboard /></span> Dashboard</NavLink></li>
                             <li><NavLink to={'/admin/brands'}><span><IoBusinessOutline /></span>Brands</NavLink></li>
                             <li><NavLink to={'/admin/creators'}><span><BsPeople /></span>Creators</NavLink></li>
                             <li><NavLink to={'/admin/transactions'}><span><BsCreditCard2Front /></span>Transactions</NavLink></li>

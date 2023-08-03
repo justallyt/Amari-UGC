@@ -63,6 +63,7 @@ const AdminTopbar = () => {
   }
 
   const { adminRequests }  = useSelector(state => state.admin)
+  const { userInfo } = useSelector(state => state.auth)
   return (
     <div className="topbar">
                 <div className="admin-inner">
@@ -70,7 +71,7 @@ const AdminTopbar = () => {
                          { wait ?  <Spinner /> : ''}
                            <div className="topbar-content">
                                        <div className="topbar-left">
-                                                 <NavLink to={'/'}>
+                                                 <NavLink to={`/admin/${userInfo.id}`}>
                                                              <div className="logo">
                                                                       <img src={logo} alt="Logo" />
                                                              </div>
