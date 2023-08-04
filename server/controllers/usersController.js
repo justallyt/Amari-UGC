@@ -278,3 +278,8 @@ export const GetAllRequestsToAdmin = asyncHandler(async(req, res) => {
                res.status(500).json({ message: 'Sorry, no requests were received'})
         }
 })
+
+//Approve Creator Requests
+export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
+         
+})

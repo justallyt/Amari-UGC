@@ -2,10 +2,12 @@ import { PiCheck } from "react-icons/pi"
 import { LiaTimesSolid } from "react-icons/lia"
 import dummy1 from "../../assets/creator2.jpg"
 import dummy2 from "../../assets/stanchart.png"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useGetAllBrandsQuery, useGetAllCreatorsQuery } from "../../redux/admin/adminSlice"
 import { useEffect } from "react"
 import { setAllBrandsForAdmin, setAllCreatorsForAdmin } from "../../redux/admin/adminUtils"
+import TaskInitiator from "./TaskInitiator"
+import TaskTarget from "./TaskTarget"
 const AdminTasksBody = () => {
     const dispatch = useDispatch();
 
@@ -16,7 +18,10 @@ const AdminTasksBody = () => {
                if(brands) dispatch(setAllBrandsForAdmin([...brands.all_brands]))
                if(creators) dispatch(setAllCreatorsForAdmin([...creators.all_creators]))
     }, [brands, creators, dispatch])
-    
+
+
+    const { adminRequests } = useSelector(state => state.admin);
+    console.log(adminRequests)
   return (
     <div className="admin-tasks-body">
               <div className="admin-inner">
@@ -36,33 +41,10 @@ const AdminTasksBody = () => {
                                                   </div>
 
                                                   <div className="requests-list">
-                                                              <div className="request-moja">
-                                                                            <div className="initiator">
-                                                                                       <h3>Initiator</h3>
-                                                                                        <div className="initiator-profile">
-                                                                                                   <div className="profile-image">
-                                                                                                            <img src={dummy1} alt="" />
-                                                                                                   </div>
-                                                                                                    <div className="profile-description">
-                                                                                                              <h2>Omondi Fullstack Dev</h2>
-                                                                                                              <h5>Creator</h5>
-                                                                                                              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel nam nihil molestiae id at illum, eaque repudiandae quas neque eveniet.</p>
-                                                                                                              <button>View Creator</button>
-                                                                                                    </div>
-                                                                                        </div>
-                                                                            </div>
-                                                                            <div className="target">
-                                                                                         <h3>Target</h3>
-                                                                                         <div className="target-profile">
-                                                                                                    <div className="profile-image">
-                                                                                                              <img src={dummy2} alt="" />
-                                                                                                    </div>
-                                                                                                    <div className="profile-description">
-                                                                                                                 <h2>Standard Chartered</h2>
-                                                                                                                 <h5>Consulting</h5>
-                                                                                                    </div>
-                                                                                         </div>
-                                                                            </div>
+                                                              { adminRequests && adminRequests.map(item => 
+                                                                <div className="request-moja" key={item._id}>
+                                                                            <TaskInitiator data={item} />
+                                                                            <TaskTarget data={item} />
                                                                             <div className="additionals-plus-actions">
                                                                                            <div className="actions">
                                                                                                       <button className="approve"><span><PiCheck /></span> Approve</button>
@@ -75,6 +57,8 @@ const AdminTasksBody = () => {
                                                                                            </div>
                                                                             </div>
                                                               </div>
+                                                                
+                                                                )}
                                                   </div>
                                       </div>
                           </div>

@@ -11,6 +11,14 @@ const requestSchema = mongoose.Schema({
           },
           message: {
                  type: String,
+          },
+          approved: {
+                 type: Boolean,
+                 default: false
+          },
+          handledStatus: {
+                type: String,
+                default: 'Pending'
           }
 }, { timestamps: true})
 
