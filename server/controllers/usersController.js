@@ -238,20 +238,20 @@ export const GetAllBrandsForCreators = asyncHandler(async(req, res) => {
 })
 //Get All Brands
 export const GetAllBrands = asyncHandler(async(req, res) => {
-          const brands = await User.find({ role: 'Brand'}).select('-password');
+          const all_brands = await User.find({ role: 'Brand'}).select('-password');
 
-          if(brands){
-                  res.status(200).json({ brands })
+          if(all_brands){
+                  res.status(200).json({ all_brands })
           }else{
                res.status(400).json({ message: 'Sorry, no brands found for your selection'})
           }
 })
 //Get All Creators
 export const GetAllCreators = asyncHandler(asyncHandler(async(req, res) => {
-         const creators = await User.find({ role: 'Creator'}).select('-password');
+         const all_creators = await User.find({ role: 'Creator'}).select('-password');
 
-         if(creators){
-                  res.status(200).json({ creators })
+         if(all_creators){
+                  res.status(200).json({ all_creators })
          }else{
                  res.status(500).json({ message: 'Oops, no creators found. Server error'})
          }

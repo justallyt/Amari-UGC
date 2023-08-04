@@ -28,5 +28,7 @@ export const adminSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-       useGetAllRequestsQuery
+       useGetAllRequestsQuery,
+       useGetAllBrandsQuery,
+       useGetAllCreatorsQuery,
  } = adminSlice

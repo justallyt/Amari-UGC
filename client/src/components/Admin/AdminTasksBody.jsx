@@ -2,7 +2,21 @@ import { PiCheck } from "react-icons/pi"
 import { LiaTimesSolid } from "react-icons/lia"
 import dummy1 from "../../assets/creator2.jpg"
 import dummy2 from "../../assets/stanchart.png"
+import { useDispatch } from "react-redux"
+import { useGetAllBrandsQuery, useGetAllCreatorsQuery } from "../../redux/admin/adminSlice"
+import { useEffect } from "react"
+import { setAllBrandsForAdmin, setAllCreatorsForAdmin } from "../../redux/admin/adminUtils"
 const AdminTasksBody = () => {
+    const dispatch = useDispatch();
+
+    const { data: brands } = useGetAllBrandsQuery({  refetchOnMountOrArgChange: true })
+    const { data: creators } = useGetAllCreatorsQuery({  refetchOnMountOrArgChange: true })
+
+    useEffect(() => {
+               if(brands) dispatch(setAllBrandsForAdmin([...brands.all_brands]))
+               if(creators) dispatch(setAllCreatorsForAdmin([...creators.all_creators]))
+    }, [brands, creators, dispatch])
+    
   return (
     <div className="admin-tasks-body">
               <div className="admin-inner">

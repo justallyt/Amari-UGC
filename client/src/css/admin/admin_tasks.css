@@ -154,6 +154,7 @@
        -ms-border-radius: 7px;
        -o-border-radius: 7px;
        box-shadow: 0px 0px 5px -1px gainsboro;
+       margin-bottom: 15px;
 }
 .target-profile .profile-image img{
        object-fit: contain;
@@ -204,4 +205,30 @@
        font-family: "Madera-Medium";
        text-align: right;
        color: rgb(151, 151, 151);
+}
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 950px){
+    .request-moja{
+           grid-template-columns: 1fr;
+    }
+    .request-moja .target{
+        margin-left: 60px;
+    }
+    .additionals-plus-actions{
+        gap: 20px;
+    }
+    .request-moja .actions button{
+           width: 150px;
+           margin: auto;
+    }
 }
