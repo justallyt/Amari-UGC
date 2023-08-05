@@ -30,6 +30,12 @@ const usersSchema = mongoose.Schema({
         phone: {
               type: String,
         },
+        brands: {
+
+        },
+        creators: {
+              
+        },
        address: {
               country: { type: String, default: 'null'},
               city: { type: String, default: 'null'}

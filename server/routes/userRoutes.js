@@ -25,8 +25,6 @@ router.post('/logout', LogOutUser);
 router.get('/profile', protect, GetProfile);
 router.put('/update-profile', protect, upload.single('profileImage'), UpdateProfile);
 router.get('/getbrandsforcreators', protect, GetAllBrandsForCreators);
-router.get('/getallcreators', protect, GetAllCreators);
-router.get('/getallbrands', protect, GetAllBrands);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
 

@@ -270,7 +270,7 @@ export const GetAdminNotifications = asyncHandler(async(req, res) => {
 
 //Get All Requests to the Admin
 export const GetAllRequestsToAdmin = asyncHandler(async(req, res) => {
-        const all_requests  = await Request.find()
+        const all_requests  = await Request.find({ approved: false, handledStatus: 'Pending'})
 
         if(all_requests){
                 res.status(200).json({ all_requests })

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 const BrandRoutes = () => {
         const { userInfo } = useSelector(state => state.auth)
         const { id } = useParams();
-        const cookie = document.cookie.split(';').some(item => item.startsWith(' mimic='))
+        const cookie = document.cookie.split(';').some(item => item.startsWith(' mimic=') || item.startsWith('mimic='))
            return (
                   [userInfo.id, userInfo.username].some(val => val === id) &&
                    userInfo &&  
