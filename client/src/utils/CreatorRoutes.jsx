@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 const CreatorRoutes = () => {
     const { userInfo } = useSelector(state => state.auth)
     //const { id } = useParams();
+    const cookie = document.cookie.split(';').some(item => item.startsWith(' mimic='))
   return (
             // userInfo !== null &&   [userInfo.username, userInfo.id].some(value => value == id) &&   
             // userInfo.role === import.meta.env.VITE_CONSUMER_ROLE ? <Outlet /> : <Navigate to={'/user/login'} />
             userInfo !== null &&   
+            cookie &&
             userInfo.role === import.meta.env.VITE_CONSUMER_ROLE ? <Outlet /> : <Navigate to={'/user/login'} />
   )
 }

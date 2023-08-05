@@ -1,9 +1,7 @@
 import { PiCheck } from "react-icons/pi"
 import { LiaTimesSolid } from "react-icons/lia"
-import dummy1 from "../../assets/creator2.jpg"
-import dummy2 from "../../assets/stanchart.png"
 import { useDispatch, useSelector } from "react-redux"
-import { useGetAllBrandsQuery, useGetAllCreatorsQuery } from "../../redux/admin/adminSlice"
+import { useApproveCreatorMutation, useGetAllBrandsQuery, useGetAllCreatorsQuery } from "../../redux/admin/adminSlice"
 import { useEffect } from "react"
 import { setAllBrandsForAdmin, setAllCreatorsForAdmin } from "../../redux/admin/adminUtils"
 import TaskInitiator from "./TaskInitiator"
@@ -19,9 +17,20 @@ const AdminTasksBody = () => {
                if(creators) dispatch(setAllCreatorsForAdmin([...creators.all_creators]))
     }, [brands, creators, dispatch])
 
-
     const { adminRequests } = useSelector(state => state.admin);
-    console.log(adminRequests)
+    
+    //Approve a Creator
+    const [ approveCreator, { isLoading }] = useApproveCreatorMutation()
+
+    const approve = async (id) =>{
+            try {
+                  const res = await approveCreator({id}).unwrap()
+
+                  console.log(res)
+            } catch (error) {
+                   console.log(error)
+            }
+    }
   return (
     <div className="admin-tasks-body">
               <div className="admin-inner">
@@ -47,13 +56,13 @@ const AdminTasksBody = () => {
                                                                             <TaskTarget data={item} />
                                                                             <div className="additionals-plus-actions">
                                                                                            <div className="actions">
-                                                                                                      <button className="approve"><span><PiCheck /></span> Approve</button>
+                                                                                                      <button onClick={() => approve(item._id)} className="approve"><span><PiCheck /></span> Approve</button>
                                                                                                       <button className="reject"><span><LiaTimesSolid /></span> Reject</button>
                                                                                            </div>
 
                                                                                            <div className="recieved-date">
                                                                                                      <p>Received on</p>
-                                                                                                     <p>sep 24, 2023 11.10 am</p>
+                                                                                                     <p>{new Date(item.createdAt).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'})}</p>
                                                                                            </div>
                                                                             </div>
                                                               </div>

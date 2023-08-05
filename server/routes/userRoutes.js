@@ -11,7 +11,8 @@ import {
      GetAdminNotifications,
      GetAllRequestsToAdmin,
      GetAllCreators,
-     GetAllBrandsForCreators
+     GetAllBrandsForCreators,
+     ApproveCreatorRequest
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
@@ -28,7 +29,14 @@ router.get('/getallcreators', protect, GetAllCreators);
 router.get('/getallbrands', protect, GetAllBrands);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
-router.get('/admin-notifications', protect, GetAdminNotifications)
-router.get('/get-all-requests', protect, GetAllRequestsToAdmin)
 
+
+
+
+//Admin Routes
+router.get('/get-all-requests', protect, GetAllRequestsToAdmin)
+router.get('/getallcreators', protect, GetAllCreators);
+router.get('/getallbrands', protect, GetAllBrands);
+router.get('/admin-notifications', protect, GetAdminNotifications);
+router.put('/approve-creator', protect, ApproveCreatorRequest);
 export default router;

@@ -23,7 +23,14 @@ export const adminSlice = apiSlice.injectEndpoints({
                          method: 'GET'
                   })
              }),
-             
+             // Approve a creator
+             approveCreator: builder.mutation({
+                   query: (payload) => ({
+                           url: 'user/approve-creator',
+                           method: 'PUT',
+                           body: payload
+                   })
+             })
       })
 })
 
@@ -31,4 +38,5 @@ export const {
        useGetAllRequestsQuery,
        useGetAllBrandsQuery,
        useGetAllCreatorsQuery,
+       useApproveCreatorMutation
  } = adminSlice

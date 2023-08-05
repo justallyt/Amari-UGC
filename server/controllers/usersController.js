@@ -281,5 +281,18 @@ export const GetAllRequestsToAdmin = asyncHandler(async(req, res) => {
 
 //Approve Creator Requests
 export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
-         
+         const { id } = req.body;
+
+         const request_id = new mongoose.Types.ObjectId(`${id}`);
+
+         const update_request = await Request.findByIdAndUpdate(request_id, {
+               approved: true,
+               handledStatus: 'Completed'
+         })
+
+         if(update_request){
+                 res.status(200).json({ message: 'Success'})
+         }else{
+                res.status(500).json({ error: 'Failed to approve request'})
+         }
 })
