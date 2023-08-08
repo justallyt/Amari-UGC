@@ -192,6 +192,10 @@
        background: rgba(172, 255, 172, 0.5);
        color:rgb(16, 135, 52)
 }
+.request-moja .actions button.approved{
+      background: var(--main-color);
+      color: white;
+}
 .request-moja .actions button.reject{
       background: rgba(255, 183, 183, 0.5);
       color: red;
@@ -208,9 +212,19 @@
        color: rgb(151, 151, 151);
 }
 
+.no-listings h2{
+     font-family: "Madera-Thin";
+     font-size: 20px;
+}
 
-
-
+.new-requests,
+.approved-requests{
+    display: none;
+}
+.new-requests.active,
+.approved-requests.active{
+    display: block;
+}
 
 
 

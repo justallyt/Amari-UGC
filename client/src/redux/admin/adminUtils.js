@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
         adminRequests: localStorage.getItem('Videos') ? JSON.parse(localStorage.getItem('AdminRequests')) : null,
         allBrands: localStorage.getItem('Brands') ? JSON.parse(localStorage.getItem('Brands')) : null,
-        allCreators: localStorage.getItem('Creators') ? JSON.parse(localStorage.getItem('Creators')) : null
+        allCreators: localStorage.getItem('Creators') ? JSON.parse(localStorage.getItem('Creators')) : null,
+        approvedRequests: localStorage.getItem('Approved') ? JSON.parse(localStorage.getItem('Approved')) : null
 }
 
 export const adminUtils = createSlice({
@@ -21,6 +22,10 @@ export const adminUtils = createSlice({
               setAllCreatorsForAdmin: (state, action) => {
                     state.allCreators = action.payload;
                     localStorage.setItem('Creators', JSON.stringify(action.payload))
+              },
+              setApprovedRequests: (state, action) => {
+                      state.approvedRequests = action.payload;
+                      localStorage.setItem('Approved', JSON.stringify(action.payload))
               }
        }
 })
@@ -28,7 +33,8 @@ export const adminUtils = createSlice({
 export const{
       setAdminRequests,
       setAllBrandsForAdmin,
-      setAllCreatorsForAdmin
+      setAllCreatorsForAdmin,
+      setApprovedRequests
 } = adminUtils.actions
 
 export default adminUtils.reducer

@@ -7,7 +7,8 @@ export const adminSlice = apiSlice.injectEndpoints({
                     query: () => ({
                            url: 'user/get-all-requests',
                            method: "GET"
-                    })
+                    }),
+                    providesTags: ['Request']
              }),
              //Get all Brands
              getAllBrands: builder.query({
@@ -23,13 +24,22 @@ export const adminSlice = apiSlice.injectEndpoints({
                          method: 'GET'
                   })
              }),
+             //Get all approved requests
+             getApprovedCreators: builder.query({
+                   query: () => ({
+                           url: 'user/approved-requests',
+                           method: 'GET'
+                   }),
+                   providesTags: ['Request']
+             }),
              // Approve a creator
              approveCreator: builder.mutation({
                    query: (payload) => ({
                            url: 'user/approve-creator',
                            method: 'PUT',
                            body: payload
-                   })
+                   }),
+                   invalidatesTags: ['Request']
              })
       })
 })
@@ -38,5 +48,6 @@ export const {
        useGetAllRequestsQuery,
        useGetAllBrandsQuery,
        useGetAllCreatorsQuery,
+       useGetApprovedCreatorsQuery,
        useApproveCreatorMutation
  } = adminSlice

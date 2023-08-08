@@ -282,6 +282,7 @@ export const GetAllRequestsToAdmin = asyncHandler(async(req, res) => {
 //Approve Creator Requests
 export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
          const { id } = req.body;
+         const admin_id = req.user._id
 
          const request_id = new mongoose.Types.ObjectId(`${id}`);
 
@@ -291,8 +292,41 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
          })
 
          if(update_request){
-                 res.status(200).json({ message: 'Success'})
+                 res.status(200).json({update_request})
+                //Update Brands for A Creator
+                const updateCreator = await User.findByIdAndUpdate(update_request.creator, {
+                       $push: { brands: update_request.brand}
+                })
+                //Update Creators for A Brand
+                const updateBrand = await User.findByIdAndUpdate(update_request.brand, {
+                     $push: { creators: update_request.creator}
+                })
+                 
+                //Create a notification for the above actions
+                const approval_msg = `You have been approved to work with ${updateBrand.name}`
+                const notifications = await Notifications.create({
+                     notification_type: 'Approval',
+                     sender: {
+                            senderId: admin_id,
+                     },
+                     receipient: {
+                            receipientId: update_request.creator,
+                            receipientMsg: approval_msg
+                     }
+               })
+
          }else{
                 res.status(500).json({ error: 'Failed to approve request'})
          }
+})
+
+//Get All Approved Requests
+export const ApprovedRequests = asyncHandler(async(req, res) => {
+       const requests  = await Request.find({ approved: true, handledStatus: 'Completed'})
+
+       if(requests){
+               res.status(200).json({ requests })
+       }else{
+              res.status(500).json({ message: 'Sorry, no requests were received'})
+       }
 })

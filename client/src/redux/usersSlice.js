@@ -41,7 +41,8 @@ export const usersSlice = apiSlice.injectEndpoints({
                             url: 'user/creation-request',
                             method: 'POST',
                             body: payload
-                     })
+                     }),
+                     invalidatesTags: ['Request']
               }),
               getBrands: builder.query({
                      query: () =>( {

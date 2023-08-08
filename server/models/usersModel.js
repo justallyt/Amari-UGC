@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from 'bcryptjs';
 
 const usersSchema = mongoose.Schema({
@@ -30,12 +30,8 @@ const usersSchema = mongoose.Schema({
         phone: {
               type: String,
         },
-        brands: {
-
-        },
-        creators: {
-              
-        },
+        brands: [{ type: Schema.Types.ObjectId , ref: 'User'}],
+        creators: [{ type: Schema.Types.ObjectId, ref: 'User'}],
        address: {
               country: { type: String, default: 'null'},
               city: { type: String, default: 'null'}

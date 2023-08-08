@@ -407,10 +407,24 @@ p.redirect a{
   }
 }
 
+.cog {
+  width: 15px;
+  height: 15px;
+  animation: spinner-z355kx 1.5s infinite linear;
+  border-radius: 4px;
+  border: 3px dotted var(--main-color);
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  -webkit-animation: spinner-z355kx 1.5s infinite linear;
+}
 
-
-
-
+@keyframes spinner-z355kx {
+  to {
+     transform: rotate(360deg);
+  }
+}
 
 /* Header Styles */
 header{
