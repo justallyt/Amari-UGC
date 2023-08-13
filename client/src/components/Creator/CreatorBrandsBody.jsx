@@ -3,11 +3,12 @@ import Topbar from "./Topbar"
 import twiga from "../../assets/twiga.png"
 import stanchart from "../../assets/stanchart.png"
 import { useGetBrandsQuery } from "../../redux/usersSlice"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { setPulledBrands } from "../../redux/utilsSlices"
 import RequestBtn from "./RequestBtn"
 import SpinnerData from "../SpinnerData"
 const CreatorBrandsBody = ({ refetchFn }) => {
+    const [ myBrands, setMyBrands ] = useState(null)
     const { profile } = useSelector(state => state.profile)
     const { brands } = useSelector(state => state.utils);
     const dispatch = useDispatch()
@@ -20,6 +21,15 @@ const CreatorBrandsBody = ({ refetchFn }) => {
            }
     }, [data, dispatch])
     
+    //Filter Stuff
+   useEffect(() => {
+              if(brands){
+                     profile.brands.forEach(item => {
+                            const stuff =  Object.values(brands).filter(kitu => kitu._id === item)
+                            console.log(stuff)
+                   })
+          }
+   })
   return (
     <div className="dashboard-body-wrap">
                <div className="dashboard-row">

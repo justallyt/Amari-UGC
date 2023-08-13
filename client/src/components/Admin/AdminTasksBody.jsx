@@ -13,7 +13,8 @@ const AdminTasksBody = () => {
 
     const { data: brands } = useGetAllBrandsQuery({  refetchOnMountOrArgChange: true })
     const { data: creators } = useGetAllCreatorsQuery({  refetchOnMountOrArgChange: true })
-    const { data: approved } = useGetApprovedCreatorsQuery();
+    const { data: approved } = useGetApprovedCreatorsQuery({ refetchOnMountOrArgChange: true});
+
     useEffect(() => {
                if(brands) dispatch(setAllBrandsForAdmin([...brands.all_brands]))
                if(creators) dispatch(setAllCreatorsForAdmin([...creators.all_creators]))
@@ -65,7 +66,7 @@ const AdminTasksBody = () => {
                                                                                    <TaskTarget data={item} />
                                                                                    <div className="additionals-plus-actions">
                                                                                                   <div className="actions">
-                                                                                                             <button onClick={() => approve(item._id)} className="approve"><span><PiCheck /></span> Approve <CogSpinner /></button>
+                                                                                                             <button onClick={() => approve(item._id)} className="approve">{ isLoading ? <CogSpinner />   : <span><PiCheck /></span> } Approve </button>
                                                                                                              <button className="reject"><span><LiaTimesSolid /></span> Reject</button>
                                                                                                   </div>
 

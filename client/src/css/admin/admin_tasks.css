@@ -192,6 +192,9 @@
        background: rgba(172, 255, 172, 0.5);
        color:rgb(16, 135, 52)
 }
+button.approve .cog{
+    border: 3px dotted rgb(16, 135, 52);
+}
 .request-moja .actions button.approved{
       background: var(--main-color);
       color: white;

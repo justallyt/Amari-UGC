@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
         adminRequests: localStorage.getItem('Videos') ? JSON.parse(localStorage.getItem('AdminRequests')) : null,
-        allBrands: localStorage.getItem('Brands') ? JSON.parse(localStorage.getItem('Brands')) : null,
-        allCreators: localStorage.getItem('Creators') ? JSON.parse(localStorage.getItem('Creators')) : null,
-        approvedRequests: localStorage.getItem('Approved') ? JSON.parse(localStorage.getItem('Approved')) : null
+        allBrands: localStorage.getItem('Brands') ? JSON.parse(localStorage.getItem('Brands')) : [],
+        allCreators: localStorage.getItem('Creators') ? JSON.parse(localStorage.getItem('Creators')) : [],
+        approvedRequests: localStorage.getItem('Approved') ? JSON.parse(localStorage.getItem('Approved')) : []
 }
 
 export const adminUtils = createSlice({
