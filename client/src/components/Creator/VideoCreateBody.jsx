@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast"
 const VideoCreateBody = () => {
     const { profile } = useSelector(state => state.profile)
     const { videoUploadProgress } = useSelector(state => state.utils)
-
+    const { userBrands } = useSelector(state => state.utils)
     const [isUploading, setIsUploading] = useState(false);
    const [ selectedFile, setSelectedFile] = useState(null)
    const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm()
@@ -77,10 +77,14 @@ const VideoCreateBody = () => {
                                                                             <label htmlFor="brand">Choose a Brand</label>
                                                                             <select className="video-form-control" {...register('brand', { required: 'Please specify the brand you are creating for'})}>
                                                                                        <option value=''>My Brands</option>
-                                                                                       <option value="Twiga Foods">Twiga Foods</option>
-                                                                                       <option value="Sheth Naturals">Sheth Naturals</option>
-                                                                                       <option value="Porsche Cayane">Porsche Cayane</option>
-                                                                                       <option value="HoneyCoin">HoneyCoin</option>
+                                                                                       {userBrands && userBrands.length > 0 ?
+                                                                                                 userBrands.map(item => 
+                                                                                                        <option key={item._id} value={item.name}>{item.name}</option>
+                                                                                                  )
+                                                                                                 :
+                                                                                                 <option value="">Please add a Brand</option>
+                                                                                        }
+                                                                                      
                                                                             </select>
                                                                             <span>{errors.brand && errors.brand.message}</span>
                                                                  </div>

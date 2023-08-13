@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { setAllBrandsForAdmin, setAllCreatorsForAdmin, setApprovedRequests } from "../../redux/admin/adminUtils"
 import TaskInitiator from "./TaskInitiator"
 import TaskTarget from "./TaskTarget"
-import CogSpinner from "../CogSpinner"
+import ApproveBtn from "./ApproveBtn"
 const AdminTasksBody = () => {
   const [switchCont, setSwitchCont] = useState(0)
     const dispatch = useDispatch();
@@ -66,7 +66,8 @@ const AdminTasksBody = () => {
                                                                                    <TaskTarget data={item} />
                                                                                    <div className="additionals-plus-actions">
                                                                                                   <div className="actions">
-                                                                                                             <button onClick={() => approve(item._id)} className="approve">{ isLoading ? <CogSpinner />   : <span><PiCheck /></span> } Approve </button>
+                                                                                                          
+                                                                                                             <ApproveBtn fnClick={approve} load={isLoading} id={item._id} />
                                                                                                              <button className="reject"><span><LiaTimesSolid /></span> Reject</button>
                                                                                                   </div>
 

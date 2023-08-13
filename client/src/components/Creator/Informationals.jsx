@@ -13,6 +13,7 @@ import VideoModal from "./VideoModal"
 import { openModal } from "../../redux/utilsSlices"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { BsPatchPlus } from "react-icons/bs"
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
   const { isModalOpen, videos } = useSelector(state => state.utils);
@@ -41,7 +42,7 @@ const Informationals = () => {
                                 </div>
                                { isModalOpen ?  <VideoModal identity={videoId} />: ''}
                                 <div className="creations-row">
-                                       { videos ? 
+                                       { videos.length > 0 ? 
                                             <>
                                               { videos.slice(-3).reverse().map(item =>
                                                 <div className="creation-moja" key={item._id}>
@@ -56,7 +57,15 @@ const Informationals = () => {
                                                  </div>
                                                )}
                                             </>:
-                                            <p>No videos fetched yet.</p>
+                                          
+                                            <div className="video-skeleton">
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}>
+                                                                      <div className="skele-box">
+                                                                                <p>Create your first Video</p>
+                                                                                <span><BsPatchPlus /></span>
+                                                                      </div>
+                                                       </NavLink>
+                                            </div>
                                       }
                                 </div>
 

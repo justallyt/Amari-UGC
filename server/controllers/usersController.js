@@ -218,7 +218,7 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
 
 //Get Submitted Brand Requests
 export const GetUserBrandRequests = asyncHandler(async(req, res) => {
-        const user_requests = await Request.find({ creator: req.user._id}).select('brand');
+        const user_requests = await Request.find({ creator: req.user._id, handledStatus: 'Pending'}).select('brand');
 
         if(user_requests){
               res.status(200).json({ user_requests})

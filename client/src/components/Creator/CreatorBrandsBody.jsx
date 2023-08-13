@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
-import twiga from "../../assets/twiga.png"
-import stanchart from "../../assets/stanchart.png"
+import { IoImagesOutline } from "react-icons/io5"
 import { useGetBrandsQuery } from "../../redux/usersSlice"
 import { useEffect, useState } from "react"
-import { setPulledBrands } from "../../redux/utilsSlices"
+import { setPulledBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
 import RequestBtn from "./RequestBtn"
 import SpinnerData from "../SpinnerData"
 const CreatorBrandsBody = ({ refetchFn }) => {
     const [ myBrands, setMyBrands ] = useState(null)
+    const [ availableBrands, setAvailableBrands] = useState()
     const { profile } = useSelector(state => state.profile)
     const { brands } = useSelector(state => state.utils);
     const dispatch = useDispatch()
@@ -24,12 +24,20 @@ const CreatorBrandsBody = ({ refetchFn }) => {
     //Filter Stuff
    useEffect(() => {
               if(brands){
+                     let things = []
                      profile.brands.forEach(item => {
-                            const stuff =  Object.values(brands).filter(kitu => kitu._id === item)
-                            console.log(stuff)
+                            const stuff =  Object.values(brands).find(kitu => kitu._id === item)
+                            things.push(stuff)
                    })
+                   setMyBrands(things)
+                   dispatch(setUserApprovedBrands(things))
+
+                   const avails = Object.values(brands).filter(obj => things.indexOf(obj) === -1);
+                   setAvailableBrands(avails)
           }
-   })
+
+   }, [brands, setMyBrands, profile])
+
   return (
     <div className="dashboard-body-wrap">
                <div className="dashboard-row">
@@ -44,18 +52,25 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                  <h3>My Current Brands</h3>
 
                                                  <div className="current-brands">
-                                                              <div className="brand-moja">
-                                                                         <div className="brand-image">
-                                                                                    <img src={twiga} alt="" />
-                                                                         </div>
-                                                                         <h4>Twiga Foods</h4>
-                                                              </div>
-                                                              <div className="brand-moja">
-                                                                         <div className="brand-image">
-                                                                                    <img src={stanchart} alt="" />
-                                                                         </div>
-                                                                         <h4>Standard Chartered</h4>
-                                                              </div>
+                                                             { myBrands   ?
+                                                                     <>
+                                                                      { myBrands && myBrands.map(item => 
+                                                                                <div className="brand-moja" key={item._id}>
+                                                                                         <div className="brand-image">
+                                                                                                <img src={item.profilePic.url} alt="" />
+                                                                                          </div>
+                                                                                        <h4>{item.name}</h4>
+                                                                               </div>
+                                                                         )}
+                                                                      </>  :
+                                                                      <div className="brand-moja">
+                                                                                <div className="brand-image">
+                                                                                        <span><IoImagesOutline /></span>
+                                                                                </div>
+                                                                                <h4>No brand yet</h4>
+                                                                     </div>
+                                                               }
+                                                              
                                                  </div>
 
                                                  <div className="available-brands">
@@ -66,7 +81,7 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                                         <SpinnerData />
                                                                   </div>   :
                                                                   <>
-                                                                          { brands != null && Object.values(brands).map(item => 
+                                                                          { availableBrands && availableBrands.map(item => 
                                                                                  <div className="available-brand-moja" key={item.name}>
                                                                                  <div className="left-items">
                                                                                                 <div className="brand-profile">
@@ -77,8 +92,8 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                                                  <div className="right-items">
                                                                                             <RequestBtn id={item._id} refetch={refetchFn} />
                                                                                  </div>
-                                                                       </div>
-                                                                     )}
+                                                                          </div>
+                                                                       )}
                                                               </>
                                                             }
                                                               
