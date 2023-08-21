@@ -36,7 +36,7 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                    setAvailableBrands(avails)
           }
 
-   }, [brands, setMyBrands, profile])
+   }, [brands, setMyBrands, profile, dispatch])
 
   return (
     <div className="dashboard-body-wrap">

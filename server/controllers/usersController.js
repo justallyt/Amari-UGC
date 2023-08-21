@@ -34,7 +34,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
         const userExists = await User.findOne({ email });
 
         if(userExists){
-               res.status(400);
+               res.status(400);  
                throw new Error("User Account already exists");
         }
         
@@ -284,7 +284,7 @@ export const GetAllRequestsToAdmin = asyncHandler(async(req, res) => {
 //Approve Creator Requests
 export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
          const { id } = req.body;
-         const admin_id = req.user._id
+         const admin_id = req.user._id; 
 
          const request_id = new mongoose.Types.ObjectId(`${id}`);
 
@@ -294,18 +294,31 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
          })
 
          if(update_request){
-                 res.status(200).json({update_request})
                 //Update Brands for A Creator
-                const updateCreator = await User.findByIdAndUpdate(update_request.creator, {
-                       $push: { brands: update_request.brand}
-                })
-                //Update Creators for A Brand
-                const updateBrand = await User.findByIdAndUpdate(update_request.brand, {
-                     $push: { creators: update_request.creator}
-                })
+                const existingCreators = await User.findById(update_request.creator);
+                const existingBrands = await User.findById(update_request.brand)
+                console.log(existingBrands)
+                const  creatorCheckTest = existingCreators.brands.some(item => item === update_request.brand);
+                const brandCheckTest = existingBrands.creators.some(item => item === update_request.creator);
+
+                if(!creatorCheckTest){ //checks if brand has already been added to a creator
+                      //update creator brand list
+                     const updateCreator = await User.findByIdAndUpdate(update_request.creator, {
+                            $push: { brands: update_request.brand}
+                     })
+                }
+                if(!brandCheckTest){ //checks if creator already added to a brand
+                       //Update Creators for A Brand
+                      const updateBrand = await User.findByIdAndUpdate(update_request.brand, {
+                           $push: { creators: update_request.creator}
+                      })
+                }
+                
+              // res.status(200).json({ message: 'Approval Successful'})
                  
                 //Create a notification for the above actions
                 const approval_msg = `You have been approved to work with ${updateBrand.name}`
+                console.log(approval_msg)
                 const notifications = await Notifications.create({
                      notification_type: 'Approval',
                      sender: {
@@ -316,7 +329,7 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
                             receipientMsg: approval_msg
                      }
                })
-
+              console.log(notifications)
          }else{
                 res.status(500).json({ error: 'Failed to approve request'})
          }
