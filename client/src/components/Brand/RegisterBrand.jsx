@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Footer from "../../components/Footer"
 import { VscEye } from "react-icons/vsc"
 import { VscEyeClosed } from "react-icons/vsc"
 import { NavLink, useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useCreateUserMutation } from "../../redux/usersSlice";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setCredentials } from "../../redux/authSlice"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
@@ -16,15 +16,6 @@ const RegisterBrand = () => {
 
  const navigate = useNavigate();
  const dispatch = useDispatch();
-
- const { userInfo } = useSelector(state => state.auth);
-
- useEffect(()=> {
-        if(userInfo){
-             navigate(`/brand/${userInfo.id}`)
-        }
-}, [navigate, userInfo])
-
 
  const createBrand = async (data) => {
   if(data.terms === true){

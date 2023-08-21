@@ -1,9 +1,9 @@
 import { VscEye, VscEyeClosed } from "react-icons/vsc"
 import Footer from "../Footer"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useCreateUserMutation } from "../../redux/usersSlice"
 import { setCredentials } from "../../redux/authSlice"
 import { Toaster } from "react-hot-toast"
@@ -14,18 +14,9 @@ const RegisterCreator = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
-   const { userInfo } = useSelector(state => state.auth);
-
    const [ registerconsumer, { isLoading} ] = useCreateUserMutation();
 
    const { register, handleSubmit, formState: { errors }, reset } = useForm();
-   
-
-   useEffect(()=> {
-       if(userInfo){
-            navigate(`/creator/${userInfo.id}`)
-       }
-   }, [navigate, userInfo])
 
 
    const createConsumer = async (data) => {
@@ -35,7 +26,8 @@ const RegisterCreator = () => {
            try {
                 const res = await registerconsumer(data).unwrap();
                 dispatch(setCredentials({...res}));
-                navigate(`/${res.role.toLowerCase}/${res.username === 'null' ? res.id : res.username}`);
+                console.log(res)
+                navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ? res.id : res.username}`);
            } catch (err) {
                  console.log(err);
            }

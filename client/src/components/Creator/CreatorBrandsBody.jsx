@@ -52,9 +52,9 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                  <h3>My Current Brands</h3>
 
                                                  <div className="current-brands">
-                                                             { myBrands   ?
+                                                             { myBrands && myBrands.length >0  ?
                                                                      <>
-                                                                      { myBrands && myBrands.map(item => 
+                                                                      {  myBrands.map(item => 
                                                                                 <div className="brand-moja" key={item._id}>
                                                                                          <div className="brand-image">
                                                                                                 <img src={item.profilePic.url} alt="" />
@@ -81,7 +81,9 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                                         <SpinnerData />
                                                                   </div>   :
                                                                   <>
-                                                                          { availableBrands && availableBrands.map(item => 
+                                                                      { availableBrands && availableBrands.length > 0 ? 
+                                                                           <>
+                                                                                  { availableBrands && availableBrands.map(item => 
                                                                                  <div className="available-brand-moja" key={item.name}>
                                                                                  <div className="left-items">
                                                                                                 <div className="brand-profile">
@@ -93,7 +95,10 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                                                             <RequestBtn id={item._id} refetch={refetchFn} />
                                                                                  </div>
                                                                           </div>
-                                                                       )}
+                                                                        )}
+                                                                           </>
+                                                                       : <p>You&apos;ve probable subscribed to all of them. Stay tuned.</p>
+                                                                       }
                                                               </>
                                                             }
                                                               

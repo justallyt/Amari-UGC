@@ -50,6 +50,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                                message: "Account created successfully",
                                id: user._id,
                                role: user.role,
+                               username: user.username
                         })
                }else{
                       res.status(400);
@@ -69,6 +70,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                               name: user.name,
                               email: user.email,
                               role: user.role,
+                              username: user.username
                        })
                }else{
                          res.status(400);

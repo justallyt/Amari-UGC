@@ -62,8 +62,11 @@
 }
 .available-brands{
     margin-top: 40px;
+    min-height: 300px;;
 }
-
+.available-brands p{
+     margin: 20px 0;
+}
 .available-brand-moja{
      margin: 20px 0;
      display: flex;

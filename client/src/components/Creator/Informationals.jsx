@@ -42,7 +42,7 @@ const Informationals = () => {
                                 </div>
                                { isModalOpen ?  <VideoModal identity={videoId} />: ''}
                                 <div className="creations-row">
-                                       { videos.length > 0 ? 
+                                       { videos && videos.length > 0 ? 
                                             <>
                                               { videos.slice(-3).reverse().map(item =>
                                                 <div className="creation-moja" key={item._id}>
