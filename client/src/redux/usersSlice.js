@@ -20,7 +20,8 @@ export const usersSlice = apiSlice.injectEndpoints({
                   query: () => ({
                           url: 'user/profile',
                           method: "GET",
-                  })
+                  }),
+                  providesTags: ['UserProfile']
             }), 
             updateUserProfile: builder.mutation({
                    query: (payload) => ({
@@ -60,6 +61,13 @@ export const usersSlice = apiSlice.injectEndpoints({
               //get all admin requests
                
               //get all unread notifications
+              getUserNotifications: builder.query({
+                     query: () => ({
+                             url:  '/user/notifications',
+                             method: 'GET'
+                     })
+              }),
+              
         })
 })
 

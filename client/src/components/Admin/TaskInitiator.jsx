@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 
 const TaskInitiator = ({ data }) => {
    const { allCreators } = useSelector(state => state.admin);
-   const initiator = allCreators.find(item => item._id === data.creator)
+   const initiator =allCreators !== null ?  allCreators.find(item => item._id === data.creator) : []
   return (
     <div className="initiator">
          <h3>Initiator</h3>

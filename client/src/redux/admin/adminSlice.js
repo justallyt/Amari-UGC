@@ -39,7 +39,7 @@ export const adminSlice = apiSlice.injectEndpoints({
                            method: 'PUT',
                            body: payload
                    }),
-                   invalidatesTags: ['Request']
+                   invalidatesTags: ['Request', 'UserProfile']
              })
       })
 })

@@ -7,8 +7,11 @@ import { setAllBrandsForAdmin, setAllCreatorsForAdmin, setApprovedRequests } fro
 import TaskInitiator from "./TaskInitiator"
 import TaskTarget from "./TaskTarget"
 import ApproveBtn from "./ApproveBtn"
+import toast, { Toaster } from "react-hot-toast"
+
 const AdminTasksBody = () => {
   const [switchCont, setSwitchCont] = useState(0)
+  const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
 
     const { data: brands } = useGetAllBrandsQuery({  refetchOnMountOrArgChange: true })
@@ -24,13 +27,16 @@ const AdminTasksBody = () => {
     const { adminRequests } = useSelector(state => state.admin);
     const { approvedRequests } = useSelector(state => state.admin)
     //Approve a Creator
-    const [ approveCreator, { isLoading }] = useApproveCreatorMutation()
+    const [ approveCreator] = useApproveCreatorMutation()
 
     const approve = async (id) =>{
+            setLoading(true)
             try {
                   const res = await approveCreator({id}).unwrap()
-
-                  console.log(res)
+                  if(res){
+                       toast.success(`${res.message}`, { id: 'Approval Successful'})
+                       setLoading(false)
+                  }  
             } catch (error) {
                    console.log(error)
             }
@@ -41,6 +47,7 @@ const AdminTasksBody = () => {
     }
   return (
     <div className="admin-tasks-body">
+               <Toaster />
               <div className="admin-inner">
                           <div className="tasks-body-content">
                                       <h2>Tasks Management</h2>
@@ -67,7 +74,7 @@ const AdminTasksBody = () => {
                                                                                    <div className="additionals-plus-actions">
                                                                                                   <div className="actions">
                                                                                                           
-                                                                                                             <ApproveBtn fnClick={approve} load={isLoading} id={item._id} />
+                                                                                                             <ApproveBtn fnClick={approve} load={loading} id={item._id} />
                                                                                                              <button className="reject"><span><LiaTimesSolid /></span> Reject</button>
                                                                                                   </div>
 

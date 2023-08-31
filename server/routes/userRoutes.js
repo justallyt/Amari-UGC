@@ -13,7 +13,8 @@ import {
      GetAllCreators,
      GetAllBrandsForCreators,
      ApproveCreatorRequest,
-     ApprovedRequests
+     ApprovedRequests,
+     GetUserNotifications
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
@@ -28,9 +29,7 @@ router.put('/update-profile', protect, upload.single('profileImage'), UpdateProf
 router.get('/getbrandsforcreators', protect, GetAllBrandsForCreators);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
-
-
-
+router.get('/notifications', protect, GetUserNotifications);
 
 //Admin Routes
 router.get('/get-all-requests', protect, GetAllRequestsToAdmin)

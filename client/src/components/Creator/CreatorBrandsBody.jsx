@@ -14,7 +14,7 @@ const CreatorBrandsBody = ({ refetchFn }) => {
     const dispatch = useDispatch()
     //get brands
     const { data, isLoading } = useGetBrandsQuery({  refetchOnMountOrArgChange: true })
-
+    
     useEffect(()=>{
            if(data){
                    dispatch(setPulledBrands({...data.brands}))
@@ -97,7 +97,7 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                                           </div>
                                                                         )}
                                                                            </>
-                                                                       : <p>You&apos;ve probable subscribed to all of them. Stay tuned.</p>
+                                                                       : <p>You&apos;ve probably subscribed to all of them. Stay tuned.</p>
                                                                        }
                                                               </>
                                                             }

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 
 const TaskTarget = ({ data }) => {
     const { allBrands } = useSelector(state => state.admin)
-    const target = allBrands.find(item => item._id === data.brand)
+    const target = allBrands !== null ? allBrands.find(item => item._id === data.brand) : []
   return (
     <div className="target">
          <h3>Target</h3>

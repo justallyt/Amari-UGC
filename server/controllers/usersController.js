@@ -294,10 +294,11 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
          })
 
          if(update_request){
+                res.status(200).json({ message: 'Approval Successful'})
                 //Update Brands for A Creator
                 const existingCreators = await User.findById(update_request.creator);
                 const existingBrands = await User.findById(update_request.brand)
-                console.log(existingBrands)
+               
                 const  creatorCheckTest = existingCreators.brands.some(item => item === update_request.brand);
                 const brandCheckTest = existingBrands.creators.some(item => item === update_request.creator);
 
@@ -313,12 +314,10 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
                            $push: { creators: update_request.creator}
                       })
                 }
-                
-              // res.status(200).json({ message: 'Approval Successful'})
                  
                 //Create a notification for the above actions
-                const approval_msg = `You have been approved to work with ${updateBrand.name}`
-                console.log(approval_msg)
+                const approval_msg = `You have been approved to work with ${existingBrands.name}`
+                
                 const notifications = await Notifications.create({
                      notification_type: 'Approval',
                      sender: {
@@ -329,7 +328,7 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
                             receipientMsg: approval_msg
                      }
                })
-              console.log(notifications)
+       
          }else{
                 res.status(500).json({ error: 'Failed to approve request'})
          }
@@ -344,4 +343,17 @@ export const ApprovedRequests = asyncHandler(async(req, res) => {
        }else{
               res.status(500).json({ message: 'Sorry, no requests were received'})
        }
+})
+
+
+// Get user Notifications
+export const GetUserNotifications = asyncHandler(async(req, res) => {
+        console.log(req.user._id)
+        const notifications = await Notifications.find({ "receipient.receipientId": req.user._id})
+
+        if(notifications){
+              res.status(201).json({ notifications })
+        }else{
+              res.status(500).json({ message: 'Sorry, no notifications found' })
+        }
 })
