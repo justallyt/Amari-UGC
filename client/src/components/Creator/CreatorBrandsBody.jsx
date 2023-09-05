@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { IoImagesOutline } from "react-icons/io5"
-import { useGetBrandsQuery } from "../../redux/usersSlice"
+import { useGetBrandsQuery, useGetUserProfileQuery } from "../../redux/usersSlice"
 import { useEffect, useState } from "react"
 import { setPulledBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
 import RequestBtn from "./RequestBtn"
 import SpinnerData from "../SpinnerData"
+import { setProfile } from "../../redux/profileSlice"
 const CreatorBrandsBody = ({ refetchFn }) => {
     const [ myBrands, setMyBrands ] = useState(null)
     const [ availableBrands, setAvailableBrands] = useState()
@@ -13,13 +14,16 @@ const CreatorBrandsBody = ({ refetchFn }) => {
     const { brands } = useSelector(state => state.utils);
     const dispatch = useDispatch()
     //get brands
-    const { data, isLoading } = useGetBrandsQuery({  refetchOnMountOrArgChange: true })
-    
+    const { data:allbrands, isLoading } = useGetBrandsQuery({  refetchOnMountOrArgChange: true })
+    const { data:refetched_profile } = useGetUserProfileQuery({ refetchOnMountOrArgChange: true})
     useEffect(()=>{
-           if(data){
-                   dispatch(setPulledBrands({...data.brands}))
+           if(allbrands){
+                   dispatch(setPulledBrands({...allbrands.brands}))
            }
-    }, [data, dispatch])
+           if(refetched_profile) {
+              dispatch(setProfile({...refetched_profile.user}))
+           }
+    }, [allbrands,refetched_profile, dispatch])
     
     //Filter Stuff
    useEffect(() => {

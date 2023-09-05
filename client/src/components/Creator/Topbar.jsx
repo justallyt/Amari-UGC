@@ -5,24 +5,35 @@ import { BsEnvelope } from "react-icons/bs"
 import { FaRegUser } from "react-icons/fa"
 import { NavLink, useNavigate} from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
-import { useLogoutUserMutation } from "../../redux/usersSlice"
+import { useGetUserNotificationsQuery, useLogoutUserMutation } from "../../redux/usersSlice"
 import { clearCredentials } from "../../redux/authSlice"
-import { clearProfile } from "../../redux/profileSlice"
+import { clearProfile, setNotifications } from "../../redux/profileSlice"
 import { useSelector, useDispatch } from "react-redux"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 import profileImg from "../../assets/dummyprofile.png"
 import { apiSlice } from "../../redux/apiSlice"
 import { clearUtils } from "../../redux/utilsSlices"
+import { CgClose } from "react-icons/cg"
 
 const Topbar = ({ user}) => {
   const [ status, setStatus ] = useState(false)
   const [wait, setWait] = useState(false);
   const boxRef = useRef()
+  const {userInfo} = useSelector(state=> state.auth);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+    //get user notifications
+    const { data, isLoading} = useGetUserNotificationsQuery();
+  
   useEffect(() => {
            document.addEventListener("click", handleClick, true)
-  }, [])
+
+           if(data && !isLoading){
+                  dispatch(setNotifications([...data.notifications]))
+           }
+  }, [data, dispatch, isLoading])
 
   const handleClick = (e) => {
           if(boxRef.current && !boxRef.current.contains(e.target)){
@@ -32,10 +43,7 @@ const Topbar = ({ user}) => {
           }
   }
  
-  const {userInfo} = useSelector(state=> state.auth);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   //Logout User
 const [ logoutConsumer ] = useLogoutUserMutation();
 
@@ -58,6 +66,8 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                toast.error("Logout Failed.Please try again");
          }
   }
+
+
   return (
     <div className="topbar-section">
                   <Toaster />
@@ -69,8 +79,35 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                   <div className="notification-profile">
                              <div className="notification">
                                         <span><IoMdNotificationsOutline /></span>
-                                        <span className="red-dot"></span>
+                                        <div className="red-dot"></div>
                              </div>
+                             <div className="notification-fly-box">
+                                       <div className="box-header">
+                                                  <h3>Notifications</h3>
+                                                  <span><CgClose /></span>
+                                       </div>
+                                       <div className="box-body">
+                                                   <div className="box-notification-moja">
+                                                              <div className="box-profile">
+                                                                        <span className="approval">A</span>
+                                                              </div>
+                                                              <div className="box-texts">
+                                                                       <p>You have been approved to work with Unilever</p>
+                                                                       <span>24 May at 1.38pm</span>
+                                                              </div>
+                                                   </div>
+                                                   <div className="box-notification-moja">
+                                                              <div className="box-profile">
+                                                                        <span className="request">R</span>
+                                                              </div>
+                                                              <div className="box-texts">
+                                                                       <p>You have requested to work with Unilever</p>
+                                                                       <span>24 May at 1.38pm</span>
+                                                              </div>
+                                                   </div>
+                                       </div>
+                             </div>
+
                              <div className="profile-part" onClick={() => setStatus(true)}>
                                          <div className="profile-image">
                                                    { user !== null ? 

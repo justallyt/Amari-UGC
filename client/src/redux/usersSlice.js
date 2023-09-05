@@ -58,7 +58,6 @@ export const usersSlice = apiSlice.injectEndpoints({
                              method: 'GET'
                       })
               }),
-              //get all admin requests
                
               //get all unread notifications
               getUserNotifications: builder.query({
@@ -79,5 +78,6 @@ export const {
        useLogoutUserMutation,
        useRequestCreationPermissionMutation,
        useGetBrandsQuery,
-       useCheckRequestsQuery
+       useCheckRequestsQuery,
+       useGetUserNotificationsQuery
 } = usersSlice;

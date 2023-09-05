@@ -192,7 +192,7 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
          const brand_name = await User.findById(brand_id).select('name')
          const admin_id = await User.find({ role: "Admin"}).select('_id');
          const admin_message = `${creator_name.name} requests to work with ${brand_name.name}`
-
+         
          try {
               const creator_request = await Request.create({ creator: creator_id, brand: brand_id, message: admin_message})
               
