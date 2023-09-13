@@ -14,3 +14,57 @@
       color: rgb(94, 94, 94);
       font-size: 18px;
 }
+
+.admin-settings-types{
+      background: white;
+      margin-top: 20px;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+}
+
+.types-header{
+        display: flex;
+        border-bottom: 1px solid rgba(219, 226, 227, 0.549);
+}
+.types-header .type{
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 20px;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;;
+      cursor: pointer;
+      position: relative;
+}
+.types-header .type::after{
+       content: "";
+       position: absolute;
+       background-color: var(--main-color);
+       width: 0%;
+       height: 2px;
+       left: 0;
+       bottom: 0;
+}
+.types-header .type.active{
+        background: rgba(214, 241, 247, 0.338)
+}
+.types-header .type.active::after{
+       width:100%;
+}
+.types-header .type:hover{
+       background: rgba(240, 243, 244, 0.495);
+}
+.types-header .type span{
+      display: flex;
+      margin-top: 3px;
+}
+
+.settings-tabs-container{
+      padding: 20px;
+}
