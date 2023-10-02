@@ -1,9 +1,8 @@
 import { PiCheck } from "react-icons/pi"
 import { LiaTimesSolid } from "react-icons/lia"
-import { useDispatch, useSelector } from "react-redux"
-import { useApproveCreatorMutation, useGetAllBrandsQuery, useGetAllCreatorsQuery, useGetApprovedCreatorsQuery } from "../../redux/admin/adminSlice"
-import { useEffect, useState } from "react"
-import { setAllBrandsForAdmin, setAllCreatorsForAdmin, setApprovedRequests } from "../../redux/admin/adminUtils"
+import { useSelector } from "react-redux"
+import { useApproveCreatorMutation } from "../../redux/admin/adminSlice"
+import { useState } from "react"
 import TaskInitiator from "./TaskInitiator"
 import TaskTarget from "./TaskTarget"
 import ApproveBtn from "./ApproveBtn"
@@ -12,17 +11,6 @@ import toast, { Toaster } from "react-hot-toast"
 const AdminTasksBody = () => {
   const [switchCont, setSwitchCont] = useState(0)
   const [loading, setLoading] = useState(false)
-    const dispatch = useDispatch();
-
-    const { data: brands } = useGetAllBrandsQuery({  refetchOnMountOrArgChange: true })
-    const { data: creators } = useGetAllCreatorsQuery({  refetchOnMountOrArgChange: true })
-    const { data: approved } = useGetApprovedCreatorsQuery({ refetchOnMountOrArgChange: true});
-
-    useEffect(() => {
-               if(brands) dispatch(setAllBrandsForAdmin([...brands.all_brands]))
-               if(creators) dispatch(setAllCreatorsForAdmin([...creators.all_creators]))
-               if(approved) dispatch(setApprovedRequests([...approved.requests]))
-    }, [brands, creators,approved, dispatch])
 
     const { adminRequests } = useSelector(state => state.admin);
     const { approvedRequests } = useSelector(state => state.admin)

@@ -68,3 +68,157 @@
 .settings-tabs-container{
       padding: 20px;
 }
+
+/* Account Profile Styles */
+.wrapper-split{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 30px;
+      margin: 10px;
+}
+
+.wrapper-split .profile-row,
+.wrapper-split .password-row,
+.personal-details-row{
+      padding: 30px;
+      border-radius: 12px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      -ms-border-radius: 12px;
+      -o-border-radius: 12px;
+      box-shadow: 0px 0px 3px  -1px rgb(210, 209, 209);
+      position: relative;
+}
+
+.profile-row h3,
+.password-row h3,
+.personal-details-row h3{
+      font-family: "Madera-Light";
+      font-size: 18px;
+}
+.profile-row p,
+.password-row p,
+.personal-details-row p{
+      color:rgb(94, 94, 94);
+}
+.profile-row .upload-profile-box{
+        margin: 30px 0;
+}
+.upload-profile-box .upload-image{
+       width: 100px;
+       height: 100px;
+       margin: 20px auto;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       overflow: hidden;
+}
+.upload-profile-box .upload-btns{
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+}
+
+.upload-btns button{
+      font-family: "Madera-Regular";
+      width: 90px;
+      height: 40px;
+      padding-bottom: 2px;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+      cursor: pointer;
+}
+.upload-btns button:nth-child(1){
+      background: var(--main-color);
+      color: white;
+      border:none;
+}
+.upload-btns button:nth-child(2){
+      border: 2px solid rgba(255, 71, 111, 0.836);
+      background: transparent;
+      color: rgb(255, 75, 114);
+}
+.profile-row .profile-terms{
+      text-align: center;
+      margin-bottom: 10px;
+}
+.password-form{
+      margin-top: 20px;
+}
+.input-row{
+       margin-bottom: 10px;;
+}
+.input-row label{
+        font-size: 15px;
+        display: block;
+        margin-bottom: 5px;
+}
+.input-row .input-control{
+       width: 100%;
+       height: 55px;
+       border: 1px solid gainsboro;
+       border-radius: 7px;
+       -webkit-border-radius: 7px;
+       -moz-border-radius: 7px;
+       -ms-border-radius: 7px;
+       -o-border-radius: 7px;
+       outline: none;
+       padding-left: 10px;
+       font-size: 16px;
+}
+.input-control:focus{
+       border: 1px solid var(--main-color);
+}
+.password-row .password-check{
+       width: 30px;
+       height: 30px;
+       position: absolute;
+       right: 30px;
+       top: 30px;
+       cursor: pointer;
+}
+
+.password-check span{
+       font-size: 24px;
+}
+
+.personal-details-row{
+      margin-top: 30px;
+}
+.personal-details-grid{
+       display: grid;
+       margin-top: 20px;
+       grid-template-columns: repeat(2,1fr);
+       column-gap: 30px;
+}
+.save-btn{
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: flex-end;
+}
+.save-btn button{
+       width: 100px;
+       font-family: "Madera-Regular";
+       height: 45px;
+       border-radius: 7px;
+       -webkit-border-radius: 7px;
+       -moz-border-radius: 7px;
+       -ms-border-radius: 7px;
+       -o-border-radius: 7px;
+       border: none;
+       cursor: pointer;
+}
+.save-btn button:nth-child(1){
+      background: var(--main-color);
+      color: white;
+}
+.save-btn button:nth-child(2){
+      background: rgba(250, 95, 128, 0.822);
+      color: whitesmoke;
+}

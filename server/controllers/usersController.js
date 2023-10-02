@@ -348,7 +348,6 @@ export const ApprovedRequests = asyncHandler(async(req, res) => {
 
 // Get user Notifications
 export const GetUserNotifications = asyncHandler(async(req, res) => {
-        console.log(req.user._id)
         const notifications = await Notifications.find({ "receipient.receipientId": req.user._id})
 
         if(notifications){

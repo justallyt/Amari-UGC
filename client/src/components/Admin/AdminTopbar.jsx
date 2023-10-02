@@ -11,7 +11,7 @@ import { useLogoutUserMutation } from "../../redux/usersSlice"
 import { clearCredentials } from "../../redux/authSlice"
 import { clearProfile } from "../../redux/profileSlice"
 import { apiSlice } from "../../redux/apiSlice"
-import { setAdminRequests } from "../../redux/admin/adminUtils"
+import { clearAllUtils, setAdminRequests } from "../../redux/admin/adminUtils"
 import Spinner from "../Spinner"
 // import { BsChatRightText } from "react-icons/bs"
 // import { AiOutlineShoppingCart } from "react-icons/ai"
@@ -52,9 +52,10 @@ const AdminTopbar = () => {
               setTimeout(() => {
                      setWait(false)
                      dispatch(clearCredentials({...res}));
-                     dispatch(clearProfile())
-                     dispatch(apiSlice.util.resetApiState())
-                     navigate('/user/login')
+                     dispatch(clearProfile());
+                     dispatch(clearAllUtils());
+                     dispatch(apiSlice.util.resetApiState());
+                     navigate('/user/login');
               }, 1500)
 
         } catch (error) {

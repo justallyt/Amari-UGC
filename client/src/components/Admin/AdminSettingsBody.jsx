@@ -2,6 +2,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { FaWpforms } from "react-icons/fa6"
 import { GrShieldSecurity } from 'react-icons/gr'
+import AdminAccount from "./Settings-Tabs/AdminAccount"
 
 const AdminSettingsBody = () => {
   return (
@@ -33,7 +34,7 @@ const AdminSettingsBody = () => {
 
 
                                      <div className="settings-tabs-container">
-                                              
+                                                <AdminAccount />
                                      </div>
                          </div>
               </div>
