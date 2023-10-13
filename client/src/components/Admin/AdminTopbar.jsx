@@ -64,7 +64,8 @@ const AdminTopbar = () => {
   }
 
   const { adminRequests }  = useSelector(state => state.admin)
-  const { userInfo } = useSelector(state => state.auth)
+  const { profile } = useSelector(state => state.profile)
+  console.log(profile)
   return (
     <div className="topbar">
                 <div className="admin-inner">
@@ -72,7 +73,7 @@ const AdminTopbar = () => {
                          { wait ?  <Spinner /> : ''}
                            <div className="topbar-content">
                                        <div className="topbar-left">
-                                                 <NavLink to={`/admin/${userInfo.id}`}>
+                                                 <NavLink to={`/admin/${profile.username !== 'null' ? profile.username : profile._id}`}>
                                                              <div className="logo">
                                                                       <img src={logo} alt="Logo" />
                                                              </div>
@@ -90,23 +91,31 @@ const AdminTopbar = () => {
                                                   {/* <span><BsChatRightText /></span>
                                                   <span><AiOutlineShoppingCart /></span> */}
 
-                                                  <div className="admin-profile">
-                                                              <img src={dummy} alt="profile image" onClick={() => setStatus(true)} />
-
+                                                  <div className="admin-profile" onClick={() => setStatus(true)}>
+                                                              { profile !== null ? 
+                                                                    <img src={profile.profilePic.url !== 'null' ? profile.profilePic.url : dummy} alt="profile image"  />
+                                                                   :
+                                                                   <img src={dummy} alt="profile image"  />
+                                                               }
+                                                               
                                                               <div className={ status ? "topbar-box active" : "topbar-box"} ref={adminBoxRef}>
                                                                        <h2>Admin Profile</h2>
 
                                                                        <div className="profile-n-name">
                                                                                  <div className="photo">
-                                                                                            <img src={dummy} alt="" />
+                                                                                             { profile !== null ? 
+                                                                                                     <img src={profile.profilePic.url !== 'null' ? profile.profilePic.url : dummy} alt="profile image"  />
+                                                                                               :
+                                                                                                     <img src={dummy} alt="profile image"  />
+                                                                                                }
                                                                                  </div>
                                                                                  <div className="name-email">
-                                                                                          <h3>Albert Okundi</h3>
-                                                                                          <p><span><BsEnvelope /></span> platforms@amariconsult.com</p>
+                                                                                          <h3>{profile.name}</h3>
+                                                                                          <p><span><BsEnvelope /></span> {profile.email}</p>
                                                                                  </div>
                                                                        </div>
                                                                        <div className="topbar-links">
-                                                                                  <NavLink to={'/'}>
+                                                                                  <NavLink to={`/admin/settings`}>
                                                                                             <div className="user-icon">
                                                                                                        <FaUserAlt />
                                                                                             </div>
@@ -115,7 +124,7 @@ const AdminTopbar = () => {
                                                                                                       <p>Account Settings</p>
                                                                                             </div>
                                                                                   </NavLink>
-                                                                                  <NavLink to={'/'}>
+                                                                                  <NavLink to={'/admin/tasks'}>
                                                                                             <div className="user-icon">
                                                                                                        <VscExtensions />
                                                                                             </div>

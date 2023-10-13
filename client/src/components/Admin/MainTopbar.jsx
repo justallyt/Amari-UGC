@@ -12,8 +12,7 @@ const MainTopbar = () => {
      const [status, setStatus] = useState(false)
 
      const toggleSidebar = () => setStatus(!status)
-     const { userInfo } = useSelector(state => state.auth)
-
+     const { profile } = useSelector(state => state.profile)
      const { data: brands } = useGetAllBrandsQuery({  refetchOnMountOrArgChange: true })
      const { data: creators } = useGetAllCreatorsQuery({  refetchOnMountOrArgChange: true })
      const { data: approved } = useGetApprovedCreatorsQuery({ refetchOnMountOrArgChange: true});
@@ -29,7 +28,7 @@ const MainTopbar = () => {
     <div className="main-topbar">
                <div className="admin-inner">
                      <ul className={ status ? 'active' : ''}>
-                            <li><NavLink to={`/admin/${userInfo.id}`}><span><RxDashboard /></span> Dashboard</NavLink></li>
+                            <li><NavLink to={`/admin/${profile.username !== 'null' ? profile.username : profile._id}`}><span><RxDashboard /></span> Dashboard</NavLink></li>
                             <li><NavLink to={'/admin/brands'}><span><IoBusinessOutline /></span>Brands</NavLink></li>
                             <li><NavLink to={'/admin/creators'}><span><BsPeople /></span>Creators</NavLink></li>
                             <li><NavLink to={'/admin/transactions'}><span><BsCreditCard2Front /></span>Transactions</NavLink></li>

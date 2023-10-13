@@ -21,6 +21,7 @@ const AdminDashboardBody = () => {
           dispatch(setProfile({...profile.user}))
      }
   }, [profile, dispatch, isLoading])
+
   return (
     <div className="admin-dashboard-wrapper">
                  <AdminTopbar />
