@@ -7,8 +7,20 @@ import AnalyticsSection from "./AnalyticsSection"
 import TransactionList from "./TransactionList"
 import Footer from "../Footer"
 import { useSelector } from "react-redux"
+import { useGetAdminProfileQuery } from "../../redux/admin/adminSlice"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { setProfile } from "../../redux/profileSlice"
 const AdminDashboardBody = () => {
   const { adminRequests } = useSelector(state => state.admin)
+ const dispatch = useDispatch();
+  const { data: profile, isLoading } = useGetAdminProfileQuery({ refetchOnMountOrArgChange: true})
+
+  useEffect(() => {
+     if(!isLoading && profile){
+          dispatch(setProfile({...profile.user}))
+     }
+  }, [profile, dispatch, isLoading])
   return (
     <div className="admin-dashboard-wrapper">
                  <AdminTopbar />

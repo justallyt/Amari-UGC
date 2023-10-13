@@ -170,6 +170,7 @@
        outline: none;
        padding-left: 10px;
        font-size: 16px;
+       font-family: "Madera-Regular";
 }
 .input-control:focus{
        border: 1px solid var(--main-color);
@@ -203,9 +204,29 @@
       justify-content: flex-end;
 }
 .save-btn button{
+      font-family: "Madera-Regular";
+      width: 150px;
+      height: 45px;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+      background: rgb(23, 207, 124);
+      border: none;
+      color: whitesmoke;
+      font-size: 15px;
+      padding-bottom: 3px;
+      cursor: pointer;
+}
+.upload-btns p,
+.upload-btn{
        width: 100px;
        font-family: "Madera-Regular";
        height: 45px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
        border-radius: 7px;
        -webkit-border-radius: 7px;
        -moz-border-radius: 7px;
@@ -213,12 +234,14 @@
        -o-border-radius: 7px;
        border: none;
        cursor: pointer;
+       font-size: 14px;
 }
-.save-btn button:nth-child(1){
+.upload-btns .upload-btn p,
+.upload-btn{
       background: var(--main-color);
-      color: white;
+      color: white !important;
 }
-.save-btn button:nth-child(2){
+.upload-btns p{
       background: rgba(250, 95, 128, 0.822);
       color: whitesmoke;
 }

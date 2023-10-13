@@ -2,6 +2,13 @@ import { apiSlice } from "../apiSlice";
 
 export const adminSlice = apiSlice.injectEndpoints({
       endpoints: (builder) => ({
+            //get profile details
+            getAdminProfile: builder.query({
+                   query: () => ({
+                        url: `user/profile`,
+                        method: 'GET'
+                   })
+            }),
              //get all admin requests
              getAllRequests: builder.query({
                     query: () => ({
@@ -45,6 +52,7 @@ export const adminSlice = apiSlice.injectEndpoints({
 })
 
 export const {
+        useGetAdminProfileQuery,
        useGetAllRequestsQuery,
        useGetAllBrandsQuery,
        useGetAllCreatorsQuery,

@@ -9,6 +9,7 @@ import { clearProfilePic, setProfile } from "../../../redux/profileSlice"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../../Spinner"
 import { updateUsername } from "../../../redux/authSlice"
+
 const ProfileCard = () => {
   const { profile } = useSelector(state => state.profile);
   const [ userImage, setUserImage ] = useState([])
@@ -36,8 +37,6 @@ const ProfileCard = () => {
          setStatus(false)
          dispatch(clearProfilePic())
   }
-
-  
 
   useEffect(() => {
          if(userImage.length < 1) return;
