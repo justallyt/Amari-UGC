@@ -39,6 +39,4 @@ router.get('/admin-notifications', protect, GetAdminNotifications);
 router.put('/approve-creator', protect, ApproveCreatorRequest);
 router.get('/approved-requests', protect, ApprovedRequests);
 
-
-
 export default router;

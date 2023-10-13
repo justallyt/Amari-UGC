@@ -3,7 +3,11 @@ import profileImg from "../../../assets/dummyprofile.png"
 import { BsEyeSlash, BsEye } from "react-icons/bs"
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from 'react-hook-form'
-import { clearProfilePic } from "../../../redux/profileSlice";
+import { clearProfilePic, setProfile } from "../../../redux/profileSlice";
+import toast, { Toaster} from "react-hot-toast";
+import { useUpdateAdminProfileMutation } from "../../../redux/admin/adminSlice";
+import Spinner from "../../Spinner";
+import { updateUsername } from "../../../redux/authSlice";
 const AdminAccount = () => {
   const [ view, setView] = useState(false);
   const [ status, setStatus] = useState(false)
@@ -45,9 +49,32 @@ useEffect(() => {
   setImageUrl(profileUrl)
 
 }, [userImage])
+
+const [ updateAdminProfile, { isLoading }] = useUpdateAdminProfileMutation();
+const updateAdmin = async (data) => {
+       if(data.password === data.confirm_pass){
+             const formData = new FormData();
+             formData.append('data', JSON.stringify(data));
+             formData.append('profileImage', data.profileImage[0]);
+
+             try {
+                    const res = await updateAdminProfile(formData).unwrap()
+                    
+                    dispatch(setProfile({ ...res.info }))
+                    dispatch(updateUsername(res.info.username))
+                    toast.success(res.message, { id: 'admin-update-success'})
+             }catch{
+                    toast.error("Update failed. Please try again.", { id: 'admin-update-error'})
+             }
+       }else{
+             toast.error('Sorry, passwords do not match.', { id: 'password-error'})
+       }
+}
   return (
     <div className="account-wrapper">
-                <form>
+                <Toaster />
+                { isLoading ? <Spinner /> : ''}
+                <form onSubmit={handleSubmit(updateAdmin)}>
                      <div className="wrapper-split">
                             <div className="profile-row">
                                       <h3>Change Profile</h3>
@@ -64,6 +91,7 @@ useEffect(() => {
                                                               </span>
                                                              <p onClick={clearImageProfile}>Reset</p>
                                                   </div>
+                                                  <span></span>
                                       </div>
                                       <p className="profile-terms">Allowed jpg,jpeg or png. Max size of 800Kb</p>
                             </div>
@@ -77,17 +105,14 @@ useEffect(() => {
                                                         </div>
                                              </div>
                                            <div className="password-form">
-                                                      <div className="input-row">
-                                                                 <label htmlFor="current-password">Current Password</label>
-                                                                 <input type={view ? "text" : "password"} {...register('password')} className="input-control" value="1234500"  />
-                                                      </div>
+                                                      
                                                       <div className="input-row">
                                                                  <label htmlFor="current-password">New Password</label>
-                                                                 <input type={view ? "text" : "password"} {...register('new_pass')} className="input-control" value="1234500"   />
+                                                                 <input type={view ? "text" : "password"} {...register('password')} className="input-control" placeholder="Enter new password"  />
                                                       </div>
                                                       <div className="input-row">
                                                                  <label htmlFor="current-password">Confirm Password</label>
-                                                                 <input type={view ? "text" : "password"} {...register('confirm_pass')} className="input-control" value="1234500"   />
+                                                                 <input type={view ? "text" : "password"} {...register('confirm_pass')} className="input-control" placeholder="Confirm password"   />
                                                       </div>
                                            </div>
                             </div>
@@ -112,7 +137,7 @@ useEffect(() => {
                                          </div>
                                          <div className="input-row">
                                                     <label htmlFor="phone">Your Phone Number</label>
-                                                    <input type="email" className="input-control"  pattern="[0-9]+" {...register('phone') }/>
+                                                    <input type="text" className="input-control"  pattern="[0-9]+" {...register('phone') }/>
                                          </div>
                                          <div className="input-row">
                                                     <label htmlFor="city">City</label>

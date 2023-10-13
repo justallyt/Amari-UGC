@@ -47,6 +47,15 @@ export const adminSlice = apiSlice.injectEndpoints({
                            body: payload
                    }),
                    invalidatesTags: ['Request', 'UserProfile']
+             }),
+
+             //update admin profile
+             updateAdminProfile: builder.mutation({
+                   query: (payload) => ({
+                             url: 'admin/update-admin-profile',
+                             method: 'PUT',
+                             body: payload
+                   })
              })
       })
 })
@@ -57,5 +66,6 @@ export const {
        useGetAllBrandsQuery,
        useGetAllCreatorsQuery,
        useGetApprovedCreatorsQuery,
-       useApproveCreatorMutation
+       useApproveCreatorMutation,
+       useUpdateAdminProfileMutation
  } = adminSlice

@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-import cloudinary from "../../utils/cloudinary";
-import User from "../../models/usersModel";
+import cloudinary from "../../utils/cloudinary.js";
+import User from "../../models/usersModel.js";
 
 export const UpdateAdminProfile = asyncHandler(async(req, res) => {
        const user = await User.findById(req.user._id);
