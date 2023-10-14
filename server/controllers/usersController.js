@@ -203,7 +203,7 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
                             notification_type: 'Request',
                             sender: {
                                    senderId: creator_request.creator,
-                                   senderMsg: creator_request.message,
+                                   senderMsg: `You have requested to work with ${brand_details.name}`,
                                    profilePhoto: creator_details.profilePic.url
                             },
                             receipient: {
@@ -241,8 +241,11 @@ export const GetAllBrandsForCreators = asyncHandler(async(req, res) => {
 
 // Get user Notifications
 export const GetUserNotifications = asyncHandler(async(req, res) => {
-        const notifications = await Notifications.find({ "receipient.receipientId": req.user._id})
-
+        const receipient_notifications = await Notifications.find({ "receipient.receipientId": req.user._id })
+        const sender_notifications = await Notifications.find({ "sender.senderId": req.user._id })
+       
+        const notifications = sender_notifications.concat(receipient_notifications);
+        
         if(notifications){
               res.status(201).json({ notifications })
         }else{

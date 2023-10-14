@@ -9,6 +9,11 @@ export  const calculateTimePassed = (t) => {
     const result = dayjs(t).from(a)
 
     return result
+}
 
-    
+export const sanitizeNotifications = (notifications) => {
+        const ordered = [...notifications].sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+        return ordered;
 }

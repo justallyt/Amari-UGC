@@ -1,6 +1,6 @@
 import { CgClose } from "react-icons/cg"
 import { useSelector } from "react-redux";
-import { calculateTimePassed } from "../../utils/dateConverter";
+import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter";
 const NotificationFlyBox = ({ status, fn }) => {
    const closeNotificationBox = () => fn(false);
    const { my_notifications } = useSelector(state => state.profile);
@@ -13,7 +13,7 @@ const NotificationFlyBox = ({ status, fn }) => {
             </div>
              <div className="box-body">
                          { my_notifications && my_notifications.length > 0 ? 
-                               my_notifications.map(item => 
+                               sanitizeNotifications(my_notifications).map(item => 
                                 <div className="box-notification-moja" key={item._id}>
                                              <div className="box-profile">
                                                     { item.notification_type === 'Approval' ? 
@@ -24,7 +24,7 @@ const NotificationFlyBox = ({ status, fn }) => {
                                                      }
                                             </div>
                                             <div className="box-texts">
-                                                  <p>{item.receipient.receipientMsg}</p>
+                                                   { item.notification_type === 'Request' ? <p>{item.sender.senderMsg}</p> : <p>{item.receipient.receipientMsg}</p>}
                                                   <span>{calculateTimePassed(item.createdAt)}</span>
                                            </div>
                               </div>
