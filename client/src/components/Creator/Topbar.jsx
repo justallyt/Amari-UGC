@@ -14,11 +14,12 @@ import Spinner from "../Spinner"
 import profileImg from "../../assets/dummyprofile.png"
 import { apiSlice } from "../../redux/apiSlice"
 import { clearUtils } from "../../redux/utilsSlices"
-import { CgClose } from "react-icons/cg"
+import NotificationFlyBox from "./NotificationFlyBox"
 
 const Topbar = ({ user}) => {
   const [ status, setStatus ] = useState(false)
   const [wait, setWait] = useState(false);
+  const [notificationStatus, setNotificationStatus] = useState(false)
   const boxRef = useRef()
   const {userInfo} = useSelector(state=> state.auth);
 
@@ -66,8 +67,8 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                toast.error("Logout Failed.Please try again");
          }
   }
-
-
+ //Open notification box
+ const openNotificationBox = () => setNotificationStatus(!notificationStatus)
   return (
     <div className="topbar-section">
                   <Toaster />
@@ -77,36 +78,11 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                              <input type="text" placeholder="Search" className="search-control" />
                   </div>
                   <div className="notification-profile">
-                             <div className="notification">
+                             <div className="notification" onClick={openNotificationBox}>
                                         <span><IoMdNotificationsOutline /></span>
                                         <div className="red-dot"></div>
                              </div>
-                             <div className="notification-fly-box">
-                                       <div className="box-header">
-                                                  <h3>Notifications</h3>
-                                                  <span><CgClose /></span>
-                                       </div>
-                                       <div className="box-body">
-                                                   <div className="box-notification-moja">
-                                                              <div className="box-profile">
-                                                                        <span className="approval">A</span>
-                                                              </div>
-                                                              <div className="box-texts">
-                                                                       <p>You have been approved to work with Unilever</p>
-                                                                       <span>24 May at 1.38pm</span>
-                                                              </div>
-                                                   </div>
-                                                   <div className="box-notification-moja">
-                                                              <div className="box-profile">
-                                                                        <span className="request">R</span>
-                                                              </div>
-                                                              <div className="box-texts">
-                                                                       <p>You have requested to work with Unilever</p>
-                                                                       <span>24 May at 1.38pm</span>
-                                                              </div>
-                                                   </div>
-                                       </div>
-                             </div>
+                             <NotificationFlyBox status={notificationStatus} fn={setNotificationStatus} />
 
                              <div className="profile-part" onClick={() => setStatus(true)}>
                                          <div className="profile-image">
@@ -137,7 +113,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                                              </div>
                                    </div>
 
-                                   <NavLink className='profile-link'>
+                                   <NavLink className='profile-link' to={`/creator/${user.username !== 'null' ? user.username : user._id}/settings`}>
                                                <span><FaRegUser /></span>
                                                  <div className="deets">
                                                              <h4>My Account</h4>

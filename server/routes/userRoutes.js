@@ -6,14 +6,8 @@ import {
     GetProfile, 
     UpdateProfile, 
     AssetCreationRequest, 
-    GetAllBrands, 
     GetUserBrandRequests,
-     GetAdminNotifications,
-     GetAllRequestsToAdmin,
-     GetAllCreators,
      GetAllBrandsForCreators,
-     ApproveCreatorRequest,
-     ApprovedRequests,
      GetUserNotifications
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
@@ -30,13 +24,5 @@ router.get('/getbrandsforcreators', protect, GetAllBrandsForCreators);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
 router.get('/notifications', protect, GetUserNotifications);
-
-//Admin Routes
-router.get('/get-all-requests', protect, GetAllRequestsToAdmin)
-router.get('/getallcreators', protect, GetAllCreators);
-router.get('/getallbrands', protect, GetAllBrands);
-router.get('/admin-notifications', protect, GetAdminNotifications);
-router.put('/approve-creator', protect, ApproveCreatorRequest);
-router.get('/approved-requests', protect, ApprovedRequests);
 
 export default router;

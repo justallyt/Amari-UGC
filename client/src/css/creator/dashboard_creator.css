@@ -133,7 +133,7 @@
 }
 .notification{
      position: relative;
-     border: 1px solid gainsboro;
+     border: 1px solid rgba(220, 220, 220, 0.51);
      width: 40px;
      height: 40px;
      border-radius: 7px;
@@ -147,7 +147,7 @@
      -o-border-radius: 7px;
 }
 .notification span{
-      font-size: 22px;
+      font-size: 18px;
 }
 .notification .red-dot{
       width: 8px;
@@ -214,17 +214,24 @@
       -moz-border-radius: 7px;
       -ms-border-radius: 7px;
       -o-border-radius: 7px;
-      transform: scale(1);
-      -webkit-transform: scale(1);
-      -moz-transform: scale(1);
-      -ms-transform: scale(1);
-      -o-transform: scale(1);
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+      -ms-transform: scale(0);
+      -o-transform: scale(0);
       transform-origin: 100% 0%;
       transition: all 0.6s ease;
       -webkit-transition: all 0.6s ease;
       -moz-transition: all 0.6s ease;
       -ms-transition: all 0.6s ease;
       -o-transition: all 0.6s ease;
+}
+.notification-fly-box.active{
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
 }
 .notification-fly-box .box-header{
     padding-bottom: 10px;

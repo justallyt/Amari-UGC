@@ -65,7 +65,7 @@ const AdminTopbar = () => {
 
   const { adminRequests }  = useSelector(state => state.admin)
   const { profile } = useSelector(state => state.profile)
-  console.log(profile)
+  
   return (
     <div className="topbar">
                 <div className="admin-inner">
