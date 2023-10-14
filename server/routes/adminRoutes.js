@@ -2,6 +2,7 @@ import express from "express"
 import { protect } from "../middlewares/authMiddleware.js"
 import { upload } from "../utils/multer.js"
 import { 
+    GetAdminProfile,
     UpdateAdminProfile,
     GetAllRequestsToAdmin,
     GetAllCreators,
@@ -13,6 +14,7 @@ import {
 
 const router = express.Router()
 
+router.get('/get-admin-profile', protect, GetAdminProfile);
 router.get('/get-all-requests', protect, GetAllRequestsToAdmin)
 router.get('/getallcreators', protect, GetAllCreators);
 router.get('/getallbrands', protect, GetAllBrands);

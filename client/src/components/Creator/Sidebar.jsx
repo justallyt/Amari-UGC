@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom"
 import logo from '../../assets/logo.png'
 import { IoHomeOutline, IoLayersOutline, IoCloudUploadOutline } from "react-icons/io5"
+import { IoMdNotificationsOutline } from "react-icons/io"
 import { BsDatabase, BsPiggyBank } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
 import { useSelector } from "react-redux"
@@ -23,6 +24,9 @@ const CreatorSidebar = () => {
                                              </li>
                                              <li>
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}><span><IoCloudUploadOutline /></span> <p>Create</p></NavLink>
+                                             </li>
+                                             <li>
+                                                       <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/notifications`}><span><IoMdNotificationsOutline /></span> <p>Notifications</p></NavLink>
                                              </li>
                                              <li>
                                                        <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/assets`}><span><BsDatabase /></span> <p>My Creations</p></NavLink>

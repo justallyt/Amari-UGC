@@ -3,6 +3,19 @@ import cloudinary from "../../utils/cloudinary.js";
 import User from "../../models/usersModel.js";
 import Notifications from "../../models/NotificationsModel.js";
 import Request from "../../models/RequestsModel.js";
+import mongoose from "mongoose";
+
+// Get admin data from DB 
+export const GetAdminProfile = asyncHandler(async(req, res) => {
+         const user = await User.findById(req.user._id).select('-password');
+
+         if(user){
+                 res.status(200).json({ user })
+         }else{
+                res.status(500).json({ message: 'Admin data could not be fetched at this time.'})
+         }
+})
+
 
 export const UpdateAdminProfile = asyncHandler(async(req, res) => {
        const user = await User.findById(req.user._id);
@@ -139,6 +152,7 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
                    notification_type: 'Approval',
                    sender: {
                           senderId: admin_id,
+                          profilePhoto: req.user.profilePic.url
                    },
                    receipient: {
                           receipientId: update_request.creator,

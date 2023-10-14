@@ -188,10 +188,10 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
          const { brandId } = req.body;
          const creator_id = req.user._id;
          const brand_id = new mongoose.Types.ObjectId(`${brandId}`)
-         const creator_name = await User.findById(creator_id).select('name')
-         const brand_name = await User.findById(brand_id).select('name')
+         const creator_details = await User.findById(creator_id).select('name profilePic')
+         const brand_details = await User.findById(brand_id).select('name profilePic')
          const admin_id = await User.find({ role: "Admin"}).select('_id');
-         const admin_message = `${creator_name.name} requests to work with ${brand_name.name}`
+         const admin_message = `${creator_details.name} requests to work with ${brand_details.name}`
          
          try {
               const creator_request = await Request.create({ creator: creator_id, brand: brand_id, message: admin_message})
@@ -204,13 +204,13 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
                             sender: {
                                    senderId: creator_request.creator,
                                    senderMsg: creator_request.message,
+                                   profilePhoto: creator_details.profilePic.url
                             },
                             receipient: {
                                    receipientId: admin_id[0]._id,
-                                   receipientMsg: creator_request.message
+                                   receipientMsg: creator_request.message,
                             }
                       })
-                
               }      
          } catch (error) {
                 res.status(401).json({ message: "Request Failed. Sorry, its not your fault. Please try again later"});

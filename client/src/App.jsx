@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard"
 import CreatorBrands from "./pages/Creator/CreatorBrands"
 import AdminTasks from "./pages/Admin/AdminTasks"
 import AdminSettings from "./pages/Admin/AdminSettings"
+import CreatorNotifications from "./pages/Creator/CreatorNotifications"
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
                                <Route path="/creator/:id/settings" element={<CreatorSettings />} />
                                <Route path="/creator/:id/settings/:type" element={<CreatorSettings />} />
                                <Route path="/creator/:id/my-brands" element={<CreatorBrands />}/>
+                               <Route path="/creator/:id/notifications" element={<CreatorNotifications />} />
                      </Route>
 
 

@@ -5,7 +5,7 @@ export const adminSlice = apiSlice.injectEndpoints({
             //get profile details
             getAdminProfile: builder.query({
                    query: () => ({
-                        url: `user/profile`,
+                        url: 'admin/get-admin-profile',
                         method: 'GET'
                    })
             }),

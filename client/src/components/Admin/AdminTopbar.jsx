@@ -72,7 +72,7 @@ const AdminTopbar = () => {
                         <Toaster />
                          { wait ?  <Spinner /> : ''}
                            <div className="topbar-content">
-                                       <div className="topbar-left">
+                                      <div className="topbar-left">
                                                  <NavLink to={`/admin/${profile.username !== 'null' ? profile.username : profile._id}`}>
                                                              <div className="logo">
                                                                       <img src={logo} alt="Logo" />
@@ -139,7 +139,7 @@ const AdminTopbar = () => {
                                                               </div>
                                                   </div>
                                        </div>
-                           </div>
+                           </div> 
                 </div>
     </div>
   )

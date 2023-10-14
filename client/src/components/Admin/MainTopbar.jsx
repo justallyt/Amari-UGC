@@ -24,6 +24,7 @@ const MainTopbar = () => {
                 if(creators) dispatch(setAllCreatorsForAdmin([...creators.all_creators]))
                 if(approved) dispatch(setApprovedRequests([...approved.requests]))
      }, [brands, creators, approved, dispatch])
+    
   return (
     <div className="main-topbar">
                <div className="admin-inner">

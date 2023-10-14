@@ -1,34 +1,17 @@
 import { PiCheck } from "react-icons/pi"
 import { LiaTimesSolid } from "react-icons/lia"
 import { useSelector } from "react-redux"
-import { useApproveCreatorMutation } from "../../redux/admin/adminSlice"
 import { useState } from "react"
 import TaskInitiator from "./TaskInitiator"
 import TaskTarget from "./TaskTarget"
 import ApproveBtn from "./ApproveBtn"
-import toast, { Toaster } from "react-hot-toast"
+import { Toaster } from "react-hot-toast"
 
 const AdminTasksBody = () => {
   const [switchCont, setSwitchCont] = useState(0)
-  const [loading, setLoading] = useState(false)
 
     const { adminRequests } = useSelector(state => state.admin);
     const { approvedRequests } = useSelector(state => state.admin)
-    //Approve a Creator
-    const [ approveCreator] = useApproveCreatorMutation()
-
-    const approve = async (id) =>{
-            setLoading(true)
-            try {
-                  const res = await approveCreator({id}).unwrap()
-                  if(res){
-                       toast.success(`${res.message}`, { id: 'Approval Successful'})
-                       setLoading(false)
-                  }  
-            } catch (error) {
-                   console.log(error)
-            }
-    }
 
     const switchContainers = (id) => {
            setSwitchCont(id)
@@ -62,7 +45,7 @@ const AdminTasksBody = () => {
                                                                                    <div className="additionals-plus-actions">
                                                                                                   <div className="actions">
                                                                                                           
-                                                                                                             <ApproveBtn fnClick={approve} load={loading} id={item._id} />
+                                                                                                             <ApproveBtn  id={item._id} />
                                                                                                              <button className="reject"><span><LiaTimesSolid /></span> Reject</button>
                                                                                                   </div>
 

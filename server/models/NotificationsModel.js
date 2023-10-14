@@ -12,7 +12,8 @@ const notificationsSchema = mongoose.Schema({
                },
                senderName: { type: String},
                senderMsg: { type: String},
-               isRead: { type: Boolean, default: false}
+               isRead: { type: Boolean, default: false},
+               profilePhoto: { type: String }
         },
         receipient: {
                receipientId: { 
@@ -21,7 +22,8 @@ const notificationsSchema = mongoose.Schema({
                },
                receipientName: { type: String},
                receipientMsg: { type: String },
-               isRead: { type: Boolean, default: false}
+               isRead: { type: Boolean, default: false},
+               profilePhoto: { type: String }
         },
 }, { timestamps: true })
 
