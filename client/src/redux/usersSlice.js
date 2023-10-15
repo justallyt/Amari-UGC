@@ -59,14 +59,31 @@ export const usersSlice = apiSlice.injectEndpoints({
                       })
               }),
                
-              //get all unread notifications
+              //get all notifications
               getUserNotifications: builder.query({
                      query: () => ({
-                             url:  '/user/notifications',
+                             url:  '/user/all-notifications',
                              method: 'GET'
-                     })
+                     }),
+                     providesTags: ['Notifications']
               }),
               
+              //get all unread notifications
+              getUnreadUserNotifications: builder.query({
+                       query: () => ({
+                              url: '/user/unread-notifications',
+                              method: 'GET'
+                       }),
+                       providesTags: ['Notifications']
+              }),
+
+            //mark all notifications as read
+            readAllUserNotifications: builder.mutation({
+                   query: () => ({
+                         method: 'PUT'
+                   }),
+                   invalidatesTags: ["Notifications"]
+            })
         })
 })
 
@@ -79,5 +96,7 @@ export const {
        useRequestCreationPermissionMutation,
        useGetBrandsQuery,
        useCheckRequestsQuery,
-       useGetUserNotificationsQuery
+       useGetUserNotificationsQuery,
+       useGetUnreadUserNotificationsQuery,
+       useReadAllUserNotificationsMutation
 } = usersSlice;

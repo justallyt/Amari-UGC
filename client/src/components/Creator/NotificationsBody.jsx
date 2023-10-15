@@ -1,9 +1,22 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter";
+import { useGetUserNotificationsQuery } from "../../redux/usersSlice";
+import { useEffect } from "react";
+import { setAllNotifications } from "../../redux/profileSlice";
+import SpinnerData from "../SpinnerData"
 
 const NotificationsBody = () => {
-    const { profile, my_notifications } = useSelector(state => state.profile);
+    const { profile, all_notifications } = useSelector(state => state.profile);
+    const dispatch = useDispatch()
+    const { data, isLoading } = useGetUserNotificationsQuery();
+
+    useEffect(() => {
+          
+          if(data){
+                dispatch(setAllNotifications([...data.notifications]))
+          }
+    },[data, dispatch])
   return (
     <div className="dashboard-body-wrap">
                 <div className="dashboard-row">
@@ -16,7 +29,13 @@ const NotificationsBody = () => {
                                       </div>
 
                                       <div className="notifications-row">
-                                               { sanitizeNotifications(my_notifications).map(item => 
+                                                { isLoading ? 
+                                                       <div className="spinner-loader">
+                                                                 <SpinnerData />
+                                                       </div>
+                                                : 
+                                                <>
+                                                { sanitizeNotifications(all_notifications).map(item => 
                                                  <div className="notification-moja" key={item._id}>
                                                          <div className="notification-moja-left">
                                                                   <div className="notification-profile">
@@ -27,11 +46,12 @@ const NotificationsBody = () => {
                                                                             <span>{calculateTimePassed(item.createdAt)}</span>
                                                                   </div>
                                                          </div>
-                                                         <div className="notification-moja-right">
+                                                         {/* <div className="notification-moja-right">
                                                                    <button>Mark as Read</button>
-                                                         </div>
+                                                         </div> */}
                                                </div>
                                                 )}
+                                                 </>}
                                       </div>
                            </div>
                 </div>

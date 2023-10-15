@@ -8,8 +8,9 @@ import {
     AssetCreationRequest, 
     GetUserBrandRequests,
      GetAllBrandsForCreators,
-     GetUserNotifications,
-     UpdateAllNotificationsStatus
+     GetUserUnreadNotifications,
+     UpdateAllNotificationsStatus,
+     GetAllUserNotifications
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
@@ -24,7 +25,8 @@ router.put('/update-profile', protect, upload.single('profileImage'), UpdateProf
 router.get('/getbrandsforcreators', protect, GetAllBrandsForCreators);
 router.post('/creation-request', protect, AssetCreationRequest);
 router.get('/check-requests', protect, GetUserBrandRequests);
-router.get('/notifications', protect, GetUserNotifications);
-router.get('/update-all-notifications', protect, UpdateAllNotificationsStatus)
+router.get('/all-notifications', protect, GetAllUserNotifications);
+router.get('/unread-notifications', protect, GetUserUnreadNotifications);
+router.put('/update-all-notifications', protect, UpdateAllNotificationsStatus)
 
 export default router;

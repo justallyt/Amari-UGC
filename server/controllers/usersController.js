@@ -239,12 +239,12 @@ export const GetAllBrandsForCreators = asyncHandler(async(req, res) => {
        }
 })
 
-// Get user Notifications
-export const GetUserNotifications = asyncHandler(async(req, res) => {
-        const receipient_notifications = await Notifications.find({ "receipient.receipientId": req.user._id })
-        const sender_notifications = await Notifications.find({ "sender.senderId": req.user._id })
+// Get user unread Notifications
+export const GetUserUnreadNotifications = asyncHandler(async(req, res) => {
+       const unread_receipient_notifications = await Notifications.find({ "receipient.receipientId": req.user._id, "receipient.isRead": false})
+       const unread_sender_notifications = await Notifications.find({ "sender.senderId": req.user._id, "sender.isRead": false})
        
-        const notifications = sender_notifications.concat(receipient_notifications);
+        const notifications = unread_sender_notifications.concat(unread_receipient_notifications);
         
         if(notifications){
               res.status(201).json({ notifications })
@@ -252,20 +252,28 @@ export const GetUserNotifications = asyncHandler(async(req, res) => {
               res.status(500).json({ message: 'Sorry, no notifications found' })
         }
 })
+// Get all user notifications
+export const GetAllUserNotifications = asyncHandler(async(req, res) => {
+       const receipient_notifications = await Notifications.find({ "receipient.receipientId": req.user._id});
+       const sender_notifications = await Notifications.find({ "sender.senderId": req.user._id });
 
+       const notifications = sender_notifications.concat(receipient_notifications);
+
+       if(notifications){
+               res.status(201).json({ notifications})
+       }else{
+              res.status(500).json({ msg: 'Sorry, an error occured while pulling notifications from db'})
+       }
+})
 //Update read Status for User Notifications
 export const UpdateAllNotificationsStatus = asyncHandler(async(req, res) => {
-        const unread_receipient_notifications = await Notifications.find({ "receipient.receipientId": req.user._id, "receipient.isRead": false})
-        const unread_sender_notifications = await Notifications.find({ "sender.senderId": req.user._id, "sender.isRead": false})
-
-        const unread_notifications = unread_receipient_notifications.concat(unread_sender_notifications);
-
-        if(unread_notifications){
-                const updateAllNotifications = await User.updateMany({}, {})
-                res.status(201).json({ message: 'Updated all notifications', info: unread_notifications})
+        const updateReceiptNotifications = await Notifications.updateMany({"receipient.receipientId": req.user._id}, { "$set": {"receipient.isRead": true}})
+    
+        const updateSendNotifications = await Notifications.updateMany({ "sender.senderId": req.user._id }, { "$set" : { "sender.isRead": true }})
+       
+        if(updateReceiptNotifications.acknowledged && updateSendNotifications.acknowledged){
+                 res.status(200).json({ msg: 'All Upto to date'})
         }else{
-               res.status(500).json({ message: 'Internal server error'})
+                res.status(500).json({ msg: 'An error occured while updating notifications'})
         }
-
-        console.log(unread_receipient_notifications)
 })

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const NotificationFlyBox = ({ status, fn, innerRef }) => {
    const closeNotificationBox = () => fn(false);
-   const { profile, my_notifications } = useSelector(state => state.profile);
+   const { profile, unread_notifications } = useSelector(state => state.profile);
 
   return (
      <div className={ status ? "notification-fly-box active" : "notification-fly-box"} ref={innerRef}>
@@ -14,8 +14,8 @@ const NotificationFlyBox = ({ status, fn, innerRef }) => {
                        <span onClick={closeNotificationBox}><CgClose /></span>
             </div>
              <div className="box-body">
-                         { my_notifications && my_notifications.length > 0 ? 
-                               sanitizeNotifications(my_notifications).map(item => 
+                         { unread_notifications && unread_notifications.length > 0 ? 
+                               sanitizeNotifications(unread_notifications).map(item => 
                                 <div className="box-notification-moja" key={item._id}>
                                              <div className="box-profile">
                                                     { item.notification_type === 'Approval' ? 

@@ -119,3 +119,8 @@
       -ms-transform: scale(1);
       -o-transform: scale(1);
 }
+
+.notifications-row .spinner-loader{
+      display: flex;
+      justify-content: center;
+}

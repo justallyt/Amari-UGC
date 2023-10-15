@@ -5,9 +5,9 @@ import { BsEnvelope } from "react-icons/bs"
 import { FaRegUser } from "react-icons/fa"
 import { NavLink, useNavigate} from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
-import { useGetUserNotificationsQuery, useLogoutUserMutation } from "../../redux/usersSlice"
+import { useGetUnreadUserNotificationsQuery,  useLogoutUserMutation } from "../../redux/usersSlice"
 import { clearCredentials } from "../../redux/authSlice"
-import { clearProfile, setNotifications } from "../../redux/profileSlice"
+import { clearProfile, setUnreadNotifications } from "../../redux/profileSlice"
 import { useSelector, useDispatch } from "react-redux"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
@@ -27,14 +27,14 @@ const Topbar = ({ user}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
     //get user notifications
-    const { data, isLoading} = useGetUserNotificationsQuery();
+    const { data, isLoading} = useGetUnreadUserNotificationsQuery();
   
   useEffect(() => {
            document.addEventListener("click", handleClick, true)
            document.addEventListener("click", handleNotification, true)
 
            if(data && !isLoading){
-                  dispatch(setNotifications([...data.notifications]))
+                  dispatch(setUnreadNotifications([...data.notifications]))
            }
   }, [data, dispatch, isLoading])
 
