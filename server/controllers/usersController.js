@@ -252,3 +252,20 @@ export const GetUserNotifications = asyncHandler(async(req, res) => {
               res.status(500).json({ message: 'Sorry, no notifications found' })
         }
 })
+
+//Update read Status for User Notifications
+export const UpdateAllNotificationsStatus = asyncHandler(async(req, res) => {
+        const unread_receipient_notifications = await Notifications.find({ "receipient.receipientId": req.user._id, "receipient.isRead": false})
+        const unread_sender_notifications = await Notifications.find({ "sender.senderId": req.user._id, "sender.isRead": false})
+
+        const unread_notifications = unread_receipient_notifications.concat(unread_sender_notifications);
+
+        if(unread_notifications){
+                const updateAllNotifications = await User.updateMany({}, {})
+                res.status(201).json({ message: 'Updated all notifications', info: unread_notifications})
+        }else{
+               res.status(500).json({ message: 'Internal server error'})
+        }
+
+        console.log(unread_receipient_notifications)
+})

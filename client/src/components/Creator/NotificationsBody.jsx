@@ -10,7 +10,10 @@ const NotificationsBody = () => {
                            <Topbar user={profile} />
 
                            <div className="notifications-wrapper">
-                                      <h2>All Notifications</h2>
+                                      <div className="notifications-wrapper-head">
+                                               <h2>All Notifications</h2>
+                                               <button>Mark All As Read</button>
+                                      </div>
 
                                       <div className="notifications-row">
                                                { sanitizeNotifications(my_notifications).map(item => 

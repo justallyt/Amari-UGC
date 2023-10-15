@@ -1,12 +1,14 @@
 import { CgClose } from "react-icons/cg"
 import { useSelector } from "react-redux";
 import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter";
-const NotificationFlyBox = ({ status, fn }) => {
+import { NavLink } from "react-router-dom";
+
+const NotificationFlyBox = ({ status, fn, innerRef }) => {
    const closeNotificationBox = () => fn(false);
-   const { my_notifications } = useSelector(state => state.profile);
+   const { profile, my_notifications } = useSelector(state => state.profile);
 
   return (
-     <div className={ status ? "notification-fly-box active" : "notification-fly-box"}>
+     <div className={ status ? "notification-fly-box active" : "notification-fly-box"} ref={innerRef}>
             <div className="box-header">
                        <h3>Notifications</h3>
                        <span onClick={closeNotificationBox}><CgClose /></span>
@@ -32,6 +34,8 @@ const NotificationFlyBox = ({ status, fn }) => {
                             :
                             <p>You&apos;re all caught up on your notifications.</p>
                          }
+
+                         <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/notifications`}>View All Notifications</NavLink>
              </div>
     </div>
   )

@@ -21,6 +21,7 @@ const Topbar = ({ user}) => {
   const [wait, setWait] = useState(false);
   const [notificationStatus, setNotificationStatus] = useState(false)
   const boxRef = useRef()
+  const notificationRef = useRef()
   const {userInfo} = useSelector(state=> state.auth);
 
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const Topbar = ({ user}) => {
   
   useEffect(() => {
            document.addEventListener("click", handleClick, true)
+           document.addEventListener("click", handleNotification, true)
 
            if(data && !isLoading){
                   dispatch(setNotifications([...data.notifications]))
@@ -43,7 +45,14 @@ const Topbar = ({ user}) => {
                  setStatus(true)
           }
   }
- 
+ //Open notification box
+ const handleNotification = (e) =>{
+         if(notificationRef.current && !notificationRef.current.contains(e.target)){
+                setNotificationStatus(false)
+         }else{
+               setNotificationStatus(true)
+         }
+ }
 
   //Logout User
 const [ logoutConsumer ] = useLogoutUserMutation();
@@ -67,8 +76,7 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                toast.error("Logout Failed.Please try again");
          }
   }
- //Open notification box
- const openNotificationBox = () => setNotificationStatus(!notificationStatus)
+ 
   return (
     <div className="topbar-section">
                   <Toaster />
@@ -78,11 +86,11 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                              <input type="text" placeholder="Search" className="search-control" />
                   </div>
                   <div className="notification-profile">
-                             <div className="notification" onClick={openNotificationBox}>
+                             <div className="notification" onClick={() => setNotificationStatus(true)}>
                                         <span><IoMdNotificationsOutline /></span>
                                         <div className="red-dot"></div>
                              </div>
-                             <NotificationFlyBox status={notificationStatus} fn={setNotificationStatus} />
+                             <NotificationFlyBox innerRef={notificationRef} status={notificationStatus} fn={setNotificationStatus} />
 
                              <div className="profile-part" onClick={() => setStatus(true)}>
                                          <div className="profile-image">
