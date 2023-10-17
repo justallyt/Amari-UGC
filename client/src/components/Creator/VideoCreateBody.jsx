@@ -7,51 +7,80 @@ import  { useForm } from "react-hook-form"
 import { AiOutlineDelete } from 'react-icons/ai'
 import Footer from "../Footer"
 import VideoLoader from "./VideoLoader"
-import { useCreateAssetMutation } from "../../redux/videosSlice"
+// import { useCreateAssetMutation } from "../../redux/videosSlice"
 import { toast } from "react-hot-toast"
+import { chunkerize } from "../../utils/fileChunker"
+import { uploadAssetToBackend } from "../../utils/uploadAssetToServer"
+import axios from "axios"
 const VideoCreateBody = () => {
     const { profile } = useSelector(state => state.profile)
-    const { videoUploadProgress } = useSelector(state => state.utils)
     const { userBrands } = useSelector(state => state.utils)
     const [isUploading, setIsUploading] = useState(false);
+    const [progress, setProgress] = useState(0)
    const [ selectedFile, setSelectedFile] = useState(null)
    const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm()
-    //Video dropzone
+    //asset dropzone
     const { getRootProps, getInputProps } = useDropzone({
             accept: {
-                  'video/*': ['.mp4']
+                  'video/*': ['.mp4'],
+                  'image/*': ['.png', '.jpg', '.jpeg']
             },
             onDrop: (files) => {
-                      setValue('video', files);
+                      setValue('asset', files);
                       setSelectedFile(files)
             }
     })
 
-    const [ createAsset, { isLoading } ] = useCreateAssetMutation();
+    //const [ createAsset, { isLoading } ] = useCreateAssetMutation();
 
     const uploadAsset = async(data, e) =>{
             e.preventDefault();
+            setIsUploading(true);
             const formData = new FormData();
             formData.append('data', JSON.stringify(data));
-            formData.append('userVideo', data.video[0]);
 
-            setIsUploading(true);
-            try {
-                   const response = await createAsset(formData).unwrap();
-                   
-                   if(response) {
-                          console.log(response)
-                          reset();
-                          resetUpload();
+            const file = data.asset[0];
+    
+            const chunkSize = 5 * 1024 * 1024;
+            const totalChunks = Math.ceil(file.size / chunkSize);
+            console.log(totalChunks)
+
+            formData.append("totalChunks", totalChunks)
+            const chunkProgress = 100 / totalChunks;
+            let chunkNumber = 0;
+            let start = 0;
+            let end = 0;
+
+            formData.append('chunkNumber', chunkNumber);
+        
+            formData.append("originalname", file.name);
+
+            const uploadNextChunk = () => {
+                   if(end <= file.size){
+                            const chunk = file.slice(start, end);
+                            formData.append("assetChunk", chunk)
+                         
+
+                            fetch('http://localhost:8080/api/asset/create', {
+                                    method: "POST",
+                                    body: formData,
+                                    credentials: "include",
+                            }).then(response => response.json())
+                            .then((data) => {
+                                    console.log({ data })
+                                    setProgress(Number((chunkNumber + 1) * chunkProgress));
+                                    chunkNumber++;
+                                    start = end;
+                                    end = start + chunkSize;
+                                    uploadNextChunk();
+                            }).catch(error => console.log("Error: ", error));
                    }
-                    
-
-            } catch (error) {
-                  console.log(error);
-                  toast.error("Asset Creation Failed. Internal server error", { id: 'asset creation error'})
             }
-      
+
+            uploadNextChunk();
     }
+
+
     const resetUpload = () => {
             setSelectedFile(null)
             resetField('video')
@@ -69,7 +98,7 @@ const VideoCreateBody = () => {
                                        </div>
                                       
                                        { isUploading ?
-                                             <VideoLoader percent={videoUploadProgress} uploadStatus={isLoading} resetIsUploading={setIsUploading} />
+                                             <VideoLoader percent={progress} uploadStatus={isUploading} resetIsUploading={setIsUploading} />
                                            : 
                                            <form onSubmit={handleSubmit(uploadAsset)} encType="multipart/form-data">
                                                      <div className="video-form-row">
@@ -105,11 +134,11 @@ const VideoCreateBody = () => {
                                                             </div>
                                                               :
                                                           <div className="video-upload-part">
-                                                                   <label htmlFor="video upload">Upload Video</label>
+                                                                   <label htmlFor="video upload">Upload Asset</label>
 
                                                                    <div className="video-upload-trigger-box">
                                                                               <div { ...getRootProps() } className="upload-wrapper">
-                                                                                          <input {...getInputProps} className="dropbox"  name="video"  {...register('video', {required: 'Please upload a video'})}  />
+                                                                                          <input {...getInputProps} className="dropbox"  name="asset"  {...register('asset', {required: 'Please upload a video'})}  />
                                                                                           <span><BsUpload /></span>
                                                                                           <p>Drop files here or click to upload</p>
                                                                               </div>

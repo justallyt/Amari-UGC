@@ -80,6 +80,7 @@ export const usersSlice = apiSlice.injectEndpoints({
             //mark all notifications as read
             readAllUserNotifications: builder.mutation({
                    query: () => ({
+                         url: '/user/update-all-notifications',
                          method: 'PUT'
                    }),
                    invalidatesTags: ["Notifications"]

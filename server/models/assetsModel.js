@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 //import User from "./usersModel";
 
-const videosSchema = mongoose.Schema({
+const assetsSchema = mongoose.Schema({
          creator: {
               type: Schema.Types.ObjectId,
               ref: 'User'
@@ -19,13 +19,13 @@ const videosSchema = mongoose.Schema({
          caption: {
                type: String,
          },
-         video: {
+         asset: {
                 asset_id: { type: String},
                  url: { type: String, required: true},
                  thumbnail: { type: String, required: true}
          }
 }, { timestamps: true})
 
-const Video = mongoose.model('Video', videosSchema);
+const Asset = mongoose.model('Asset', assetsSchema);
 
-export default Video
+export default Asset

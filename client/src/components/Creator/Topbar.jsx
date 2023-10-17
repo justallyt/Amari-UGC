@@ -23,7 +23,7 @@ const Topbar = ({ user}) => {
   const boxRef = useRef()
   const notificationRef = useRef()
   const {userInfo} = useSelector(state=> state.auth);
-
+  const { unread_notifications } = useSelector(state => state.profile);
   const navigate = useNavigate();
   const dispatch = useDispatch();
     //get user notifications
@@ -88,7 +88,13 @@ const [ logoutConsumer ] = useLogoutUserMutation();
                   <div className="notification-profile">
                              <div className="notification" onClick={() => setNotificationStatus(true)}>
                                         <span><IoMdNotificationsOutline /></span>
-                                        <div className="red-dot"></div>
+                                        { unread_notifications && unread_notifications.length > 0 ?
+                                                <div className="red-dot">
+                                                        <figure>{unread_notifications.length}</figure>
+                                               </div>
+                                               :
+                                               ''
+                                        }
                              </div>
                              <NotificationFlyBox innerRef={notificationRef} status={notificationStatus} fn={setNotificationStatus} />
 

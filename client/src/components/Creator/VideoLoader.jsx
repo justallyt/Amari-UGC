@@ -8,17 +8,17 @@ const VideoLoader = ({ percent, uploadStatus, resetIsUploading }) => {
     const [success, setSuccess] = useState(false)
     const [uploadMsg, setUploadMsg] = useState("Retrieving and preparing your asset")
     const { profile } = useSelector(state => state.profile)
-   useEffect(()=> {
-          if(percent === 100){
-                   setTimeout(()=> {
-                       setUploadMsg("Uploading your asset to the servers")
-                   }, 1000)
-          }
+  //  useEffect(()=> {
+  //         if(percent === 100){
+  //                  setTimeout(()=> {
+  //                      setUploadMsg("Uploading your asset to the servers")
+  //                  }, 1000)
+  //         }
 
-         if(!uploadStatus){
-                 setSuccess(true)
-          }
-   }, [percent, uploadStatus])
+  //        if(!uploadStatus){
+  //                setSuccess(true)
+  //         }
+  //  }, [percent, uploadStatus])
 
    const dispatch = useDispatch()
    const resetThings = () => {

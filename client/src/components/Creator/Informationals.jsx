@@ -1,10 +1,6 @@
 import { NavLink } from "react-router-dom"
-import vid1 from "../../assets/vid1.jpg"
-import vid2 from "../../assets/vid2.jpg"
-import vid3 from "../../assets/vid3.jpg"
-import standard from "../../assets/standard.png"
 import { MdOutlineVideoFile } from "react-icons/md"
-import { useGetUserAssetsQuery } from "../../redux/videosSlice"
+import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setVideoAssets } from "../../redux/utilsSlices"
@@ -14,10 +10,11 @@ import { openModal } from "../../redux/utilsSlices"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { BsPatchPlus } from "react-icons/bs"
+import { calculateTimePassed } from "../../utils/dateConverter"
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
   const { isModalOpen, videos } = useSelector(state => state.utils);
-  const { profile } = useSelector(state => state.profile)
+  const { profile, all_notifications } = useSelector(state => state.profile)
   const dispatch = useDispatch();
   const { data, isLoading } = useGetUserAssetsQuery({  refetchOnMountOrArgChange: true })
 
@@ -32,6 +29,8 @@ const Informationals = () => {
          setVideoId(id)
   }
 
+  //sanitize activity notifications
+  const activities = [...all_notifications].reverse()
   return (
     <div className="informationals-section">
               <div className="section-wrapper">
@@ -81,65 +80,23 @@ const Informationals = () => {
                                             <div className="tab-row">
                                                      <h4>Today</h4>
 
-                                                     <div className="activity-moja">
+                                                     { activities.slice(0,4).map(item => 
+                                                        <div className="activity-moja" key={item._id}>
                                                                 <div className="activity-block">
                                                                          <div className="activity-thumbnail">
-                                                                                     <img src={vid1} alt="" />
+                                                                                 <img src={item.sender.profilePhoto} alt="" />
                                                                          </div>
                                                                          <div className="activity-user">
-                                                                                    <h5>You</h5>
-                                                                                    <p>You uploaded a new video.</p>
+                                                                                    <h5>Sender</h5>
+                                                                                    <p>{item.sender.senderMsg || item.receipient.receipientMsg}</p>
                                                                          </div>
                                                                 </div>
                                                                 <div className="time"> 
-                                                                        <p>1 min ago</p>
+                                                                        <p>{calculateTimePassed(item.createdAt)}</p>
                                                                  </div>
-                                                     </div>
-                                                     <div className="activity-moja">
-                                                                <div className="activity-block">
-                                                                         <div className="activity-thumbnail">
-                                                                                     <img src={standard} alt="" />
-                                                                         </div>
-                                                                         <div className="activity-user">
-                                                                                    <h5>Standard Chartered</h5>
-                                                                                    <p>Standard Chartered liked your post</p>
-                                                                         </div>
-                                                                </div>
-                                                                <div className="time"> 
-                                                                        <p>10 mins ago</p>
-                                                                 </div>
-                                                     </div>
-
-                                                     <h4>Yesterday</h4>
-
-                                                     <div className="activity-moja">
-                                                                <div className="activity-block">
-                                                                         <div className="activity-thumbnail">
-                                                                                     <img src={vid2} alt="" />
-                                                                         </div>
-                                                                         <div className="activity-user">
-                                                                                    <h5>You</h5>
-                                                                                    <p>You post a new video</p>
-                                                                         </div>
-                                                                </div>
-                                                                <div className="time"> 
-                                                                        <p>Yesterday</p>
-                                                                 </div>
-                                                     </div>
-                                                     <div className="activity-moja">
-                                                                <div className="activity-block">
-                                                                         <div className="activity-thumbnail">
-                                                                                     <img src={vid3} alt="" />
-                                                                         </div>
-                                                                         <div className="activity-user">
-                                                                                    <h5>Orchard Juice</h5>
-                                                                                    <p>Orchard Juice liked your video</p>
-                                                                         </div>
-                                                                </div>
-                                                                <div className="time"> 
-                                                                        <p>Yesterday</p>
-                                                                 </div>
-                                                     </div>
+                                                         </div>
+                                                     )}
+                                                     
                                             </div>
                                 </div>
                        </div>

@@ -32,7 +32,7 @@ const NotificationFlyBox = ({ status, fn, innerRef }) => {
                               </div>
                                 )
                             :
-                            <p>You&apos;re all caught up on your notifications.</p>
+                            <p className="caught-up">You&apos;re all caught up on your notifications.</p>
                          }
 
                          <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/notifications`}>View All Notifications</NavLink>

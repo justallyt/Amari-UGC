@@ -1,10 +1,10 @@
 import asyncHandler from "express-async-handler";
 import cloudinary from "../utils/cloudinary.js";
-import Video from "../models/videosModel.js";
+import Asset from "../models/assetsModel.js";
 import User from "../models/usersModel.js";
 
 //Upload video
-export const CreateVideo = asyncHandler(async(req,res) => {
+export const CreateAsset = asyncHandler(async(req,res) => {
         const user = await User.findById(req.user._id);
 
         if(user){

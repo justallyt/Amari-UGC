@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter";
-import { useGetUserNotificationsQuery } from "../../redux/usersSlice";
+import { useGetUserNotificationsQuery, useReadAllUserNotificationsMutation } from "../../redux/usersSlice";
 import { useEffect } from "react";
 import { setAllNotifications } from "../../redux/profileSlice";
 import SpinnerData from "../SpinnerData"
+import toast from "react-hot-toast";
 
 const NotificationsBody = () => {
     const { profile, all_notifications } = useSelector(state => state.profile);
@@ -17,6 +18,22 @@ const NotificationsBody = () => {
                 dispatch(setAllNotifications([...data.notifications]))
           }
     },[data, dispatch])
+
+    //mark all notifications as read
+    const [markAllNotificationsAsRead] = useReadAllUserNotificationsMutation();
+
+    const readAllNotifications = async() => {
+          try{
+                  const res =  await markAllNotificationsAsRead().unwrap();
+
+                  if(res){
+                         toast.success(res.msg, { id: 'notify-update-success'})
+                  }
+          }catch (error){
+                console.log(error); 
+                toast.error("Notification error.", { id: 'notify-update-error'})
+          }
+    }
   return (
     <div className="dashboard-body-wrap">
                 <div className="dashboard-row">
@@ -25,7 +42,7 @@ const NotificationsBody = () => {
                            <div className="notifications-wrapper">
                                       <div className="notifications-wrapper-head">
                                                <h2>All Notifications</h2>
-                                               <button>Mark All As Read</button>
+                                               <button onClick={readAllNotifications}>Mark All As Read</button>
                                       </div>
 
                                       <div className="notifications-row">
@@ -42,7 +59,8 @@ const NotificationsBody = () => {
                                                                             <img src={item.sender.profilePhoto} alt="" />
                                                                   </div>
                                                                   <div className="notification-texts">
-                                                                            { item.notification_type === 'Request' ? <p>{item.sender.senderMsg}</p> : <p>{item.receipient.receipientMsg}</p>}
+                                                                             
+                                                                             { item.notification_type === 'Request' ? <p className={item.sender.isRead ? 'read' : ''}>{item.sender.senderMsg}</p> : <p className={item.receipient.isRead ? 'read' : ''}>{item.receipient.receipientMsg}</p>}
                                                                             <span>{calculateTimePassed(item.createdAt)}</span>
                                                                   </div>
                                                          </div>

@@ -6,8 +6,8 @@ const storage = multer.diskStorage({
         }
 });
 
-const videoStorage = multer.diskStorage({
+const assetStorage = multer.memoryStorage({
          filename: (req, file, cb) => cb(null, file.originalname)
 })
 export const upload = multer({ storage: storage });
-export const video_upload = multer({ storage: videoStorage })
+export const asset_upload = multer({ storage: assetStorage })

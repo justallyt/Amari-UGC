@@ -83,7 +83,10 @@
       -o-border-radius: 50%;
 }
 .notification-texts p{
-     font-family: "Madera-Medium";
+         font-family: "Madera-Medium";
+}
+.notification-texts p.read{
+     font-family: "Madera-Regular";
 }
 .notification-texts span{
      font-size: 12px;
