@@ -2,20 +2,21 @@ import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { IoImagesOutline } from "react-icons/io5"
 import { useGetBrandsQuery, useGetUserProfileQuery } from "../../redux/usersSlice"
-import { useEffect, useState } from "react"
-import { setPulledBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
+import { useEffect } from "react"
+import { setPulledBrands} from "../../redux/utilsSlices"
 import RequestBtn from "./RequestBtn"
 import SpinnerData from "../SpinnerData"
 import { setProfile } from "../../redux/profileSlice"
 const CreatorBrandsBody = ({ refetchFn }) => {
-    const [ myBrands, setMyBrands ] = useState(null)
-    const [ availableBrands, setAvailableBrands] = useState()
+    //const [ availableBrands, setAvailableBrands] = useState()
     const { profile } = useSelector(state => state.profile)
-    const { brands } = useSelector(state => state.utils);
+    const { userBrands, availableBrands } = useSelector(state => state.utils);
     const dispatch = useDispatch()
+
     //get brands
     const { data:allbrands, isLoading } = useGetBrandsQuery({  refetchOnMountOrArgChange: true })
     const { data:refetched_profile } = useGetUserProfileQuery({ refetchOnMountOrArgChange: true})
+
     useEffect(()=>{
            if(allbrands){
                    dispatch(setPulledBrands({...allbrands.brands}))
@@ -25,23 +26,6 @@ const CreatorBrandsBody = ({ refetchFn }) => {
            }
     }, [allbrands,refetched_profile, dispatch])
     
-    //Filter Stuff
-   useEffect(() => {
-              if(brands){
-                     let things = []
-                     profile.brands.forEach(item => {
-                            const stuff =  Object.values(brands).find(kitu => kitu._id === item)
-                            things.push(stuff)
-                   })
-                   setMyBrands(things)
-                   dispatch(setUserApprovedBrands(things))
-
-                   const avails = Object.values(brands).filter(obj => things.indexOf(obj) === -1);
-                   setAvailableBrands(avails)
-          }
-
-   }, [brands, setMyBrands, profile, dispatch])
-
   return (
     <div className="dashboard-body-wrap">
                <div className="dashboard-row">
@@ -56,9 +40,9 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                  <h3>My Current Brands</h3>
 
                                                  <div className="current-brands">
-                                                             { myBrands && myBrands.length >0  ?
+                                                             { userBrands && userBrands.length >0  ?
                                                                      <>
-                                                                      {  myBrands.map(item => 
+                                                                      {  userBrands.map(item => 
                                                                                 <div className="brand-moja" key={item._id}>
                                                                                          <div className="brand-image">
                                                                                                 <img src={item.profilePic.url} alt="" />
@@ -71,7 +55,7 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                                                 <div className="brand-image">
                                                                                         <span><IoImagesOutline /></span>
                                                                                 </div>
-                                                                                <h4>No brand yet</h4>
+                                                                                <h4>Not subscribed to any brand</h4>
                                                                      </div>
                                                                }
                                                               

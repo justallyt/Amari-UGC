@@ -16,6 +16,7 @@ const Informationals = () => {
   const { isModalOpen, videos } = useSelector(state => state.utils);
   const { profile, all_notifications } = useSelector(state => state.profile)
   const dispatch = useDispatch();
+
   const { data, isLoading } = useGetUserAssetsQuery({  refetchOnMountOrArgChange: true })
 
   useEffect(()=> {
@@ -30,7 +31,7 @@ const Informationals = () => {
   }
 
   //sanitize activity notifications
-  const activities = [...all_notifications].reverse()
+  const activities = all_notifications !== null ? [...all_notifications].reverse() : []
   return (
     <div className="informationals-section">
               <div className="section-wrapper">
@@ -80,7 +81,7 @@ const Informationals = () => {
                                             <div className="tab-row">
                                                      <h4>Today</h4>
 
-                                                     { activities.slice(0,4).map(item => 
+                                                     {activities &&  activities.slice(0,4).map(item => 
                                                         <div className="activity-moja" key={item._id}>
                                                                 <div className="activity-block">
                                                                          <div className="activity-thumbnail">

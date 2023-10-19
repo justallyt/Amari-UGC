@@ -9,9 +9,8 @@ import Footer from "../Footer"
 import VideoLoader from "./VideoLoader"
 // import { useCreateAssetMutation } from "../../redux/videosSlice"
 import { toast } from "react-hot-toast"
-import { chunkerize } from "../../utils/fileChunker"
-import { uploadAssetToBackend } from "../../utils/uploadAssetToServer"
 import axios from "axios"
+
 const VideoCreateBody = () => {
     const { profile } = useSelector(state => state.profile)
     const { userBrands } = useSelector(state => state.utils)
@@ -38,46 +37,10 @@ const VideoCreateBody = () => {
             setIsUploading(true);
             const formData = new FormData();
             formData.append('data', JSON.stringify(data));
+           
+            
 
-            const file = data.asset[0];
-    
-            const chunkSize = 5 * 1024 * 1024;
-            const totalChunks = Math.ceil(file.size / chunkSize);
-            console.log(totalChunks)
-
-            formData.append("totalChunks", totalChunks)
-            const chunkProgress = 100 / totalChunks;
-            let chunkNumber = 0;
-            let start = 0;
-            let end = 0;
-
-            formData.append('chunkNumber', chunkNumber);
-        
-            formData.append("originalname", file.name);
-
-            const uploadNextChunk = () => {
-                   if(end <= file.size){
-                            const chunk = file.slice(start, end);
-                            formData.append("assetChunk", chunk)
-                         
-
-                            fetch('http://localhost:8080/api/asset/create', {
-                                    method: "POST",
-                                    body: formData,
-                                    credentials: "include",
-                            }).then(response => response.json())
-                            .then((data) => {
-                                    console.log({ data })
-                                    setProgress(Number((chunkNumber + 1) * chunkProgress));
-                                    chunkNumber++;
-                                    start = end;
-                                    end = start + chunkSize;
-                                    uploadNextChunk();
-                            }).catch(error => console.log("Error: ", error));
-                   }
-            }
-
-            uploadNextChunk();
+            reset();
     }
 
 

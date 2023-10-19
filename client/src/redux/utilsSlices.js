@@ -6,7 +6,8 @@ const initialState = {
       videos: localStorage.getItem('Videos') ? JSON.parse(localStorage.getItem('Videos')) : null,
       brands: null,
       requests: null,
-      userBrands: localStorage.getItem('UserBrands') ? JSON.parse(localStorage.getItem("UserBrands")) : null
+      userBrands: localStorage.getItem('UserBrands') ? JSON.parse(localStorage.getItem("UserBrands")) : null,
+      availableBrands: localStorage.getItem("AvailableBrands") ? JSON.parse(localStorage.getItem("AvailableBrands")): null
 }
 export const utilsSlice = createSlice({
         name: 'UtilsSlice',
@@ -39,6 +40,7 @@ export const utilsSlice = createSlice({
               //set brands
               setPulledBrands: (state, action) => {
                       state.brands = action.payload
+                      
               },
 
               //check requested brands
@@ -51,8 +53,11 @@ export const utilsSlice = createSlice({
                    state.userBrands = action.payload
                    localStorage.setItem('UserBrands', JSON.stringify(action.payload))
              },
-
-             clearUtils: (state) => {
+            setAvailableBrands: (state, action) => {
+                    state.availableBrands = action.payload
+                    localStorage.setItem("AvailableBrands", JSON.stringify(action.payload))
+            },
+            clearUtils: (state) => {
                        state.videos = null;
                        state.brands = null;
                        state.requests = null;
@@ -71,6 +76,7 @@ export const {
        setPulledBrands,
        setRequestedBrands,
        setUserApprovedBrands,
-       clearUtils
+       clearUtils,
+       setAvailableBrands
 } = utilsSlice.actions
 export default utilsSlice.reducer;

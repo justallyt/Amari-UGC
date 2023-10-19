@@ -10,10 +10,10 @@ import toast from "react-hot-toast";
 const NotificationsBody = () => {
     const { profile, all_notifications } = useSelector(state => state.profile);
     const dispatch = useDispatch()
+
     const { data, isLoading } = useGetUserNotificationsQuery();
 
-    useEffect(() => {
-          
+    useEffect(() => {      
           if(data){
                 dispatch(setAllNotifications([...data.notifications]))
           }
@@ -52,7 +52,7 @@ const NotificationsBody = () => {
                                                        </div>
                                                 : 
                                                 <>
-                                                { sanitizeNotifications(all_notifications).map(item => 
+                                                { all_notifications && sanitizeNotifications(all_notifications).map(item => 
                                                  <div className="notification-moja" key={item._id}>
                                                          <div className="notification-moja-left">
                                                                   <div className="notification-profile">
