@@ -15,7 +15,8 @@ const VideoCreateBody = () => {
     const { profile } = useSelector(state => state.profile)
     const { userBrands } = useSelector(state => state.utils)
     const [isUploading, setIsUploading] = useState(false);
-    const [progress, setProgress] = useState(0)
+    const [isFinished, setIsFinished] = useState(false);
+    //const [progress, setProgress] = useState(0)
    const [ selectedFile, setSelectedFile] = useState(null)
    const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm()
     //asset dropzone
@@ -30,16 +31,29 @@ const VideoCreateBody = () => {
             }
     })
 
-    //const [ createAsset, { isLoading } ] = useCreateAssetMutation();
-
     const uploadAsset = async(data, e) =>{
             e.preventDefault();
             setIsUploading(true);
             const formData = new FormData();
             formData.append('data', JSON.stringify(data));
-           
-            
+            formData.append('asset', data.asset[0]);
 
+            // const onUploadProgress = event => {
+            //        const percentCompleted = Math.round((event.loaded * 100) / event.total);
+            //        console.log('onUploadProgress', percentCompleted);
+            // };
+
+            const res = await axios.post(import.meta.env.VITE_API_URL,
+                   formData,
+                   { withCredentials: true, headers: {"Content-Type": 'multipart/form-data' } },
+             )
+             if(res){
+                   setIsFinished(true)
+                   resetUpload();
+             }else{
+                   toast.error("Sorry something went wrong")
+             }
+  
             reset();
     }
 
@@ -61,7 +75,7 @@ const VideoCreateBody = () => {
                                        </div>
                                       
                                        { isUploading ?
-                                             <VideoLoader percent={progress} uploadStatus={isUploading} resetIsUploading={setIsUploading} />
+                                             <VideoLoader uploadStatus={isUploading} end={isFinished} resetIsFinished={setIsFinished}  resetIsUploading={setIsUploading} />
                                            : 
                                            <form onSubmit={handleSubmit(uploadAsset)} encType="multipart/form-data">
                                                      <div className="video-form-row">

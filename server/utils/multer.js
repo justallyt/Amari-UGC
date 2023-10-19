@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
         }
 });
 
-const assetStorage = multer.memoryStorage({
+const assetStorage = multer.diskStorage({
          filename: (req, file, cb) => cb(null, file.originalname)
 })
 export const upload = multer({ storage: storage });

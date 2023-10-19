@@ -1,30 +1,24 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 import { GiCheckMark } from "react-icons/gi"
-import { useDispatch, useSelector } from "react-redux"
-import { clearUploadProgress } from "../../redux/utilsSlices"
+import { useSelector } from "react-redux"
+
 import { NavLink } from "react-router-dom"
-const VideoLoader = ({ percent, uploadStatus, resetIsUploading }) => {
+const VideoLoader = ({ resetIsUploading, end, resetIsFinished }) => {
     const [success, setSuccess] = useState(false)
-    const [uploadMsg, setUploadMsg] = useState("Retrieving and preparing your asset")
+    const [uploadMsg, setUploadMsg] = useState("Sit tight while we upload your asset.")
     const { profile } = useSelector(state => state.profile)
-  //  useEffect(()=> {
-  //         if(percent === 100){
-  //                  setTimeout(()=> {
-  //                      setUploadMsg("Uploading your asset to the servers")
-  //                  }, 1000)
-  //         }
 
-  //        if(!uploadStatus){
-  //                setSuccess(true)
-  //         }
-  //  }, [percent, uploadStatus])
+   useEffect(()=> {
+         if(end){
+                 setSuccess(true)
+          }
+   }, [end])
 
-   const dispatch = useDispatch()
    const resetThings = () => {
             setSuccess(false);
-            setUploadMsg("Retrieving and preparing your asset");
-            dispatch(clearUploadProgress());
+            setUploadMsg("Sit tight while we upload your asset.");
+            resetIsFinished(false)
             resetIsUploading(false)
    }
   return (
@@ -50,9 +44,6 @@ const VideoLoader = ({ percent, uploadStatus, resetIsUploading }) => {
                                                     <div className="bouncing-shadow"></div>
                                         </div>
                                         <p>{uploadMsg}</p>           
-                                         <div className="progress-bar">
-                                                   <div className="bar-percent" style={{ width: `${percent}%` }}></div>
-                                         </div>
                                </>
                              }
                 </div>

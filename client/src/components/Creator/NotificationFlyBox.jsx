@@ -26,7 +26,10 @@ const NotificationFlyBox = ({ status, fn, innerRef }) => {
                                                      }
                                             </div>
                                             <div className="box-texts">
-                                                   { item.notification_type === 'Request' ? <p>{item.sender.senderMsg}</p> : <p>{item.receipient.receipientMsg}</p>}
+                                                   { item.notification_type === 'Request' ? <p>{item.sender.senderMsg}</p> : 
+                                                      item.notification_type === 'Upload' ?  <p>{item.sender.senderMsg}</p> :
+                                                      <p>{item.receipient.receipientMsg}</p>}
+                                                      
                                                   <span>{calculateTimePassed(item.createdAt)}</span>
                                            </div>
                               </div>

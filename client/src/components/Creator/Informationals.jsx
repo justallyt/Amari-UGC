@@ -10,7 +10,8 @@ import { openModal } from "../../redux/utilsSlices"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { BsPatchPlus } from "react-icons/bs"
-import { calculateTimePassed } from "../../utils/dateConverter"
+import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter"
+
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
   const { isModalOpen, videos } = useSelector(state => state.utils);
@@ -81,7 +82,7 @@ const Informationals = () => {
                                             <div className="tab-row">
                                                      <h4>Today</h4>
 
-                                                     {activities &&  activities.slice(0,4).map(item => 
+                                                     {activities &&  sanitizeNotifications(activities).slice(0,4).map(item => 
                                                         <div className="activity-moja" key={item._id}>
                                                                 <div className="activity-block">
                                                                          <div className="activity-thumbnail">
