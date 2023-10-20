@@ -13,8 +13,9 @@ import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 import profileImg from "../../assets/dummyprofile.png"
 import { apiSlice } from "../../redux/apiSlice"
-import { clearUtils } from "../../redux/utilsSlices"
+import { clearUtils, setUserAssets } from "../../redux/utilsSlices"
 import NotificationFlyBox from "./NotificationFlyBox"
+import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 
 const Topbar = ({ user}) => {
   const [ status, setStatus ] = useState(false)
@@ -27,16 +28,20 @@ const Topbar = ({ user}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
     //get user notifications
-    const { data, isLoading} = useGetUnreadUserNotificationsQuery();
+    const { data: user_notifs, isLoading} = useGetUnreadUserNotificationsQuery();
+    const { data: user_things} = useGetUserAssetsQuery();
   
   useEffect(() => {
            document.addEventListener("click", handleClick, true)
            document.addEventListener("click", handleNotification, true)
 
-           if(data && !isLoading){
-                  dispatch(setUnreadNotifications([...data.notifications]))
+           if(user_notifs && !isLoading){
+                  dispatch(setUnreadNotifications([...user_notifs.notifications]))
            }
-  }, [data, dispatch, isLoading])
+           if(user_things){
+                 dispatch(setUserAssets([...user_things.assets]))
+           }
+  }, [user_notifs, dispatch, user_things, isLoading])
 
   const handleClick = (e) => {
           if(boxRef.current && !boxRef.current.contains(e.target)){

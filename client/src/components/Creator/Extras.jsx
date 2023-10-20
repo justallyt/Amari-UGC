@@ -2,6 +2,7 @@ import { CgMoreAlt } from "react-icons/cg"
 import brands from "../../assets/enterprise.png"
 import videos from "../../assets/video-editing.png"
 import { AreaChart, Area, XAxis, YAxis,  Tooltip, ResponsiveContainer } from 'recharts';
+import { useSelector } from "react-redux";
 
 const data = [
      { name: 'Jan', uv: 120, pv: 400, amt: 2000},
@@ -13,7 +14,14 @@ const data = [
      { name: 'July', uv: 148, pv: 400, amt: 2000},
      { name: 'August', uv: 250, pv: 400, amt: 2000}
 ]
+
+
+
 const Extras = () => {
+  const { assets } = useSelector(state => state.utils)
+  //Sanitize things
+const active_brands = assets && [...new Set(assets.map(item => item.created_for))]
+console.log(active_brands)
   return (
     <div className="extras-section">
              <div className="extras-wrapper">
@@ -31,14 +39,14 @@ const Extras = () => {
                                                  <div className="brand-icon">
                                                            <img src={brands} alt="" />
                                                  </div>
-                                                <h4>5 brands</h4>
+                                                <h4>{active_brands !== null ? active_brands.length : '0'} Brands</h4>
                                                 <p>Created for</p>
                                      </div>
                                      <div className="brands-box">
                                                  <div className="brand-icon">
                                                            <img src={videos} alt="" />
                                                  </div>
-                                                <h4>10 Creations</h4>
+                                                <h4>{assets !== null ? assets.length : 0} Assets</h4>
                                                 <p>Created</p>
                                      </div>
                         </div>

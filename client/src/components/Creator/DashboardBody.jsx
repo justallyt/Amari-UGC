@@ -37,7 +37,7 @@ const DashboardBody = () => {
                <div className="dashboard-row">
                          <Topbar user={profile} />
 
-                         <div className="dashbord-wrapper">
+                         <div className="dashboard-wrapper">
                                   <div className="intro">
                                             <h2>{greeting}, { profile && profile.name.split(" ")[0]}</h2>
                                   </div>

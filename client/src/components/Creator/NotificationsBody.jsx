@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { setAllNotifications } from "../../redux/profileSlice";
 import SpinnerData from "../SpinnerData"
 import toast from "react-hot-toast";
+import Footer from "../Footer";
 
 const NotificationsBody = () => {
     const { profile, all_notifications } = useSelector(state => state.profile);
@@ -74,6 +75,8 @@ const NotificationsBody = () => {
                                                  </>}
                                       </div>
                            </div>
+
+                           <Footer />
                 </div>
     </div>
   )

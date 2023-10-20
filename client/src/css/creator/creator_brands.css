@@ -1,6 +1,9 @@
 :root{
     --gray: rgb(82, 82, 82);
 }
+.brand-list-row{
+     min-height: 120vh;
+}
 .brand-list-header{
      width: 800px;
 }

@@ -1,16 +1,16 @@
 import CreatorSidebar from '../../components/Creator/Sidebar'
-import VideoCreateBody from '../../components/Creator/VideoCreateBody'
+import CreateAssetBody from '../../components/Creator/CreateAssetBody'
 import '../../css/creator/video_create.css'
 
-const VideoCreate = () => {
+const CreateAsset = () => {
   return (
     <div className='dashboard-wrapper'>
                <div className="dashboard-inner">
                            <CreatorSidebar />
-                           <VideoCreateBody />
+                           <CreateAssetBody />
                </div>
     </div>
   )
 }
 
-export default VideoCreate
+export default CreateAsset

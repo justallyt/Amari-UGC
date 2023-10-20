@@ -7,6 +7,7 @@ import { setPulledBrands} from "../../redux/utilsSlices"
 import RequestBtn from "./RequestBtn"
 import SpinnerData from "../SpinnerData"
 import { setProfile } from "../../redux/profileSlice"
+import Footer from "../Footer"
 const CreatorBrandsBody = ({ refetchFn }) => {
     //const [ availableBrands, setAvailableBrands] = useState()
     const { profile } = useSelector(state => state.profile)
@@ -94,6 +95,8 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                  </div>
                                       </div>
                            </div>
+
+                           <Footer />
                </div>
     </div>
   )

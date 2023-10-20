@@ -31,7 +31,7 @@ export const utilsSlice = createSlice({
               },
 
               //set  Assets
-              setAssets: (state, action) => {
+              setUserAssets: (state, action) => {
                      state.videos = action.payload
                      localStorage.setItem('Assets', JSON.stringify(action.payload))
               },
@@ -71,7 +71,7 @@ export const {
       setUploadProgress, 
       clearUploadProgress,
       openModal, closeModal, 
-      setAssets,
+      setUserAssets,
        setPulledBrands,
        setRequestedBrands,
        setUserApprovedBrands,

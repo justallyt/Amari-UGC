@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { NavLink } from "react-router-dom"
 import { MdOutlineVideoFile } from "react-icons/md"
-import { FaHeart } from 'react-icons/fa'
 import AssetModal from "./AssetModal"
 import { openModal } from "../../redux/utilsSlices"
+import { VscHeart } from "react-icons/vsc"
 import { useState } from "react"
+import Footer from "../Footer"
 const AssetsBody = () => {
       const [videoId, setVideoId] = useState(null)
     const { profile } = useSelector(state => state.profile)
@@ -31,10 +32,11 @@ const AssetsBody = () => {
                                              </div>
 
                                              <div className="assets-videos">
-                                                        <h4>{assets.length} Assets</h4>
+                                                        <h4>{assets !== null && `${assets.length} Assets`}</h4>
 
-                                                        <div className="assets-video-row">
-                                                                   { assets.map(item => 
+                                                        { assets !== null && assets.length > 0 ?
+                                                              <div className="assets-video-row">
+                                                                   { assets !== null &&  assets.map(item => 
                                                                         <div className="asset-video-moja" key={item._id} onClick={() => openVideoModal(item._id)} >
                                                                               <img src={item.asset.thumbnail} alt="" />
                                                                               <div className="video-deets">
@@ -43,15 +45,18 @@ const AssetsBody = () => {
                                                                                                    <p>{item.brand_product}</p>
                                                                                          </div>
                                                                                          <div className="likes">
-                                                                                                     <span><FaHeart /></span>
+                                                                                                     <span><VscHeart /></span>
                                                                                                      <p>0</p>
                                                                                          </div>
                                                                               </div>
                                                                    </div>
                                                                   )}
-                                                        </div>
+                                                        </div>     : <p className="silence">You have not created any assets so far.</p>
+                                                        }
                                              </div>
                                   </div>
+
+                                  <Footer />
                        </div>
             </div>
        )

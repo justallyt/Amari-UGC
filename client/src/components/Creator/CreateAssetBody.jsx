@@ -10,8 +10,9 @@ import VideoLoader from "./VideoLoader"
 // import { useCreateAssetMutation } from "../../redux/videosSlice"
 import { toast } from "react-hot-toast"
 import axios from "axios"
+//import { useCreateAssetMutation } from "../../redux/assetSlice"
 
-const VideoCreateBody = () => {
+const CreateAssetBody = () => {
     const { profile } = useSelector(state => state.profile)
     const { userBrands } = useSelector(state => state.utils)
     const [isUploading, setIsUploading] = useState(false);
@@ -31,6 +32,7 @@ const VideoCreateBody = () => {
             }
     })
 
+    //const [createUserAsset] = useCreateAssetMutation()
     const uploadAsset = async(data, e) =>{
             e.preventDefault();
             setIsUploading(true);
@@ -47,6 +49,8 @@ const VideoCreateBody = () => {
                    formData,
                    { withCredentials: true, headers: {"Content-Type": 'multipart/form-data' } },
              )
+            // const res = await createUserAsset(formData).unwrap();
+
              if(res){
                    setIsFinished(true)
                    resetUpload();
@@ -57,14 +61,12 @@ const VideoCreateBody = () => {
             reset();
     }
 
-
     const resetUpload = () => {
             setSelectedFile(null)
             resetField('video')
     }
   return (
-    <div  className="dashboard-body-wrap">
-               
+    <div  className="dashboard-body-wrap">        
                <div className="dashboard-row">
                           <Topbar user={profile} />
 
@@ -133,11 +135,13 @@ const VideoCreateBody = () => {
                                            </form>
                                       }
                           </div>
+
+                          <Footer />
                </div>
-               <Footer />
+               
     </div>
   )
 }
 
-export default VideoCreateBody
+export default CreateAssetBody
 

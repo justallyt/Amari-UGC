@@ -219,8 +219,13 @@
       padding-bottom: 3px;
       cursor: pointer;
 }
-.upload-btns p,
-.upload-btn{
+.upload-admin-btns{
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+}
+.upload-admin-btns p,
+.upload-admin-btn{
        width: 100px;
        font-family: "Madera-Regular";
        height: 45px;
@@ -236,12 +241,20 @@
        cursor: pointer;
        font-size: 14px;
 }
-.upload-btns .upload-btn p,
-.upload-btn{
+.upload-admin-btns .upload-admin-btn p,
+.upload-admin-btn{
       background: var(--main-color);
       color: white !important;
 }
-.upload-btns p{
+.upload-admin-btns p{
       background: rgba(250, 95, 128, 0.822);
       color: whitesmoke;
+}
+.upload-admin-btn input[type='file']{
+      position: absolute;
+      width: 90px;
+      height: 35px;
+      opacity: 0;
+      font-size: 0;
+      cursor: pointer;
 }

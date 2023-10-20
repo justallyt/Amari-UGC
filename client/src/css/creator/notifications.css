@@ -1,3 +1,6 @@
+.notifications-wrapper{
+      min-height: 120vh;
+}
 .notifications-wrapper h2{
       font-size: 23px;
       font-family: "Madera-Light";

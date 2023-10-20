@@ -1,3 +1,6 @@
+.assets-body-wrap{
+    min-height: 120vh;
+}
 .assets-body-wrap .intro{
     margin: 20px  0;
     border-bottom: 1px solid var(--sleezy-border);
@@ -6,6 +9,7 @@
 .assets-body-wrap .intro .intro-column{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 .intro-column a{
     display: flex;
@@ -33,7 +37,6 @@
     font-family: "Madera-Light";
 }
 .assets-body-wrap .intro p{
-    width: 700px;
     font-size: 15px;
     color: rgb(101, 100, 100);
 }
@@ -45,7 +48,7 @@
 .assets-video-row{
      display: grid;
      grid-template-columns: repeat(3,1fr);
-     gap: 20px;
+     gap: 5px;
      margin-top: 30px;
 }
 .asset-video-moja{
@@ -56,6 +59,7 @@
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
+    overflow: hidden;
 }
 .asset-video-moja img{
      position: absolute;
@@ -79,9 +83,26 @@
       -ms-border-radius: 20px;
       -o-border-radius: 20px;
       padding: 15px 30px;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(20px);
       display: grid;
       grid-template-columns:  auto 45px;
+      transform: translateY(100%);
+      -webkit-transform: translateY(100%);
+      -moz-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+      -o-transform: translateY(100%);
+      transition: transform 0.3s ease;
+      -webkit-transition: transform 0.3s ease;
+      -moz-transition: transform 0.3s ease;
+      -ms-transition: transform 0.3s ease;
+      -o-transition: transform 0.3s ease;
+}
+.asset-video-moja:hover .video-deets{
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
 }
 .video-deets span.play{
       font-size: 20px;
@@ -126,6 +147,7 @@
 }
 .video-deets .likes span{
       color: rgb(238, 238, 238);
+      font-size: 25px;
 }
 .video-deets .likes p{
     font-size: 12px;

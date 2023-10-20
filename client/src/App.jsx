@@ -10,7 +10,6 @@ import CreatorSettings from "./pages/Creator/CreatorSettings"
 import BrandRoutes from './utils/BrandRoutes'
 import CreatorRoutes from "./utils/CreatorRoutes"
 import BrandSettings from "./pages/Brand/BrandSettings"
-import VideoCreate from "./pages/Creator/VideoCreate"
 import CreatorAssets from "./pages/Creator/CreatorAssets"
 import AdminRoutes from "./utils/AdminRoutes"
 import AdminDashboard from "./pages/Admin/AdminDashboard"
@@ -18,6 +17,7 @@ import CreatorBrands from "./pages/Creator/CreatorBrands"
 import AdminTasks from "./pages/Admin/AdminTasks"
 import AdminSettings from "./pages/Admin/AdminSettings"
 import CreatorNotifications from "./pages/Creator/CreatorNotifications"
+import CreateAsset from "./pages/Creator/CreateAsset"
 
 function App() {
 
@@ -32,7 +32,7 @@ function App() {
                    {/* Consumer Routes */}
                      <Route element={<CreatorRoutes />}>
                                <Route path="/creator/:id/" element={<CreatorDashboard />} />
-                               <Route path="/creator/:id/new" element={<VideoCreate />} />
+                               <Route path="/creator/:id/new" element={<CreateAsset />} />
                                <Route path="/creator/:id/assets" element={<CreatorAssets />} />
                                <Route path="/creator/:id/settings" element={<CreatorSettings />} />
                                <Route path="/creator/:id/settings/:type" element={<CreatorSettings />} />

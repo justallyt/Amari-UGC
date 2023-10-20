@@ -1,12 +1,9 @@
 import { NavLink } from "react-router-dom"
 import { BsFileEarmarkText } from "react-icons/bs"
-import { useGetUserAssetsQuery } from "../../redux/assetSlice"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setAssets } from "../../redux/utilsSlices"
 import { BsPlayFill } from 'react-icons/bs'
-import { openModal } from "../../redux/utilsSlices"
-import Skeleton from 'react-loading-skeleton'
+import { openModal} from "../../redux/utilsSlices"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { BsPatchPlus } from "react-icons/bs"
 import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter"
@@ -16,23 +13,15 @@ const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
   const { isModalOpen, assets } = useSelector(state => state.utils);
   const { profile, all_notifications } = useSelector(state => state.profile)
-  const dispatch = useDispatch();
 
-  const { data, isLoading } = useGetUserAssetsQuery({  refetchOnMountOrArgChange: true })
-
-  useEffect(()=> {
-          if(!isLoading && data){
-                   dispatch(setAssets(data.assets))
-          }
-  }, [data, isLoading, dispatch])
-
+ const dispatch = useDispatch();
   const openVideoModal = (id) => {
          dispatch(openModal())
          setVideoId(id)
   }
-
   //sanitize activity notifications
   const activities = all_notifications !== null ? [...all_notifications].reverse() : []
+  const user_assets = assets !== null ? assets : []
 
   return (
     <div className="informationals-section">
@@ -44,18 +33,18 @@ const Informationals = () => {
                                 </div>
                                { isModalOpen ?  <AssetModal identity={videoId} />: ''}
                                 <div className="creations-row">
-                                       { assets && assets.length > 0 ? 
+                                       { user_assets && user_assets.length > 0 ? 
                                             <>
-                                              { assets.slice(-3).reverse().map(item =>
+                                              { user_assets.slice(-3).reverse().map(item =>
                                                 <div className="creation-moja" key={item._id}>
                                                             <div className="creation-thumbnail">
-                                                                     { isLoading ?  <Skeleton height={250} /> : <img src={item.asset.thumbnail} alt="" />}
+                                                                     <img src={item.asset.thumbnail} alt="" />
                                                                      <div className="overlay-play">
                                                                                 <span onClick={() => openVideoModal(item._id)}><BsPlayFill /></span>
                                                                      </div>
                                                               </div>
-                                                           { isLoading ?  <Skeleton /> : <h3>{item.created_for}</h3>}
-                                                          { isLoading ?  <Skeleton /> : <p>{item.brand_product}</p>}
+                                                           <h3>{item.created_for}</h3>
+                                                           <p>{item.brand_product}</p> 
                                                  </div>
                                                )}
                                             </>:
@@ -81,28 +70,31 @@ const Informationals = () => {
                                             </div>
 
                                             <div className="tab-row">
-                                                     <h4>Today</h4>
-
-                                                     {activities &&  sanitizeNotifications(activities).slice(0,4).map(item => 
-                                                        <div className="activity-moja" key={item._id}>
-                                                                <div className="activity-block">
-                                                                         <div className="activity-thumbnail">
-                                                                                 <img src={item.sender.profilePhoto} alt="" />
-                                                                         </div>
-                                                                         <div className="activity-user">
-                                                                                    <h5>
-                                                                                           { item.notification_type === 'Request' || item.notification_type === 'Upload' ? 'You' :
+                                                     { activities.length > 0 ? 
+                                                             <> 
+                                                                      {activities &&  sanitizeNotifications(activities).slice(0,4).map(item => 
+                                                                          <div className="activity-moja" key={item._id}>
+                                                                                  <div className="activity-block">
+                                                                                           <div className="activity-thumbnail">
+                                                                                                   <img src={item.sender.profilePhoto} alt="" />
+                                                                                           </div>
+                                                                                           <div className="activity-user">
+                                                                                                      <h5>
+                                                                                                             { item.notification_type === 'Request' || item.notification_type === 'Upload' ? 'You' :
                                                                                                item.sender.senderName 
-                                                                                           }
-                                                                                    </h5>
-                                                                                    <p>{item.sender.senderMsg || item.receipient.receipientMsg}</p>
-                                                                         </div>
-                                                                </div>
-                                                                <div className="time"> 
-                                                                        <p>{calculateTimePassed(item.createdAt)}</p>
-                                                                 </div>
-                                                         </div>
-                                                     )}
+                                                                                                             }
+                                                                                                      </h5>
+                                                                                                      <p>{item.sender.senderMsg || item.receipient.receipientMsg}</p>
+                                                                                           </div>
+                                                                                  </div>
+                                                                                  <div className="time"> 
+                                                                                          <p>{calculateTimePassed(item.createdAt)}</p>
+                                                                                   </div>
+                                                                        </div>
+                                                                    )}
+                                                             </>    : 
+                                                             <p className="silence">Eerie silence over here</p>
+                                                     }
                                                      
                                             </div>
                                 </div>

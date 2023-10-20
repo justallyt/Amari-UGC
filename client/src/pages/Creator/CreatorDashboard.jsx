@@ -4,10 +4,10 @@ import "../../css/creator/dashboard_creator.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useGetBrandsQuery, useGetUnreadUserNotificationsQuery, useGetUserNotificationsQuery, useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setAllNotifications, setProfile, setUnreadNotifications } from "../../redux/profileSlice"
-import { setAvailableBrands, setPulledBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
-
+import { setUserAssets, setAvailableBrands, setPulledBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
 import { useEffect } from "react"
 import Spinner from "../../components/Spinner"
+import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 
 const CreatorDashboard = () => {  
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const CreatorDashboard = () => {
   const { data: user_notifications } = useGetUserNotificationsQuery({ refetchOnMountOrArgChange: true})
   const { data: unread_user_notifications } = useGetUnreadUserNotificationsQuery({ refetchOnMountOrArgChange: true})
   const { data:allbrands } = useGetBrandsQuery({ refetchOnMountOrArgChange: true})
+ const { data: user_assets } = useGetUserAssetsQuery({ refetchOnMountOrArgChange: true})
 
   useEffect(() => {
         if(!isLoading && user_data){
@@ -29,7 +30,10 @@ const CreatorDashboard = () => {
          if(unread_user_notifications){
               dispatch(setUnreadNotifications([...unread_user_notifications.notifications]))
          }
-  }, [user_data, user_notifications, unread_user_notifications, dispatch, isLoading])
+         if(user_assets){
+               dispatch(setUserAssets([...user_assets.assets]))
+         }
+  }, [user_data, user_notifications, unread_user_notifications,user_assets, dispatch, isLoading])
 
   useEffect(()=>{
              if(allbrands){

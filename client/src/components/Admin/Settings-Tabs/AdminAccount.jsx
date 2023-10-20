@@ -84,8 +84,8 @@ const updateAdmin = async (data) => {
                                                   <div className="upload-image">
                                                             { status ?  <img src={imageUrl} alt="" /> :  <img src={profile.profilePic.url !== 'null' ? profile.profilePic.url : profileImg} alt="" />}
                                                   </div>
-                                                  <div className="upload-btns">
-                                                             <span  className="upload-btn">
+                                                  <div className="upload-admin-btns">
+                                                             <span  className="upload-admin-btn">
                                                                        <input type="file" {...register('profileImage')} onChange={uploadProfile}  />
                                                                        <p>Upload</p>
                                                               </span>
