@@ -108,3 +108,14 @@ export const CreateAsset = asyncHandler(async(req, res) => {
                 res.status(403).json({ message: 'Sorry you are not authorized to create an asset with this account.'})
         }
 })
+
+//Get User Assets
+export const getUserAssets = asyncHandler(async(req, res) => {
+        const assets = await Asset.find({ creator: req.user._id})
+ 
+        if(assets){
+             res.status(200).json({assets})
+      }else{
+              res.status(400).json({ message: "User data could not be fetched at this time."})
+      }
+ })

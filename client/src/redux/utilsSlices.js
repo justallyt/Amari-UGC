@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { 
-      videoUploadProgress: 0,
       isModalOpen: false,
-      videos: localStorage.getItem('Videos') ? JSON.parse(localStorage.getItem('Videos')) : null,
+      assets: localStorage.getItem('Assets') ? JSON.parse(localStorage.getItem('Assets')) : null,
       brands: null,
       requests: null,
       userBrands: localStorage.getItem('UserBrands') ? JSON.parse(localStorage.getItem("UserBrands")) : null,
@@ -13,12 +12,12 @@ export const utilsSlice = createSlice({
         name: 'UtilsSlice',
         initialState,
         reducers: {
-              setUploadProgress: (state, action) => {
-                     return {
-                           ...state,
-                          videoUploadProgress: action.payload
-                     }
-              },
+        //       setUploadProgress: (state, action) => {
+        //              return {
+        //                    ...state,
+        //                   videoUploadProgress: action.payload
+        //              }
+        //       },
               clearUploadProgress: (state) => {
                       state.videoUploadProgress = 0
               },
@@ -31,10 +30,10 @@ export const utilsSlice = createSlice({
                   state.isModalOpen = false
               },
 
-              //set Video Assets
-              setVideoAssets: (state, action) => {
+              //set  Assets
+              setAssets: (state, action) => {
                      state.videos = action.payload
-                     localStorage.setItem('Videos', JSON.stringify(action.payload))
+                     localStorage.setItem('Assets', JSON.stringify(action.payload))
               },
 
               //set brands
@@ -58,7 +57,7 @@ export const utilsSlice = createSlice({
                     localStorage.setItem("AvailableBrands", JSON.stringify(action.payload))
             },
             clearUtils: (state) => {
-                       state.videos = null;
+                       state.assets = null;
                        state.brands = null;
                        state.requests = null;
                        state.userBrands = null;
@@ -72,7 +71,7 @@ export const {
       setUploadProgress, 
       clearUploadProgress,
       openModal, closeModal, 
-      setVideoAssets,
+      setAssets,
        setPulledBrands,
        setRequestedBrands,
        setUserApprovedBrands,

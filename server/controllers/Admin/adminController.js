@@ -152,6 +152,7 @@ export const ApproveCreatorRequest = asyncHandler(async(req, res) => {
                    notification_type: 'Approval',
                    sender: {
                           senderId: admin_id,
+                          senderName:'Admin',
                           profilePhoto: req.user.profilePic.url
                    },
                    receipient: {

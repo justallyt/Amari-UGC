@@ -78,10 +78,10 @@
       -moz-border-radius: 20px;
       -ms-border-radius: 20px;
       -o-border-radius: 20px;
-      padding: 15px;
+      padding: 15px 30px;
       backdrop-filter: blur(5px);
       display: grid;
-      grid-template-columns: 45px auto 45px;
+      grid-template-columns:  auto 45px;
 }
 .video-deets span.play{
       font-size: 20px;
@@ -221,10 +221,14 @@
      overflow: hidden;
      width: 95%;
      height: 95%;
+     background: rgb(5, 40, 41)
 }
 .video-part .modal-video-box video{
      overflow: hidden;
-     background: rgb(5, 40, 41)
+     
+}
+.modal-video-box img{
+      object-fit: contain;
 }
 .modal-box .likes-part{
      padding: 30px;

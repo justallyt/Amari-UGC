@@ -2,15 +2,14 @@ import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { NavLink } from "react-router-dom"
 import { MdOutlineVideoFile } from "react-icons/md"
-import { BsPlayFill } from 'react-icons/bs'
 import { FaHeart } from 'react-icons/fa'
-import VideoModal from "./VideoModal"
+import AssetModal from "./AssetModal"
 import { openModal } from "../../redux/utilsSlices"
 import { useState } from "react"
 const AssetsBody = () => {
       const [videoId, setVideoId] = useState(null)
     const { profile } = useSelector(state => state.profile)
-    const { videos, isModalOpen } = useSelector(state => state.utils);
+    const { assets, isModalOpen } = useSelector(state => state.utils);
     const dispatch = useDispatch()
 
     const openVideoModal = (id) => {
@@ -21,7 +20,7 @@ const AssetsBody = () => {
             <div className="dashboard-body-wrap">
                        <div className="dashboard-row">
                                   <Topbar user={profile} />
-                                 { isModalOpen ? <VideoModal identity={videoId}/> : ''}
+                                 { isModalOpen ? <AssetModal identity={videoId}/> : ''}
                                   <div className="assets-body-wrap">
                                              <div className="intro">
                                                      <h2>My Creations</h2>
@@ -32,14 +31,13 @@ const AssetsBody = () => {
                                              </div>
 
                                              <div className="assets-videos">
-                                                        <h4>{videos.length} Videos</h4>
+                                                        <h4>{assets.length} Assets</h4>
 
                                                         <div className="assets-video-row">
-                                                                   { videos.map(item => 
-                                                                        <div className="asset-video-moja" key={item._id}>
-                                                                              <img src={item.video.thumbnail} alt="" />
+                                                                   { assets.map(item => 
+                                                                        <div className="asset-video-moja" key={item._id} onClick={() => openVideoModal(item._id)} >
+                                                                              <img src={item.asset.thumbnail} alt="" />
                                                                               <div className="video-deets">
-                                                                                         <span onClick={() => openVideoModal(item._id)} className="play"><BsPlayFill /></span>
                                                                                          <div className="video-tags">
                                                                                                    <h3>{item.created_for}</h3>
                                                                                                    <p>{item.brand_product}</p>

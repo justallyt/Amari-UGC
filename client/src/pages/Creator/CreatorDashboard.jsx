@@ -2,8 +2,8 @@ import DashboardBody from "../../components/Creator/DashboardBody"
 import CreatorSidebar from "../../components/Creator/Sidebar"
 import "../../css/creator/dashboard_creator.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useGetBrandsQuery, useGetUserNotificationsQuery, useGetUserProfileQuery } from "../../redux/usersSlice"
-import { setAllNotifications, setProfile } from "../../redux/profileSlice"
+import { useGetBrandsQuery, useGetUnreadUserNotificationsQuery, useGetUserNotificationsQuery, useGetUserProfileQuery } from "../../redux/usersSlice"
+import { setAllNotifications, setProfile, setUnreadNotifications } from "../../redux/profileSlice"
 import { setAvailableBrands, setPulledBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
 
 import { useEffect } from "react"
@@ -16,6 +16,7 @@ const CreatorDashboard = () => {
   //Get User Profile
   const { data: user_data, isLoading } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
   const { data: user_notifications } = useGetUserNotificationsQuery({ refetchOnMountOrArgChange: true})
+  const { data: unread_user_notifications } = useGetUnreadUserNotificationsQuery({ refetchOnMountOrArgChange: true})
   const { data:allbrands } = useGetBrandsQuery({ refetchOnMountOrArgChange: true})
 
   useEffect(() => {
@@ -24,8 +25,11 @@ const CreatorDashboard = () => {
          }
          if(user_notifications){
               dispatch(setAllNotifications([...user_notifications.notifications]))
+         } 
+         if(unread_user_notifications){
+              dispatch(setUnreadNotifications([...unread_user_notifications.notifications]))
          }
-  }, [user_data, user_notifications, dispatch, isLoading])
+  }, [user_data, user_notifications, unread_user_notifications, dispatch, isLoading])
 
   useEffect(()=>{
              if(allbrands){

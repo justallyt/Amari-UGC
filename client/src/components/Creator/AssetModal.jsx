@@ -4,17 +4,17 @@ import logo2 from "../../assets/stanchart.png"
 import { CgClose } from "react-icons/cg"
 import { useDispatch, useSelector } from "react-redux"
 import { closeModal } from "../../redux/utilsSlices"
-import Video from "../Video"
+import OpenedAsset from "../OpenedAsset"
 
-const VideoModal = ({ identity }) => {
+const AssetModal = ({ identity }) => {
     const dispatch = useDispatch()
-   const { isModalOpen, videos } = useSelector(state => state.utils);
+   const { isModalOpen, assets } = useSelector(state => state.utils);
    
     const closeVideoModal = () =>{
            dispatch(closeModal());
     }
   
-    const activeVideo = videos.find(vid => vid._id === identity);
+    const activeAsset = assets.find(item => item._id === identity);
     
   return (
     <div className={isModalOpen ? "video-modal-wrapper active" : "video-modal-wrapper"}>
@@ -22,7 +22,7 @@ const VideoModal = ({ identity }) => {
               <div className="modal-box">
                          <div className="video-part">
                                     <div className="modal-video-box"> 
-                                              <Video source={activeVideo.video.url} />
+                                              <OpenedAsset source={activeAsset.asset.url} />
                                     </div>
                          </div>
                          <div className="likes-part">
@@ -50,4 +50,4 @@ const VideoModal = ({ identity }) => {
   )
 }
 
-export default VideoModal
+export default AssetModal
