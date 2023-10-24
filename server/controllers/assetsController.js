@@ -7,7 +7,7 @@ import Notifications from "../models/NotificationsModel.js";
 //Upload Asset
 export const CreateAsset = asyncHandler(async(req, res) => {
         const user = await User.findById(req.user._id);
-
+        
         if(user){
              let asset_id, url, thumbnail;
              //Extract type of file

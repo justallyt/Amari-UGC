@@ -4,6 +4,7 @@ const initialState = {
       isModalOpen: false,
       assets: localStorage.getItem('Assets') ? JSON.parse(localStorage.getItem('Assets')) : null,
       brands: null,
+      creators: null,
       requests: null,
       userBrands: localStorage.getItem('UserBrands') ? JSON.parse(localStorage.getItem("UserBrands")) : null,
       availableBrands: localStorage.getItem("AvailableBrands") ? JSON.parse(localStorage.getItem("AvailableBrands")): null
@@ -32,16 +33,17 @@ export const utilsSlice = createSlice({
 
               //set  Assets
               setUserAssets: (state, action) => {
-                     state.videos = action.payload
+                     state.assets = action.payload
                      localStorage.setItem('Assets', JSON.stringify(action.payload))
               },
 
               //set brands
               setPulledBrands: (state, action) => {
-                      state.brands = action.payload
-                      
+                      state.brands = action.payload               
               },
-
+              setPulledCreators: (state, action) => {
+                      state.creators = action.payload
+              },
               //check requested brands
              setRequestedBrands: (state, action) => {
                     state.requests = action.payload
@@ -76,6 +78,7 @@ export const {
        setRequestedBrands,
        setUserApprovedBrands,
        clearUtils,
-       setAvailableBrands
+       setAvailableBrands,
+       setPulledCreators
 } = utilsSlice.actions
 export default utilsSlice.reducer;

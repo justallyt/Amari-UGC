@@ -49,14 +49,16 @@ export const usersSlice = apiSlice.injectEndpoints({
                      query: () =>( {
                              url: 'user/getbrandsforcreators',
                              method: 'GET'
-                     })
+                     }),
+                     providesTags: ['UserProfile']
               }),
               //Check for already requested brands
               checkRequests: builder.query({
                       query: () => ({
                              url: 'user/check-requests',
                              method: 'GET'
-                      })
+                      }),
+                      providesTags: ['Request']
               }),
                
               //get all notifications

@@ -1,19 +1,43 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import CreatorBrandsBody from "../../components/Creator/CreatorBrandsBody"
 import CreatorSidebar from "../../components/Creator/Sidebar"
 import "../../css/creator/creator_brands.css"
-import { useCheckRequestsQuery } from "../../redux/usersSlice"
+import { useCheckRequestsQuery, useGetBrandsQuery } from "../../redux/usersSlice"
 import { useEffect } from "react"
-import { setRequestedBrands } from "../../redux/utilsSlices"
+import { setRequestedBrands, setUserApprovedBrands, setAvailableBrands, setPulledBrands } from "../../redux/utilsSlices"
 const CreatorBrands = () => {
   const dispatch = useDispatch();
-  const { data, refetch } = useCheckRequestsQuery({  refetchOnMountOrArgChange: true })
+  const { data: requests, refetch } = useCheckRequestsQuery({  refetchOnMountOrArgChange: true })
+  const { data: allbrands} = useGetBrandsQuery({ refetchOnMountOrArgChange: true })
+  const { profile } = useSelector(state => state.profile)
+  const { brands } = useSelector(state => state.utils)
 
   useEffect(()=> {
-           if(data){
-                 dispatch(setRequestedBrands({...data.user_requests}))
+           if(requests){
+                 dispatch(setRequestedBrands({...requests.user_requests}))
            }
-  }, [data, dispatch])
+          if(allbrands){
+                dispatch(setPulledBrands({...allbrands.brands}))
+          }
+  }, [allbrands, requests, dispatch])
+
+  //Filter user brands
+useEffect(() => {
+  if(brands !== null){
+        let things = []
+        profile !== null && profile.brands.forEach(item => {
+              const stuff =  Object.values(brands).find(kitu => kitu._id === item)
+              things.push(stuff)
+        })
+     //setMyBrands(things)
+     dispatch(setUserApprovedBrands(things))
+
+     const avails = Object.values(brands).filter(obj => things.indexOf(obj) === -1);
+    // setAvailableBrands(avails)
+    dispatch(setAvailableBrands(avails))
+}
+
+}, [brands, profile, dispatch])
   return (
     <div className="dashboard-wrapper">
              <div className="dashboard-inner">

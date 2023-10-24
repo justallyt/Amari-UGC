@@ -1,24 +1,31 @@
 import { NavLink } from "react-router-dom"
 import { BsFileEarmarkText } from "react-icons/bs"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { BsPlayFill } from 'react-icons/bs'
-import { openModal} from "../../redux/utilsSlices"
+import { openModal, setUserAssets} from "../../redux/utilsSlices"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { BsPatchPlus } from "react-icons/bs"
 import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter"
 import AssetModal from "./AssetModal"
+import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
   const { isModalOpen, assets } = useSelector(state => state.utils);
   const { profile, all_notifications } = useSelector(state => state.profile)
+  const { data:assets_pulled } = useGetUserAssetsQuery({refetchOnMountOrArgChange: true})
 
  const dispatch = useDispatch();
   const openVideoModal = (id) => {
          dispatch(openModal())
          setVideoId(id)
   }
+  useEffect(() => {
+         if(assets_pulled){
+               dispatch(setUserAssets([...assets_pulled.assets]))
+         }
+  }, [assets_pulled,dispatch])
   //sanitize activity notifications
   const activities = all_notifications !== null ? [...all_notifications].reverse() : []
   const user_assets = assets !== null ? assets : []

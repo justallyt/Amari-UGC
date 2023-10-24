@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import connectToDatabase from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js"
 import assetRoutes from "./routes/assetRoutes.js"
+import brandRoutes from './routes/brandRoutes.js'
 import adminRoutes from "./routes/adminRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js"
 import cors from "cors"
@@ -30,6 +31,7 @@ app.use(cors(corsConfig))
 /* Routes */
 app.use("/api/user", userRoutes);
 app.use('/api/asset', assetRoutes);
+app.use('/api/brand', brandRoutes);
 app.use('/api/admin', adminRoutes);
 
 //Error Handling

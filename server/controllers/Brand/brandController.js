@@ -1,0 +1,14 @@
+import asyncHandler from "express-async-handler";
+import User from "../../models/usersModel.js";
+import Notifications from "../../models/NotificationsModel.js";
+import mongoose from "mongoose";
+
+export const GetAllCreatorsForBrands = asyncHandler(async(req, res) => {
+         const creators = await User.find({ role: 'Creator'}).select('-password')
+
+         if(creators){
+                res.status(200).json({ creators })
+         }else{
+              res.status(500).json({ message: "Sorry, no creator could be pulled for the specified brand"})
+         }
+})

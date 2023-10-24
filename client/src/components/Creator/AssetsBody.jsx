@@ -3,20 +3,28 @@ import Topbar from "./Topbar"
 import { NavLink } from "react-router-dom"
 import { MdOutlineVideoFile } from "react-icons/md"
 import AssetModal from "./AssetModal"
-import { openModal } from "../../redux/utilsSlices"
+import { openModal, setUserAssets } from "../../redux/utilsSlices"
 import { VscHeart } from "react-icons/vsc"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Footer from "../Footer"
+import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 const AssetsBody = () => {
       const [videoId, setVideoId] = useState(null)
     const { profile } = useSelector(state => state.profile)
     const { assets, isModalOpen } = useSelector(state => state.utils);
+    const { data: pulled_assets } = useGetUserAssetsQuery({ refetchOnMountOrArgChange: true })
     const dispatch = useDispatch()
 
     const openVideoModal = (id) => {
           dispatch(openModal())
           setVideoId(id)
     }
+
+    useEffect(() => {
+             if(pulled_assets){
+                   dispatch(setUserAssets([...pulled_assets.assets]))
+             }
+    }, [dispatch, pulled_assets])
        return (
             <div className="dashboard-body-wrap">
                        <div className="dashboard-row">
