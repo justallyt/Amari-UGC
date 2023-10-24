@@ -1,9 +1,10 @@
 import express from "express";
-import { GetAllCreatorsForBrands } from "../controllers/Brand/brandController.js";
+import { GetAllAssetsForBrand, GetAllCreatorsForBrands} from "../controllers/Brand/brandController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 
 const brand_router = express.Router();
 
 brand_router.get('/get-all-creators', protect, GetAllCreatorsForBrands);
+brand_router.get('/get-brand-assets', protect, GetAllAssetsForBrand)
 
 export default brand_router;

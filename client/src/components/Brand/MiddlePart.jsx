@@ -4,17 +4,11 @@ import toast, { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux"
 import { clearMessage } from "../../redux/authSlice"
 import creators from "../../assets/leader.png";
-import videos from "../../assets/photograph.png"
+import assets from "../../assets/photograph.png"
 import posts from "../../assets/social-media.png"
 import Performance from "./Performance";
 import Transanctions from "./Transanctions";
 
-//Dummy data for creations
-const wedges = [
-  { id: 0, icon: creators, num: 20, txt: 'Creators for my brand'},
-  { id: 1, icon: videos, num: 50, txt: 'Videos for my brand'},
-  { id: 2, icon: posts, num: 33, txt: 'Posts Made'}
-]
 
 
 const MiddlePart = () => {
@@ -22,6 +16,8 @@ const MiddlePart = () => {
 
     const { userInfo } = useSelector(state => state.auth);
     const { profile } = useSelector(state => state.profile)
+    const { brandCreators, brandAssets } = useSelector(state => state.brand);
+  
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -41,6 +37,14 @@ const MiddlePart = () => {
               }, 3000)
         }
     }, [userInfo, dispatch])
+
+
+    //Sanitized data for creators and assets
+const wedges = [
+      { id: 0, icon: creators, num: brandCreators && brandCreators.length, txt: brandCreators && brandCreators.length > 1 ?  'Creators for my brand' : 'Creator for my brand'},
+    { id: 1, icon: assets, num: brandAssets && brandAssets.length, txt: brandAssets && brandAssets.length > 1 ? 'Assets for my brand' : 'Asset for my brand'},
+     { id: 2, icon: posts, num: 33, txt: 'Posts Made'}
+]
 
   return (
     <div className="dashboard-middle-part">

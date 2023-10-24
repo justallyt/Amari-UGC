@@ -4,18 +4,19 @@ import { useDispatch, useSelector } from "react-redux"
 import { useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setProfile } from "../../redux/profileSlice"
 import { useEffect } from "react"
-import { useGetAllCreatorsForBrandQuery } from "../../redux/brand/brandSlice"
-import { setBrandCreators } from "../../redux/brand/brandUtils"
+import { useGetAllAssetsForBrandQuery, useGetAllCreatorsForBrandQuery } from "../../redux/brand/brandSlice"
+import { setBrandAssets, setBrandCreators } from "../../redux/brand/brandUtils"
 import Spinner from "../../components/Spinner"
 import {  setPulledCreators } from "../../redux/utilsSlices"
+import "../../css/brand/creators.css"
 const BrandDashboard = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector(state => state.profile);
   const { creators } = useSelector(state => state.utils);
   //Get User Profile
   const { data: brand_profile, isLoading, refetch } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
- const { data: all_creators } = useGetAllCreatorsForBrandQuery({ refetchOnMountOrArgChange: true})
-
+  const { data: all_creators } = useGetAllCreatorsForBrandQuery({ refetchOnMountOrArgChange: true})
+  const { data: brand_assets } = useGetAllAssetsForBrandQuery({ refetchOnMountOrArgChange: true })
   useEffect(()=> {
            if(!isLoading && brand_profile){
                   refetch();
@@ -24,8 +25,10 @@ const BrandDashboard = () => {
           if(all_creators){
                 dispatch(setPulledCreators({...all_creators.creators}))
           }
-
-  }, [isLoading, dispatch, refetch, brand_profile, all_creators])  
+          if(brand_assets){
+                 dispatch(setBrandAssets([...brand_assets.assets]))
+          }
+  }, [isLoading, dispatch, refetch, brand_profile, all_creators, brand_assets])  
 
   //Filter brand creators
   useEffect(()=> {
@@ -38,7 +41,7 @@ const BrandDashboard = () => {
 
                 dispatch(setBrandCreators(things)); // select specific creators for specific brands
 
-                const avails = Object.values(creators).filter(obj => things.indexOf(obj) === -1);
+                //const avails = Object.values(creators).filter(obj => things.indexOf(obj) === -1);
 
                 //set available creators not subscribed yet
 

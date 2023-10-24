@@ -1,0 +1,249 @@
+.creators-header{
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-end;
+     border-bottom: 1px solid var(--sleezy-border);
+     padding-bottom: 20px;
+}
+.creators-header h2{
+    font-family: "Madera-Light";
+    font-size: 30px
+}
+.creators-header p{
+    font-size: 15px;
+    color: rgb(86, 86, 86);
+}
+.creators-header .search-and-actions{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.search-and-actions .search-bar{
+     width: 200px;
+     height: 45px;
+     font-family: "Madera-Regular";
+     padding: 0px 8px 5px 12px;
+     box-shadow: 0px 0px 3px -1px rgba(176, 176, 176, 0.551);
+}
+.search-and-actions .search-bar span{
+      font-size: 13px;
+}
+.sorter{
+    position: relative;
+}
+.sorter .sorter-active{
+     border: 1px solid rgb(223, 233, 235);
+     width: 170px;
+     height: 45px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0 15px 5px;
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     position: relative;
+}
+.sorter-active h5{
+      font-family: "Madera-Light";
+      font-size: 13px;
+      color: rgb(78, 78, 78);
+}
+.sorter-active span{
+    display: flex;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.sorter-options{
+     position: absolute;
+     right: 0;
+     top: 110%;
+     background: white;
+     width: 180px;
+     box-shadow: 0px 0px 2px -1px rgba(160, 160, 160, 0.603);
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     overflow: hidden;
+     -o-border-radius: 7px;
+     display: none;
+}
+.sorter-options.active{
+       display: block;
+}
+.sorter-options ul li{
+     font-size: 15px;
+     padding: 5px 15px;
+     transition: all 0.5s ease;
+     -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+     -ms-transition: all 0.5s ease;
+     -o-transition: all 0.5s ease;
+     cursor: pointer;
+}
+.sorter-options ul li:last-child{
+     padding-bottom: 10px;
+}
+.sorter-options ul li:hover,
+.sorter-options ul li.active{
+    color: var(--main-color);
+}
+
+
+/* Creator Switches */
+.creator-switches{
+      margin-top: 10px;
+}
+
+.creator-tab-options ul{
+    display: flex;
+    gap: 20px;
+}
+.creator-tab-options ul li{
+     padding: 8px 25px 12px;
+     font-size: 14px;
+     font-family: "Madera-Medium";
+     border-radius: 20px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     -ms-border-radius: 20px;
+     -o-border-radius: 20px;
+     cursor: pointer;
+     transition: all 0.5s ease;
+     -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+     -ms-transition: all 0.5s ease;
+     -o-transition: all 0.5s ease;
+}
+.creator-tab-options ul li.active,
+.creator-tab-options ul li:hover{
+      background: rgba(224, 246, 250, 0.51);
+      color: var(--main-color);
+}
+.creator-tabs{
+      margin-top: 30px;
+}
+.creator-tab-my-creators{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 10px;
+}
+.creator-moja{
+     text-align: center;
+     padding: 40px;
+     border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     -ms-border-radius: 10px;
+     -o-border-radius: 10px;
+     background: rgb(245, 254, 254);
+     box-shadow: 0px 0px 3px -1px rgba(177, 195, 200, 0.56);
+     transition: all 0.7s ease;
+     -webkit-transition: all 0.7s ease;
+     -moz-transition: all 0.7s ease;
+     -ms-transition: all 0.7s ease;
+     -o-transition: all 0.7s ease;
+}
+.creator-moja:hover{
+       transform: translateY(-10px);
+       -webkit-transform: translateY(-10px);
+       -moz-transform: translateY(-10px);
+       -ms-transform: translateY(-10px);
+       -o-transform: translateY(-10px);
+}
+.creator-moja .profile-image{
+       width: 70px;
+       height: 70px;
+       margin: 10px auto;
+       border: 4px solid white;
+       box-shadow: 0px 0px 3px -1px rgba(188, 188, 188, 0.597);
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       overflow: hidden;
+}
+
+.creator-moja .profile-details h2{
+     font-size: 24px;
+     margin-bottom: 10px;
+     color: #333;
+}
+.creator-moja .profile-details p{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 14px;
+     color: #888;
+     font-family: "Madera-Regular";
+}
+.creator-moja .profile-details p span{
+       font-size: 20px;
+       display: flex;
+       margin-top: 2px;
+}
+.profile-features-row{
+      position: relative;
+}
+.creator-moja .features{
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      margin: 20px auto;
+      gap: 20px;
+}
+.creator-moja .features h3{
+     font-family: "Madera-Light";
+}
+.creator-moja .features p{
+     font-size: 13px
+}
+.creator-moja .features .brands{ 
+       border-left: 1px solid var(--sleezy-border);
+       border-right: 1px solid var(--sleezy-border);
+}
+.view-creator-profile{
+       position: absolute;
+       width: 100%;
+}
+.creator-moja:hover .view-creator-profile{
+       position: relative;
+}
+.view-creator-profile a{
+     width: 90%;
+     margin: auto;
+     height: 45px;
+     display: flex;
+     justify-content: center;
+     background: rgba(224, 246, 250, 0.51);
+     border-radius: 35px;
+     -webkit-border-radius: 35px;
+     -moz-border-radius: 35px;
+     -ms-border-radius: 35px;
+     -o-border-radius: 35px;
+     font-size: 14px;
+     align-items: center;
+     padding-bottom: 5px;
+     color: var(--main-color);
+     transform: scale(0);
+     -webkit-transform: scale(0);
+     -moz-transform: scale(0);
+     -ms-transform: scale(0);
+     -o-transform: scale(0);
+     transform-origin: top;
+     transition: all 0.3s ease-in-out;
+     -webkit-transition: all 0.3s ease-in-out;
+     -moz-transition: all 0.3s ease-in-out;
+     -ms-transition: all 0.3s ease-in-out;
+     -o-transition: all 0.3s ease-in-out;
+}
+.creator-moja:hover .view-creator-profile a{
+       transform: scale(1);
+       -webkit-transform: scale(1);
+       -moz-transform: scale(1);
+       -ms-transform: scale(1);
+       -o-transform: scale(1);
+}

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
      brandNotifications: localStorage.getItem('BrandNotifications') ? JSON.parse(localStorage.getItem('BrandNotifications')) : null,
-     brandCreators: localStorage.getItem('BrandCreators') ? JSON.parse(localStorage.getItem('BrandCreators')) : null
+     brandCreators: localStorage.getItem('BrandCreators') ? JSON.parse(localStorage.getItem('BrandCreators')) : null,
+     brandAssets: localStorage.getItem('BrandAssets') ? JSON.parse(localStorage.getItem('BrandAssets')) : null
 }
 
 export const brandUtils = createSlice({
@@ -16,13 +17,18 @@ export const brandUtils = createSlice({
              setBrandCreators: (state, action) => {
                     state.brandCreators = action.payload
                     localStorage.setItem("BrandCreators", JSON.stringify(action.payload))
+             },
+             setBrandAssets: (state, action) => {
+                    state.brandAssets = action.payload
+                    localStorage.setItem('BrandAssets', JSON.stringify(action.payload))
              }
       }
 })
 
 export const { 
      setBrandNotifications,
-     setBrandCreators
+     setBrandCreators,
+     setBrandAssets
 } = brandUtils.actions
 
 

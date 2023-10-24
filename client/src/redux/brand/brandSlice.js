@@ -8,10 +8,18 @@ export const brandSlice = apiSlice.injectEndpoints({
                               method: 'GET'
                        }),
                        providesTags: ['Creators']
+               }),
+               getAllAssetsForBrand: builder.query({
+                       query: () => ({
+                              url: 'brand/get-brand-assets',
+                              methods: 'GET'
+                       }),
+                       providesTags: ['Assets']
                })
         })
 })
 
 export const {
-     useGetAllCreatorsForBrandQuery
+     useGetAllCreatorsForBrandQuery,
+     useGetAllAssetsForBrandQuery
 } = brandSlice

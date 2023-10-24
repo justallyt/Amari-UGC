@@ -56,10 +56,10 @@ const Sidebar = () => {
                                 <div className="sidebar-menu">
                                              <ul>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/`}><span><RxDashboard /></span> Dashboard</NavLink></li>
-                                                      <li><NavLink to={'/'}><span><GiHumanPyramid /></span>Creators</NavLink></li>
-                                                      <li><NavLink to={'/'}><span><BsClipboardData /></span>Creations</NavLink></li>
-                                                      <li><NavLink to={'/'}><span><VscNotebook /></span>Posts</NavLink></li>
-                                                      <li><NavLink to={'/'}><span><BsCreditCard2Front /></span>Billing</NavLink></li>
+                                                      <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/creators`}><span><GiHumanPyramid /></span>Creators</NavLink></li>
+                                                      <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/assets`}><span><BsClipboardData /></span>Assets</NavLink></li>
+                                                      <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/posts`}><span><VscNotebook /></span>Posts</NavLink></li>
+                                                      <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/billing`}><span><BsCreditCard2Front /></span>Billing</NavLink></li>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ? profile._id : profile.username}/settings`}><span><SlSettings /></span>Settings</NavLink></li>
                                              </ul>
 
