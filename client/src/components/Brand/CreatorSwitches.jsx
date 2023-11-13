@@ -1,7 +1,7 @@
 import image from "../../assets/dummyprofile.png"
 import { MdLocationOn } from "react-icons/md"
 import { useSelector } from "react-redux"
-import { NavLink } from "react-router-dom"
+//import { NavLink } from "react-router-dom"
 const CreatorSwitches = () => {
     const { brandCreators } = useSelector(state => state.brand);
 
@@ -10,7 +10,7 @@ const CreatorSwitches = () => {
               <div className="creator-tab-options">
                      <ul>
                               <li className="active">My Creators</li>
-                              <li>All Creators</li>
+                              {/* <li>All Creators</li> */}
                      </ul>
               </div>
 
@@ -40,9 +40,9 @@ const CreatorSwitches = () => {
                                                                                   <p>Asset Views</p>
                                                                        </div>
                                                               </div>
-                                                              <div className="view-creator-profile">
+                                                              {/* <div className="view-creator-profile">
                                                                        <NavLink to={'/'}>View Profile</NavLink>
-                                                                 </div>
+                                                                 </div> */}
                                                       </div>
                                       </div>
                                       )}

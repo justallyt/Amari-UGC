@@ -83,6 +83,7 @@
       -ms-border-radius: 20px;
       -o-border-radius: 20px;
       padding: 15px 30px;
+      background: rgba(0, 47, 49, 0.181);
       backdrop-filter: blur(20px);
       display: grid;
       grid-template-columns:  auto 45px;
@@ -291,4 +292,89 @@
 .likes-part .brand-moja h2{
     font-size: 15px;
     color: #444;
+}
+
+/* Asset details */
+.likes-part .creator{
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--sleezy-border);
+    display: flex;
+    gap: 10px;
+}
+.likes-part .creator .creator-profile-texts h3{
+    font-size: 16px;
+    line-height: 1;
+    font-family: "Madera-Light";
+}
+.likes-part .creator .creator-profile-texts p{
+    font-size: 13px;
+}
+
+.asset-description{
+     border-bottom: 1px solid var(--sleezy-border);
+     padding-bottom: 20px;
+}
+.asset-description p{
+      font-size: 14px;
+}
+
+.asset-description h4{
+     font-size: 16px;
+     margin: 10px 0  !important;
+     line-height: 1
+}
+
+.asset-description .asset-brand-deets{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
+.asset-brand-deets .asset-brand-image{
+     border: 1px solid var(--sleezy-border);
+     height: 70px;
+     background: white;
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.asset-brand-image img{
+     object-fit: contain;
+     width: 80%;
+     height: 80%;
+}
+.brand-name-product h4{
+    font-size:18px;
+    font-family: "Madera-Light" ;
+    margin-bottom: 5px !important;
+}
+.brand-name-product h5{
+      font-size: 13px;
+      font-family: "Madera-Light";
+      color: #636363
+}
+.brand-name-product h5 span{
+     font-size: 10px;
+}
+.asset-impressions{
+     display: grid;
+     grid-template-columns: repeat(3,1fr);
+     margin: 20px 0;
+}
+.asset-impressions .asset-impression-column{
+       display: flex;
+       align-items: center;
+       gap: 5px;;
+}
+.asset-impression-column span{
+    font-size: 25px;
+    display: flex;
+}
+.asset-impression-column h4{
+       margin: 0 !important;
+       font-size: 14px !important;
 }

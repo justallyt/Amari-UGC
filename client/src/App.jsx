@@ -19,6 +19,7 @@ import AdminSettings from "./pages/Admin/AdminSettings"
 import CreatorNotifications from "./pages/Creator/CreatorNotifications"
 import CreateAsset from "./pages/Creator/CreateAsset"
 import BrandCreators from "./pages/Brand/BrandCreators"
+import BrandAssets from "./pages/Brand/BrandAssets"
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
                                 <Route path="/brand/:id/" element={<BrandDashboard />} />
                                 <Route path="/brand/:id/settings" element={<BrandSettings />} />
                                 <Route path="/brand/:id/creators" element={<BrandCreators />} />
+                                <Route path='/brand/:id/assets' element={<BrandAssets />} />
                      </Route>
 
                      { /* Admin Routes */}

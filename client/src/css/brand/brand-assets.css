@@ -1,0 +1,7 @@
+.brand-asset-intro h2{
+       font-family: "Madera-Light";
+}
+.brand-asset-intro p{
+     font-size: 16px;
+     color: var(--black);
+}
