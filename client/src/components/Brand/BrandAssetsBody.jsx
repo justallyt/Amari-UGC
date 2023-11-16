@@ -41,6 +41,7 @@ const BrandAssetsBody = () => {
                           </div>
                           <div className="brand-asset-moja">
                                     <img src={vid} alt="" />
+                                    <div className="asset-overlay"></div>
                                     <div className="play-btn">
                                                  <span><FaPlay /></span>
                                     </div>
