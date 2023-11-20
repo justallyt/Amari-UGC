@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+     isBrandAssetModalOpen: false,
      brandNotifications: localStorage.getItem('BrandNotifications') ? JSON.parse(localStorage.getItem('BrandNotifications')) : null,
      brandCreators: localStorage.getItem('BrandCreators') ? JSON.parse(localStorage.getItem('BrandCreators')) : null,
      brandAssets: localStorage.getItem('BrandAssets') ? JSON.parse(localStorage.getItem('BrandAssets')) : null
@@ -21,14 +22,23 @@ export const brandUtils = createSlice({
              setBrandAssets: (state, action) => {
                     state.brandAssets = action.payload
                     localStorage.setItem('BrandAssets', JSON.stringify(action.payload))
+             },
+             openBrandModal: (state) => {
+                    state.isBrandAssetModalOpen = true
+             }, 
+             closeBrandModal: (state) => {
+                    state.isBrandAssetModalOpen = false
              }
+
       }
 })
 
 export const { 
      setBrandNotifications,
      setBrandCreators,
-     setBrandAssets
+     setBrandAssets,
+     openBrandModal,
+     closeBrandModal
 } = brandUtils.actions
 
 
