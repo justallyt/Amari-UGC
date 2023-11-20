@@ -219,7 +219,7 @@
        position: relative;
        padding: 20px;
 }
-.brand-modal-texts-col span{
+.brand-modal-texts-col span.modal-close{
         position: absolute;
         right: 10px;
         top: 10px;
@@ -240,4 +240,88 @@
        font-size: 18px;
        border-bottom: 1px solid var(--sleezy-border);
        padding-bottom: 10px;
+       font-family: "Madera-Light";
+}
+.creator-profile{
+       display: flex;
+       gap: 10px;
+       align-items: center;
+       margin-top: 20px;
+}
+.modal-texts-inner .creator-profile .profile-image,
+.creator-profile .profile-image img{
+       width: 65px;
+       height: 65px;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+}
+.modal-texts-inner h4{
+       font-size: 16px;
+       font-family: "Madera-Light";
+       margin-bottom: 0;
+       line-height: 1;
+}
+.modal-texts-inner .profile-texts p{
+        font-size: 13px;
+}
+.modal-texts-inner .asset-product-row{
+       display: flex;
+       gap: 10px;
+       align-items: center;
+       margin: 20px 0 0 0;
+}
+.asset-product-row span{
+       background: rgba(126, 242, 255, 0.2);
+       color:rgb(73, 73, 73);
+       font-size: 13px;
+       display: inline-flex;
+       padding: 6px 20px 10px 20px;
+       border-radius: 6px;
+       -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+       -ms-border-radius: 6px;
+       -o-border-radius: 6px;
+}
+.asset-product-row h5{
+       font-family: "Madera-Light";
+       margin: 0 !important;
+       line-height: 1;
+}
+
+.modal-texts-inner .caption{
+       font-size: 15px;
+       margin: 10px 0;
+}
+
+.modal-texts-inner .impressions-part{
+       border-top: 1px solid var(--sleezy-border);
+       margin-top: 30px;
+       display: flex;
+       justify-content: space-between;
+       padding-top: 20px;
+}
+.impressions-part span{
+       font-size: 20px;
+       width: 45px;
+       height: 45px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       transition:all 0.5s ease-in-out;
+       cursor: pointer;
+       -webkit-transition:all 0.5s ease-in-out;
+       -moz-transition:all 0.5s ease-in-out;
+       -ms-transition:all 0.5s ease-in-out;
+       -o-transition:all 0.5s ease-in-out;
+}
+.impressions-part span:hover{
+       background: rgba(126, 242, 255, 0.2);
 }
