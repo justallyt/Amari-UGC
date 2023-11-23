@@ -23,7 +23,13 @@ const assetsSchema = mongoose.Schema({
                 asset_id: { type: String},
                  url: { type: String, required: true},
                  thumbnail: { type: String, required: true}
-         }
+         },
+         liked_by: [
+            { 
+                user: { type: Schema.Types.ObjectId , ref: 'User'},
+                is_liked: { type: Boolean, default: false}
+            }
+        ]
 }, { timestamps: true})
 
 const Asset = mongoose.model('Asset', assetsSchema);

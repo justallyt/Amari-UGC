@@ -3,6 +3,7 @@ import cloudinary from "../utils/cloudinary.js";
 import Asset from "../models/assetsModel.js";
 import User from "../models/usersModel.js";
 import Notifications from "../models/NotificationsModel.js";
+import mongoose, { Mongoose } from "mongoose";
 
 //Upload Asset
 export const CreateAsset = asyncHandler(async(req, res) => {
@@ -116,6 +117,44 @@ export const getUserAssets = asyncHandler(async(req, res) => {
         if(assets){
              res.status(201).json({assets})
       }else{
-              res.status(400).json({ message: "User data could not be fetched at this time."})
+              res.status(500).json({ message: "User data could not be fetched at this time."})
       }
+ })
+
+
+ //endpoint for brand to like an asset
+ export const LikeAsset = asyncHandler(async(req, res) => {
+          const { asset_id, brand_id } = req.body;
+
+          const clicker = new mongoose.Types.ObjectId(brand_id);
+          
+          const checker = await Asset.findById(asset_id);
+
+          if(checker){ 
+                if(checker.liked_by.length > 0){
+                        const removed = await Asset.findByIdAndUpdate(asset_id, {
+                                 $pull: { liked_by: { user: clicker}}
+                        }, { new: true})
+                        
+                        if(removed){
+                                const all_assets = await Asset.find({ created_for: removed.created_for});
+                
+                                res.status(200).json(all_assets)
+                        }
+                }else{
+                       const result = await Asset.findByIdAndUpdate(asset_id, {
+                                $push: { liked_by: { user: clicker, is_liked: true}}
+                        }, { new: true})
+
+                        if(result){
+                                const all_assets = await Asset.find({ created_for: result.created_for})
+                                
+                                res.status(200).json(all_assets);
+                        }else{
+                                res.status(500).json({ message: 'Asset could not be liked'})
+                        }
+                }
+          }
+          
+        
  })

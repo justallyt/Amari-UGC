@@ -1,20 +1,40 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { closeBrandModal } from "../../redux/brand/brandUtils";
+import { closeBrandModal, setBrandAssets } from "../../redux/brand/brandUtils";
 import BrandOpenedAsset from "./BrandOpenedAsset";
 import profileImg from "../../assets/dummyprofile.png"
-import { GoHeart, GoBookmark } from "react-icons/go";
+import { GoHeart, GoBookmark, GoHeartFill } from "react-icons/go";
+import { useLikeUserAssetMutation } from "../../redux/assetSlice";
+import { useState } from "react";
 
 const BrandAssetModal = ({ data }) => {
+  const [ likeFlag, setLikeFlag] = useState(true);
   const { isBrandAssetModalOpen, brandCreators } = useSelector(state => state.brand)
+  const { profile } = useSelector(state => state.profile)
   const dispatch = useDispatch();
+
   const closeModal = () => {
             dispatch(closeBrandModal())
   }
 
   //get asset creator
   const creator = brandCreators && data ? brandCreators.find(item => item._id === data.creator) : {}
- console.log(creator)
+  //const likeStatus = data && data.is_liked.length > 0 ? data.is_liked[0].is_liked : false
+ const [LikeUserAsset] = useLikeUserAssetMutation();
+ 
+  const likeCreatedAsset = async(id) => {
+       
+         const info = {
+                   asset_id: data ? data._id : '',
+                   brand_id: id
+         }
+          const result = await LikeUserAsset(info).unwrap();
+
+          if(result){
+                dispatch(setBrandAssets([...result]))
+          }
+  }
+  
   return (
     <div className={isBrandAssetModalOpen ? "brand-modal active" : "brand-modal"}>
             <div className="brand-modal-content">
@@ -46,8 +66,10 @@ const BrandAssetModal = ({ data }) => {
                                               <p className="caption">{data && data.caption}</p>
 
                                               <div className="impressions-part">
-                                                        <div className="like-option">
-                                                                  <span><GoHeart /></span>
+                                                        <div className="like-option" onClick={() => likeCreatedAsset(profile._id)}>
+                                                                  <span className={data && data.liked_by.length > 0 && data.liked_by[0].is_liked ? 'active' : ''}>
+                                                                                {data && data.liked_by.length > 0 && data.liked_by[0].is_liked ? <GoHeartFill />   : <GoHeart />}
+                                                                  </span>
                                                         </div>
                                                         <div className="bookmark-option">
                                                                   <span><GoBookmark /></span>

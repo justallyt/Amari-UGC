@@ -25,7 +25,18 @@ export const assetsSlice = apiSlice.injectEndpoints({
               //         },
               //         invalidatesTags: ['Assets']
               // })
+              likeUserAsset: builder.mutation({
+                     query: (payload) => ({
+                            url: '/asset/like-asset', 
+                            method: 'PUT',
+                            body: payload
+                     }),
+                     invalidatesTags: ['Assets']
+              })
        })
 })
 
-export const { useCreateAssetMutation, useGetUserAssetsQuery } =  assetsSlice
+export const { 
+       useGetUserAssetsQuery,
+       useLikeUserAssetMutation
+} =  assetsSlice
