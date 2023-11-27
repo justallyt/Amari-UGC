@@ -29,7 +29,11 @@ const assetsSchema = mongoose.Schema({
                 user: { type: Schema.Types.ObjectId , ref: 'User'},
                 is_liked: { type: Boolean, default: false}
             }
-        ]
+        ],
+        bookmarked: {
+                type: Boolean,
+                default: false
+        }
 }, { timestamps: true})
 
 const Asset = mongoose.model('Asset', assetsSchema);

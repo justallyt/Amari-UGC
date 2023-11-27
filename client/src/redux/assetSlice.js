@@ -32,11 +32,20 @@ export const assetsSlice = apiSlice.injectEndpoints({
                             body: payload
                      }),
                      invalidatesTags: ['Assets']
+              }),
+              bookmarkUserAsset: builder.mutation({
+                        query: (payload) => ({
+                              url: '/asset/bookmark-asset',
+                              method: "PUT",
+                              body: payload
+                        }),
+                        invalidatesTags: ['Assets']
               })
        })
 })
 
 export const { 
        useGetUserAssetsQuery,
-       useLikeUserAssetMutation
+       useLikeUserAssetMutation,
+       useBookmarkUserAssetMutation
 } =  assetsSlice

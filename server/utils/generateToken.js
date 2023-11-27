@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4} from 'uuid'
+
 const generateToken = (res, userId) => {
        const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1d' });
        const mimic_token = uuidv4();

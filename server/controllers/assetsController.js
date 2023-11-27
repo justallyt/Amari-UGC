@@ -136,10 +136,11 @@ export const getUserAssets = asyncHandler(async(req, res) => {
                                  $pull: { liked_by: { user: clicker}}
                         }, { new: true})
                         
+                        
                         if(removed){
                                 const all_assets = await Asset.find({ created_for: removed.created_for});
                 
-                                res.status(200).json(all_assets)
+                                res.status(200).json({ data: all_assets, asset: removed })
                         }
                 }else{
                        const result = await Asset.findByIdAndUpdate(asset_id, {
@@ -149,12 +150,40 @@ export const getUserAssets = asyncHandler(async(req, res) => {
                         if(result){
                                 const all_assets = await Asset.find({ created_for: result.created_for})
                                 
-                                res.status(200).json(all_assets);
+                                res.status(200).json({ data: all_assets, asset: result});
                         }else{
                                 res.status(500).json({ message: 'Asset could not be liked'})
                         }
                 }
           }
-          
-        
+ })
+
+ //Endpoint for brand to bookmark an asset
+ export const BookmarkAsset = asyncHandler(async(req, res) => {
+          const { asset_id } = req.body;
+
+          const checker = await Asset.findById(asset_id);
+
+          if(checker){
+                if(checker.bookmarked){
+                        const removeAssetBookmark = await Asset.findByIdAndUpdate(asset_id, {
+                                bookmarked: false
+                        }, { new: true})
+                        if(removeAssetBookmark){
+                                 const all_assets = await Asset.find({ created_for: removeAssetBookmark.created_for});
+                                 res.status(200).json({ data: all_assets, asset: removeAssetBookmark, msg: 'You have removed asset from your bookmarks'})
+                        }
+                }else{
+                        const updateAssetBookmark = await Asset.findByIdAndUpdate(asset_id, {
+                                bookmarked: true
+                        }, { new: true})
+                        if(updateAssetBookmark){
+                                 const all_assets = await Asset.find({ created_for: updateAssetBookmark.created_for})
+                                 res.status(200).json({ data: all_assets, asset: updateAssetBookmark, msg: 'You have added asset to your bookmarks'})
+                        }
+                }
+                
+          }else{
+                 res.status(500).json({ message: "Asset not found with that id"})
+          }
  })

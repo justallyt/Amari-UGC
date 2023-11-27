@@ -325,7 +325,6 @@
 .impressions-part span:hover,
 .impressions-part span.active{
        background: rgba(126, 242, 255, 0.2);
-
 }
 .impressions-part span.active{
         color: var(--main-color);
