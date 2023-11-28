@@ -61,6 +61,7 @@ export const utilsSlice = createSlice({
             clearUtils: (state) => {
                        state.assets = null;
                        state.brands = null;
+                       state.creators = null;
                        state.requests = null;
                        state.userBrands = null;
                        localStorage.clear();

@@ -13,6 +13,7 @@ import toast, { Toaster } from "react-hot-toast"
 import Spinner from '../Spinner'
 import { useState } from 'react'
 import { VscNotebook } from "react-icons/vsc"
+import { clearBrandInfo } from '../../redux/brand/brandUtils'
 const Sidebar = () => {
       const [wait, setWait] = useState(false);
 
@@ -34,7 +35,8 @@ const Sidebar = () => {
                   setTimeout(() => {
                         setWait(false)
                         dispatch(clearCredentials({...res}));
-                        dispatch(clearProfile())
+                        dispatch(clearProfile());
+                        dispatch(clearBrandInfo());
                         navigate('/user/login')
                   }, 1500)
             }catch(error){

@@ -28,8 +28,14 @@ export const brandUtils = createSlice({
              }, 
              closeBrandModal: (state) => {
                     state.isBrandAssetModalOpen = false
+             },
+             clearBrandInfo: (state) => {
+                   state.brandNotifications = null;
+                   state.brandCreators = null;
+                   state.brandAssets = null;
+                   localStorage.clear();
              }
-
+            
       }
 })
 
@@ -38,7 +44,8 @@ export const {
      setBrandCreators,
      setBrandAssets,
      openBrandModal,
-     closeBrandModal
+     closeBrandModal,
+     clearBrandInfo
 } = brandUtils.actions
 
 

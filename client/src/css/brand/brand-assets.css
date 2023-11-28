@@ -298,10 +298,10 @@
 
 .modal-texts-inner .impressions-part{
        border-top: 1px solid var(--sleezy-border);
-       margin-top: 30px;
+       margin-top: 10px;
        display: flex;
        justify-content: space-between;
-       padding-top: 20px;
+       padding-top: 5px;
 }
 .impressions-part span{
        font-size: 20px;
@@ -328,4 +328,9 @@
 }
 .impressions-part span.active{
         color: var(--main-color);
+}
+.impressions-part .right-col{
+       display: flex;
+       align-items: center;
+       gap: 10px;
 }

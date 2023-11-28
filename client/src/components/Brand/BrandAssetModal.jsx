@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeBrandModal, setBrandAssets } from "../../redux/brand/brandUtils";
 import BrandOpenedAsset from "./BrandOpenedAsset";
 import profileImg from "../../assets/dummyprofile.png"
-import { GoHeart, GoBookmark, GoHeartFill,GoBookmarkFill } from "react-icons/go";
+import { GoHeart, GoBookmark, GoHeartFill,GoBookmarkFill, GoDownload } from "react-icons/go";
 import { useBookmarkUserAssetMutation, useLikeUserAssetMutation } from "../../redux/assetSlice";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast"
+import JsFileDownloader from "js-file-downloader"
 
 const BrandAssetModal = ({ data, func }) => {
   const [likeFlag, setLikeFlag] = useState(false);
@@ -75,8 +76,21 @@ const BrandAssetModal = ({ data, func }) => {
                    func(result.asset)
                    toast.success(result.msg, { id: 'bookmark-success'})
           }
-
   }
+
+  //Asset url
+  const file_url = data ? data.asset.url : ''
+  const DownloadFile = () => {
+          new JsFileDownloader({
+                   url: file_url
+          }).then(() => {
+                  toast.success('Asset download successful', { id: 'download-status'})
+          }).catch(error => {
+                  console.log(error)
+                  toast.error('Asset download failed', { id: 'error'})
+          })
+  }
+  
   return (
     <div className={isBrandAssetModalOpen ? "brand-modal active" : "brand-modal"}>
            <Toaster />
@@ -114,10 +128,15 @@ const BrandAssetModal = ({ data, func }) => {
                                                                                 { likeFlag ? <GoHeartFill />   : <GoHeart />}
                                                                   </span>
                                                         </div>
-                                                        <div className="bookmark-option" onClick={bookmarkAsset}>
-                                                                  <span className={bookmarkFlag ? 'active' : ''}>
+                                                        <div className="right-col">
+                                                                   <div className="bookmark-option" onClick={bookmarkAsset}>
+                                                                             <span className={bookmarkFlag ? 'active' : ''}>
                                                                          { bookmarkFlag ? <GoBookmarkFill /> : <GoBookmark /> }
-                                                                 </span>
+                                                                            </span>
+                                                                   </div>
+                                                                   <div className="download-option" onClick={DownloadFile}>
+                                                                                  <span><GoDownload /></span>
+                                                                   </div>
                                                         </div>
                                               </div>
                                    </div>
