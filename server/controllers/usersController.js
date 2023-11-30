@@ -178,6 +178,9 @@ export const LogOutUser = asyncHandler(async(req,res) => {
                      httpOnly: true,
                      expires: new Date(0)
              })
+             res.cookie('mimic', '', {
+                   expires: new Date(0)
+             })
             
              res.status(200).json({ message: 'You have logged out'})
 })

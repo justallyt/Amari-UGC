@@ -38,10 +38,8 @@ const authUser = async(data) => {
             const res = await loginUser(data).unwrap();
             dispatch(setCredentials({...res}));
              navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ?  res.id : res.username}/`);
-
-             
        } catch (error) {
-             console.log(error);
+             console.log(error); 
              toast.error("Login failed. Please try again")
        }
        reset();

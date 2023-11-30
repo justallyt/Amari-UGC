@@ -334,3 +334,104 @@
        align-items: center;
        gap: 10px;
 }
+
+
+/* Comments */
+.comments-wrapper h4{
+        font-family: "Madera-Light";
+        border-bottom: 1px solid var(--sleezy-border);
+        display: inline-block;
+        padding-bottom: 5px;
+}
+.comment-moja{
+       margin: 10px 0;;
+}
+.comment-moja .main-comment{
+       display: flex;
+       gap: 5px;
+}
+.comment-moja .author-texts h5{
+        font-family: "Madera-Light";
+        font-size: 15px;
+}
+.comment-moja .author-texts p{
+        font-size: 13px;
+        line-height: 18px;
+        color: rgb(86, 85, 85);
+}
+.comment-moja img{
+         width: 35px;
+         height: 35px;
+         border-radius: 35px;
+         -webkit-border-radius: 35px;
+         -moz-border-radius: 35px;
+         -ms-border-radius: 35px;
+         -o-border-radius: 35px;
+         object-fit: contain;
+         box-shadow: 0px 0px 2px 1px gainsboro;
+}
+
+.comment-moja .author-actions{
+       display: flex;
+       gap: 10px;;
+       align-items: center;
+}
+.comment-moja .author-actions span{
+       font-size: 12px;
+}
+.comment-moja .author-actions h6{
+       font-family: "Madera-Light";
+       cursor: pointer;
+}
+
+.reply-form{
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       display: none;
+}
+.reply-form.active{
+       display: flex;
+}
+.reply-form-content{
+       display: flex;
+       align-items: center;
+       margin-top:5px
+}
+.reply-form .reply-form-control{
+       width: 250px;
+       height: 40px;
+       resize: none;
+       outline: none;
+       border: none;
+       background: rgb(238, 239, 239);
+       border-radius: 5px 0px 0px 5px;
+       -webkit-border-radius: 5px 0px 0px 5px;
+       -moz-border-radius: 5px 0px 0px 5px;
+       -ms-border-radius: 5px 0px 0px 5px;
+       -o-border-radius: 5px 0px 0px 5px;
+       padding: 5px;
+}
+.reply-form-content button{
+         border: none;
+         width: 40px;
+         height: 40px;
+         border-radius: 0px 5px 5px 0px;
+         -webkit-border-radius: 0px 5px 5px 0px;
+         -moz-border-radius: 0px 5px 5px 0px;
+         -ms-border-radius: 0px 5px 5px 0px;
+         -o-border-radius: 0px 5px 5px 0px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 16px;
+         color: white;
+         cursor: pointer;
+         background-color: var(--main-color);
+}
+.reply-form span{
+        display: flex;
+        margin-top: 5px;
+        cursor: pointer;
+        font-size: 20px;
+}

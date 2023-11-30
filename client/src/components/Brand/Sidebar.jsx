@@ -14,6 +14,7 @@ import Spinner from '../Spinner'
 import { useState } from 'react'
 import { VscNotebook } from "react-icons/vsc"
 import { clearBrandInfo } from '../../redux/brand/brandUtils'
+import { apiSlice } from '../../redux/apiSlice'
 const Sidebar = () => {
       const [wait, setWait] = useState(false);
 
@@ -37,6 +38,7 @@ const Sidebar = () => {
                         dispatch(clearCredentials({...res}));
                         dispatch(clearProfile());
                         dispatch(clearBrandInfo());
+                        dispatch(apiSlice.util.resetApiState())
                         navigate('/user/login')
                   }, 1500)
             }catch(error){

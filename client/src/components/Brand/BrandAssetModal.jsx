@@ -8,6 +8,8 @@ import { useBookmarkUserAssetMutation, useLikeUserAssetMutation } from "../../re
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast"
 import JsFileDownloader from "js-file-downloader"
+import CommentMoja from "./CommentMoja";
+
 
 const BrandAssetModal = ({ data, func }) => {
   const [likeFlag, setLikeFlag] = useState(false);
@@ -103,7 +105,7 @@ const BrandAssetModal = ({ data, func }) => {
                         </div>
                         <div className="brand-modal-texts-col">
                                     <span className="modal-close" onClick={closeModal}><IoCloseOutline /></span>
-                                   <div className="modal-texts-inner">
+                                     <div className="modal-texts-inner">
                                               <h3>Creator</h3>
                                               { Object.keys(creator).length > 0 &&
                                                       <div className="creator-profile">
@@ -123,21 +125,30 @@ const BrandAssetModal = ({ data, func }) => {
                                               <p className="caption">{data && data.caption}</p>
 
                                               <div className="impressions-part">
-                                                        <div className="like-option" onClick={() => likeCreatedAsset(profile._id)}>
+                                                        <div className="like-option" onClick={() => likeCreatedAsset(profile._id)} title="Like Asset">
                                                                   <span className={likeFlag  ? 'active' : ''}>
                                                                                 { likeFlag ? <GoHeartFill />   : <GoHeart />}
                                                                   </span>
                                                         </div>
                                                         <div className="right-col">
-                                                                   <div className="bookmark-option" onClick={bookmarkAsset}>
+                                                                   <div className="bookmark-option" onClick={bookmarkAsset} title="Bookmark Asset">
                                                                              <span className={bookmarkFlag ? 'active' : ''}>
                                                                          { bookmarkFlag ? <GoBookmarkFill /> : <GoBookmark /> }
                                                                             </span>
                                                                    </div>
-                                                                   <div className="download-option" onClick={DownloadFile}>
+                                                                   <div className="download-option" onClick={DownloadFile} title="Download Asset">
                                                                                   <span><GoDownload /></span>
                                                                    </div>
                                                         </div>
+                                              </div>
+
+
+                                              <div className="comments-wrapper">
+                                                        <h4>Comments</h4>
+                                                             <div className="comments-body">
+                                                                       <CommentMoja />
+                                                                       <CommentMoja />
+                                                             </div>
                                               </div>
                                    </div>
                         </div>

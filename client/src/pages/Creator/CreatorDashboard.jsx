@@ -14,15 +14,16 @@ const CreatorDashboard = () => {
   const { profile } = useSelector(state => state.profile)
   const { brands } = useSelector(state => state.utils);
   //Get User Profile
-  const { data: user_data, isLoading } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
+  const { data: user_data } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
   const { data: user_notifications } = useGetUserNotificationsQuery({ refetchOnMountOrArgChange: true})
   const { data: unread_user_notifications } = useGetUnreadUserNotificationsQuery({ refetchOnMountOrArgChange: true})
   const { data:allbrands } = useGetBrandsQuery({ refetchOnMountOrArgChange: true})
  const { data: user_assets } = useGetUserAssetsQuery({ refetchOnMountOrArgChange: true})
 
   useEffect(() => {
-        if(!isLoading && user_data){
+        if(user_data){
              dispatch(setProfile({...user_data.user}))
+             console.log(user_data);
          }
          if(user_notifications){
               dispatch(setAllNotifications([...user_notifications.notifications]))
@@ -33,7 +34,7 @@ const CreatorDashboard = () => {
          if(user_assets){
                dispatch(setUserAssets([...user_assets.assets]))
          }
-  }, [user_data, user_notifications, unread_user_notifications,user_assets, dispatch, isLoading])
+  }, [user_data, user_notifications, unread_user_notifications,user_assets, dispatch])
 
   useEffect(()=>{
              if(allbrands){

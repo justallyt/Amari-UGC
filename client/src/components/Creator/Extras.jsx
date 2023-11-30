@@ -21,7 +21,7 @@ const Extras = () => {
   const { assets } = useSelector(state => state.utils)
   //Sanitize things
 const active_brands = assets && [...new Set(assets.map(item => item.created_for))]
-console.log(active_brands)
+
   return (
     <div className="extras-section">
              <div className="extras-wrapper">
