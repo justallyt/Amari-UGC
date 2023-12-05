@@ -645,6 +645,9 @@
      -ms-border-radius: 7px;
      -o-border-radius: 7px;
      box-shadow: 0px 0px 5px -2px gainsboro;
+     display: flex;
+     align-items: center;
+     justify-content: center;
 }
 .activity-moja .activity-thumbnail img{
     border-radius: 7px;
@@ -653,6 +656,11 @@
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
     object-fit: cover;
+}
+.activity-thumbnail img.brand{
+     object-fit: contain;
+     width: 90%;
+     height: 90%;
 }
 
 .activity-block{

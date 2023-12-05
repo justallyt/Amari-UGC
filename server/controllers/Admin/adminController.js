@@ -54,6 +54,9 @@ export const UpdateAdminProfile = asyncHandler(async(req, res) => {
                      }, { new: true })
 
                      if(updateAdmin){
+                             const updateAdminNotifications = await Notifications.updateMany({ "sender.senderId": req.user._id}, {
+                                      "$set": {"sender.profilePhoto": updateAdmin.profilePic.url}
+                             })
                              res.status(201).json({ message: 'Details updated successfully', info: updateAdmin})
                      }else{
                             res.status(401).json({ message: 'Accout update failed. Please try again later.'})

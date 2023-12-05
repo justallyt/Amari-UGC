@@ -4,6 +4,7 @@ import Asset from "../models/assetsModel.js";
 import User from "../models/usersModel.js";
 import Notifications from "../models/NotificationsModel.js";
 import mongoose, { Mongoose } from "mongoose";
+import Comment from "../models/Comments.js";
 
 //Upload Asset
 export const CreateAsset = asyncHandler(async(req, res) => {
@@ -138,6 +139,7 @@ export const getUserAssets = asyncHandler(async(req, res) => {
                         
                         
                         if(removed){
+                                const deleteNotification = await Notifications.findOneAndRemove({ "sender.senderId": clicker})
                                 const all_assets = await Asset.find({ created_for: removed.created_for});
                 
                                 res.status(200).json({ data: all_assets, asset: removed })
@@ -148,6 +150,23 @@ export const getUserAssets = asyncHandler(async(req, res) => {
                         }, { new: true})
 
                         if(result){
+                                const creator = await User.findById(result.creator);
+                                
+                                const notify = await Notifications.create({
+                                         notification_type: 'Like',
+                                         sender: {
+                                                  senderId: clicker,
+                                                  senderName: result.created_for,
+                                                  senderMsg: `You liked an asset created by ${creator.name}`,
+                                                  profilePhoto: req.user.profilePic.url
+                                         },
+                                         receipient: {
+                                                  receipientId: result.creator,
+                                                  receipientName: creator.name,
+                                                  receipientMsg: `Your asset was liked by ${result.created_for}`,
+                                                  profilePhoto: creator.profilePic.url
+                                         }
+                                })
                                 const all_assets = await Asset.find({ created_for: result.created_for})
                                 
                                 res.status(200).json({ data: all_assets, asset: result});
@@ -186,4 +205,29 @@ export const getUserAssets = asyncHandler(async(req, res) => {
           }else{
                  res.status(500).json({ message: "Asset not found with that id"})
           }
+ })
+
+
+ //Comment on Asset
+ export const CommentOnAsset = asyncHandler(async(req, res) => {
+        const { asset, comment, commentor, name, photo } = req.body;
+        const assetID = new mongoose.Types.ObjectId(asset);
+        const commentorID = new mongoose.Types.ObjectId(commentor);
+        
+        const newComment = await Comment.create({
+                   asset_id: assetID,
+                   commenter: {
+                          commenter_id: commentorID,
+                          name: name,
+                          photo: photo
+                   },
+                   comment: comment
+        })
+
+        if(newComment){
+                res.status(201).json({message: 'Comment added succesfully'})
+        }else{
+                res.status(500).json({message: 'Your comment not posted. Internal server error'})
+        }
+
  })

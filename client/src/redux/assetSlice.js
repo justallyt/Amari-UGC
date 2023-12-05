@@ -9,22 +9,6 @@ export const assetsSlice = apiSlice.injectEndpoints({
                      }),
                      providesTags: ['Assets']
               }),
-              // createAsset: builder.mutation({
-              //         queryFn: async (data) => {
-              //                 try{
-              //                        const result = await axios.post(
-              //                             import.meta.env.VITE_API_URL,
-              //                             data,
-              //                             { withCredentials: true, headers: {"Content-Type": 'multipart/form-data' } }
-              //                        )
-
-              //                        return { data: result }
-              //                 } catch(axiosError) {
-              //                         return axiosError;
-              //                 }
-              //         },
-              //         invalidatesTags: ['Assets']
-              // })
               likeUserAsset: builder.mutation({
                      query: (payload) => ({
                             url: '/asset/like-asset', 
@@ -40,6 +24,21 @@ export const assetsSlice = apiSlice.injectEndpoints({
                               body: payload
                         }),
                         invalidatesTags: ['Assets']
+              }),
+              commentOnAsset: builder.mutation({
+                     query: (payload) => ({
+                              url: '/asset/comment',
+                              method: 'POST',
+                              body: payload
+                     }),
+                     invalidatesTags: ['Comment']
+              }),
+              getAssetComments: builder.query({
+                        query: () => ({
+                              url: '/asset/get-asset-comments',
+                              method: "GET"
+                        }),
+                        providesTags: ['Comment']
               })
        })
 })
@@ -47,5 +46,6 @@ export const assetsSlice = apiSlice.injectEndpoints({
 export const { 
        useGetUserAssetsQuery,
        useLikeUserAssetMutation,
-       useBookmarkUserAssetMutation
+       useBookmarkUserAssetMutation,
+       useCommentOnAssetMutation
 } =  assetsSlice

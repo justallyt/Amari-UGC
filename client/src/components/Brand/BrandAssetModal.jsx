@@ -4,7 +4,7 @@ import { closeBrandModal, setBrandAssets } from "../../redux/brand/brandUtils";
 import BrandOpenedAsset from "./BrandOpenedAsset";
 import profileImg from "../../assets/dummyprofile.png"
 import { GoHeart, GoBookmark, GoHeartFill,GoBookmarkFill, GoDownload } from "react-icons/go";
-import { useBookmarkUserAssetMutation, useLikeUserAssetMutation } from "../../redux/assetSlice";
+import { useBookmarkUserAssetMutation, useCommentOnAssetMutation, useLikeUserAssetMutation } from "../../redux/assetSlice";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast"
 import JsFileDownloader from "js-file-downloader"
@@ -14,6 +14,8 @@ import CommentMoja from "./CommentMoja";
 const BrandAssetModal = ({ data, func }) => {
   const [likeFlag, setLikeFlag] = useState(false);
   const [bookmarkFlag, setBookmarkFlag] = useState(false)
+  const [commentMoja, setCommentMoja] = useState('')
+  const [isAbleToPost, setIsAbleToPost] = useState(false)
   const { isBrandAssetModalOpen, brandCreators } = useSelector(state => state.brand)
   const { profile } = useSelector(state => state.profile)
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ const BrandAssetModal = ({ data, func }) => {
 
   //get asset creator
   const creator = brandCreators && data ? brandCreators.find(item => item._id === data.creator) : {}
-  //const likeStatus = data && data.is_liked.length > 0 ? data.is_liked[0].is_liked : false
+
  const [LikeUserAsset] = useLikeUserAssetMutation();
  const [bookmarkUserAsset] = useBookmarkUserAssetMutation();
 
@@ -93,6 +95,27 @@ const BrandAssetModal = ({ data, func }) => {
           })
   }
   
+  const updatePostStatus = (comment) => {
+          if(comment === ''){
+                 setIsAbleToPost(false);
+          }else{
+                 setIsAbleToPost(true);
+                 setCommentMoja(comment)
+          }
+  }
+
+  //Commenting on Asset feature
+  const [CreateComment, { isLoading}] = useCommentOnAssetMutation();
+  const SubmitComment = () => {
+           const comment_data = {
+                   asset: data ? data._id : '',
+                   comment: commentMoja,
+                   commentor: profile._id,
+                   name: profile.name,
+                   photo: profile.profilePic.url
+           }
+          const result = CreateComment(comment_data).unwrap();
+  }
   return (
     <div className={isBrandAssetModalOpen ? "brand-modal active" : "brand-modal"}>
            <Toaster />
@@ -148,8 +171,17 @@ const BrandAssetModal = ({ data, func }) => {
                                                              <div className="comments-body">
                                                                        <CommentMoja />
                                                                        <CommentMoja />
+                                                                       <CommentMoja />
+                                                                       <CommentMoja />
+                                                                       <CommentMoja />
+                                                                       <CommentMoja />
                                                              </div>
                                               </div>
+                                   </div>
+
+                                   <div className="comment-input">
+                                              <textarea placeholder="Add your comment" cols="30" rows="10" onChange={e =>updatePostStatus(e.target.value)}></textarea>
+                                               <h3 className={ isAbleToPost ? 'active': ''} onClick={SubmitComment}>Post</h3>
                                    </div>
                         </div>
             </div>

@@ -83,7 +83,7 @@ const Informationals = () => {
                                                                           <div className="activity-moja" key={item._id}>
                                                                                   <div className="activity-block">
                                                                                            <div className="activity-thumbnail">
-                                                                                                   <img src={item.sender.profilePhoto} alt="" />
+                                                                                                   <img className={profile._id === item.sender.senderId ? '' : 'brand'} src={item.sender.profilePhoto} alt="" />
                                                                                            </div>
                                                                                            <div className="activity-user">
                                                                                                       <h5>
@@ -91,7 +91,7 @@ const Informationals = () => {
                                                                                                item.sender.senderName 
                                                                                                              }
                                                                                                       </h5>
-                                                                                                      <p>{item.sender.senderMsg || item.receipient.receipientMsg}</p>
+                                                                                                      <p>{profile._id === item.sender.senderId && item.sender.senderMsg || item.receipient.receipientMsg}</p>
                                                                                            </div>
                                                                                   </div>
                                                                                   <div className="time"> 
