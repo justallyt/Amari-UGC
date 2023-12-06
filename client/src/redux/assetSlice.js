@@ -34,11 +34,19 @@ export const assetsSlice = apiSlice.injectEndpoints({
                      invalidatesTags: ['Comment']
               }),
               getAssetComments: builder.query({
-                        query: () => ({
-                              url: '/asset/get-asset-comments',
+                        query: (id) => ({
+                              url: `/asset/get-asset-comments/${id}`,
                               method: "GET"
                         }),
                         providesTags: ['Comment']
+              }),
+              replyOnComment: builder.mutation({
+                     query: (payload) => ({
+                             url: '/asset/reply',
+                             method: 'POST',
+                             body: payload
+                     }),
+                     invalidatesTags: ['Comment']
               })
        })
 })
@@ -47,5 +55,7 @@ export const {
        useGetUserAssetsQuery,
        useLikeUserAssetMutation,
        useBookmarkUserAssetMutation,
-       useCommentOnAssetMutation
+       useCommentOnAssetMutation,
+       useGetAssetCommentsQuery,
+       useReplyOnCommentMutation
 } =  assetsSlice

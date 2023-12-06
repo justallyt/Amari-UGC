@@ -19,6 +19,7 @@ const commentSchema = mongoose.Schema({
         },
         replies: [
             {
+                   reply_id: {type: String},
                    comment_id: { type: Schema.Types.ObjectId, ref: 'Comment'},
                    replier: { type: Schema.Types.ObjectId, ref: 'User'},
                    reply: { type: String},

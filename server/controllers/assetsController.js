@@ -5,7 +5,7 @@ import User from "../models/usersModel.js";
 import Notifications from "../models/NotificationsModel.js";
 import mongoose, { Mongoose } from "mongoose";
 import Comment from "../models/Comments.js";
-
+import { v4 as uuidv4} from 'uuid'
 //Upload Asset
 export const CreateAsset = asyncHandler(async(req, res) => {
         const user = await User.findById(req.user._id);
@@ -223,11 +223,54 @@ export const getUserAssets = asyncHandler(async(req, res) => {
                    },
                    comment: comment
         })
-
+      
         if(newComment){
                 res.status(201).json({message: 'Comment added succesfully'})
         }else{
                 res.status(500).json({message: 'Your comment not posted. Internal server error'})
         }
 
+ })
+
+ //Get comments for an asset
+ export const GetAssetComments = asyncHandler(async(req, res) => {
+          const assetID = new mongoose.Types.ObjectId(req.params.id);
+          const asset_comments = await Comment.find({ asset_id: assetID }); 
+          
+          if(asset_comments){
+                   res.status(200).json(asset_comments)
+          }else{
+                  res.status(500).json({ message: 'Error fetching comments'})
+          }
+ })
+
+ //Create a reply on a comment
+ export const CreateReplyOnComment = asyncHandler(async(req, res) => {
+          const { id, person, name, message, photo } = req.body;
+          const commentID = new mongoose.Types.ObjectId(id);
+          const commentorID = new mongoose.Types.ObjectId(person);
+          //generate random id for reply
+          const random_id = uuidv4();
+          const comment = await Comment.findById(commentID)
+          
+          if(comment){
+                  const result = await Comment.findByIdAndUpdate(commentID, {
+                          $push: { 
+                                 replies: {
+                                        reply_id: random_id,
+                                         comment_id: commentID,
+                                         replier: commentorID,
+                                         reply: message,
+                                         name: name,
+                                         photo: photo
+                                 }
+                          }
+                  }, { new: true})
+
+                  if(result){
+                          res.status(200).json('Reply added successfully')
+                  }else{
+                          res.status(500).json("Reply not added")
+                  }
+          }
  })

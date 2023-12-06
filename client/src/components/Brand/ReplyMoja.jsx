@@ -2,9 +2,10 @@ import { useSelector } from "react-redux"
 import ReplyForm from "./ReplyForm";
 import { useState } from "react";
 
-const ReplyMoja = () => {
+const ReplyMoja = ({ content }) => {
     const [replyStatus, setReplyStatus] = useState(false)
     const { profile } = useSelector(state => state.profile)
+    console.log(content);
   return (
           <div className="reply-moja">
                   <div className="reply-profile">
@@ -21,7 +22,7 @@ const ReplyMoja = () => {
                           <span>3 days ago</span>
                             <h6 onClick={() => setReplyStatus(!replyStatus)}>Reply</h6>
                 </div>
-                  <ReplyForm  status={replyStatus} func={setReplyStatus} />                                    
+                  {/* <ReplyForm  status={replyStatus} func={setReplyStatus} />                                     */}
      </div>
   )
 }

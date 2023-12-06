@@ -1,27 +1,29 @@
-import { useSelector } from "react-redux"
 import ReplyForm from "./ReplyForm";
 import { useState } from "react";
 import ReplyMoja from "./ReplyMoja";
+import { calculateTimePassed } from "../../utils/dateConverter";
 
-const CommentMoja = () => {
-     const [replyStatus, setReplyStatus] = useState(false)
-    const { profile } = useSelector(state => state.profile)
+const CommentMoja = ({ data }) => {
+  const [replyStatus, setReplyStatus] = useState(false)
+   console.log(data)
   return (
     <div className="comment-moja">
               <div className="main-comment">
                     <div className="comment-image-profile">
-                                <img src={profile.profilePic.url} alt="image" />
+                                <img src={data && data.commenter.photo} alt="image" />
                     </div>
                      <div className="author-texts">
-                              <h5>CocaCola</h5>
-                              <p>Well this is a beautiful artwork. keep on doing great work</p>
+                              <h5>{data && data.commenter.name}</h5>
+                              <p>{data && data.comment}</p>
                               <div className="author-actions">
-                                        <span>3 days ago</span>
+                                        <span>{data && calculateTimePassed(data.createdAt)}</span>
                                           <h6 onClick={() => setReplyStatus(!replyStatus)}>Reply</h6>
                               </div>
-                               <ReplyForm  status={replyStatus} func={setReplyStatus} />
+                               <ReplyForm  status={replyStatus} func={setReplyStatus} comment={data._id} />
                                <div className="replies-body">
-                                           <ReplyMoja />
+                                            { data && data.replies.length > 0 && 
+                                                        data.replies.map(item => <ReplyMoja content={item} key={item.reply_id}/>)
+                                              }
                                </div>
                    </div>
        </div>

@@ -7,6 +7,8 @@ import { useState } from "react";
 const BrandAssetsBody = () => {
   const { brandAssets } = useSelector(state => state.brand)
   const [assetDetails, setAssetDetails]  = useState();
+  const { isBrandAssetModalOpen } = useSelector(state => state.brand)
+
   const dispatch = useDispatch();
 
   const openAssetModal = (asset) => {
@@ -20,7 +22,7 @@ const BrandAssetsBody = () => {
                         <h2>All Brand Assets</h2>
                        <p>View all assets created for your brand</p>          
               </div>
-               <BrandAssetModal data={assetDetails} func={setAssetDetails} />
+               { isBrandAssetModalOpen && <BrandAssetModal data={assetDetails} func={setAssetDetails} />}
               <div className="brand-assets-row">
                         { brandAssets && brandAssets.length > 0 ?
                                  brandAssets.map(kitu => 

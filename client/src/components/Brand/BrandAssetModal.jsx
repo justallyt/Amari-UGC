@@ -4,8 +4,8 @@ import { closeBrandModal, setBrandAssets } from "../../redux/brand/brandUtils";
 import BrandOpenedAsset from "./BrandOpenedAsset";
 import profileImg from "../../assets/dummyprofile.png"
 import { GoHeart, GoBookmark, GoHeartFill,GoBookmarkFill, GoDownload } from "react-icons/go";
-import { useBookmarkUserAssetMutation, useCommentOnAssetMutation, useLikeUserAssetMutation } from "../../redux/assetSlice";
-import { useEffect, useState } from "react";
+import { useBookmarkUserAssetMutation, useCommentOnAssetMutation, useGetAssetCommentsQuery, useLikeUserAssetMutation } from "../../redux/assetSlice";
+import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast"
 import JsFileDownloader from "js-file-downloader"
 import CommentMoja from "./CommentMoja";
@@ -16,9 +16,11 @@ const BrandAssetModal = ({ data, func }) => {
   const [bookmarkFlag, setBookmarkFlag] = useState(false)
   const [commentMoja, setCommentMoja] = useState('')
   const [isAbleToPost, setIsAbleToPost] = useState(false)
+  const [isCreatingComment, setIsCreatingComment] = useState(false);
   const { isBrandAssetModalOpen, brandCreators } = useSelector(state => state.brand)
   const { profile } = useSelector(state => state.profile)
   const dispatch = useDispatch();
+  const commentRef = useRef();
 
   const closeModal = () => {
             dispatch(closeBrandModal());
@@ -78,7 +80,6 @@ const BrandAssetModal = ({ data, func }) => {
           if(result){
                    dispatch(setBrandAssets([...result.data]))
                    func(result.asset)
-                   toast.success(result.msg, { id: 'bookmark-success'})
           }
   }
 
@@ -105,8 +106,10 @@ const BrandAssetModal = ({ data, func }) => {
   }
 
   //Commenting on Asset feature
-  const [CreateComment, { isLoading}] = useCommentOnAssetMutation();
-  const SubmitComment = () => {
+  const [CreateComment] = useCommentOnAssetMutation();
+
+  const SubmitComment = async () => {
+          setIsCreatingComment(true)
            const comment_data = {
                    asset: data ? data._id : '',
                    comment: commentMoja,
@@ -114,8 +117,21 @@ const BrandAssetModal = ({ data, func }) => {
                    name: profile.name,
                    photo: profile.profilePic.url
            }
-          const result = CreateComment(comment_data).unwrap();
+          const result = await CreateComment(comment_data).unwrap();
+
+          if(result){
+                  commentRef.current.value = '';
+                  setIsAbleToPost(false);
+                  setIsCreatingComment(false);
+          }else{
+                 toast.error("Could not add your comment", { id: 'comment-error'})
+          }
   }
+
+  //Fetch Comments
+  const asset_id = data ? data._id : ''
+  const { data: comments, isLoading } = useGetAssetCommentsQuery(asset_id);
+  
   return (
     <div className={isBrandAssetModalOpen ? "brand-modal active" : "brand-modal"}>
            <Toaster />
@@ -169,19 +185,29 @@ const BrandAssetModal = ({ data, func }) => {
                                               <div className="comments-wrapper">
                                                         <h4>Comments</h4>
                                                              <div className="comments-body">
-                                                                       <CommentMoja />
-                                                                       <CommentMoja />
-                                                                       <CommentMoja />
-                                                                       <CommentMoja />
-                                                                       <CommentMoja />
-                                                                       <CommentMoja />
+                                                                     { !comments && !isLoading  && <p className="error">Error fetching comments</p>}
+                                                                     { isLoading  ?
+                                                                           <div className="simple-loader">
+                                                                                    <span className="spinning-loader"></span>
+                                                                            </div>
+                                                                            : 
+                                                                            comments.length > 0 ?
+                                                                                   comments.map(comment => 
+                                                                                       <CommentMoja data={comment} key={comment._id}/>
+                                                                                    )
+                                                                                    :
+                                                                                    <p className="error">No Comments yet</p>
+                                                                        
+                                                                     }
                                                              </div>
                                               </div>
                                    </div>
 
                                    <div className="comment-input">
-                                              <textarea placeholder="Add your comment" cols="30" rows="10" onChange={e =>updatePostStatus(e.target.value)}></textarea>
-                                               <h3 className={ isAbleToPost ? 'active': ''} onClick={SubmitComment}>Post</h3>
+                                              <textarea placeholder="Add your comment" cols="30" rows="10" onChange={e =>updatePostStatus(e.target.value)} ref={commentRef} ></textarea>
+                                               <h3 className={ isAbleToPost ? 'active': ''} onClick={SubmitComment}>
+                                                        { isCreatingComment ? <span className="spinning-loader"></span> : 'Post'}
+                                               </h3>
                                    </div>
                         </div>
             </div>

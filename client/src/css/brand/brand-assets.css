@@ -370,6 +370,9 @@
         font-family: "Madera-Light";
         font-size: 15px;
 }
+.comment-moja .author-texts{
+        width: 100%;
+}
 .comment-moja .author-texts p{
         font-size: 13px;
         line-height: 18px;
@@ -455,8 +458,12 @@
          justify-content: center;
          font-size: 16px;
          color: white;
-         cursor: pointer;
-         background-color: var(--main-color);
+         cursor: none;
+         background-color: rgba(0, 188, 209, 0.75);
+}
+.reply-form-content button.active{
+       cursor: pointer;
+       background-color: var(--main-color);
 }
 .reply-form span{
         display: flex;
@@ -502,3 +509,33 @@
        color: var(--main-color);
        cursor: pointer;
 }
+.comments-body .error{
+       font-size: 13px;
+       text-align: center;
+       padding: 10px 0;
+       color: rgb(128, 127, 127);
+}
+.simple-loader{
+       display: flex;
+       justify-content: center;
+       padding: 20px 0;;
+}
+.spinning-loader {
+       width: 20px;
+       height: 20px;
+       border-radius: 50%;
+       display: inline-block;
+       border-top: 3px solid var(--main-color);
+       border-right: 3px solid transparent;
+       box-sizing: border-box;
+       animation: rotation 1s linear infinite;
+     }
+     
+     @keyframes rotation {
+       0% {
+         transform: rotate(0deg);
+       }
+       100% {
+         transform: rotate(360deg);
+       }
+     } 
