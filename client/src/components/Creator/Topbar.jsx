@@ -2,6 +2,7 @@
 import { TbSearch } from "react-icons/tb"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { BsEnvelope } from "react-icons/bs" 
+import { HiOutlineMenu } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa"
 import { NavLink, useNavigate} from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
@@ -86,63 +87,70 @@ const [ logoutConsumer ] = useLogoutUserMutation();
     <div className="topbar-section">
                   <Toaster />
                   { wait ?  <Spinner /> : ''}
-                  <div className="search-bar">
-                             <span><TbSearch /></span>
-                             <input type="text" placeholder="Search" className="search-control" />
-                  </div>
-                  <div className="notification-profile">
-                             <div className="notification" onClick={() => setNotificationStatus(true)}>
-                                        <span><IoMdNotificationsOutline /></span>
-                                        { unread_notifications && unread_notifications.length > 0 ?
-                                                <div className="red-dot">
-                                                        <figure>{unread_notifications.length}</figure>
-                                               </div>
-                                               :
-                                               ''
-                                        }
-                             </div>
-                             <NotificationFlyBox innerRef={notificationRef} status={notificationStatus} fn={setNotificationStatus} />
+                  <div className="topbar-section-wrapper">
+                                 <div className="left-stuff">
+                                           <span><HiOutlineMenu /></span>
+                                 </div>
+                                 <div className="right-stuff">
+                                          <div className="search-bar">
+                                                      <span><TbSearch /></span>
+                                                     <input type="text" placeholder="Search" className="search-control" />
+                                        </div>
+                                        <div className="notification-profile">
+                                                   <div className="notification" onClick={() => setNotificationStatus(true)}>
+                                                              <span><IoMdNotificationsOutline /></span>
+                                                              { unread_notifications && unread_notifications.length > 0 ?
+                                                                      <div className="red-dot">
+                                                                              <figure>{unread_notifications.length}</figure>
+                                                                     </div>
+                                                                     :
+                                                                     ''
+                                                              }
+                                                   </div>
+                                                   <NotificationFlyBox innerRef={notificationRef} status={notificationStatus} fn={setNotificationStatus} />
 
-                             <div className="profile-part" onClick={() => setStatus(true)}>
-                                         <div className="profile-image">
-                                                   { user !== null ? 
-                                                           <img src={user.profilePic.url !== 'null' ? user.profilePic.url : profileImg} alt="" />
-                                                       :
-                                                       <img src={profileImg} alt="" />
-                                                    }
+                                                   <div className="profile-part" onClick={() => setStatus(true)}>
+                                                               <div className="profile-image">
+                                                                         { user !== null ? 
+                                                                                 <img src={user.profilePic.url !== 'null' ? user.profilePic.url : profileImg} alt="" />
+                                                                             :
+                                                                             <img src={profileImg} alt="" />
+                                                                          }
                                                    
-                                         </div>
-                             </div>
-                  </div>
-                  <div className={status ? "fly-box active"  : "fly-box"  } ref={boxRef}>
-                          <div className="fly-box-wrap">
-                                   <h4>User Profile</h4>
+                                                               </div>
+                                                   </div>
+                                        </div>
+                                        <div className={status ? "fly-box active"  : "fly-box"  } ref={boxRef}>
+                                                <div className="fly-box-wrap">
+                                                         <h4>User Profile</h4>
 
-                                   <div className="account-profile">
-                                             <div className="account-image">
-                                                    { user !== null ? 
-                                                           <img src={user.profilePic.url !== 'null' ? user.profilePic.url : profileImg} alt="" />
-                                                       :
-                                                       <img src={profileImg} alt="" />
-                                                    }
-                                             </div>
-                                             <div className="account-details">
-                                                         <h3>{user && user.name}</h3>
-                                                         <p><span><BsEnvelope /></span> {user && user.email}</p>
-                                             </div>
-                                   </div>
+                                                         <div className="account-profile">
+                                                                   <div className="account-image">
+                                                                          { user !== null ? 
+                                                                                 <img src={user.profilePic.url !== 'null' ? user.profilePic.url : profileImg} alt="" />
+                                                                             :
+                                                                             <img src={profileImg} alt="" />
+                                                                          }
+                                                                   </div>
+                                                                   <div className="account-details">
+                                                                               <h3>{user && user.name}</h3>
+                                                                               <p><span><BsEnvelope /></span> {user && user.email}</p>
+                                                                   </div>
+                                                         </div>
 
-                                   <NavLink className='profile-link' to={`/creator/${user.username !== 'null' ? user.username : user._id}/settings`}>
-                                               <span><FaRegUser /></span>
-                                                 <div className="deets">
-                                                             <h4>My Account</h4>
-                                                             <p>Profile Settings</p>
+                                                         <NavLink className='profile-link' to={`/creator/${user.username !== 'null' ? user.username : user._id}/settings`}>
+                                                                     <span><FaRegUser /></span>
+                                                                       <div className="deets">
+                                                                                   <h4>My Account</h4>
+                                                                                   <p>Profile Settings</p>
+                                                                       </div>
+                                                         </NavLink>
+                                                         <div className="logout-btn">
+                                                                   <button onClick={LogoutUser}>Logout</button>
+                                                         </div>
                                                  </div>
-                                   </NavLink>
-                                   <div className="logout-btn">
-                                             <button onClick={LogoutUser}>Logout</button>
-                                   </div>
-                           </div>
+                                        </div>
+                                 </div>
                   </div>
     </div>
   )

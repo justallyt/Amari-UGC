@@ -17,8 +17,16 @@
    display: flex;
    justify-content: center;
    margin-top: 40px;
+   gap: 20px;
+   flex-wrap: wrap;
 }
-
+.get-started a:nth-child(2){
+      background: transparent;
+      border: 2px solid var(--main-color);
+      color: #111;
+      width: 250px;
+      height: 50px;
+}
 
 .random-images-section{
      width: 95%;

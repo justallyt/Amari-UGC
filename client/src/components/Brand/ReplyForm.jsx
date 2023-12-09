@@ -29,7 +29,8 @@ const ReplyForm = ({ status, func, comment}) => {
                   person: profile._id,
                   name: profile.name,
                   message: replyMsg,
-                  photo: profile.profilePic.url
+                  photo: profile.profilePic.url,
+                  role: profile.role
           }
 
           const result = await ReplyComment(reply_data).unwrap();
@@ -47,7 +48,7 @@ const ReplyForm = ({ status, func, comment}) => {
                   <form>       
                           <div className="reply-form-content">
                                  <textarea onChange={(e) => checkReplyStatus(e.target.value)}  className="reply-form-control" placeholder="Add a reply" cols="30" rows="10" ref={inputRef} ></textarea>
-                                <button className={replyStatus ? 'active': ''} onClick={(e) =>CreateReply(e)}><VscSend /></button>
+                                <p className={replyStatus ? 'active': ''} onClick={(e) =>CreateReply(e)}><VscSend /></p>
                           </div>
                   </form>
                    <span onClick={() => func(false)}><IoCloseOutline /></span>

@@ -61,7 +61,7 @@
 }
 
 .sidebar-container .help{
-    margin: 200px auto 0px auto;
+    margin: 100px auto 0px auto;
     text-align: center;
 }
 .sidebar-container .help a{
@@ -92,7 +92,7 @@
 }
 
 .search-bar{
-     width: 30%;
+    width: 300px;
      background: white;
      height: 45px;
      border-radius: 7px;
@@ -119,12 +119,16 @@
     margin-top: 3px;
     display: inline-flex;
 }
-.topbar-section{
+.topbar-section-wrapper{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     gap: 30px;
+}
+.topbar-section-wrapper .right-stuff{
+        display: flex;
+        gap: 30px;
 }
 .notification-profile{
     display: flex;
@@ -827,6 +831,15 @@
 
 @media(max-width: 1250px){
         .sidebar-container{
-                width: 80px;
+                width: 0px;
+                padding: 0;
+        }
+        .sidebar-nav,
+        .sidebar-container .help{
+              display: none;
+        }
+        .dashboard-body-wrap{
+             width: 100%;
+             margin-left: 0;
         }
 }  

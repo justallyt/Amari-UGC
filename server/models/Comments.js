@@ -11,7 +11,8 @@ const commentSchema = mongoose.Schema({
                        ref: 'User'
                 },
                 name: { type: String, required: true},
-                photo: { type: String}
+                photo: { type: String},
+                role: { type: String}
         },
         comment: { 
                 type: String,
@@ -24,7 +25,9 @@ const commentSchema = mongoose.Schema({
                    replier: { type: Schema.Types.ObjectId, ref: 'User'},
                    reply: { type: String},
                    name: { type: String},
-                   photo: { type: String}
+                   photo: { type: String},
+                   role: { type: String},
+                   createdAt: { type: Date, default: Date.now}
             }
         ]
 }, { timestamps: true})

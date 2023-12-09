@@ -57,7 +57,7 @@ const NotificationsBody = () => {
                                                  <div className="notification-moja" key={item._id}>
                                                          <div className="notification-moja-left">
                                                                   <div className="notification-profile">
-                                                                            <img src={item.sender.profilePhoto} alt="" />
+                                                                            <img className={profile._id === item.sender.senderId ? '' : 'brand'}  src={item.sender.profilePhoto} alt="" />
                                                                   </div>
                                                                   <div className="notification-texts">
                                                                              

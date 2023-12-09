@@ -115,7 +115,8 @@ const BrandAssetModal = ({ data, func }) => {
                    comment: commentMoja,
                    commentor: profile._id,
                    name: profile.name,
-                   photo: profile.profilePic.url
+                   photo: profile.profilePic.url,
+                   role: profile.role
            }
           const result = await CreateComment(comment_data).unwrap();
 
@@ -138,7 +139,7 @@ const BrandAssetModal = ({ data, func }) => {
             <div className="brand-modal-content">
                         <div className="brand-modal-asset-col">
                                    <div className="modal-asset-body">
-                                                <div className="modal-loader"></div>
+                                                 
                                                <BrandOpenedAsset source={data ? data.asset.url : ''}  status={isBrandAssetModalOpen}/>
                                    </div>
                         </div>

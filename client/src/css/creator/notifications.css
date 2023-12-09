@@ -85,6 +85,11 @@
       -ms-border-radius: 50%;
       -o-border-radius: 50%;
 }
+.notification-profile img.brand{
+      object-fit: contain;
+      width: 90%;
+      height: 90%;
+}
 .notification-texts p{
          font-family: "Madera-Medium";
 }

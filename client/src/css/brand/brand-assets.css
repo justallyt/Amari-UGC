@@ -204,6 +204,9 @@
        transform: rotate(360deg);
  }
 } 
+.modal-asset-body{
+       overflow: hidden;
+}
 .modal-asset-body img{
        object-fit: contain;
        width: 90%;
@@ -213,7 +216,7 @@
 .modal-asset-body video{
         position: absolute;
         z-index: 5;
-        height: 610px;
+        height: 100%;
 }
 .brand-modal-texts-col{
        position: relative;
@@ -392,11 +395,20 @@
          align-items: center;
          justify-content: center;
 }
-.comment-image-profile img{
-         width: 60%;
-         height: 60%;
-         object-fit: contain;
-         
+.comment-image-profile img.creator-photo{
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         border-radius: 50%;
+         -webkit-border-radius: 50%;
+         -moz-border-radius: 50%;
+         -ms-border-radius: 50%;
+         -o-border-radius: 50%;
+}
+.comment-image-profile img.brand{
+       width: 60%;
+       height: 60%;
+       object-fit: contain
 }
 .comment-moja .author-actions{
        display: flex;
@@ -444,7 +456,7 @@
        -o-border-radius: 5px 0px 0px 5px;
        padding: 5px;
 }
-.reply-form-content button{
+.reply-form-content p{
          border: none;
          width: 40px;
          height: 40px;
@@ -456,12 +468,12 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         font-size: 16px;
+         font-size: 18px;
          color: white;
          cursor: none;
          background-color: rgba(0, 188, 209, 0.75);
 }
-.reply-form-content button.active{
+.reply-form-content p.active{
        cursor: pointer;
        background-color: var(--main-color);
 }

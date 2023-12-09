@@ -210,7 +210,7 @@ export const getUserAssets = asyncHandler(async(req, res) => {
 
  //Comment on Asset
  export const CommentOnAsset = asyncHandler(async(req, res) => {
-        const { asset, comment, commentor, name, photo } = req.body;
+        const { asset, comment, commentor, name, photo, role } = req.body;
         const assetID = new mongoose.Types.ObjectId(asset);
         const commentorID = new mongoose.Types.ObjectId(commentor);
         
@@ -219,12 +219,28 @@ export const getUserAssets = asyncHandler(async(req, res) => {
                    commenter: {
                           commenter_id: commentorID,
                           name: name,
-                          photo: photo
+                          photo: photo,
+                          role: role
                    },
                    comment: comment
         })
       
         if(newComment){
+                const asset = await Asset.findById(newComment.asset_id);
+                const creator = await User.findById(asset.creator);
+
+                const notify = await Notifications.create({
+                         notification_type: 'Comment',
+                         sender: {
+                                  senderId: newComment.commenter.commenter_id,
+                                  senderName: newComment.commenter.name,
+                                  profilePhoto: newComment.commenter.photo
+                         },
+                         receipient: {
+                                 receipientId: creator._id,
+                                 receipientMsg: `The asset you created for ${asset.created_for} has a new comment.`
+                         }
+                })
                 res.status(201).json({message: 'Comment added succesfully'})
         }else{
                 res.status(500).json({message: 'Your comment not posted. Internal server error'})
@@ -246,7 +262,7 @@ export const getUserAssets = asyncHandler(async(req, res) => {
 
  //Create a reply on a comment
  export const CreateReplyOnComment = asyncHandler(async(req, res) => {
-          const { id, person, name, message, photo } = req.body;
+          const { id, person, name, message, photo, role } = req.body;
           const commentID = new mongoose.Types.ObjectId(id);
           const commentorID = new mongoose.Types.ObjectId(person);
           //generate random id for reply
@@ -262,8 +278,9 @@ export const getUserAssets = asyncHandler(async(req, res) => {
                                          replier: commentorID,
                                          reply: message,
                                          name: name,
-                                         photo: photo
-                                 }
+                                         photo: photo,
+                                         role: role
+                                 } 
                           }
                   }, { new: true})
 

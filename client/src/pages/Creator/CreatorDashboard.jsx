@@ -23,7 +23,6 @@ const CreatorDashboard = () => {
   useEffect(() => {
         if(user_data){
              dispatch(setProfile({...user_data.user}))
-             console.log(user_data);
          }
          if(user_notifications){
               dispatch(setAllNotifications([...user_notifications.notifications]))
