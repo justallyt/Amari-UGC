@@ -3,9 +3,12 @@ import CreatorBrandsBody from "../../components/Creator/CreatorBrandsBody"
 import CreatorSidebar from "../../components/Creator/Sidebar"
 import "../../css/creator/creator_brands.css"
 import { useCheckRequestsQuery, useGetBrandsQuery } from "../../redux/usersSlice"
-import { useEffect } from "react"
+import { sidebarContext } from "../../components/Creator/context/sidebarContext"
+import { useEffect, useState } from "react"
 import { setRequestedBrands, setUserApprovedBrands, setAvailableBrands, setPulledBrands } from "../../redux/utilsSlices"
+import MobileSidebar from "../../components/Creator/MobileSidebar"
 const CreatorBrands = () => {
+  const [status, setStatus ] = useState(false)
   const dispatch = useDispatch();
   const { data: requests, refetch } = useCheckRequestsQuery({  refetchOnMountOrArgChange: true })
   const { data: allbrands} = useGetBrandsQuery({ refetchOnMountOrArgChange: true })
@@ -42,7 +45,11 @@ useEffect(() => {
     <div className="dashboard-wrapper">
              <div className="dashboard-inner">
                         <CreatorSidebar />
-                        <CreatorBrandsBody refetchFn={refetch} />
+                         <sidebarContext.Provider value={[status, setStatus]}>
+                                  <MobileSidebar />
+                                  <CreatorBrandsBody refetchFn={refetch} />
+                         </sidebarContext.Provider>
+                       
              </div>
     </div>
   )

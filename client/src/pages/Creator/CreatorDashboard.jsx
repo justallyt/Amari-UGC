@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { useGetBrandsQuery, useGetUnreadUserNotificationsQuery, useGetUserNotificationsQuery, useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setAllNotifications, setProfile, setUnreadNotifications } from "../../redux/profileSlice"
 import { setUserAssets, setAvailableBrands, setPulledBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Spinner from "../../components/Spinner"
 import { useGetUserAssetsQuery } from "../../redux/assetSlice"
+import MobileSidebar from "../../components/Creator/MobileSidebar"
+import { sidebarContext } from "../../components/Creator/context/sidebarContext"
 
 const CreatorDashboard = () => {  
   const dispatch = useDispatch();
+  const [status, setStatus] = useState(false)
   const { profile } = useSelector(state => state.profile)
   const { brands } = useSelector(state => state.utils);
   //Get User Profile
@@ -63,10 +66,12 @@ useEffect(() => {
            { user_data && profile ? 
                   <div className="dashboard-wrapper">
                             <div className="dashboard-inner">
-                                     <CreatorSidebar />
-                                     <DashboardBody />
-                            </div>
-                           
+                                    <sidebarContext.Provider value={[status, setStatus]}>
+                                             <MobileSidebar />
+                                              <CreatorSidebar />
+                                              <DashboardBody />
+                                    </sidebarContext.Provider>
+                            </div> 
                    </div>
                    : 
                    <Spinner />

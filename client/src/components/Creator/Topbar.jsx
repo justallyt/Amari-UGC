@@ -5,7 +5,7 @@ import { BsEnvelope } from "react-icons/bs"
 import { HiOutlineMenu } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa"
 import { NavLink, useNavigate} from "react-router-dom"
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { useGetUnreadUserNotificationsQuery,  useLogoutUserMutation } from "../../redux/usersSlice"
 import { clearCredentials } from "../../redux/authSlice"
 import { clearProfile, setUnreadNotifications } from "../../redux/profileSlice"
@@ -17,9 +17,12 @@ import { apiSlice } from "../../redux/apiSlice"
 import { clearUtils, setUserAssets } from "../../redux/utilsSlices"
 import NotificationFlyBox from "./NotificationFlyBox"
 import { useGetUserAssetsQuery } from "../../redux/assetSlice"
+import logo from "../../assets/logo.png"
+import { sidebarContext } from "./context/sidebarContext";
 
 const Topbar = ({ user}) => {
   const [ status, setStatus ] = useState(false)
+  const [sidebarStatus, setSidebarStatus] = useContext(sidebarContext)
   const [wait, setWait] = useState(false);
   const [notificationStatus, setNotificationStatus] = useState(false)
   const boxRef = useRef()
@@ -83,13 +86,18 @@ const [ logoutConsumer ] = useLogoutUserMutation();
          }
   }
  
+ //Open sidebar
+ const openSidebar = () => setSidebarStatus(!sidebarStatus)
   return (
     <div className="topbar-section">
                   <Toaster />
                   { wait ?  <Spinner /> : ''}
                   <div className="topbar-section-wrapper">
                                  <div className="left-stuff">
-                                           <span><HiOutlineMenu /></span>
+                                           <span onClick={openSidebar}><HiOutlineMenu /></span>
+                                           <NavLink to={`/creator/${user.username !== 'null' ? user.username : user._id}/`} className="mobile-logo">
+                                                      <img src={logo} alt="" />
+                                           </NavLink>
                                  </div>
                                  <div className="right-stuff">
                                           <div className="search-bar">

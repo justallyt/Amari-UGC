@@ -1,20 +1,39 @@
+import { HiOutlineMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom"
 import logo from '../../assets/logo.png'
+import { useContext, useEffect, useRef } from "react";
+import { sidebarContext } from "./context/sidebarContext";
 import { IoHomeOutline, IoLayersOutline, IoCloudUploadOutline } from "react-icons/io5"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { BsDatabase, BsPiggyBank } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
 import { useSelector } from "react-redux"
-const CreatorSidebar = () => {
-     const { profile } = useSelector(state => state.profile);
-     return (
-          <div className="sidebar-container">
-                       <div className="sidebar-logo">
-                                <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/`}>
-                                          <img src={logo} alt="" />
-                                </NavLink>
+
+const MobileSidebar = () => {
+  const { profile } = useSelector(state => state.profile)
+  const [sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
+  const sidebarRef = useRef();
+
+  useEffect(() => {
+        document.addEventListener("click", closeSidebar, true)
+  }, [])
+  const closeSidebar = (e) => {
+          if(sidebarRef && !sidebarRef.current.contains(e.target)){
+                 setSidebarStatus(false)
+          }
+          setSidebarStatus(false)
+  }
+
+  return (
+    <div className={sidebarStatus ? "mobile-sidebar-wrapper active" : "mobile-sidebar-wrapper"}>
+             <div ref={sidebarRef}  className={ sidebarStatus ? "mobile-sidebar-content active" : "mobile-sidebar-content"}>
+                       <div className="mobile-header">
+                                <span onClick={closeSidebar}><HiOutlineMenu /></span>
+                                <div className="mobile-logo">
+                                           <img src={logo} alt="" />
+                                </div>
                        </div>
-                       <div className="sidebar-nav">
+                       <div className="mobile-nav">
                                     <ul>
                                               <li>
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/`}><span><IoHomeOutline /></span> <p>Dashboard</p></NavLink>
@@ -39,12 +58,9 @@ const CreatorSidebar = () => {
                                              </li>
                                     </ul>
                        </div>
-
-                       <div className="help">
-                                <NavLink to={'/help'}>Need any Help?</NavLink>
-                       </div>
-          </div>
-     )
+             </div>
+    </div>
+  )
 }
 
-export default CreatorSidebar
+export default MobileSidebar

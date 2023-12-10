@@ -90,6 +90,44 @@
        margin: auto;
        padding: 20px;
 }
+.topbar-section{
+       position: relative;
+}
+.left-stuff{
+       transform: translateX(-20px);
+       display: flex;
+       align-items: center;
+       gap: 5px;
+       -webkit-transform: translateX(-20px);
+       -moz-transform: translateX(-20px);
+       -ms-transform: translateX(-20px);
+       -o-transform: translateX(-20px);
+       visibility: hidden;
+}
+.left-stuff .mobile-logo,
+.mobile-header .mobile-logo{
+      width: 120px;
+      margin-top: 5px;
+}
+.left-stuff span,
+.mobile-header span{
+     font-size: 25px;
+     cursor: pointer;
+     color: #222;
+     width: 40px;
+     height: 40px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-radius: 50%;
+     -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+     -ms-border-radius: 50%;
+     -o-border-radius: 50%;
+}
+.left-stuff span:hover{
+      background: var(--sleezy-border)
+}
 
 .search-bar{
     width: 300px;
@@ -450,6 +488,92 @@
 .logout-btn button:hover{
     background: rgba(241, 249, 250, 0.762);
 }
+
+/* Mobile Sidebar Styles */
+.mobile-sidebar-wrapper{
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: rgba(0, 26, 29, 0.682);
+       z-index: -1;
+    
+}
+.mobile-sidebar-wrapper.active{
+       z-index: 999;
+       display: block;
+}
+.mobile-sidebar-content{
+      width: 300px;
+      background: white;
+      height: 100%;
+      padding: 10px;
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      -moz-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+      -o-transform: translateX(-100%);
+      transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+}
+.mobile-sidebar-content.active{
+       transform: translateX(0);
+       -webkit-transform: translateX(0);
+       -moz-transform: translateX(0);
+       -ms-transform: translateX(0);
+       -o-transform: translateX(0);
+}
+.mobile-header{
+    display: flex;
+    gap: 5px;;
+}
+.mobile-header img{
+      object-fit: contain;
+}
+.mobile-nav{
+       margin-top: 20px;
+}
+.mobile-nav ul li{
+     line-height: 45px;
+     margin-bottom: 10px;
+}
+.mobile-nav ul li a{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 90%;
+        font-size: 16px;
+        padding: 0 15px;
+        margin: auto;
+        color: rgb(0,38, 42);
+        border-radius: 7px;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -ms-border-radius: 7px;
+        -o-border-radius: 7px;
+        transition: all 0.7s ease;
+        -webkit-transition: all 0.7s ease;
+        -moz-transition: all 0.7s ease;
+        -ms-transition: all 0.7s ease;
+        -o-transition: all 0.7s ease;
+}
+
+.mobile-nav ul li a:hover,
+.mobile-nav ul li a.active{
+    font-family: "Madera-Medium";
+    background:var(--main-color);
+    color: white;
+}
+.mobile-nav ul li a span{
+    display: inline-flex;
+    margin-top: 2px;
+    font-size: 20px;
+}
+
 
 .dashboard-wrapper-row{
        margin: 20px 0;
@@ -830,9 +954,11 @@
 }
 
 @media(max-width: 1250px){
-        .sidebar-container{
+        .sidebar-container,
+        .sidebar-logo{
                 width: 0px;
                 padding: 0;
+                display: none;
         }
         .sidebar-nav,
         .sidebar-container .help{
@@ -842,4 +968,35 @@
              width: 100%;
              margin-left: 0;
         }
+        .dashboard-wrapper .intro{
+               margin-top: 30px
+        }
+        .left-stuff {
+              visibility: visible;
+        }
 }  
+
+@media(max-width: 800px){
+        .search-bar{
+               width: 40px;
+               height: 40px;
+               padding: 0;
+               display: flex;
+               justify-content: center;
+        }
+        .search-bar .search-control{
+               display: none;
+        }
+        .search-bar span{
+             width: 40px;
+             height: 40px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             border-radius: 7px;
+             -webkit-border-radius: 7px;
+             -moz-border-radius: 7px;
+             -ms-border-radius: 7px;
+             -o-border-radius: 7px;
+}
+}

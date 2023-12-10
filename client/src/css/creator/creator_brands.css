@@ -126,3 +126,14 @@
     pointer-events: none;
     color: white;
 }
+
+@media(max-width: 1250px){
+       .brand-list-row{
+            margin-top: 30px;
+       }
+}
+@media(max-width: 1090px){
+       .brand-list-header{
+             width: 100%;
+       }
+}
