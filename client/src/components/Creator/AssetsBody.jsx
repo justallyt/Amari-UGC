@@ -3,17 +3,19 @@ import Topbar from "./Topbar"
 import { NavLink } from "react-router-dom"
 import { MdOutlineVideoFile } from "react-icons/md"
 import AssetModal from "./AssetModal"
-import { openModal, setUserAssets } from "../../redux/utilsSlices"
+import {  openModal, setUserAssets } from "../../redux/utilsSlices"
 import { VscHeart } from "react-icons/vsc"
+import { FaHeart } from "react-icons/fa";
 import { useEffect, useState } from "react"
 import Footer from "../Footer"
 import { useGetUserAssetsQuery } from "../../redux/assetSlice"
+
 const AssetsBody = () => {
       const [videoId, setVideoId] = useState(null)
     const { profile } = useSelector(state => state.profile)
     const { assets, isModalOpen } = useSelector(state => state.utils);
     const { data: pulled_assets } = useGetUserAssetsQuery({ refetchOnMountOrArgChange: true })
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const openVideoModal = (id) => {
           dispatch(openModal())
@@ -25,11 +27,13 @@ const AssetsBody = () => {
                    dispatch(setUserAssets([...pulled_assets.assets]))
              }
     }, [dispatch, pulled_assets])
+
+
        return (
             <div className="dashboard-body-wrap">
                        <div className="dashboard-row">
                                   <Topbar user={profile} />
-                                 { isModalOpen ? <AssetModal identity={videoId}/> : ''}
+                                 { isModalOpen ? <AssetModal identity={videoId} /> : ''}
                                   <div className="assets-body-wrap">
                                              <div className="intro">
                                                      <h2>My Creations</h2>
@@ -53,8 +57,13 @@ const AssetsBody = () => {
                                                                                                    <p>{item.brand_product}</p>
                                                                                          </div>
                                                                                          <div className="likes">
-                                                                                                     <span><VscHeart /></span>
-                                                                                                     <p>0</p>
+                                                                                                { item.liked_by.length > 0 ?
+                                                                                                      <span className="liked"><FaHeart /></span>
+                                                                                                 :
+                                                                                                      <span><VscHeart /></span>
+                                                                                                 }
+                                                                                                     
+                                                                                                    
                                                                                          </div>
                                                                               </div>
                                                                    </div>

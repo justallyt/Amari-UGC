@@ -298,3 +298,19 @@
                -o-transform: scale(1.2, 1);
       }
   }
+
+  @media(max-width: 1090px){
+    .video-form-row,
+    .video-loading-section,
+    .video-upload-part,
+    .video-form-column textarea,
+    .video-create-row p{
+           width: 100%;
+    }
+  }
+
+  @media(max-width: 768px){
+          .video-form-row{
+                grid-template-columns: 1fr;
+          }
+  }

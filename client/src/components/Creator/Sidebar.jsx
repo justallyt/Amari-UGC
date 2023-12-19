@@ -5,8 +5,10 @@ import { IoMdNotificationsOutline } from "react-icons/io"
 import { BsDatabase, BsPiggyBank } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
 import { useSelector } from "react-redux"
+
 const CreatorSidebar = () => {
      const { profile } = useSelector(state => state.profile);
+
      return (
           <div className="sidebar-container">
                        <div className="sidebar-logo">

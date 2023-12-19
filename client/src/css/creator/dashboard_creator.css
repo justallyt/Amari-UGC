@@ -728,7 +728,7 @@
 
 
 .activity-panel{
-       margin: 40px 0;
+       margin: 40px 0 0 0;
 }
 .activity-panel h2{
     font-family: "Madera-Light";
@@ -976,7 +976,7 @@
         }
 }  
 
-@media(max-width: 800px){
+@media(max-width: 900px){
         .search-bar{
                width: 40px;
                height: 40px;
@@ -998,5 +998,88 @@
              -moz-border-radius: 7px;
              -ms-border-radius: 7px;
              -o-border-radius: 7px;
+      }
+
+      .dashboard-wrapper-row{
+           grid-template-columns: 1fr;
+           gap: 10px;
+      }
 }
+
+@media(max-width: 700px){
+    .topbar-section-wrapper .right-stuff{
+            gap: 10px;
+    }
+      .creations-row{
+            grid-template-columns: 1fr 1fr;
+      }
+      .creations-row .creation-moja:nth-child(3){
+            display: none;
+      }
+      .informationals-section .creation-header{
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+      }
+      .activity-moja{
+             gap: 10px;
+             align-items: center;
+      }
+      .activity-moja .activity-thumbnail{
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+      }
+      .activity-block .activity-user h5{
+            font-size: 15px;
+      }
+      .activity-block .activity-user p{
+            font-size: 11px;
+      }
+      .activity-moja .time p{
+             padding: 0;
+             font-size: 10px;
+      }
+
+      .notification-fly-box{
+            right: 0;
+      }
+}
+
+@media(max-width: 500px){
+      .topbar-section-wrapper{
+             gap: 0px;
+      }
+      .topbar-section-wrapper .right-stuff{
+             gap: 10px
+      }
+      .search-bar{
+             width: max-content;
+             height: max-content;
+             background: none;
+      }
+      .search-bar span{
+            width: max-content;
+      }
+
+     .notification{
+           width: max-content;
+           border: none;
+           padding-top: 3px;
+     }
+       .profile-part {
+             width: 35px;
+             height: 35px;
+       }
+       .profile-part img{
+             height: 35px;
+       }
+      .creation-thumbnail,
+      .creation-thumbnail img{
+            max-height: 250px;
+      }
+      .notification-fly-box,
+      .topbar-section .fly-box{
+            width: 90%;
+      }
 }

@@ -136,4 +136,14 @@
        .brand-list-header{
              width: 100%;
        }
+
+}
+@media(max-width: 768px){
+       .available-brand-moja{
+             width: 100%;
+       }
+       .available-brand-moja button{
+             width: 100px;
+             font-size: 12px;
+       }
 }

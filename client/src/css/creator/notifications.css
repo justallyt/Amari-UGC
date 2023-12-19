@@ -135,3 +135,19 @@
       display: flex;
       justify-content: center;
 }
+
+@media(max-width: 1090px){
+         .notifications-wrapper-head,
+         .notifications-row{
+                   width: 100%;
+         }
+         .notification-profile{
+                flex-shrink: 0;
+         }
+
+}
+@media(max-width: 500px){
+      .notification-texts p{
+            font-size: 14px;
+     }
+}

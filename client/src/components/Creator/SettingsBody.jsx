@@ -9,16 +9,22 @@ import { VscDebugDisconnect } from 'react-icons/vsc'
 import { TfiBrushAlt } from "react-icons/tfi"
 import ProfileCard from "./settings/ProfileCard"
 import Footer from "../Footer"
+import { CgMenuLeftAlt } from "react-icons/cg";
+import { useState } from "react"
 const SettingsBody = () => {
-  const { userInfo} = useSelector(state => state.auth)
+  const [settingsStatus, setSettingsStatus] = useState(false)
   const { profile } = useSelector(state => state.profile)
+
+  const openMobileSettings = () => {
+         setSettingsStatus(!settingsStatus)
+  }
   return (
     <div className="dashboard-body-wrap">
              <div className="dashboard-row">
                         <Topbar user={profile} />
 
                         <div className="dashboard-wrapper">
-                                  <NavLink to={`/${userInfo.id}`} className='back-btn'>
+                                  <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}`} className='back-btn'>
                                             <span><BsArrowLeft /></span>
                                             <h5>Back to Dashboard</h5>
                                   </NavLink>
@@ -30,7 +36,8 @@ const SettingsBody = () => {
 
                                             <div className="settings-types-row">
                                                         <div className="settings-sidebar">
-                                                                    <ul>
+                                                                <span onClick={openMobileSettings} className="sidebar-btn"><CgMenuLeftAlt /></span>
+                                                                    <ul className={settingsStatus ? 'active' : ''} >
                                                                           <li className="active"><NavLink to={'/'}><span><MdOutlineAccountCircle /></span> Profile</NavLink></li>
                                                                           <li><NavLink to={'/'}>
                                                                             <span><IoMdNotificationsOutline /></span>

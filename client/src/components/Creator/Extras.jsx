@@ -56,7 +56,7 @@ const active_brands = assets && [...new Set(assets.map(item => item.created_for)
                                   <p>Business graph with Stats</p>
 
                                   <div className="chart">
-                                            <ResponsiveContainer width='100%' height='100%'>
+                                            <ResponsiveContainer width='99%' height='100%'>
                                                      <AreaChart  width={300} height={100} data={data} margin={{ left: -60}}>
                                                               <defs>
                                                                        <linearGradient id="color" x1='0' y1='0' x2='0' y2='1'>

@@ -5,7 +5,7 @@ import OpenedAsset from "../OpenedAsset"
 import profileImg from "../../assets/dummyprofile.png"
 import { useCommentOnAssetMutation, useGetAssetCommentsQuery } from "../../redux/assetSlice"
 import CommentMoja from "../Brand/CommentMoja"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 
 const AssetModal = ({ identity }) => {
@@ -13,6 +13,7 @@ const AssetModal = ({ identity }) => {
    const { isModalOpen, assets, userBrands } = useSelector(state => state.utils);
    const { profile } = useSelector(state => state.profile)
    const commentRef = useRef();
+   const modalRef = useRef();
    const [commentMoja, setCommentMoja] = useState('')
    const [isAbleToPost, setIsAbleToPost] = useState(false)
    const [isCreatingComment, setIsCreatingComment] = useState(false);
@@ -63,10 +64,19 @@ const AssetModal = ({ identity }) => {
     const asset_id = identity ? identity : '';
     const { data: comments, isLoading } = useGetAssetCommentsQuery(asset_id)
 
+    const handleModalOffClick = (e) =>{
+            if(modalRef && !modalRef.current.contains(e.target)){
+                   dispatch(closeModal())
+            }
+    }
+    useEffect(() => {
+            document.addEventListener("click", handleModalOffClick, true)
+    }, [])
   return (
     <div className={isModalOpen ? "video-modal-wrapper active" : "video-modal-wrapper"}>
               <Toaster />
-              <div className="modal-box">
+              <div className="modal-box" ref={modalRef}>
+                          <span className="close-btn mobile" onClick={closeVideoModal}><CgClose /></span>
                          <div className="video-part">
                                     <div className="modal-video-box"> 
                                                <div className="modal-loader"></div>
