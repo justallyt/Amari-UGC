@@ -38,7 +38,7 @@ const Performance = () => {
                 <div className="performance-bar-chart">
                         <h5>Analytics <span>+ 5.4%</span></h5>
                         <div className="performance-bar-chart-inner">
-                            <ResponsiveContainer width="100%" height="100%">
+                            <ResponsiveContainer width="99%" height="100%">
                                 <BarChart data={data} barGap={10} >
                                          <CartesianGrid vertical={false} strokeDasharray="2 2" opacity={0.4} />
                                                      <XAxis dataKey="name" tickLine={false} axisLine={false} label={{ fontSize:15}}  tick={{ fontSize: "12px"}} />

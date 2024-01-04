@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux"
@@ -8,11 +8,14 @@ import assets from "../../assets/photograph.png"
 import posts from "../../assets/social-media.png"
 import Performance from "./Performance";
 import Transanctions from "./Transanctions";
-
-
+import { CgMenu } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import logo from '../../assets/logo.png'
+import { brandSidebarContext } from "./context/sidebar";
 
 const MiddlePart = () => {
     const [ greeting, setGreeting] = useState('')
+    const [sidebarStatus, setSidebarStatus] = useContext(brandSidebarContext);
 
     const { userInfo } = useSelector(state => state.auth);
     const { profile } = useSelector(state => state.profile)
@@ -46,11 +49,19 @@ const wedges = [
      { id: 2, icon: posts, num: 33, txt: 'Posts Made'}
 ]
 
+const openSidebar = () => setSidebarStatus(!sidebarStatus)
+
   return (
     <div className="dashboard-middle-part">
                <Toaster />
                  <div className="wrapper-inner">
                           <div className="middle-part-content">
+                                        <div className="middle-sidebar-initiate">
+                                                    <span onClick={openSidebar}><CgMenu /></span>
+                                                    <Link to={'/'}>
+                                                             <img src={logo} alt="" />
+                                                    </Link>
+                                        </div>
                                        <div className="greeting">
                                                  <h3>{greeting}, {profile.name} </h3>
                                                  <p>Have an in-depth look at all the metrics within your dashboard</p>

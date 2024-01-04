@@ -7,19 +7,15 @@ const BrandDashboardBody = () => {
   return (
     <div className="brand-dashboard-wrapper">
                <div className="dashboard-inner">
-                         <Sidebar />
-                        
+                         <Sidebar />                     
                          <div className="brand-dashboard-skewed">
                                    <div className="brand-dashboard-skewed-inner">
                                             <MiddlePart />
                                             <RightPart />
                                    </div>
                                    <Footer />
-                         </div>
-
-                         
+                         </div>        
                </div>
-               
     </div>
   )
 }

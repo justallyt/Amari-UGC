@@ -3,16 +3,20 @@ import "../../css/brand/dashboard_brand.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useGetUserProfileQuery } from "../../redux/usersSlice"
 import { setProfile } from "../../redux/profileSlice"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useGetAllAssetsForBrandQuery, useGetAllCreatorsForBrandQuery } from "../../redux/brand/brandSlice"
 import { setBrandAssets, setBrandCreators } from "../../redux/brand/brandUtils"
 import Spinner from "../../components/Spinner"
 import {  setPulledCreators } from "../../redux/utilsSlices"
 import "../../css/brand/creators.css"
+import { brandSidebarContext } from "../../components/Brand/context/sidebar"
+import BrandMobileSidebar from "../../components/Brand/BrandMobileSidebar"
+
 const BrandDashboard = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector(state => state.profile);
   const { creators } = useSelector(state => state.utils);
+  const [sidebarStatus, setSidebarStatus] = useState(false)
   //Get User Profile
   const { data: brand_profile, isLoading, refetch } = useGetUserProfileQuery({  refetchOnMountOrArgChange: true })
   const { data: all_creators } = useGetAllCreatorsForBrandQuery({ refetchOnMountOrArgChange: true})
@@ -52,7 +56,10 @@ const BrandDashboard = () => {
     <>
          { profile ? 
                   <>
-                       <BrandDashboardBody />
+                       <brandSidebarContext.Provider value={[sidebarStatus, setSidebarStatus]}>
+                                 <BrandDashboardBody />
+                                 <BrandMobileSidebar />
+                       </brandSidebarContext.Provider>
                   </>
                   : 
                  <Spinner />

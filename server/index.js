@@ -29,10 +29,14 @@ const corsConfig = {
 };
 app.use(cors(corsConfig))
 /* Routes */
+
 app.use("/api/user", userRoutes);
 app.use('/api/asset', assetRoutes);
 app.use('/api/brand', brandRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/', (req, res) => {
+    res.status(200).send("Welcome to Amari UGC")
+} )
 
 //Error Handling
 app.use(notFound);
