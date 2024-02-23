@@ -124,7 +124,7 @@ const CreateAssetBody = () => {
                                                                               <span className="error">{errors.asset && errors.asset.message}</span>
                                                                    </div>   
 
-                                                                   <div className="mobile-upload-trigger-box" onClick={open}>
+                                                                   <div className="mobile-upload-trigger-box" onTouchEnd={open}>
                                                                                 <span><BsUpload /></span>
                                                                                 <p>Click to upload</p>
                                                                     </div>                                                   
