@@ -127,6 +127,7 @@ const CreateAssetBody = () => {
                                                                    <div className="mobile-upload-trigger-box" onTouchEnd={open}>
                                                                                 <span><BsUpload /></span>
                                                                                 <p>Click to upload</p>
+                                                                                <input type="file" name="" id="" />
                                                                     </div>                                                   
                                                             </div>
                                                        }
