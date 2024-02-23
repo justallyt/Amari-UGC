@@ -21,7 +21,7 @@ const CreateAssetBody = () => {
    const [ selectedFile, setSelectedFile] = useState(null)
    const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm()
     //asset dropzone
-    const { getRootProps, getInputProps } = useDropzone({
+    const { getRootProps, getInputProps, open } = useDropzone({
             accept: {
                   'video/*': ['.mp4'],
                   'image/*': ['.png', '.jpg', '.jpeg']
@@ -121,8 +121,13 @@ const CreateAssetBody = () => {
                                                                                           <span><BsUpload /></span>
                                                                                           <p>Drop files here or click to upload</p>
                                                                               </div>
-                                                                              <span className="error">{errors.video && errors.video.message}</span>
-                                                                   </div>                                                      
+                                                                              <span className="error">{errors.asset && errors.asset.message}</span>
+                                                                   </div>   
+
+                                                                   <div className="mobile-upload-trigger-box" onClick={open}>
+                                                                                <span><BsUpload /></span>
+                                                                                <p>Click to upload</p>
+                                                                    </div>                                                   
                                                             </div>
                                                        }
 

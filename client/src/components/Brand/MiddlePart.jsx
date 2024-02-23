@@ -58,7 +58,7 @@ const openSidebar = () => setSidebarStatus(!sidebarStatus)
                           <div className="middle-part-content">
                                         <div className="middle-sidebar-initiate">
                                                     <span onClick={openSidebar}><CgMenu /></span>
-                                                    <Link to={'/'}>
+                                                    <Link to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/`}>
                                                              <img src={logo} alt="" />
                                                     </Link>
                                         </div>

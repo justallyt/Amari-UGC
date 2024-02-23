@@ -53,7 +53,7 @@ const Sidebar = () => {
                       <Toaster />
                       { wait ?  <Spinner /> : ''}
                        <div className="brand-sidebar-content">
-                                <NavLink to={'/brand/'}>
+                                <NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/`}>
                                           <div className="logo">
                                                      <img src={logo} alt="" />
                                           </div>
