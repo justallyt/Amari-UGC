@@ -33,7 +33,7 @@ const VideoLoader = ({ resetIsUploading, end, resetIsFinished }) => {
                                            <p>Asset Uploaded Successfully</p>
 
                                            <div className="asset-btns">
-                                                       <NavLink to={'/'} onClick={resetThings}>View Asset</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/assets`} onClick={resetThings}>View Asset</NavLink>
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`} onClick={resetThings}>Create Another</NavLink>
                                            </div>
                                   </div>

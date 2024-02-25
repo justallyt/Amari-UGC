@@ -9,7 +9,7 @@ import { v4 as uuidv4} from 'uuid'
 //Upload Asset
 export const CreateAsset = asyncHandler(async(req, res) => {
         const user = await User.findById(req.user._id);
-        
+       
         if(user){
              let asset_id, url, thumbnail;
              //Extract type of file

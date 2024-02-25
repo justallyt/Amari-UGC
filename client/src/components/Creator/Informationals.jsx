@@ -42,8 +42,8 @@ const Informationals = () => {
                                 <div className="creations-row">
                                        { user_assets && user_assets.length > 0 ? 
                                             <>
-                                              { user_assets.slice(-3).reverse().map(item =>
-                                                <div className="creation-moja" key={item._id}>
+                                              { user_assets.slice(-3).reverse().map((item, index) =>
+                                                <div className="creation-moja" key={`${item._id}${index}vsjl`}>
                                                             <div className="creation-thumbnail">
                                                                      <img src={item.asset.thumbnail} alt="" />
                                                                      <div className="overlay-play">

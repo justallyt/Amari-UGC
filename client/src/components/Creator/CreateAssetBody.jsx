@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import Topbar from "./Topbar"
 import { useDropzone } from "react-dropzone"
  import { BsUpload } from "react-icons/bs"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import  { useForm } from "react-hook-form"
 import { AiOutlineDelete } from 'react-icons/ai'
 import Footer from "../Footer"
@@ -17,39 +17,41 @@ const CreateAssetBody = () => {
     const { userBrands } = useSelector(state => state.utils)
     const [isUploading, setIsUploading] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
-    //const [progress, setProgress] = useState(0)
    const [ selectedFile, setSelectedFile] = useState(null)
-   const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm()
+   const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm();
+   const fileRef = useRef();
     //asset dropzone
-    const { getRootProps, getInputProps, open } = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
             accept: {
                   'video/*': ['.mp4'],
                   'image/*': ['.png', '.jpg', '.jpeg']
             },
             onDrop: (files) => {
                       setValue('asset', files);
+                      console.log(files)
                       setSelectedFile(files)
             }
     })
 
-    //const [createUserAsset] = useCreateAssetMutation()
+
+//Handle mobile uploads
+   const getMobileAsset = () => {
+          const uploadedFile = [...fileRef.current.files];
+          setValue("asset", uploadedFile)
+          setSelectedFile(uploadedFile)
+   }
+
     const uploadAsset = async(data, e) =>{
             e.preventDefault();
-            setIsUploading(true);
+             setIsUploading(true);
             const formData = new FormData();
             formData.append('data', JSON.stringify(data));
-            formData.append('asset', data.asset[0]);
-
-            // const onUploadProgress = event => {
-            //        const percentCompleted = Math.round((event.loaded * 100) / event.total);
-            //        console.log('onUploadProgress', percentCompleted);
-            // };
-
+            formData.append('asset',data.asset[0]);
+            
             const res = await axios.post(import.meta.env.VITE_API_URL,
                    formData,
                    { withCredentials: true, headers: {"Content-Type": 'multipart/form-data' } },
              )
-            // const res = await createUserAsset(formData).unwrap();
 
              if(res){
                    setIsFinished(true)
@@ -107,7 +109,7 @@ const CreateAssetBody = () => {
                                                                     <p>You are about to upload the file below:</p>
 
                                                                     <div className="upload-status-box">
-                                                                               <p>{selectedFile[0].path}</p>
+                                                                               <p>{selectedFile[0].name}</p>
                                                                                <span onClick={resetUpload}><AiOutlineDelete /></span>
                                                                     </div>
                                                             </div>
@@ -124,14 +126,14 @@ const CreateAssetBody = () => {
                                                                               <span className="error">{errors.asset && errors.asset.message}</span>
                                                                    </div>   
 
-                                                                   <div className="mobile-upload-trigger-box" onTouchEnd={open}>
+                                                                 { /* Mobile Trigger for uploads */}
+                                                                   <label className="mobile-upload-trigger-box">
                                                                                 <span><BsUpload /></span>
                                                                                 <p>Click to upload</p>
-                                                                                <input type="file" name="" id="" />
-                                                                    </div>                                                   
+                                                                                <input type="file" onChange={getMobileAsset} ref={fileRef} />
+                                                                    </label>                                             
                                                             </div>
-                                                       }
-
+                                                       }  
                                                      <div className="video-form-column">
                                                                  <label htmlFor="caption">Add a Caption</label>
                                                                  <textarea name="" placeholder="Add a caption to go with it" cols="30" rows="10" {...register('caption')}></textarea>

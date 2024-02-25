@@ -89,7 +89,10 @@
      -o-border-radius: 7px;
 }
 .mobile-upload-trigger-box{
-    display: none;
+    display: none !important;
+}
+.mobile-upload-trigger-box input{
+      display: none;
 }
 .upload-wrapper span{
      color: #444;
@@ -323,6 +326,6 @@
                   display: none;
           }
           .mobile-upload-trigger-box{
-                   display: flex;
+                   display: flex !important;
           }
   }
