@@ -20,6 +20,7 @@ const CreateAssetBody = () => {
    const [ selectedFile, setSelectedFile] = useState(null)
    const { register, formState:{ errors }, handleSubmit, setValue,reset, resetField } = useForm();
    const fileRef = useRef();
+
     //asset dropzone
     const { getRootProps, getInputProps } = useDropzone({
             accept: {
@@ -28,7 +29,6 @@ const CreateAssetBody = () => {
             },
             onDrop: (files) => {
                       setValue('asset', files);
-                      console.log(files)
                       setSelectedFile(files)
             }
     })
@@ -87,7 +87,7 @@ const CreateAssetBody = () => {
                                                                             <label htmlFor="brand">Choose a Brand</label>
                                                                             <select className="video-form-control" {...register('brand', { required: 'Please specify the brand you are creating for'})}>
                                                                                        <option value=''>My Brands</option>
-                                                                                       {userBrands && userBrands.length > 0 ?
+                                                                                       { userBrands && userBrands.length > 0 ?
                                                                                                  userBrands.map(item => 
                                                                                                         <option key={item._id} value={item.name}>{item.name}</option>
                                                                                                   )

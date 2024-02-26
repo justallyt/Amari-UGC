@@ -1,7 +1,7 @@
 import { HiOutlineMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom"
 import logo from '../../assets/logo.png'
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useCallback } from "react";
 import { sidebarContext } from "./context/sidebarContext";
 import { IoHomeOutline, IoLayersOutline, IoCloudUploadOutline } from "react-icons/io5"
 import { IoMdNotificationsOutline } from "react-icons/io"
@@ -14,15 +14,23 @@ const MobileSidebar = () => {
   const [sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
   const sidebarRef = useRef();
 
+  const closeSidebar = useCallback((e) => {
+       if(sidebarRef){
+              if(!sidebarRef.current.contains(e.target)){
+                    setSidebarStatus(false)
+              }
+       }
+
+      setSidebarStatus(false)
+}, [setSidebarStatus])
+
   useEffect(() => {
-        document.addEventListener("click", closeSidebar, true)
-  }, [])
-  const closeSidebar = (e) => {
-          if(sidebarRef && !sidebarRef.current.contains(e.target)){
-                 setSidebarStatus(false)
-          }
-          setSidebarStatus(false)
-  }
+        document.addEventListener("click", closeSidebar, true);
+
+        return () => document.removeEventListener("click", closeSidebar, true);
+  }, [closeSidebar])
+
+
 
   return (
     <div className={sidebarStatus ? "mobile-sidebar-wrapper active" : "mobile-sidebar-wrapper"}>

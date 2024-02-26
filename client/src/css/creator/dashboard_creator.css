@@ -498,7 +498,7 @@
        bottom: 0;
        background: rgba(0, 26, 29, 0.682);
        z-index: -1;
-    
+      display: none !important;
 }
 .mobile-sidebar-wrapper.active{
        z-index: 999;
@@ -954,6 +954,9 @@
 }
 
 @media(max-width: 1250px){
+    .mobile-sidebar-wrapper{
+            display: block !important;
+    }
         .sidebar-container,
         .sidebar-logo{
                 width: 0px;
