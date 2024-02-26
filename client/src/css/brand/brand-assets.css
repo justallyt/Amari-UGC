@@ -212,12 +212,28 @@
        width: 90%;
        position: absolute;
        z-index: 5;
+       width: 95%;
 }
 .modal-asset-body video{
         position: absolute;
         z-index: 5;
         height: 100%;
+        width: 100%;
 }
+.close-modal-asset-btn{
+        color: white;
+        position: absolute;
+        top: -40px;
+        right: 0;
+        font-size: 30px;
+        cursor: pointer;
+        display: none;
+}
+
+
+
+
+
 .brand-modal-texts-col{
        position: relative;
        padding: 20px;
@@ -551,3 +567,28 @@
          transform: rotate(360deg);
        }
      } 
+
+
+     @media(max-width: 1090px){
+          .brand-modal-content{
+                width: 95%;
+          }
+     }
+
+     @media(max-width: 768px){
+            .brand-modal-content{
+                    grid-template-columns: 1fr;
+            }
+            .brand-modal-texts-col{
+                  display: none;
+            }
+            .close-modal-asset-btn{
+                   display: block;
+            }
+     }
+
+     @media(max-width: 450px){
+       .brand-asset-intro h2{
+                font-size: 22px;
+       }
+     }

@@ -1,6 +1,5 @@
 .brand-settings-skewed{
      margin-left: 300px;
-    
      width: calc(100% - 300px);
      padding: 30px;
      background: rgb(245, 254, 255);;
@@ -209,6 +208,7 @@
 .profile-logo .action-btns{
     display: flex;
     gap: 30px;
+    flex-wrap: wrap;
 }
 .profile-logo .action-btns .upload-btn p{
       width: 120px;
@@ -243,4 +243,32 @@
      justify-content: center;
      padding-bottom: 3px;
      cursor: pointer
+}
+
+@media(max-width: 1150px){
+       .brand-settings-skewed{
+              width: 100%;
+              margin-left: 0;
+       }
+        .settings-options ul{
+              width: 100%;
+              overflow: scroll;
+        }
+        .settings-options ul::-webkit-scrollbar{
+                height: 5px;
+        }
+       .profile-form{
+             width: 100%;
+       }
+}
+
+@media(max-width: 769px){
+      .profile-logo .logo-wrap{
+             flex-direction: column;
+             align-items: flex-start;
+             gap: 20px;;
+      }
+      .profile-form-row{
+            grid-template-columns: 1fr;
+      }
 }

@@ -5,6 +5,7 @@ import { IoMdNotificationsOutline } from 'react-icons/io'
 import { VscDebugDisconnect } from 'react-icons/vsc'
 import { TfiBrushAlt } from "react-icons/tfi"
 import ProfileAccount from "./ProfileAccount"
+import { MobileSidebarInitiator } from "../MobileSidebarInitiator"
 
 const BrandSettingsBody = () => {
   return (
@@ -13,6 +14,7 @@ const BrandSettingsBody = () => {
                         <Sidebar />
 
                         <div className="brand-settings-skewed">
+                                    <MobileSidebarInitiator />
                                   <div className="settings-header">
                                            <h2>Settings</h2>
                                            <p>Manage your account settings and preferences.</p>

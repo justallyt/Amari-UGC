@@ -128,8 +128,10 @@
 }
 .creator-tab-my-creators{
         display: grid;
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
         gap: 10px;
+        min-height: 100vh;
+        padding-bottom: 60px;
 }
 .creator-moja{
      text-align: center;
@@ -146,6 +148,7 @@
      -moz-transition: all 0.7s ease;
      -ms-transition: all 0.7s ease;
      -o-transition: all 0.7s ease;
+     height: max-content;
 }
 .creator-moja:hover{
        transform: translateY(-10px);
@@ -246,4 +249,41 @@
        -moz-transform: scale(1);
        -ms-transform: scale(1);
        -o-transform: scale(1);
+}
+
+
+@media(max-width: 1090px){
+     .search-and-actions .search-bar{
+          display: none;
+     }
+}
+@media(max-width: 768px){
+       .creators-header{
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 20px;;
+       }
+}
+
+@media(max-width: 400px){
+        .creator-tab-my-creators{
+               display: block;
+        }
+        .creator-moja{
+              margin-bottom: 20px;
+        }
+        .creator-moja .features{
+                grid-template-columns: 1fr;
+                gap: 10px;
+        }
+        .creator-moja .features .brands{ 
+             padding: 10px 0;
+             border-left: none;
+             border-right: none;
+             border-top: 1px solid var(--sleezy-border);
+             border-bottom: 1px solid var(--sleezy-border);
+         }
+         .creators-header h2{
+               font-size: 24px;
+         }
 }

@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast"
 import JsFileDownloader from "js-file-downloader"
 import CommentMoja from "./CommentMoja";
-
+import { MdClose } from "react-icons/md";
 
 const BrandAssetModal = ({ data, func }) => {
   const [likeFlag, setLikeFlag] = useState(false);
@@ -139,7 +139,9 @@ const BrandAssetModal = ({ data, func }) => {
             <div className="brand-modal-content">
                         <div className="brand-modal-asset-col">
                                    <div className="modal-asset-body">
-                                                 
+                                                 <span className="close-modal-asset-btn" onClick={closeModal}>
+                                                            <MdClose />
+                                                 </span>
                                                <BrandOpenedAsset source={data ? data.asset.url : ''}  status={isBrandAssetModalOpen}/>
                                    </div>
                         </div>

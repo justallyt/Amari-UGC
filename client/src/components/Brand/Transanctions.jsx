@@ -43,7 +43,7 @@ const Transanctions = () => {
                                            </select>
                                </div>
                  </div>
-                 <div className="transaction-table">
+                 <div className="transaction-table-row">
                               <table>
                                          <thead>
                                             <tr>

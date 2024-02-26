@@ -2,6 +2,7 @@ import { useState } from "react"
 import { BsSearch } from "react-icons/bs"
 import { IoCaretDownSharp } from 'react-icons/io5'
 import CreatorSwitches from "./CreatorSwitches"
+import { MobileSidebarInitiator } from "./MobileSidebarInitiator"
 const BrandCreatorsBody = () => {
     const [sortSelect, setSortSelect] = useState(false)
     const [ activeSort, setActiveSort ] = useState('Recommended')
@@ -13,6 +14,7 @@ const BrandCreatorsBody = () => {
     const openSelectBox = () => setSortSelect(!sortSelect)
   return (
     <div className="brand-creators-body">
+               <MobileSidebarInitiator />
                <div className="creators-header">
                            <div className="texts-header">
                                      <h2>Digitize Brand Yako</h2>

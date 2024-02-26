@@ -4,6 +4,8 @@ import { useDispatch, useSelector} from "react-redux"
 import BrandAssetModal from "./BrandAssetModal";
 import { openBrandModal } from "../../redux/brand/brandUtils";
 import { useState } from "react";
+import { MobileSidebarInitiator } from "./MobileSidebarInitiator";
+
 const BrandAssetsBody = () => {
   const { brandAssets } = useSelector(state => state.brand)
   const [assetDetails, setAssetDetails]  = useState();
@@ -18,6 +20,7 @@ const BrandAssetsBody = () => {
 
   return (
     <div className="brand-asset-body">
+               <MobileSidebarInitiator />
               <div className="brand-asset-intro">
                         <h2>All Brand Assets</h2>
                        <p>View all assets created for your brand</p>          

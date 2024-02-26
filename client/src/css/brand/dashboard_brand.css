@@ -57,6 +57,9 @@
     -ms-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
 }
+.disable{
+      pointer-events: none;
+}
 .sidebar-menu ul li a.active,
 .sidebar-menu ul li a:hover{
       background: var(--main-color);
@@ -117,11 +120,14 @@
 }
 
 .middle-sidebar-initiate{
-      display: flex;
+      position: relative;
+      display: none;
       align-items: center;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       opacity: 0;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--sleezy-border);;
 }
 .middle-sidebar-initiate span{
       display: flex;
@@ -140,6 +146,49 @@
 .middle-sidebar-initiate a img{
        width: 140px;
 }
+.middle-sidebar-initiate .mobile-search{
+       position: absolute;
+       right: 0px;
+       display: grid;
+       grid-template-columns: 1fr 5fr;
+       width: 40px;
+       height: 40px;
+       transition: width  0.7s ease;
+       -webkit-transition: width  0.7s ease;
+       -moz-transition: width  0.7s ease;
+       -ms-transition: width  0.7s ease;
+       -o-transition: width  0.7s ease;
+}
+.mobile-search.active{
+      width: 180px;
+     background: white;
+     padding: 0px 5px;
+     border: 1px solid var(--sleezy-border);
+     align-items: center;
+     border-radius: 6px;
+     -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+     -ms-border-radius: 6px;
+     -o-border-radius: 6px;
+}
+.mobile-search .mobile-search-control{
+       outline: none;
+       border: none;
+       background: transparent;
+       width: 100%;
+       font-family: "Madera-Regular";
+       display: none;
+}
+.mobile-search.active .mobile-search-control{
+       display: flex;
+}
+.mobile-search span{
+       font-size: 17px;
+       display: flex;
+       margin-top: 1px;
+       width: 30px;
+}
+
 .greeting h3{
      font-size: 25px;
      font-family: "Madera-Light";
@@ -278,6 +327,7 @@
 
 .transactions-wrapper {
       margin-top: 10px;
+      width: 100%;
 }
 .transactions-wrapper h3{
        font-size: 25px;
@@ -320,32 +370,44 @@
       color: gray;
 }
 
-.transaction-table{
-       margin-top: 20px
+.transaction-table-row{
+       margin-top: 20px;
+       overflow: auto;
+       position: relative;
+       height: 350px;
 }
-
-.transaction-table table{
+.transaction-table-row::-webkit-scrollbar{
+       height: 5px;
+}
+.transaction-table-row table{
+     border-collapse: collapse;
+     position: absolute;
+     top: 0;
+     left: 0;
      width: 100%;
-}
-.transaction-table table,
-.transaction-table tr,
-.transaction-table th{
-       text-align: left;
+     height: 100%;
 }
 
-.transaction-table th{
+.transaction-table-row table,
+.transaction-table-row tr,
+.transaction-table-row th{
+       text-align: left;
+      
+}
+
+.transaction-table-row th{
      border-bottom: 1px solid var(--sleezy-border);
      padding-bottom: 15px;
      font-family: "Madera-Thin";
      font-size: 15px;
      padding-left: 10px;
 }
-.transaction-table tr td{
+.transaction-table-row tr td{
      border-bottom: 1px solid var(--sleezy-border);
      padding: 15px 0;
      font-size: 15px;
 }
-.transaction-table tr:last-of-type td{
+.transaction-table-row tr:last-of-type td{
        border-bottom: none;
 }
 .creator{
@@ -367,7 +429,7 @@
      overflow: hidden;
 }
 
-.transaction-table .status{
+.transaction-table-row .status{
       border: 1px solid rgba(218, 224, 226, 0.884);
       display: inline-flex;
       align-items: center;
@@ -380,7 +442,7 @@
       -o-border-radius: 20px;
       font-size: 14px;
 }
-.transaction-table .status span{
+.transaction-table-row .status span{
       width: 7px;
       height: 7px;
       border-radius: 50%;
@@ -393,15 +455,16 @@
       -o-border-radius: 50%;
       margin-top: 4px;
 }
-.transaction-table .status.success span{
+.transaction-table-row .status.success span{
       background: rgb(46, 185, 46);
 }
-.transaction-table .status.pending span{
+.transaction-table-row .status.pending span{
      background: rgb(238, 231, 4);
 }
-.transaction-table .status.failed span{
+.transaction-table-row .status.failed span{
      background: rgb(252, 18, 18);
 }
+
 
 /* Right Side Styles */
 .right-part-inner{
@@ -572,6 +635,7 @@
        bottom: 0;
        background: rgba(0, 76, 84, 0.69);
        z-index: -1;
+       display: none;
 }
 .brand-mobile-sidebar.active{
       z-index: 999;
@@ -606,6 +670,7 @@
 }
 .mobile-brand-header a{
        width: 120px;
+       margin-left: 10%;
 }
 .mobile-brand-header a img{
        object-fit: contain;
@@ -649,12 +714,18 @@
 }
 
 @media(max-width: 1150px){
+     .brand-mobile-sidebar,
         .middle-sidebar-initiate{
               opacity: 1;
+              display: flex;
         }
         .brand-sidebar{
                 width: 0;
                  display: none;
+        }
+        .dashboard-middle-part{
+               border: none;
+               padding: 0;
         }
         .brand-dashboard-skewed{
                margin-left: 0;
@@ -663,33 +734,80 @@
                 position: relative;
         }
         .brand-dashboard-skewed .brand-dashboard-skewed-inner{
-                 grid-template-columns: auto 55px;
+                 grid-template-columns: 1fr;
+                 gap: 30px;
         }
         .right-part-inner{
-                 width: 320px;
-                 position: absolute;
-                 background: white;
-                 top: 30px;
-                 padding: 20px 10px 50px 10px;
-                 transform-origin: right;
-                 transform: translateX(-322px) scaleX(0) ;
-                 -webkit-transform: translateX(-322px) scaleX(0) ;
-                 -moz-transform: translateX(-322px) scaleX(0) ;
-                 -ms-transform: translateX(-322px) scaleX(0) ;
-                 -o-transform: translateX(-322px) scaleX(0) ;
-                 border-radius: 5px 0px 0px 5px;
-                 -webkit-border-radius: 5px 0px 0px 5px;
-                 -moz-border-radius: 5px 0px 0px 5px;
-                 -ms-border-radius: 5px 0px 0px 5px;
-                 -o-border-radius: 5px 0px 0px 5px;
-                 box-shadow: 0px 0px 3px -1px rgba(201, 201, 201, 0.362);
-                 transition: transform 0.7s ease;
-                 -webkit-transition: transform 0.7s ease;
-                 -moz-transition: transform 0.7s ease;
-                 -ms-transition: transform 0.7s ease;
-                 -o-transition: transform 0.7s ease;
-}
-        .right-part-wrapper{
-              border-right: 1px solid var(--sleezy-border);
+              width: 100%;
         }
+      .right-part-header{
+            display: none;
+      }
+      .brand-profile-view{
+             border-top: 1px solid var(--sleezy-border);
+             display: flex;
+             flex-direction: column;
+             align-items: flex-start;
+      }
+      .brand-profile-view .logo-section{
+             width: 200px;
+             margin: 30px 0 10px 0;
+      }
+}
+
+@media(max-width: 768px){
+     .greeting h3,
+     .transactions-wrapper h3,
+     .performance-analytics h3{
+             font-size: 20px;
+     }
+     .performance-numbers h4{
+            font-size: 16px;
+     }
+     .performance-numbers h1{
+             font-size: 30px;
+     }
+      .statistics-wedge,
+      .performance-grid-wrap{
+             grid-template-columns: 1fr;
+      }
+      .statistics-wedge .wedge-moja{
+            justify-content: flex-start;
+            padding: 15px 0;
+      }
+      .statistics-wedge .wedge-moja:nth-child(2){
+          border-right: none;
+          border-left: none;
+          border-top: 1px solid var(--sleezy-border);
+          border-bottom: 1px solid var(--sleezy-border);
+     }
+     .statistics-wedge{
+             padding: 0;
+             margin: 30px 0;
+     }
+   .transactions-intro{
+         flex-direction: column;
+         gap: 10px;
+         align-items: flex-start;
+   }
+
+    .creator{
+          font-size: 14px;
+    }
+   .transaction-table-row{
+         max-width: 100%;
+         overflow-x: scroll;
+   }
+   .transaction-table-row tr td{
+        font-size: 12px;
+   }
+   .transaction-table-row table{
+           width: 560px;
+   }
+}
+
+@media(max-width: 320px){
+     .brand-sidebar{
+            width: 100%;
+     }
 }
