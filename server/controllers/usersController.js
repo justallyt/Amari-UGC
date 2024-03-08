@@ -5,6 +5,8 @@ import User from "../models/usersModel.js";
 import Request from "../models/RequestsModel.js";
 import mongoose from "mongoose";
 import Notifications from "../models/NotificationsModel.js";
+import UserVerification from "../models/VerificationModel.js";
+import { sendEmailVerification } from "../mail/sendEmailVerification.js";
 
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
@@ -44,14 +46,16 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                const user = await User.create({ name, email, password, phone, address: {country}, role, businessType });
 
                if(user){
-                        generateToken(res, user._id);
+                        console.log(user);
+                         sendEmailVerification(user, res);
+                     //    generateToken(res, user._id);
 
-                        res.status(201).json({
-                               message: "Account created successfully",
-                               id: user._id,
-                               role: user.role,
-                               username: user.username
-                        })
+                     //    res.status(201).json({
+                     //           message: "Account created successfully",
+                     //           id: user._id,
+                     //           role: user.role,
+                     //           username: user.username
+                     //    })
                }else{
                       res.status(400);
                       throw new Error("Invalid Company data. Please try again");
@@ -62,16 +66,17 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                const user = await User.create({ name, email, password, role });
 
                if(user){
-                       generateToken(res, user._id);
+                     sendEmailVerification(user, res);
+                     //   generateToken(res, user._id);
 
-                       res.status(201).json({
-                              message: "Account created successfully",
-                              id: user._id,
-                              name: user.name,
-                              email: user.email,
-                              role: user.role,
-                              username: user.username
-                       })
+                     //   res.status(201).json({
+                     //          message: "Account created successfully",
+                     //          id: user._id,
+                     //          name: user.name,
+                     //          email: user.email,
+                     //          role: user.role,
+                     //          username: user.username
+                     //   })
                }else{
                          res.status(400);
                          throw new Error("Invalid consumer data. Please try again")

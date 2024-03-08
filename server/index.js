@@ -8,8 +8,9 @@ import brandRoutes from './routes/brandRoutes.js'
 import adminRoutes from "./routes/adminRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js"
 import cors from "cors"
+import { generateOTP } from "./utils/generateOTP.js";
 
-//Initialize dotenv for usage
+//Initialize dotenv for usage 
 dotenv.config();
 
 //Create port for server
@@ -46,3 +47,6 @@ app.listen(port, () => console.log(`Server listening at port ${port}`));
 
 //MongoDB Connection
 connectToDatabase();
+
+//Email Stuff
+console.log(generateOTP())

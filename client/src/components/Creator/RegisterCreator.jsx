@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { useDispatch } from "react-redux"
 import { useCreateUserMutation } from "../../redux/usersSlice"
-import { setCredentials } from "../../redux/authSlice"
+import {  setInterimName } from "../../redux/authSlice"
 import { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 const RegisterCreator = () => {
@@ -25,9 +25,10 @@ const RegisterCreator = () => {
           }
            try {
                 const res = await registerconsumer(data).unwrap();
-                dispatch(setCredentials({...res}));
-                console.log(res)
-                navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ? res.id : res.username}`);
+                //dispatch(setCredentials({...res}));
+                dispatch(setInterimName({...res.name}));
+                navigate('/confirm-account');
+                //navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ? res.id : res.username}`);
            } catch (err) {
                  console.log(err);
            }

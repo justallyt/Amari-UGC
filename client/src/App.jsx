@@ -20,6 +20,7 @@ import CreatorNotifications from "./pages/Creator/CreatorNotifications"
 import CreateAsset from "./pages/Creator/CreateAsset"
 import BrandCreators from "./pages/Brand/BrandCreators"
 import BrandAssets from "./pages/Brand/BrandAssets"
+import Confirm from "./pages/Confirm"
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
                    <Route path="/user/register" element={<UserChoice />} />
                    <Route path="/user/register/:type" element={<Register />} />
                    <Route path="/user/login" element={<Login />} />
-                    
+                    <Route path="/user/confirm-account" element={<Confirm />} />
                    {/* Consumer Routes */}
                      <Route element={<CreatorRoutes />}>
                                <Route path="/creator/:id/" element={<CreatorDashboard />} />

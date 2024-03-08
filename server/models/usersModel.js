@@ -42,6 +42,10 @@ const usersSchema = mongoose.Schema({
        profilePic: {
              public_id: { type: String, default: 'null'},
              url: { type: String, default: 'null'}
+       },
+       verified: {
+               type: Boolean,
+               default: false
        }
 }, { timestamps: true});
 

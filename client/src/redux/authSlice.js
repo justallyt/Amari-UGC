@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
       userInfo: localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null,
       pop: null,
+      interimName: null,
 }
 
 const authSlice = createSlice({
@@ -28,11 +29,17 @@ const authSlice = createSlice({
               updateUsername: (state, action) => {
                       state.userInfo.username = action.payload
                       changeUsername(action.payload)
+              },
+              setInterimName: (state, action) => {
+                     state.interimName = action.payload
+              },
+              clearInterimName: (state) => {
+                    state.interimName = null
               }
         }
 });
 
-export const { setCredentials, clearCredentials, clearPop, clearMessage, updateUsername } = authSlice.actions;
+export const { setCredentials, clearCredentials, clearPop, clearMessage, updateUsername, setInterimName, clearInterimName } = authSlice.actions;
 
 export default authSlice.reducer;
 
