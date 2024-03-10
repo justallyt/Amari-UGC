@@ -6,12 +6,13 @@ import { NavLink, useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useCreateUserMutation } from "../../redux/usersSlice";
 import { useDispatch } from "react-redux"
-import { setCredentials } from "../../redux/authSlice"
+import {  setInterimName } from "../../redux/authSlice"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "../Spinner"
 const RegisterBrand = () => {
   const [ status, setStatus] = useState(false);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const [ confirmStatus, setConfirmStatus] = useState(false);
+  const { register, handleSubmit, formState: { errors }, reset, watch } = useForm();
  const [ registerbrand, { isLoading} ] = useCreateUserMutation();
 
  const navigate = useNavigate();
@@ -23,12 +24,14 @@ const RegisterBrand = () => {
   }
    try {
         const res = await registerbrand(data).unwrap();
-        dispatch(setCredentials({...res}));
-        navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ?  res.id : res.username}/`);
-   } catch (err) {
-         console.log(err)
 
-         toast.error("Brand registration failed. Please try again", { id: 'brand-registration-error'})
+        if(res){
+              dispatch(setInterimName({...res}));
+              navigate('/user/confirm-account');
+              toast.success(res.message, { id: 'email-verification sent'})
+        }
+   } catch (err) {
+          toast.error(err.data.message, { id: 'brand-registration-error'});
    }
  //Reset form after submission
   reset();
@@ -85,6 +88,25 @@ const RegisterBrand = () => {
                                                    </div>
                                           </div>
                                           <span className="error">{errors.password && errors.password.message}</span>
+                                  </div>
+                                  <div className="form-row">
+                                          <label htmlFor="password">Confirm Password <span>*</span></label>
+                                          <div className={errors.confirmPassword ? "password-input error" : "password-input"}>
+                                                   <input type={ confirmStatus ? "text" : "password"} {...register('confirmPassword', {
+                                                              required: true, 
+                                                              minLength: 8,
+                                                              validate: val => {
+                                                                     if(watch("password") !== val){
+                                                                         return "Passwords do not match";
+                                                                     }
+                                                              }
+                                                              })} placeholder="Confirm Password" className={errors.password ? "form-control error" :"form-control"} />
+                                                   <div className={ confirmStatus ? "toggle-btn active" : "toggle-btn"} onClick={() => setConfirmStatus(!confirmStatus)}>
+                                                            <span><VscEye /></span>
+                                                            <span className="yes"><VscEyeClosed /></span>
+                                                   </div>
+                                          </div>
+                                          <span className="error">{errors.confirmPassword && errors.confirmPassword.message}</span>
                                   </div>
 
                                   <div className="agreement">

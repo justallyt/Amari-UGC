@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 import Notifications from "../models/NotificationsModel.js";
 import UserVerification from "../models/VerificationModel.js";
 import { sendEmailVerification } from "../mail/sendEmailVerification.js";
+import { sendWelcomeEmailToCreator } from "../mail/sendCreatorEmail.js";
+import { sendWelcomeEmailToBrand } from "../mail/sendBrandEmail.js";
 
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
@@ -42,26 +44,37 @@ export const RegisterUser = asyncHandler(async(req, res) => {
         
         if(role.toLowerCase() === 'brand'){
                const { name, password, phone, country, businessType } = req.body;
-               const dummy_url = '';
+               const url = 'https://res.cloudinary.com/dfwrvpy2t/image/upload/v1710081790/dummylogo_nwaba0.jpg';
 
-               const user = await User.create({ name, email, password, phone, address: {country}, role, businessType });
+               const user = await User.create({ name, email, password, phone, address: {country}, profilePic: {url}, role, businessType });
 
                if(user){
-                         sendEmailVerification(user, res);
+                        const email_result = sendEmailVerification(user);
+                         if(email_result){
+                              res.status(201).json({
+                                   message: "Email verification sent to your email.",
+                                   name: user.name,
+                                   id: user._id
+                              }) 
+                         }else{
+                               res.status(500);
+                               throw new Error("Server error. Email verification not sent")
+                         }
                }else{
                       res.status(400);
                       throw new Error("Invalid Company data. Please try again");
                }
         }else{
                const { name, password} = req.body;
-
-               const user = await User.create({ name, email, password, role });
+               const url = 'https://res.cloudinary.com/dfwrvpy2t/image/upload/v1710080930/dummyuserphoto.jpg';
+               const user = await User.create({ name, email, password, role, profilePic: { url } });
 
                if(user){
-                     const email_result = sendEmailVerification(user, res);
+                     const email_result = sendEmailVerification(user);
                      if(email_result){              
                              res.status(201).json({
                                     name: user.name,
+                                    message: 'Email verification sent to your email.',
                                     id: user._id
                              }) 
                      }
@@ -81,7 +94,7 @@ export const ConfirmAccount = asyncHandler(async(req, res) => {
           const dbOtp = await UserVerification.find({user_id: user_id});
           
           const { uniqueOtp, expiresAt } = dbOtp[0];
-         console.log(expiresAt)
+    
           if(expiresAt  < Date.now()){
                 res.status(400);
                 throw new Error("Sorry the Otp code has expired. Please resend another.");
@@ -105,6 +118,13 @@ export const ConfirmAccount = asyncHandler(async(req, res) => {
                                     username: user.username
                              })
                              const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
+
+                             //Send Welcome Emails
+                             if(user.role.toLowerCase() === 'brand'){
+                                    sendWelcomeEmailToBrand(updatedUser);
+                             }else{
+                                   sendWelcomeEmailToCreator(updatedUser);
+                             }
                      }else{
                             throw new Error("User account not verified.")
                      }
@@ -114,13 +134,12 @@ export const ConfirmAccount = asyncHandler(async(req, res) => {
           }
 })
 
+//Resend OTP code
 export const ResendUserOtp = asyncHandler(async(req, res) => {
          const { id } = req.body;
          const user_id = new mongoose.Types.ObjectId(id);
          const user = await User.findById(user_id);
-         console.log(user)
          const dbVerify =  await UserVerification.find({ user_id: user_id });
-         console.log(dbVerify)
          if(dbVerify){
               const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
          }

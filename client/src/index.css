@@ -462,7 +462,10 @@ header .logo img{
        color: var(--main-color);
        cursor: pointer;
 }
-
+.forgot-password{
+      color: var(--main-color);
+      font-size: 15px;
+}
 .footer{
     padding: 30px 0;
     border-top: 1px solid rgba(220, 220, 220, 0.5);

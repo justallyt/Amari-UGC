@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { NavLink,useNavigate } from "react-router-dom"
+import { Link, NavLink,useNavigate } from "react-router-dom"
 import { VscEye } from "react-icons/vsc"
 import { VscEyeClosed } from "react-icons/vsc"
 import { useForm } from "react-hook-form"
@@ -65,7 +65,7 @@ const authUser = async(data) => {
                                 </div>
                                 <span className="error">{errors.password && errors.password.message}</span>
                      </div>
-
+                       <Link to={'/user/forgot-password'} className="forgot-password">Forgot your Password?</Link>
                      <button type="submit" className="btn-submit">Log in</button>
              </form>
 

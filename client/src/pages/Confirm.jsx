@@ -30,7 +30,6 @@ const Confirm = () => {
                 if(res){
                      dispatch(setCredentials({...res}));
                      navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ? res.id : res.username}`);
-                     //toast.success("Account creation successful", { id: 'account-success-msg'})
                 }else{
                       toast.error("Invalid OTP, Please input a correct one", { id: 'otp-error'});
                 }
@@ -45,7 +44,6 @@ const Confirm = () => {
 
              try {
                     const res = resendUserOTP({ id }).unwrap();
-                    console.log(res);
                     if(res){
                          toast.success("OTP resend successful", { id: 'otp-resend-success'})
                     }

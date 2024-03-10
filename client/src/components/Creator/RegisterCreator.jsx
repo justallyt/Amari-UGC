@@ -11,13 +11,14 @@ import Spinner from "../Spinner"
 
 const RegisterCreator = () => {
    const [ status, setStatus] = useState(false);
+   const [ confirmStatus, setConfirmStatus] = useState(false);
 
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
    const [ registerconsumer, { isLoading} ] = useCreateUserMutation();
 
-   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+   const { register, handleSubmit, formState: { errors }, reset, watch } = useForm();
 
 
    const createConsumer = async (data) => {
@@ -30,8 +31,7 @@ const RegisterCreator = () => {
                 if(res){
                        dispatch(setInterimName({...res}));
                        navigate('/user/confirm-account');
-                }else{
-                      toast.error(res.message, { id: 'account-error'})
+                       toast.success(res.message, { id: "consumer-email-verification"})
                 }
            } catch (err) {
                  //console.log(err);
@@ -74,10 +74,27 @@ const RegisterCreator = () => {
                                                             <span><VscEye /></span>
                                                             <span className="yes"><VscEyeClosed /></span>
                                                    </div>
-                                          </div>
-                                           
+                                          </div>        
+                                          <span className="error">{errors.password && errors.password.message}</span>
                                   </div> 
-
+                                  <div className="form-row">
+                                          <label htmlFor="password">Confirm Password <span>*</span></label>
+                                          <div className={errors.confirmPassword ? "password-input error" : "password-input"}>
+                                                   <input type={ confirmStatus ? "text" : "password"} placeholder="Confirm Password" className="form-control" {...register("confirmPassword", {
+                                                          required: true, 
+                                                          minLength: 8,
+                                                          validate: val => {
+                                                                  if(watch("password") !== val){
+                                                                          return "Passwords do not match";
+                                                                  }
+                                                          }})} />
+                                                   <div className={ confirmStatus ? "toggle-btn active" : "toggle-btn"} onClick={() => setConfirmStatus(!confirmStatus)}>
+                                                            <span><VscEye /></span>
+                                                            <span className="yes"><VscEyeClosed /></span>
+                                                   </div>
+                                          </div>        
+                                          <span className="error">{errors.confirmPassword && errors.confirmPassword.message}</span>
+                                  </div> 
                                   <div className="agreement">
                                             <input type="checkbox" className="check" {...register("terms", { required: "Kindly read through our terms and policy"})} />
                                             <p>I agree to the <a href="s">Terms of Service</a> and <a href="s">Privacy Policy</a></p>
