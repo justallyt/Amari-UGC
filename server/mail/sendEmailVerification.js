@@ -4,6 +4,7 @@ import UserVerification from "../models/VerificationModel.js";
 import { mailTransport } from "../config/mailconfig.js";
 import ejs from "ejs"
 import fs from "fs"
+import mongoose from "mongoose";
 dotenv.config();
 
 export const sendEmailVerification = async(userData) => {
@@ -26,15 +27,14 @@ export const sendEmailVerification = async(userData) => {
        }
 
        const verification = await UserVerification.create({
-            user_id: _id,
+            user_id: new mongoose.Types.ObjectId(_id),
             uniqueOtp: otp,
             createdAt: Date.now(),
-            expiresAt: Date.now() + 600000
+            expiresAt: Date.now() + 180000 //expires after 3 minutes
        })
      
      if(verification){
              mailTransport.sendMail(mailOptions).then(() => {
-                  //    res.json(201).json({ message: 'Email verification saved and sent.'})
                   return true;
              })
       }else{

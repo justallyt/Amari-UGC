@@ -47,6 +47,3 @@ app.listen(port, () => console.log(`Server listening at port ${port}`));
 
 //MongoDB Connection
 connectToDatabase();
-
-//Email Stuff
-console.log(generateOTP())

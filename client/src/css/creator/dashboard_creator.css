@@ -397,9 +397,9 @@
 }
 
 .fly-box .account-image{
-    width: 70px;
+    width: 50px;
     flex-shrink: 0;
-    height: 70px;
+    height: 50px;
     overflow: hidden;
     border-radius: 50%;
     -webkit-border-radius: 50%;

@@ -10,7 +10,9 @@ import {
      GetAllBrandsForCreators,
      GetUserUnreadNotifications,
      UpdateAllNotificationsStatus,
-     GetAllUserNotifications
+     GetAllUserNotifications,
+     ConfirmAccount,
+     ResendUserOtp
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
@@ -19,6 +21,8 @@ const router = express.Router();
 
 router.post('/login', LoginUser);
 router.post('/register', RegisterUser);
+router.post('/confirm-account', ConfirmAccount);
+router.post('/resend-otp', ResendUserOtp);
 router.post('/logout', LogOutUser);
 router.get('/profile', protect, GetProfile);
 router.put('/update-profile', protect, upload.single('profileImage'), UpdateProfile);

@@ -36,26 +36,18 @@ export const RegisterUser = asyncHandler(async(req, res) => {
         const userExists = await User.findOne({ email });
 
         if(userExists){
-               res.status(400);  
-               throw new Error("User Account already exists");
+               res.status(400);
+               throw new Error("User Account already exists.");
         }
         
         if(role.toLowerCase() === 'brand'){
                const { name, password, phone, country, businessType } = req.body;
+               const dummy_url = '';
 
                const user = await User.create({ name, email, password, phone, address: {country}, role, businessType });
 
                if(user){
-                        console.log(user);
                          sendEmailVerification(user, res);
-                     //    generateToken(res, user._id);
-
-                     //    res.status(201).json({
-                     //           message: "Account created successfully",
-                     //           id: user._id,
-                     //           role: user.role,
-                     //           username: user.username
-                     //    })
                }else{
                       res.status(400);
                       throw new Error("Invalid Company data. Please try again");
@@ -66,25 +58,84 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                const user = await User.create({ name, email, password, role });
 
                if(user){
-                     sendEmailVerification(user, res);
-                     //   generateToken(res, user._id);
-
-                     //   res.status(201).json({
-                     //          message: "Account created successfully",
-                     //          id: user._id,
-                     //          name: user.name,
-                     //          email: user.email,
-                     //          role: user.role,
-                     //          username: user.username
-                     //   })
+                     const email_result = sendEmailVerification(user, res);
+                     if(email_result){              
+                             res.status(201).json({
+                                    name: user.name,
+                                    id: user._id
+                             }) 
+                     }
                }else{
                          res.status(400);
                          throw new Error("Invalid consumer data. Please try again")
                }
         }
-
 })
 
+//Verify account
+export const ConfirmAccount = asyncHandler(async(req, res) => {
+          const { otp, id } = req.body;
+         
+          const user_id = new mongoose.Types.ObjectId(id);
+          const user = await User.findById(user_id);
+          const dbOtp = await UserVerification.find({user_id: user_id});
+          
+          const { uniqueOtp, expiresAt } = dbOtp[0];
+         console.log(expiresAt)
+          if(expiresAt  < Date.now()){
+                res.status(400);
+                throw new Error("Sorry the Otp code has expired. Please resend another.");
+                const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
+          }else{
+                if(uniqueOtp === otp){
+                     //otp verified
+                     const updatedUser = await User.findByIdAndUpdate(user_id, {
+                            verified: true,
+                     }, { new: true});
+                     
+                     if(updatedUser){
+                             generateToken(res, user._id);
+
+                             res.status(201).json({
+                                    message: "Account created successfully",
+                                    id: user._id,
+                                    name: user.name,
+                                    email: user.email,
+                                    role: user.role,
+                                    username: user.username
+                             })
+                             const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
+                     }else{
+                            throw new Error("User account not verified.")
+                     }
+                }else{
+                     throw new Error("Invalid Otp code. Please input the correct one.")
+                }
+          }
+})
+
+export const ResendUserOtp = asyncHandler(async(req, res) => {
+         const { id } = req.body;
+         const user_id = new mongoose.Types.ObjectId(id);
+         const user = await User.findById(user_id);
+         console.log(user)
+         const dbVerify =  await UserVerification.find({ user_id: user_id });
+         console.log(dbVerify)
+         if(dbVerify){
+              const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
+         }
+         const otpSent = sendEmailVerification(user);
+
+         if(otpSent){
+              res.status(201).json({
+                     name: user.name,
+                     id: user._id
+              }) 
+         }else{
+              res.status(500);
+              throw new Error("OTP not sent. Please try again later");
+         }
+})
 //Get User Profile
 export const GetProfile = asyncHandler(async(req, res) => {
        const user =  await User.findById(req.user._id).select('-password');

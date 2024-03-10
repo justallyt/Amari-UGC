@@ -16,6 +16,20 @@ export const usersSlice = apiSlice.injectEndpoints({
                           body: payload,
                     })
               }),
+              confirmUser: builder.mutation({
+                       query: (payload) => ({
+                              url: 'user/confirm-account',
+                              method: 'POST',
+                              body:  payload
+                       })
+              }),
+              resendUserOTP: builder.mutation({
+                      query: (payload) => ({
+                              url: 'user/resend-otp',
+                              method: "POST",
+                              body: payload
+                      })
+              }),
             getUserProfile: builder.query({
                   query: () => ({
                           url: 'user/profile',
@@ -94,6 +108,7 @@ export const usersSlice = apiSlice.injectEndpoints({
 export const { 
        useLoginUserMutation, 
        useCreateUserMutation,
+       useConfirmUserMutation,
        useUpdateUserProfileMutation, 
        useGetUserProfileQuery,
        useLogoutUserMutation,
@@ -102,5 +117,6 @@ export const {
        useCheckRequestsQuery,
        useGetUserNotificationsQuery,
        useGetUnreadUserNotificationsQuery,
-       useReadAllUserNotificationsMutation
+       useReadAllUserNotificationsMutation,
+       useResendUserOTPMutation
 } = usersSlice;
