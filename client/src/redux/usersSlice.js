@@ -30,7 +30,31 @@ export const usersSlice = apiSlice.injectEndpoints({
                               body: payload
                       })
               }),
-            getUserProfile: builder.query({
+              confirmPasswordReset: builder.mutation({
+                      query: (payload) => ({
+                             url: 'user/reset-password-confirmation',
+                             method: "POST",
+                             body: payload
+                      })
+              }),
+
+              validatePasswordReset: builder.mutation({
+                     query: (payload) => ({
+                             url: 'user/validate-password-otp',
+                             method: "POST",
+                             body: payload
+                     })
+              }),
+
+              resendPasswordReset: builder.mutation({
+                     query: (payload) => ({
+                             url: 'user/resend-password-reset-otp',
+                             method: "POST",
+                             body: payload
+                     })
+              }),
+              
+             getUserProfile: builder.query({
                   query: () => ({
                           url: 'user/profile',
                           method: "GET",
@@ -118,5 +142,8 @@ export const {
        useGetUserNotificationsQuery,
        useGetUnreadUserNotificationsQuery,
        useReadAllUserNotificationsMutation,
-       useResendUserOTPMutation
+       useResendUserOTPMutation,
+       useConfirmPasswordResetMutation,
+       useValidatePasswordResetMutation,
+       useResendPasswordResetMutation
 } = usersSlice;

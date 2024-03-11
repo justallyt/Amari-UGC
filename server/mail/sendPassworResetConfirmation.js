@@ -5,9 +5,9 @@ import fs from "fs";
 
 dotenv.config();
 
-export const sendWelcomeEmailToBrand = async(userData) => {
+export const sendPasswordResetEmail = async(userData) => {
      const { email, name } = userData;
-     const templateString = fs.readFileSync('./mail/views/welcomeBrand.ejs', 'utf-8');
+     const templateString = fs.readFileSync('./mail/views/reset_password_success.ejs', 'utf-8');
      const dynamicData = {
         name: name,
 }
@@ -17,7 +17,7 @@ export const sendWelcomeEmailToBrand = async(userData) => {
         from: `Amari UGC Team <${process.env.EMAIL}>`,
         to: `${email}`,
         name: 'Amari Team',
-        subject: 'Welcome to AMARI UGC',
+        subject: 'Amari Password Reset Successful',
         html: html
     }
     

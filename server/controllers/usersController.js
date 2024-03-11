@@ -9,6 +9,7 @@ import UserVerification from "../models/VerificationModel.js";
 import { sendEmailVerification } from "../mail/sendEmailVerification.js";
 import { sendWelcomeEmailToCreator } from "../mail/sendCreatorEmail.js";
 import { sendWelcomeEmailToBrand } from "../mail/sendBrandEmail.js";
+import { sendPasswordVerification } from "../mail/sendPasswordVerification.js";
 
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
@@ -155,6 +156,99 @@ export const ResendUserOtp = asyncHandler(async(req, res) => {
               throw new Error("OTP not sent. Please try again later");
          }
 })
+
+//Reset Password Methods
+export const SendResetPasswordCode = asyncHandler(async(req, res) => {
+       const { email } = req.body;
+
+       const user = await User.findOne({ email });
+       
+       if(user){
+             const email_result = sendPasswordVerification(user);
+             if(email_result){
+                      res.status(201).json({
+                             message: "We've sent you an OTP to your account email address.",
+                             id: user._id
+                      })
+             }
+       }else{
+              res.status(400);
+              throw new Error("Invalid User account. Kindly register with us.")
+       }
+})
+
+//Confirm password reset request
+export const ConfirmPasswordResetRequest = asyncHandler(async(req, res) => {
+        const { id, otp } = req.body;
+
+        const user_id = new mongoose.Types.ObjectId(id);
+        const user = await User.findById(user_id);
+        const dbOtp = await UserVerification.find({ user_id: user_id });
+
+        const { uniqueOtp, expiresAt } = dbOtp[0];
+
+        if(expiresAt < Date.now()){
+                 res.status(400);
+                 throw new Error("Sorry the Otp code has expired. Please resend another.");
+                 const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
+
+        }else{
+                if(uniqueOtp === otp){
+                         //otp verified
+                         res.status(201).json({
+                                id: user._id,
+                                message: 'Password Reset Request Verified',
+                         })
+                         const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
+                }else{
+                       res.status(400);
+                       throw new Error("Invalid password reset OTP. ")
+                }
+        }
+})
+
+//Resend Password Reset OTP
+export const ResendPasswordResetOtp = asyncHandler(async(req, res) => {
+       const { id } = req.body;
+       const user_id = new mongoose.Types.ObjectId(id);
+       const user = await User.findById(user_id);
+       const dbVerify =  await UserVerification.find({ user_id: user_id });
+       if(dbVerify){
+            const deleteOtp = await UserVerification.findOneAndRemove({ user_id: user_id});
+       }
+       const otpSent = sendPasswordVerification(user);
+
+       if(otpSent){
+            res.status(201).json({
+                   message: "We've sent you an OTP to your account email address",
+                   name: user.name,
+                   id: user._id
+            }) 
+       }else{
+            res.status(500);
+            throw new Error("OTP not sent. Please try again later");
+       }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Get User Profile
 export const GetProfile = asyncHandler(async(req, res) => {
        const user =  await User.findById(req.user._id).select('-password');
@@ -173,7 +267,7 @@ export const UpdateProfile = asyncHandler(async(req, res) => {
         if(user){
               try{
                      let public_id, url;
-                     //file not uploaded
+                     //file not uploaded  
                      if(!req.file){
                             public_id = user.profilePic.public_id;
                             url = user.profilePic.url;

@@ -100,7 +100,7 @@ const RegisterBrand = () => {
                                                                          return "Passwords do not match";
                                                                      }
                                                               }
-                                                              })} placeholder="Confirm Password" className={errors.password ? "form-control error" :"form-control"} />
+                                                              })} placeholder="Confirm Password" className={errors.confirmPassword ? "form-control error" :"form-control"} />
                                                    <div className={ confirmStatus ? "toggle-btn active" : "toggle-btn"} onClick={() => setConfirmStatus(!confirmStatus)}>
                                                             <span><VscEye /></span>
                                                             <span className="yes"><VscEyeClosed /></span>

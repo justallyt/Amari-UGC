@@ -7,11 +7,11 @@ import fs from "fs"
 import mongoose from "mongoose";
 dotenv.config();
 
-export const sendEmailVerification = async(userData) => {
+export const sendPasswordVerification = async(userData) => {
       const { _id, email, name } = userData;
       const otp = generateOTP();
 
-      const templateString = fs.readFileSync('./mail/views/verification.ejs', 'utf-8');
+      const templateString = fs.readFileSync('./mail/views/reset_verification.ejs', 'utf-8');
       const dynamicData = {
                name: name,
                otp: otp,
@@ -22,7 +22,7 @@ export const sendEmailVerification = async(userData) => {
            from: `Amari UGC Team <${process.env.EMAIL}>`,
            to: `${email}`,
            name: 'Amari Team',
-           subject: 'AMARI UGC Verification Code',
+           subject: 'AMARI UGC Password Reset Code',
            html: html
        }
 

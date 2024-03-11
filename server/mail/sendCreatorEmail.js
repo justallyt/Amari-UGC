@@ -7,7 +7,7 @@ dotenv.config();
 
 export const sendWelcomeEmailToCreator = async(userData) => {
      const { email, name } = userData;
-     const templateString = fs.readFileSync('./mail/welcomeCreator.ejs', 'utf-8');
+     const templateString = fs.readFileSync('./mail/views/welcomeCreator.ejs', 'utf-8');
      const dynamicData = {
         name: name,
 }
