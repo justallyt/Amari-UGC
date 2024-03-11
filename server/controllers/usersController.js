@@ -10,6 +10,7 @@ import { sendEmailVerification } from "../mail/sendEmailVerification.js";
 import { sendWelcomeEmailToCreator } from "../mail/sendCreatorEmail.js";
 import { sendWelcomeEmailToBrand } from "../mail/sendBrandEmail.js";
 import { sendPasswordVerification } from "../mail/sendPasswordVerification.js";
+import { sendPasswordResetEmail } from "../mail/sendPassworResetConfirmation.js";
 
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
@@ -173,7 +174,7 @@ export const SendResetPasswordCode = asyncHandler(async(req, res) => {
              }
        }else{
               res.status(400);
-              throw new Error("Invalid User account. Kindly register with us.")
+              throw new Error("Invalid User account. Kindly register with us first.")
        }
 })
 
@@ -230,7 +231,24 @@ export const ResendPasswordResetOtp = asyncHandler(async(req, res) => {
        }
 })
 
+//Reset Password
+export const ResetUserPassword = asyncHandler(async(req, res) => {
+         const { id, password } = req.body;
 
+         const user_id = new mongoose.Types.ObjectId(id);
+         const updatePassword = await User.findByIdAndUpdate(user_id, {
+                 password: password
+         }, { new: true})
+
+         if(updatePassword){
+                   res.status(201).json({
+                          message: 'Password reset successful'
+                   })
+                   sendPasswordResetEmail(updatePassword)
+         }else{
+               throw new Error("Password reset unsuccessful")
+         }
+})
 
 
 

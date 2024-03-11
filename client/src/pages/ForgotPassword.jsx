@@ -4,17 +4,18 @@ import { useForm } from 'react-hook-form'
 import Footer from "../components/Footer"
 import { VscEye, VscEyeClosed } from "react-icons/vsc"
 import { useState } from "react"
-import { useConfirmPasswordResetMutation, useResendPasswordResetMutation, useValidatePasswordResetMutation } from "../redux/usersSlice"
+import { useConfirmPasswordResetMutation, useResendPasswordResetMutation, useResetUserPasswordMutation, useValidatePasswordResetMutation } from "../redux/usersSlice"
 import Spinner from "../components/Spinner"
 import toast, { Toaster } from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux";
-import { setInterimName } from "../redux/authSlice"
+import { clearInterimName, setInterimName } from "../redux/authSlice"
 
 const ForgotPassword = () => {
     const [loadingStatus, setLoadingStatus ] = useState(false);
     const [emailStatus, setEmailStatus] = useState(true);
     const [ otpStatus, setOtpStatus ] = useState(false);
     const [ resetStatus, setResetStatus] = useState(false);
+    const [ successStatus, setSuccessStatus ] = useState(false);
     const [status, setStatus] = useState(false);
     const [ confirmStatus, setConfirmStatus] = useState(false);
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const ForgotPassword = () => {
     const [ checkEmailAccount ] = useConfirmPasswordResetMutation();
     const [ validatePasswordOTP ] = useValidatePasswordResetMutation();
     const [ resendPasswordOTP ] = useResendPasswordResetMutation();
+    const [ updateUserPassword ] = useResetUserPasswordMutation();
     //submit email to reset password
     const submitEmail = async(data) =>{
             setLoadingStatus(true);
@@ -71,19 +73,46 @@ const ForgotPassword = () => {
    //resend password otp
    const resendPasswordReset = async() => {
       const id = interimName !== null ? interimName.id : 'empty';
-
+      setLoadingStatus(true);
       try {
              const res = resendPasswordOTP({ id }).unwrap();
              if(res){
                   toast.success("OTP resend successful", { id: 'otp-resend-success'})
+                  setLoadingStatus(false);
              }
       } catch (error) {
-            toast.error(error.data.message, { id: 'otp-resend-error'})
+            toast.error(error.data.message, { id: 'otp-resend-error'});
+            setLoadingStatus(false)
       }
    }
     //reset account password
-    const submitPasswordReset = (data) => {
-        console.log(data)
+    const submitPasswordReset = async(data) => {
+      setLoadingStatus(true);
+      const id = interimName !== null ? interimName.id : 'empty';
+      const { password } = data;
+
+      const reqBody = {
+             id: id,
+             password: password
+      }
+
+      try {
+             const res = await updateUserPassword(reqBody).unwrap();
+
+             if(res){
+                    setResetStatus(false);
+                     toast.success(res.message, { id: 'password-reset-success'});
+                     setLoadingStatus(false);
+                     setSuccessStatus(true);
+
+                     setTimeout(()=> {
+                               dispatch(clearInterimName())
+                     }, 3000)
+             }
+      } catch (error) {
+            setLoadingStatus(false);
+            toast.error(error.data.message, { id: 'error-password-reset-fail'})
+      }
 }
   return (
     <div className="login-wrapper">
@@ -184,7 +213,25 @@ const ForgotPassword = () => {
                                                                   </form>
                                                       </div>
                                          </div>
-                                     : '' }                            
+                                     : '' }               
+
+                                     { successStatus ?
+                                                 <div className="login-user">
+                                                            <div className="small-intro tweak">
+                                                                    <h2> Amari Support Center</h2>
+                                                                     <p>Congratulations</p>
+                                                             </div>
+                                                               
+                                                             <div className="account-themselfu confirm">
+                                                                         <div className="success-reset-message">
+                                                                                     Password Reset Successful. Proceed to login with your new password
+                                                                         </div>
+
+                                                                         <Link className="login-redirect" onClick={() => setSuccessStatus(false)} to={'/user/login'}>Login</Link>
+                                                              </div>
+                                                 </div>
+                                          : 
+                                     ''}             
                           </div>
               </div>
 

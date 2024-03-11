@@ -53,6 +53,15 @@ export const usersSlice = apiSlice.injectEndpoints({
                              body: payload
                      })
               }),
+
+              //reset user password
+              resetUserPassword: builder.mutation({
+                     query: (payload) => ({
+                            url: 'user/update-user-password',
+                            method: 'PUT',
+                            body: payload
+                     })
+              }),
               
              getUserProfile: builder.query({
                   query: () => ({
@@ -145,5 +154,6 @@ export const {
        useResendUserOTPMutation,
        useConfirmPasswordResetMutation,
        useValidatePasswordResetMutation,
-       useResendPasswordResetMutation
+       useResendPasswordResetMutation,
+       useResetUserPasswordMutation
 } = usersSlice;

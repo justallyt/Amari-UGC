@@ -15,7 +15,8 @@ import {
      ResendUserOtp,
      SendResetPasswordCode,
      ConfirmPasswordResetRequest,
-     ResendPasswordResetOtp
+     ResendPasswordResetOtp,
+     ResetUserPassword
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
@@ -29,6 +30,7 @@ router.post('/resend-otp', ResendUserOtp);
 router.post('/reset-password-confirmation', SendResetPasswordCode);
 router.post('/validate-password-otp', ConfirmPasswordResetRequest);
 router.post('/resend-password-reset-otp', ResendPasswordResetOtp);
+router.put("/update-user-password", ResetUserPassword);
 router.post('/logout', LogOutUser);
 router.get('/profile', protect, GetProfile);
 router.put('/update-profile', protect, upload.single('profileImage'), UpdateProfile);
