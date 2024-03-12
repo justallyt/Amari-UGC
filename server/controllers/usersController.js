@@ -17,19 +17,41 @@ export const LoginUser = asyncHandler(async(req, res) => {
        const { email, password } = req.body;
 
        const user = await User.findOne({ email });
+       if(!user) {
+              throw new Error("Invalid account details. Please create an account.")
+       }
+       const isUserVerified = user.verified;
 
-       if(user && (await user.matchPasswords(password))){
-             generateToken(res, user._id);
+       if(isUserVerified){
+               if(user && (await user.matchPasswords(password))){
+                       generateToken(res, user._id);
 
-             res.status(201).json({
-                   message: "Login Successful.",
-                   id: user._id,
-                   role: user.role,
-                   username: user.username
-             })
+                       res.status(201).json({
+                             message: "Login Successful.",
+                             verified: true,
+                             id: user._id,
+                             role: user.role,
+                             username: user.username
+                        })
+              }else{
+                      res.status(401);
+                      throw new Error("Invalid Email or Password. Please try again")
+               }
        }else{
-               res.status(401);
-               throw new Error("Invalid Email or Password. Please try again")
+              if(user && (await user.matchPasswords(password))){
+                     const email_result = sendEmailVerification(user);
+                     if(email_result){
+                            res.status(201).json({
+                                   verified: false,
+                                   message: "Email verification sent to your email",
+                                   name: user.name,
+                                   id: user._id
+                            })
+                     }
+              }else{
+                     res.status(401);
+                     throw new Error("Invalid Email or Password. Please try again"); 
+              }
        }
 })
 

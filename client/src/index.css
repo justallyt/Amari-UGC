@@ -530,8 +530,12 @@ header .logo img{
           max-height: 250px;
           max-width: 45%;
       }
-      .large{
+      .large,
+      .account-themselfu.confirm{
           width: 100%;
+      }
+      .small-intro.tweak h2{
+           font-size: 35px
       }
       .flexate{
            flex-direction: row;

@@ -352,6 +352,10 @@
           font-size: 14px;
           text-align: center;
     }
+    .welcome-intro-texts h1{
+            font-size: 40px;
+            line-height: 55px;
+    }
 }
 
 @media(max-width:500px){

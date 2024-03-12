@@ -5,7 +5,7 @@ import { VscEyeClosed } from "react-icons/vsc"
 import { useForm } from "react-hook-form"
 import { useLoginUserMutation } from "../redux/usersSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { setCredentials, clearPop } from "../redux/authSlice"
+import { setCredentials, clearPop, setInterimName } from "../redux/authSlice"
 import toast, { Toaster } from "react-hot-toast"
 import Spinner from "./Spinner"
 
@@ -36,10 +36,18 @@ const LoginUser = () => {
 const authUser = async(data) => {
        try {
             const res = await loginUser(data).unwrap();
-            dispatch(setCredentials({...res}));
-             navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ?  res.id : res.username}/`);
+
+            if(res.verified){
+                  dispatch(setCredentials({...res}));
+                  navigate(`/${res.role.toLowerCase()}/${res.username === 'null' ?  res.id : res.username}/`);
+            }else{
+                  dispatch(setInterimName({...res}));
+                  navigate('/user/confirm-account');
+                  toast.success(res.message, { id: "user-email-verification"})
+            }
+            
        } catch (error) {
-             toast.error("Login failed. Please try again")
+             toast.error(error.data.message, { id: 'login-error-message'})
        }
        reset();
 }
