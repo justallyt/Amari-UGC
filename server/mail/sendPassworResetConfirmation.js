@@ -14,7 +14,7 @@ export const sendPasswordResetEmail = async(userData) => {
      const html = ejs.render(templateString, dynamicData);
 
      const mailOptions = {
-        from: `Amari UGC Team <${process.env.EMAIL}>`,
+        from: `Amari Team <${process.env.EMAIL}>`,
         to: `${email}`,
         name: 'Amari Team',
         subject: 'Amari Password Reset Successful',

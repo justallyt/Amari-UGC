@@ -14,10 +14,10 @@ export const sendWelcomeEmailToBrand = async(userData) => {
      const html = ejs.render(templateString, dynamicData);
 
      const mailOptions = {
-        from: `Amari UGC Team <${process.env.EMAIL}>`,
+        from: `Amari Team <${process.env.EMAIL}>`,
         to: `${email}`,
         name: 'Amari Team',
-        subject: 'Welcome to AMARI UGC',
+        subject: 'Welcome to AMARI',
         html: html
     }
     

@@ -582,10 +582,214 @@
        gap: 50px;
        
 }
+.dashboard-wrapper .intro{
+      margin: 20px 0;
+      display: grid;
+      grid-template-columns: 3fr 1.5fr;
+      gap: 20px;
+}
+.dashboard-wrapper .intro .intro-box{
+     padding: 30px;
+     border-radius: 20px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     -ms-border-radius: 20px;
+     -o-border-radius: 20px;
+}
+.dashboard-wrapper .intro-box.wrap{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0px 0px 4px -1px rgb(210, 219, 223);
+}
 .dashboard-wrapper .intro h2{
-    font-family: "Madera-Thin";
+    font-family: "Madera-Light";
     color: rgb(0, 38, 42);
 }
+.dashboard-wrapper .intro p{
+     font-size: 15px;
+     margin: 15px 0;
+}
+.dashboard-wrapper .intro a{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 13px;
+    background: var(--main-color);
+    width: 150px;
+    height: 43px;
+    padding-bottom: 5px;
+    justify-content: center;
+    color: whitesmoke;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+.community-box{
+     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../../assets/community.jpeg") no-repeat;
+     background-size: cover;
+     background-position: center;
+     border-radius: 25px;
+     -webkit-border-radius: 25px;
+     -moz-border-radius: 25px;
+     -ms-border-radius: 25px;
+     -o-border-radius: 25px;
+     padding: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+     color: whitesmoke;
+}
+.community-box h3{
+    font-size: 18px;
+    font-family: "Madera-Light";
+}
+.community-box p{
+      font-size: 15px !important;
+}
+.community-box a{
+     margin: auto;
+     background: transparent !important;
+     border-radius: 6px;
+     -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+     -ms-border-radius: 6px;
+     -o-border-radius: 6px;
+     background: white !important;
+     color: var(--main-color) !important;
+     border: none;
+}
+
+.community-box a span{
+      font-size: 16px !important;
+}
+
+.popular-brands h2{
+     font-size: 22px;
+     font-family: var(--font-light);
+     padding-bottom: 10px;
+     border-bottom: 1px solid var(--sleezy-border);
+}
+
+.popular-brands .brands-list{
+     margin: 20px 0;
+     display: flex;
+     align-items: center;
+     gap: 20px;
+     flex-wrap: wrap;
+}
+.brands-list .popular-brand-moja{
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      background: white;
+      box-shadow: 0px 0px 10px -1px rgba(208, 208, 208, 0.241);
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+      -moz-border-radius: 100px;
+      -ms-border-radius: 100px;
+      -o-border-radius: 100px;
+}
+.popular-brand-moja .brand-logo{
+      height: 60px;
+      width: 100%;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+.brand-logo img{
+       width: 80%;
+       height: 80%;
+       object-fit: contain;
+}
+.popular-brand-moja .brand-overlay{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+      -moz-border-radius: 100px;
+      -ms-border-radius: 100px;
+      -o-border-radius: 100px;
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+      -ms-transform: scale(0);
+      -o-transform: scale(0);
+      transform-origin: center;
+      transition: all 0.8s ease;
+      -webkit-transition: all 0.8s ease;
+      -moz-transition: all 0.8s ease;
+      -ms-transition: all 0.8s ease;
+      -o-transition: all 0.8s ease;
+}
+.popular-brand-moja:hover .brand-overlay{
+       transform: scale(1);
+       -webkit-transform: scale(1);
+       -moz-transform: scale(1);
+       -ms-transform: scale(1);
+       -o-transform: scale(1);
+}
+.popular-brand-moja .action-stuff{
+      text-align: center;
+      color: white;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+      -ms-transform: scale(0);
+      -o-transform: scale(0);
+      transition: all 0.7s ease;
+      -webkit-transition: all 0.7s ease;
+      -moz-transition: all 0.7s ease;
+      -ms-transition: all 0.7s ease;
+      -o-transition: all 0.7s ease;
+}
+.popular-brand-moja:hover .action-stuff{
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+}
+.popular-brand-moja .action-stuff p{
+        font-size: 13px;
+        line-height: 15px;
+        font-family: var(--font-medium);
+        transition: all 0.7s ease;
+        -webkit-transition: all 0.7s ease;
+        -moz-transition: all 0.7s ease;
+        -ms-transition: all 0.7s ease;
+        -o-transition: all 0.7s ease;
+}
+.popular-brand-moja .action-stuff p:hover{
+      color: var(--main-color)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .informationals-section .creation-header{
     display: flex;
@@ -617,7 +821,8 @@
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
 }
-.creation-header a span{
+.creation-header a span,
+.dashboard-wrapper .intro a span{
     display: flex;
     margin-top: 3px;
     font-size: 20px;

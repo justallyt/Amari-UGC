@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom"
-import { BsFileEarmarkText } from "react-icons/bs"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { BsPlayFill } from 'react-icons/bs'
@@ -9,10 +8,12 @@ import { BsPatchPlus } from "react-icons/bs"
 import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter"
 import AssetModal from "./AssetModal"
 import { useGetUserAssetsQuery } from "../../redux/assetSlice"
+import { FiPlus } from "react-icons/fi";
+import { MdChevronLeft } from "react-icons/md";
 
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
-  const { isModalOpen, assets } = useSelector(state => state.utils);
+  const { isModalOpen, assets, availableBrands } = useSelector(state => state.utils);
   const { profile, all_notifications } = useSelector(state => state.profile)
   const { data:assets_pulled } = useGetUserAssetsQuery({refetchOnMountOrArgChange: true})
 
@@ -34,9 +35,30 @@ const Informationals = () => {
     <div className="informationals-section">
               <div className="section-wrapper">
                        <div className="informationals-creations">
+                                <div className="popular-brands">
+                                          <h2>Popular brands</h2>
+
+                                          <div className="brands-list">
+                                                { availableBrands && availableBrands.length > 0 ? 
+                                                   <>
+                                                          { availableBrands && availableBrands.slice(0, 5).map(item => 
+                                                                <div className="popular-brand-moja" key={item.name}>
+                                                                        <div className="brand-logo">
+                                                                             <img src={item.profilePic.url} alt="Brand Logo" />
+                                                                        </div>
+                                                                        <div className="brand-overlay"></div>
+                                                                         <div className="action-stuff">
+                                                                                  <span><FiPlus /></span>
+                                                                                  <p>Join</p>
+                                                                         </div>
+                                                             </div>
+                                                          )}
+                                                   </>
+                                             : <p>Eerie silence here</p>}
+                                          </div>
+                                </div>
                                 <div className="creation-header">
                                             <h2>Recently Added Creations</h2>
-                                            <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}>Create New <span><BsFileEarmarkText /></span></NavLink>
                                 </div>
                                { isModalOpen ?  <AssetModal identity={videoId} />: ''}
                                 <div className="creations-row">

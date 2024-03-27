@@ -10,6 +10,12 @@
      --sleezy-border: rgba(203, 229, 232, 0.473);
      --greyish-color: rgb(203,229,232);
      --black: rgb(75,75,75);
+     --font-medium: "Madera-Medium";
+     --font-light: "Madera-Light";
+     --font-regular: "Madera-Regular";
+     --font-ultralight: "Madera-UltraLight";
+     --font-bold: "Madera-Bold";
+     --font-thin: "Madera-Thin";
 }
 
 body{
