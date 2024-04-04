@@ -57,7 +57,7 @@ const DashboardBody = () => {
                                                          <div className="box-inner">
                                                                    <h3>Join A Community</h3>
                                                                    <p>Dive into our brand directory and select those you love or are curious about.</p>
-                                                                   <Link to={''}><span><FiPlus /></span>Find your Brand</Link>
+                                                                   <Link to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/my-brands`}><span><FiPlus /></span>Find your Brand</Link>
                                                          </div>
                                             </div>
                                   </div>

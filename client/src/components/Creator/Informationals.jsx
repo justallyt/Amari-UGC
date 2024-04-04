@@ -9,7 +9,7 @@ import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConv
 import AssetModal from "./AssetModal"
 import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 import { FiPlus } from "react-icons/fi";
-import { MdChevronLeft } from "react-icons/md";
+//import { MdChevronLeft } from "react-icons/md";
 
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)

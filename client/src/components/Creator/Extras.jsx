@@ -3,6 +3,8 @@ import brands from "../../assets/enterprise.png"
 import videos from "../../assets/video-editing.png"
 import { AreaChart, Area, XAxis, YAxis,  Tooltip, ResponsiveContainer } from 'recharts';
 import { useSelector } from "react-redux";
+import { MdOutlineLocalOffer } from "react-icons/md";
+import { LiaMoneyBillWaveAltSolid } from "react-icons/lia";
 
 const data = [
      { name: 'Jan', uv: 120, pv: 400, amt: 2000},
@@ -27,10 +29,18 @@ const active_brands = assets && [...new Set(assets.map(item => item.created_for)
              <div className="extras-wrapper">
                         <div className="extra-box">
                                      <div className="extra-header">
-                                            <h3>Earnings</h3>
+                                            <h3>Earned Rewards</h3>
                                             <span><CgMoreAlt /></span>
                                      </div>
-                                   <h1>Ksh. 84,690.50</h1>
+                                     <div className="reward-box">
+                                              <span><MdOutlineLocalOffer /></span>
+                                              <h4>24 Coupon Received</h4>
+                                     </div>
+                                     <div className="reward-box">
+                                              <span><LiaMoneyBillWaveAltSolid /></span>
+                                              <h4>Ksh.4,870 Earned</h4>
+                                     </div>
+                        
                                    <p><span>+10%</span> since last month</p>
                         </div>
 
@@ -39,14 +49,14 @@ const active_brands = assets && [...new Set(assets.map(item => item.created_for)
                                                  <div className="brand-icon">
                                                            <img src={brands} alt="" />
                                                  </div>
-                                                <h4>{active_brands !== null ? active_brands.length : '0'} Brands</h4>
-                                                <p>Created for</p>
+                                                <h4>{active_brands !== null ? active_brands.length : '0'} Favourite Brands</h4>
+                                                <p>Subscribed to</p>
                                      </div>
                                      <div className="brands-box">
                                                  <div className="brand-icon">
                                                            <img src={videos} alt="" />
                                                  </div>
-                                                <h4>{assets !== null ? assets.length : 0} Assets</h4>
+                                                <h4>{assets !== null ? assets.length : 0} Shared Moments</h4>
                                                 <p>Created</p>
                                      </div>
                         </div>
