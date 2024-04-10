@@ -46,10 +46,9 @@ const Informationals = () => {
                                                                         <div className="brand-logo">
                                                                              <img src={item.profilePic.url} alt="Brand Logo" />
                                                                         </div>
-                                                                        <div className="brand-overlay"></div>
+                                                                        <div className="brand-overlay" title="Subscribe"></div>
                                                                          <div className="action-stuff">
-                                                                                  <span><FiPlus /></span>
-                                                                                  <p>Join</p>
+                                                                                  <span title="Subscribe"><FiPlus /></span>
                                                                          </div>
                                                              </div>
                                                           )}
@@ -58,7 +57,7 @@ const Informationals = () => {
                                           </div>
                                 </div>
                                 <div className="creation-header">
-                                            <h2>Recently Added Creations</h2>
+                                            <h2>Your shared Brand moments</h2>
                                 </div>
                                { isModalOpen ?  <AssetModal identity={videoId} />: ''}
                                 <div className="creations-row">

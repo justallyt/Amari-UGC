@@ -589,7 +589,7 @@
       gap: 20px;
 }
 .dashboard-wrapper .intro .intro-box{
-     padding: 30px;
+     padding: 20px 30px;
      border-radius: 20px;
      -webkit-border-radius: 20px;
      -moz-border-radius: 20px;
@@ -597,39 +597,81 @@
      -o-border-radius: 20px;
 }
 .dashboard-wrapper .intro-box.wrap{
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0px 0px 4px -1px rgb(210, 219, 223);
+ 
+    padding: 0;
+}
+.intro-box-row{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      margin-top: 20px;
+      gap: 20px
+}
+.intro-box-column{
+      display: flex;
+      gap: 10px;
+      cursor: pointer;
+      flex-direction: column;
+      padding: 20px;
+      border-radius: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+      box-shadow: 0px 0px 4px -1px rgb(210, 219, 223);
+      transition: all 0.8s ease;
+      -webkit-transition: all 0.8s ease;
+      -moz-transition: all 0.8s ease;
+      -ms-transition: all 0.8s ease;
+      -o-transition: all 0.8s ease;
+}
+.intro-box-column:hover{ 
+      box-shadow: 0px 0px 8px -3px rgba(5, 156, 167, 0.351);
+}
+.intro-box-column:hover h3{
+       color: var(--main-color);
+}
+.intro-box-column .intro-top{
+       display: flex;
+       align-items: center;
+       gap:10px;
+}
+.intro-box-column .icon{
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      box-shadow: 0px 0px 1px 1px var(--sleezy-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+      -ms-border-radius: 50px;
+      -o-border-radius: 50px;
+}
+
+.intro-box-column .icon img{
+       width: 80%;
+       height: 80%;
 }
 .dashboard-wrapper .intro h2{
     font-family: "Madera-Light";
     color: rgb(0, 38, 42);
+    font-size: 28px;
 }
-.dashboard-wrapper .intro p{
-     font-size: 15px;
-     margin: 15px 0;
+.intro-box-column h3{
+      font-size: 16px;
+      transition: all 0.6s ease;
+      -webkit-transition: all 0.6s ease;
+      -moz-transition: all 0.6s ease;
+      -ms-transition: all 0.6s ease;
+      -o-transition: all 0.6s ease;
 }
-.dashboard-wrapper .intro a{
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 13px;
-    background: var(--main-color);
-    width: 150px;
-    height: 43px;
-    padding-bottom: 5px;
-    justify-content: center;
-    color: whitesmoke;
-    border-radius: 7px;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    -ms-border-radius: 7px;
-    -o-border-radius: 7px;
+.intro-box-column p{
+       font-size: 15px;
 }
+
 .community-box{
-     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../../assets/community.jpeg") no-repeat;
      background-size: cover;
      background-position: center;
      border-radius: 25px;
@@ -637,12 +679,14 @@
      -moz-border-radius: 25px;
      -ms-border-radius: 25px;
      -o-border-radius: 25px;
-     padding: 20px;
+     padding: 30px;
      display: flex;
+     gap: 0;
      align-items: center;
-     justify-content: center;
      text-align: center;
-     color: whitesmoke;
+     justify-content: center;
+     color: #222;
+     box-shadow: 0px 0px 4px -1px gainsboro;
 }
 .community-box h3{
     font-size: 18px;
@@ -650,6 +694,7 @@
 }
 .community-box p{
       font-size: 15px !important;
+      margin-top: 0 !important;
 }
 .community-box a{
      margin: auto;
@@ -663,7 +708,11 @@
      color: var(--main-color) !important;
      border: none;
 }
-
+.community-box img{
+       width: 60%;
+       margin: auto;
+       display: block;
+}
 .community-box a span{
       font-size: 16px !important;
 }
@@ -1250,8 +1299,8 @@
              grid-template-columns: 1fr;
     }
 
-    .dashboard-wrapper .intro-box.wrap img{
-         display: none;
+    .intro-box-row{
+         grid-template-columns: 1fr;
     }
       .creations-row{
             grid-template-columns: 1fr 1fr;

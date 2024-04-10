@@ -31,7 +31,7 @@ const CreatorSidebar = () => {
                                                        <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/notifications`}><span><IoMdNotificationsOutline /></span> <p>Notifications</p></NavLink>
                                              </li>
                                              <li>
-                                                       <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/assets`}><span><BsDatabase /></span> <p>My Creations</p></NavLink>
+                                                       <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/moments`}><span><BsDatabase /></span> <p>My Moments</p></NavLink>
                                              </li>
                                              {/* <li>
                                                        <NavLink to={'/earnings'}><span><BsPiggyBank /></span> <p>My Earnings</p></NavLink>
