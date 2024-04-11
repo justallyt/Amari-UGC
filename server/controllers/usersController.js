@@ -3,7 +3,7 @@ import generateToken from "../utils/generateToken.js";
 import cloudinary from "../utils/cloudinary.js";
 import User from "../models/usersModel.js";
 import Request from "../models/RequestsModel.js";
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import Notifications from "../models/NotificationsModel.js";
 import UserVerification from "../models/VerificationModel.js";
 import { sendEmailVerification } from "../mail/sendEmailVerification.js";
@@ -429,6 +429,49 @@ export const AssetCreationRequest = asyncHandler(async(req, res) => {
                 throw new Error('Request was not created')
          }
 })
+
+//Subscribe to work with a Brand
+export const SubscribeToBrand = asyncHandler(async(req, res) => {
+         const { brandId } = req.body;
+         const creator_id = req.user._id;
+         
+         const brand_id = new mongoose.Types.ObjectId(`${brandId}`);
+         const creator_details = await User.findById(creator_id)
+         const brand_details = await User.findById(brand_id)
+
+       //existance check
+       const creatorCheck = creator_details.brands.some(item => item === brand_id);
+       const brandCheck = brand_details.creators.some(item => item === creator_id);
+
+       if(!creatorCheck && !brandCheck){//checks if creator has already subscribed to the subject brand
+              const updateCreator = await User.findByIdAndUpdate(creator_id, {
+                     $push: { brands: brand_id}
+              }, { new: true})
+              const updateBrand = await User.findByIdAndUpdate(brand_id, {
+                     $push: { creators: creator_id}
+               }, { new: true})
+
+               if(updateBrand && updateCreator){
+                     res.status(201).json({ status: "Subscription Successful"})
+               }else{
+                      res.status(500).json({ message: "Subscription failed. Please try again later."})
+               }
+       }
+
+       //Create notifications for the above action
+       const subscription_msg = `You have subscribed to ${brand_details.name}`
+
+       const notify = await Notifications.create({
+               notification_type: 'Subscription',
+               sender: {
+                      senderId: creator_id,
+                      senderMsg: subscription_msg,
+                      profilePhoto: creator_details.profilePic.url
+               }
+       })
+})
+
+
 
 //Get Submitted Brand Requests
 export const GetUserBrandRequests = asyncHandler(async(req, res) => {

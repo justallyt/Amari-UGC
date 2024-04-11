@@ -100,6 +100,13 @@ export const usersSlice = apiSlice.injectEndpoints({
                      }),
                      providesTags: ['UserProfile']
               }),
+              subscribeToBrand: builder.mutation({
+                     query: (payload) => ({
+                              url: '/user/subscribe-to-brand',
+                              method: 'POST',
+                              body: payload
+                     })
+              }),
               //Check for already requested brands
               checkRequests: builder.query({
                       query: () => ({
@@ -155,5 +162,6 @@ export const {
        useConfirmPasswordResetMutation,
        useValidatePasswordResetMutation,
        useResendPasswordResetMutation,
-       useResetUserPasswordMutation
+       useResetUserPasswordMutation,
+       useSubscribeToBrandMutation
 } = usersSlice;

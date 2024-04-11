@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import { useRequestCreationPermissionMutation } from "../../redux/usersSlice"
+import { useRequestCreationPermissionMutation, useSubscribeToBrandMutation } from "../../redux/usersSlice"
 import { useSelector } from "react-redux"
 import toast, { Toaster } from "react-hot-toast"
 const RequestBtn = ({id, refetch}) => {
   const [requestStatus, setRequestStatus] = useState('Subscribe')
   const [ result, setResult] = useState(false)
-  const [ submitRequest ] = useRequestCreationPermissionMutation();
+  //const [ submitRequest ] = useRequestCreationPermissionMutation();
   const { requests } = useSelector(state => state.utils)
-
+  const [ subscribe ] = useSubscribeToBrandMutation();
   useEffect(()=>{
          if(requests){
                const exists = Object.values(requests);
@@ -23,7 +23,8 @@ const RequestBtn = ({id, refetch}) => {
   const requestToWorkWithBrand = async (brandId) => {
           setRequestStatus('Subscribing...')
           try {
-            const res = await submitRequest({brandId})
+            //const res = await submitRequest({brandId})
+            const res = await subscribe({brandId});
               if(res) {
                      setRequestStatus('Subscribed')
                      setResult(true);

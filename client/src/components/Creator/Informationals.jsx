@@ -9,13 +9,16 @@ import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConv
 import AssetModal from "./AssetModal"
 import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 import { FiPlus } from "react-icons/fi";
+import { useSubscribeToBrandMutation } from "../../redux/usersSlice"
 //import { MdChevronLeft } from "react-icons/md";
-
+import toast, { Toaster } from "react-hot-toast"
+import Spinner3 from "../Spinner3";
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
   const { isModalOpen, assets, availableBrands } = useSelector(state => state.utils);
   const { profile, all_notifications } = useSelector(state => state.profile)
   const { data:assets_pulled } = useGetUserAssetsQuery({refetchOnMountOrArgChange: true})
+ const [ subscribe, { isLoading }] = useSubscribeToBrandMutation();
 
  const dispatch = useDispatch();
   const openVideoModal = (id) => {
@@ -31,8 +34,21 @@ const Informationals = () => {
   const activities = all_notifications !== null ? [...all_notifications].reverse() : []
   const user_assets = assets !== null ? assets : []
 
+  const subscribeToBrand = async(brandId) => {
+       try {
+              //const res = await submitRequest({brandId})
+              const res = await subscribe({brandId});
+                if(res) {
+                       console.log(res);
+                       toast.success(res.data.status, { id: 'request status'})
+                }
+           } catch (error) {
+            console.log(error)
+      }
+  }
   return (
     <div className="informationals-section">
+                 <Toaster />
               <div className="section-wrapper">
                        <div className="informationals-creations">
                                 <div className="popular-brands">
@@ -47,9 +63,11 @@ const Informationals = () => {
                                                                              <img src={item.profilePic.url} alt="Brand Logo" />
                                                                         </div>
                                                                         <div className="brand-overlay" title="Subscribe"></div>
-                                                                         <div className="action-stuff">
-                                                                                  <span title="Subscribe"><FiPlus /></span>
+                                                                         <div className="action-stuff" onClick={() => subscribeToBrand(item._id)}>
+                                                                                  
+                                                                                  { isLoading ? <Spinner3 /> :  <span title="Subscribe"><FiPlus /></span>}
                                                                          </div>
+                                                                         
                                                              </div>
                                                           )}
                                                    </>
