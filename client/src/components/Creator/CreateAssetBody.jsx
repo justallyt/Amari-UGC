@@ -74,8 +74,8 @@ const CreateAssetBody = () => {
 
                           <div className="video-create-row">
                                        <div className="video-header">
-                                                 <h2>Create a New Asset</h2>
-                                                 <p>Easily upload your video asset, tag a specific brand you&apos;d like to create for. Then sit back and relax. You&apos;re one step away from financial freedom.</p>
+                                                 <h2>Create a New Brand Moment</h2>
+                                                 <p>Upload a photo or video of you using the brand you love. Get rewarded each time a brand reshares your shared brand experience.</p>
                                        </div>
                                       
                                        { isUploading ?
@@ -99,8 +99,9 @@ const CreateAssetBody = () => {
                                                                             <span>{errors.brand && errors.brand.message}</span>
                                                                  </div>
                                                                   <div className="video-form-column">
-                                                                               <label htmlFor="product">Specify Product</label>
-                                                                               <input type="text" className="video-form-control" placeholder="Brand product" {...register('product')} />
+                                                                               <label htmlFor="product">Specify Product or Service</label>
+                                                                               <input type="text" className="video-form-control" placeholder="Brand product" {...register('product', { required: "Please specify a product or service"})} />
+                                                                               <span className="error">{errors.product && errors.product.message}</span>
                                                                   </div>
                                                       </div>
                                       
@@ -115,7 +116,7 @@ const CreateAssetBody = () => {
                                                             </div>
                                                               :
                                                           <div className="video-upload-part">
-                                                                   <label htmlFor="video upload">Upload Asset</label>
+                                                                   <label htmlFor="video upload">Upload photo or video</label>
 
                                                                    <div className="video-upload-trigger-box">
                                                                               <div { ...getRootProps() } className="upload-wrapper">
@@ -134,12 +135,13 @@ const CreateAssetBody = () => {
                                                                     </label>                                             
                                                             </div>
                                                        }  
-                                                     <div className="video-form-column">
+                                                     <div className="video-form-column text">
                                                                  <label htmlFor="caption">Add a Caption</label>
-                                                                 <textarea name="" placeholder="Add a caption to go with it" cols="30" rows="10" {...register('caption')}></textarea>
+                                                                 <textarea name="" placeholder="Add a caption to go with it" cols="30" rows="10" {...register('caption', { required: 'Please enter a caption'})}></textarea>
+                                                                 <span className="error">{errors.caption && errors.caption.message}</span>
                                                      </div>
 
-                                                       <button type="submit">Create your asset</button>
+                                                       <button type="submit">Share</button>
                                            </form>
                                       }
                           </div>

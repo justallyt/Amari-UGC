@@ -2,23 +2,26 @@ import { NavLink } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { BsPlayFill } from 'react-icons/bs'
-import { openModal, setUserAssets} from "../../redux/utilsSlices"
+import { openModal, setUserAssets, setAvailableBrands, setUserApprovedBrands } from "../../redux/utilsSlices"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { BsPatchPlus } from "react-icons/bs"
 import { calculateTimePassed, sanitizeNotifications } from "../../utils/dateConverter"
 import AssetModal from "./AssetModal"
 import { useGetUserAssetsQuery } from "../../redux/assetSlice"
 import { FiPlus } from "react-icons/fi";
-import { useSubscribeToBrandMutation } from "../../redux/usersSlice"
+import { useGetUserProfileQuery, useSubscribeToBrandMutation } from "../../redux/usersSlice"
 //import { MdChevronLeft } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast"
 import Spinner3 from "../Spinner3";
+import { setProfile } from "../../redux/profileSlice"
 const Informationals = () => {
   const [videoId, setVideoId] = useState(null)
-  const { isModalOpen, assets, availableBrands } = useSelector(state => state.utils);
+  const { isModalOpen, assets, brands, availableBrands } = useSelector(state => state.utils);
   const { profile, all_notifications } = useSelector(state => state.profile)
   const { data:assets_pulled } = useGetUserAssetsQuery({refetchOnMountOrArgChange: true})
  const [ subscribe, { isLoading }] = useSubscribeToBrandMutation();
+ const { data: refetched_profile, refetch } = useGetUserProfileQuery({ refetchOnMountOrArgChange: true });
+
 
  const dispatch = useDispatch();
   const openVideoModal = (id) => {
@@ -29,17 +32,39 @@ const Informationals = () => {
          if(assets_pulled){
                dispatch(setUserAssets([...assets_pulled.assets]))
          }
-  }, [assets_pulled,dispatch])
+         if(refetched_profile){
+              dispatch(setProfile({...refetched_profile.user}))
+         }
+  }, [assets_pulled,dispatch, refetched_profile])
   //sanitize activity notifications
   const activities = all_notifications !== null ? [...all_notifications].reverse() : []
   const user_assets = assets !== null ? assets : []
+
+    //Filter user brands
+    useEffect(() => {
+       if(brands !== null){
+             let things = []
+             profile !== null && profile.brands.forEach(item => {
+                   const stuff =  Object.values(brands).find(kitu => kitu._id === item)
+                   things.push(stuff)
+             })
+          //setMyBrands(things)
+          dispatch(setUserApprovedBrands(things))
+     
+          const avails = Object.values(brands).filter(obj => things.indexOf(obj) === -1);
+         // setAvailableBrands(avails)
+          dispatch(setAvailableBrands(avails))
+     }
+     
+     }, [brands, profile, dispatch])
 
   const subscribeToBrand = async(brandId) => {
        try {
               //const res = await submitRequest({brandId})
               const res = await subscribe({brandId});
                 if(res) {
-                       console.log(res);
+                       
+                       refetch();
                        toast.success(res.data.status, { id: 'request status'})
                 }
            } catch (error) {

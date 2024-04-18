@@ -95,7 +95,7 @@ export const RegisterUser = asyncHandler(async(req, res) => {
 
                if(user){
                      const email_result = sendEmailVerification(user);
-                     if(email_result){              
+                     if(email_result){               
                              res.status(201).json({
                                     name: user.name,
                                     message: 'Email verification sent to your email.',
@@ -271,22 +271,6 @@ export const ResetUserPassword = asyncHandler(async(req, res) => {
                throw new Error("Password reset unsuccessful")
          }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //Get User Profile

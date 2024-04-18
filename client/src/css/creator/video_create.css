@@ -52,7 +52,6 @@
 }
 .video-form-column textarea{
       width: 800px;
-      margin-bottom: 30px;
       border: none;
       outline: none;
       box-shadow: 0px 0px 3px -1px rgba(199, 199, 199, 0.626);
@@ -67,7 +66,13 @@
       padding: 10px;
       font-family: "Madera-Regular";
 }
-
+.video-form-column.text{
+    margin-bottom: 30px;
+    flex-direction: column;
+}
+.video-form-column.text span{
+      display: block;
+}
 .video-upload-trigger-box{
        margin-top: 10px;
 }

@@ -1,16 +1,17 @@
 .assets-body-wrap{
     min-height: 120vh;
 }
-.assets-body-wrap .intro{
+.assets-body-wrap .intro-header{
     margin: 20px  0;
     border-bottom: 1px solid var(--sleezy-border);
     padding-bottom: 20px;
 }
-.assets-body-wrap .intro .intro-column{
+.assets-body-wrap .intro-header .intro-column{
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
+    flex-wrap: wrap;
 }
 .intro-column a{
     display: flex;

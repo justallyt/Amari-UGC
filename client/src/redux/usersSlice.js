@@ -105,7 +105,8 @@ export const usersSlice = apiSlice.injectEndpoints({
                               url: '/user/subscribe-to-brand',
                               method: 'POST',
                               body: payload
-                     })
+                     }),
+                     invalidatesTags: ['UserBrands']
               }),
               //Check for already requested brands
               checkRequests: builder.query({

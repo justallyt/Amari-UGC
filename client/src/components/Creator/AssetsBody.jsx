@@ -35,10 +35,10 @@ const AssetsBody = () => {
                                   <Topbar user={profile} />
                                  { isModalOpen ? <AssetModal identity={videoId} /> : ''}
                                   <div className="assets-body-wrap">
-                                             <div className="intro">
-                                                     <h2>My Creations</h2>
+                                             <div className="intro-header">
+                                                     <h2>My Brand Moments</h2>
                                                      <div className="intro-column">
-                                                                <p>View and manage all the assets that you have created so far</p>
+                                                                <p>View and manage all the brand moments that you have created so far</p>
                                                                 <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`}>Create New <span><MdOutlineVideoFile /></span></NavLink>
                                                      </div>
                                              </div>

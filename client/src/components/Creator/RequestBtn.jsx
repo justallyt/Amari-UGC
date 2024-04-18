@@ -29,7 +29,6 @@ const RequestBtn = ({id, refetch}) => {
                      setRequestStatus('Subscribed')
                      setResult(true);
                      refetch();
-                     console.log(res);
                      toast.success(res.data.status, { id: 'request status'})
               }
          } catch (error) {

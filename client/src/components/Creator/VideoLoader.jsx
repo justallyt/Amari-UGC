@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 const VideoLoader = ({ resetIsUploading, end, resetIsFinished }) => {
     const [success, setSuccess] = useState(false)
-    const [uploadMsg, setUploadMsg] = useState("Sit tight while we upload your asset.")
+    const [uploadMsg, setUploadMsg] = useState("Sit tight while we upload your moment.")
     const { profile } = useSelector(state => state.profile)
 
    useEffect(()=> {
@@ -17,7 +17,7 @@ const VideoLoader = ({ resetIsUploading, end, resetIsFinished }) => {
 
    const resetThings = () => {
             setSuccess(false);
-            setUploadMsg("Sit tight while we upload your asset.");
+            setUploadMsg("Sit tight while we upload your moment.");
             resetIsFinished(false)
             resetIsUploading(false)
    }
@@ -30,10 +30,10 @@ const VideoLoader = ({ resetIsUploading, end, resetIsFinished }) => {
                                                       <span><GiCheckMark /></span>
                                                       <div className={success ? "overlay active" : 'overlay'}></div>
                                            </div>
-                                           <p>Asset Uploaded Successfully</p>
+                                           <p>Your moment Uploaded Successfully</p>
 
                                            <div className="asset-btns">
-                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/moments`} onClick={resetThings}>View Asset</NavLink>
+                                                       <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/moments`} onClick={resetThings}>View your Moment</NavLink>
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/new`} onClick={resetThings}>Create Another</NavLink>
                                            </div>
                                   </div>

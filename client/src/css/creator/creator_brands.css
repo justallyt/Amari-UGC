@@ -21,10 +21,30 @@
 }
 .brand-list-body h3{
     font-family: "Madera-Light";
-    border-bottom: 1px solid var(--sleezy-border);
-    padding-bottom: 10px;
+    
 }
 
+.brand-list-header{
+    border-bottom: 1px solid var(--sleezy-border);
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.brand-list-header a{
+      border: 1px solid;
+      display: flex;
+      padding: 5px 20px 10px 20px;
+      font-size: 14px;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+      background: var(--main-color);
+      color: white;
+}
 .current-brands{
       display: flex;
       flex-wrap: wrap;
