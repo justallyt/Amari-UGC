@@ -44,12 +44,15 @@ const CreatorBrandsBody = ({ refetchFn }) => {
                                                              { userBrands && userBrands.length >0  ?
                                                                      <>
                                                                       {  userBrands.map(item => 
-                                                                                <div className="brand-moja" key={item._id}>
-                                                                                         <div className="brand-image">
-                                                                                                <img src={item.profilePic.url} alt="" />
-                                                                                          </div>
-                                                                                        <h4>{item.name}</h4>
-                                                                               </div>
+                                                                                { item ? 
+                                                                                  <div className="brand-moja" key={item._id}>
+                                                                                        <div className="brand-image">
+                                                                                           <img src={item.profilePic.url} alt="" />
+                                                                                         </div>
+                                                                                           <h4>{item.name}</h4>
+                                                                                 </div>
+                                                                                :
+                                                                               ''}
                                                                          )}
                                                                       </>  :
                                                                       <div className="brand-moja">

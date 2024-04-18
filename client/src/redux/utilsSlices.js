@@ -64,6 +64,7 @@ export const utilsSlice = createSlice({
                        state.creators = null;
                        state.requests = null;
                        state.userBrands = null;
+                       state.availableBrands = null;
                        localStorage.clear();
              },
 

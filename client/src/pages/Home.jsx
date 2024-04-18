@@ -28,9 +28,9 @@ const Home = () => {
 
                               <div className="welcome-intro">
                                          <div className="welcome-intro-texts">
-                                                   <h1>A Platform Connecting brands with their consumers</h1>
+                                                   <h1>A Platform rewarding Consumers for their Brand Loyalty.</h1>
                                                    <div className="get-started">
-                                                              <NavLink className="btn background expand" to={'/user/register/creator'}>Get Started As a Creator</NavLink>
+                                                              <NavLink className="btn background expand" to={'/user/register/creator'}>Get Started As a Consumer</NavLink>
                                                               <NavLink className="btn outline expand" to={'/user/register/brand'}>Get Started As a Brand</NavLink>
                                                    </div>
                                          </div>

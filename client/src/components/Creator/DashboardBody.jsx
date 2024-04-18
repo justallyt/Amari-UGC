@@ -47,7 +47,8 @@ const DashboardBody = () => {
                                             <div className="intro-box wrap">
                                                       <div className="intro-box-texts">
                                                                  <h2>{greeting}, { profile && profile.name.split(" ")[0]}</h2>
-                                                                 <p>Welcome to Amari, Where your voice shapes the brands you love.</p>
+                                                                 {/* <p>Welcome to Amari, Where your voice shapes the brands you love.</p> */}
+                                                                 <p>Welcome to Amari. Where your loyalty to Brands gets rewarded!</p>
                                                       </div>
                                                      <div className="intro-box-row">
                                                                <div className="intro-box-column" onClick={() => navigate(`/creator/${profile.username !== 'null' ? profile.username : profile._id}/my-brands`)}>
@@ -58,7 +59,7 @@ const DashboardBody = () => {
                                                                                     <h3>Discover your Favorites</h3>
                                                                           </div>
                                                                           <div className="box-column-texts">
-                                                                                      <p>Explore and connect with a wide array of brands, finding new favorites and rekindling love for the classics.</p>
+                                                                                      {/* <p>Explore and connect with a wide array of brands, finding new favorites and rekindling love for the classics.</p> */}
                                                                           </div>
                                                                </div>
                                                                <div className="intro-box-column" onClick={() => navigate(`/creator/${profile.username !== 'null' ? profile.username : profile._id}/moments`)}>
@@ -69,7 +70,7 @@ const DashboardBody = () => {
                                                                                     <h3>Share your Brand moments</h3>
                                                                           </div>
                                                                           <div className="box-column-texts">
-                                                                                      <p>Your experiences are invaluable. Upload photos or videos of you using your favorite products and let your voice be heard.</p>
+                                                                                      {/* <p>Your experiences are invaluable. Upload photos or videos of you using your favorite products and let your voice be heard.</p> */}
                                                                           </div>
                                                                </div>
                                                      </div>

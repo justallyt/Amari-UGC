@@ -532,6 +532,54 @@ header .logo img{
     font-size: 13px;
 }
 
+
+/* Error Page Styles */
+.error-crash-page{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+}
+.error-crash-page .error-crash-body{
+       width: 600px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       text-align: center;
+}
+
+.error-crash-body img{
+      mix-blend-mode: multiply;
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+}
+.error-crash-body h2{
+      font-size: 50px;
+      font-family: "Madera-Bold";
+      line-height: 60px;
+}
+.error-crash-body p{
+     line-height: 32px;
+     margin: 15px 0;
+}
+.error-crash-body a{
+      background: var(--main-color);
+      color: white;
+      width: 250px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 5px;
+      font-size: 15px;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+}
 @media(max-width: 1320px){
      .inner-row{
            width: 90%;
@@ -549,6 +597,9 @@ header .logo img{
     .small-intro{
         width: 90%;
     }
+    .error-crash-page .error-crash-body{
+          width: 90%;
+    }
 }
 
 @media(max-width: 768px){
@@ -560,8 +611,10 @@ header .logo img{
       .account-themselfu.confirm{
           width: 100%;
       }
-      .small-intro.tweak h2{
-           font-size: 35px
+      .small-intro.tweak h2,
+      .error-crash-body h2{
+           font-size: 35px;
+           line-height: 45px;
       }
       .flexate{
            flex-direction: row;
@@ -569,4 +622,5 @@ header .logo img{
       .header-btns .btn.background{
             display: none;
       }
+
 }

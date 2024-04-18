@@ -587,6 +587,7 @@
       display: grid;
       grid-template-columns: 3fr 1.5fr;
       gap: 20px;
+      align-items: center;
 }
 .dashboard-wrapper .intro .intro-box{
      padding: 20px 30px;
@@ -597,14 +598,14 @@
      -o-border-radius: 20px;
 }
 .dashboard-wrapper .intro-box.wrap{
- 
     padding: 0;
 }
 .intro-box-row{
       display: grid;
       grid-template-columns: repeat(2,1fr);
       margin-top: 20px;
-      gap: 20px
+      gap: 20px;
+
 }
 .intro-box-column{
       display: flex;
@@ -617,7 +618,7 @@
       -moz-border-radius: 20px;
       -ms-border-radius: 20px;
       -o-border-radius: 20px;
-      box-shadow: 0px 0px 4px -1px rgb(210, 219, 223);
+      box-shadow: 0px 0px 4px -1px rgba(210, 219, 223, 0.608);
       transition: all 0.8s ease;
       -webkit-transition: all 0.8s ease;
       -moz-transition: all 0.8s ease;
@@ -625,10 +626,21 @@
       -o-transition: all 0.8s ease;
 }
 .intro-box-column:hover{ 
-      box-shadow: 0px 0px 8px -3px rgba(5, 156, 167, 0.351);
+      box-shadow: 0px 0px 8px -3px rgba(63, 176, 184, 0.575);
+      background: var(--main-color);
+      color: white;
+}
+.intro-box-column h3{
+       color: var(--main-color);
+       transition: all 0.8s ease;
+       -webkit-transition: all 0.8s ease;
+       -moz-transition: all 0.8s ease;
+       -ms-transition: all 0.8s ease;
+       -o-transition: all 0.8s ease;
+        font-family: "Madera-Light";
 }
 .intro-box-column:hover h3{
-       color: var(--main-color);
+        color: white;
 }
 .intro-box-column .intro-top{
        display: flex;

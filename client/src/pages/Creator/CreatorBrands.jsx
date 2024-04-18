@@ -29,6 +29,7 @@ useEffect(() => {
   if(brands !== null){
         let things = []
         profile !== null && profile.brands.forEach(item => {
+              
               const stuff =  Object.values(brands).find(kitu => kitu._id === item)
               things.push(stuff)
         })

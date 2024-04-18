@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
 import UserChoice from "./pages/UserChoice"
 import Register from "./pages/Register"
@@ -22,19 +22,45 @@ import BrandCreators from "./pages/Brand/BrandCreators"
 import BrandAssets from "./pages/Brand/BrandAssets"
 import Confirm from "./pages/Confirm"
 import ForgotPassword from "./pages/ForgotPassword"
+import { useSelector } from "react-redux"
+import ErrorBoundary from "./utils/ErrorBoundary"
+import ErrorCrashPage from "./components/ErrorCrashPage"
+import AdminBrandsBody from "./pages/Admin/AdminBrandsBody"
 
 function App() {
+    const { userInfo } = useSelector(state => state.auth);
+    const { pathname } = useLocation();
 
   return (
     <>
-           <Routes>
-                   <Route path="/" element={<Home />} />
-                   <Route path="/user/register" element={<UserChoice />} />
-                   <Route path="/user/register/:type" element={<Register />} />
-                   <Route path="/user/login" element={<Login />} />
-                    <Route path="/user/confirm-account" element={<Confirm />} />
-                    <Route path="/user/forgot-password" element={<ForgotPassword />} />
-                   {/* Consumer Routes */}
+           { userInfo == null ?
+              <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/user/register" element={<UserChoice />} />
+                    <Route path="/user/register/:type" element={<Register />} />
+                    <Route path="/user/login" element={<Login />} />
+                     <Route path="/user/confirm-account" element={<Confirm />} />
+                     <Route path="/user/forgot-password" element={<ForgotPassword />} />
+            </Routes>
+              :
+
+              <ErrorBoundary  fallback={<ErrorCrashPage />} key={pathname}>
+                       <ProtectedApp />
+              </ErrorBoundary>
+          }
+  
+    </>
+  )
+}
+
+export default App
+
+
+const ProtectedApp = () => {
+        return (
+               <>
+                       <Routes>
+                                {/* Consumer Routes */}
                      <Route element={<CreatorRoutes />}>
                                <Route path="/creator/:id/" element={<CreatorDashboard />} />
                                <Route path="/creator/:id/new" element={<CreateAsset />} />
@@ -59,10 +85,9 @@ function App() {
                                    <Route path="/admin/:id" element={<AdminDashboard />} />
                                    <Route path="/admin/tasks" element={<AdminTasks />} />
                                    <Route path="/admin/settings" element={<AdminSettings />} />
+                                   <Route path="/admin/brands" element={<AdminBrandsBody />} />
                      </Route>
-           </Routes>
-    </>
-  )
+                  </Routes>
+               </>
+        )
 }
-
-export default App
