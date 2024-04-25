@@ -63,7 +63,7 @@
       opacity: 1;
 }
 
-.profile-account-tab .account-intro h3{
+ .account-intro h3{
       font-size: 20px;
       font-family: "Madera-Light";
 }
@@ -245,6 +245,178 @@
      cursor: pointer
 }
 
+/* Integration Tab Styles */
+.integration-tab{
+      padding-bottom: 40px;
+}
+.my-connections{
+       margin: 20px 0;
+}
+.my-connections h3{
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-family: var(--font-light);
+}
+.connect-moja{
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       border-bottom: 1px solid var(--sleezy-border);
+       padding: 15px 0;
+       width: 80%;
+}
+.connect-moja-col{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+}
+.connect-moja .connection-profile{
+       width: 50px;
+       height: 50px;
+       background: white;
+       padding: 5px;
+       box-shadow: var(--box-shadow);
+       border-radius: 8px;
+       -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+       -ms-border-radius: 8px;
+       -o-border-radius: 8px;
+}
+.connect-texts h4{
+      color: rgb(72, 72, 72);
+      font-family: var(--font-light);
+      line-height: 1;
+      margin-bottom: 5px;
+}
+.connect-texts h5{
+     color: gray;
+     font-family: var(--font-thin);
+     font-size: 16px;
+     line-height: 1;
+}
+
+.settings-col span{
+       width: 40px;
+       height: 40px;
+       cursor: pointer;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border-radius: 40px;
+       -webkit-border-radius: 40px;
+       -moz-border-radius: 40px;
+       -ms-border-radius: 40px;
+       -o-border-radius: 40px;
+       transition: all 0.8s ease;
+       -webkit-transition: all 0.8s ease;
+       -moz-transition: all 0.8s ease;
+       -ms-transition: all 0.8s ease;
+       -o-transition: all 0.8s ease;
+}
+.settings-col span:hover{
+     background: var(--sleezy-border);
+}
+.discover-connections h2{
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-family: var(--font-light);
+}
+.discover-connections-row{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+}
+.discover-moja{
+       background: white;
+       padding: 30px;
+       box-shadow: var(--box-shadow);
+       border-radius: 16px;
+       -webkit-border-radius: 16px;
+       -moz-border-radius: 16px;
+       -ms-border-radius: 16px;
+       -o-border-radius: 16px;
+}
+.discover-moja img{
+      width: 45px;
+      height: 40px;
+      object-fit: contain;
+}
+.discover-moja h3{
+      font-size: 20px;
+      margin: 5px 0
+}
+.discover-moja p{
+    font-size: 15px;
+    color: rgb(72, 72, 72);
+}
+.discover-moja button{
+      width: 150px;
+      font-family: var(--font-medium);
+      height: 45px;
+      padding-bottom: 5px;
+      margin-top: 15px;
+      border: 0;
+      background: var(--main-color);
+      color: whitesmoke;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      cursor: pointer;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media(max-width: 1150px){
        .brand-settings-skewed{
               width: 100%;
@@ -270,5 +442,17 @@
       }
       .profile-form-row{
             grid-template-columns: 1fr;
+      }
+      .discover-connections-row{
+            grid-template-columns: 1fr 1fr;
+      }
+      .connect-moja{
+            width: 100%;
+      }
+}
+
+@media(max-width: 530px){
+      .discover-connections-row{
+             grid-template-columns: 1fr;
       }
 }

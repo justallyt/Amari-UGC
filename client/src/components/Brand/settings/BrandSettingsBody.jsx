@@ -6,8 +6,11 @@ import { VscDebugDisconnect } from 'react-icons/vsc'
 import { TfiBrushAlt } from "react-icons/tfi"
 import ProfileAccount from "./ProfileAccount"
 import { MobileSidebarInitiator } from "../MobileSidebarInitiator"
-
+import { useState } from "react"
+import Integrations from "./Integrations"
+import Footer from "../../Footer"
 const BrandSettingsBody = () => {
+  const [option, setOption] = useState(0)
   return (
     <div className="brand-dashboard-wrapper">
              <div className="dashboard-wrapper-inner">
@@ -22,9 +25,9 @@ const BrandSettingsBody = () => {
 
                                   <div className="settings-options">
                                              <ul>
-                                                        <li className="active"><span><MdOutlineAccountCircle /></span> Profile</li>
+                                                        <li className={option === 0 ? "active" : ''} onClick={() => setOption(0)}><span><MdOutlineAccountCircle /></span> Profile</li>
                                                         <li><span><IoMdNotificationsOutline /></span>Notifications</li>
-                                                        <li><span><VscDebugDisconnect /></span>Integrations</li>
+                                                        <li className={option === 2 ? "active" : ''} onClick={() => setOption(2)}><span><VscDebugDisconnect /></span>Integrations</li>
                                                         <li><span><MdSecurity /></span>Security</li>
                                                         <li><span><BsCreditCard2Back /></span>Billing</li>
                                                         <li><span><TfiBrushAlt /></span>Preferences</li>
@@ -32,9 +35,15 @@ const BrandSettingsBody = () => {
                                   </div>
 
                                   <div className="option-tabs">
-                                             <ProfileAccount />
+                                             {option === 0 && <ProfileAccount />}
+                                            { option === 2 && <Integrations /> }
                                   </div>
+
+                                  <Footer />
                         </div>
+
+
+                        
             </div>
    </div>
   )

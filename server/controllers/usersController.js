@@ -118,7 +118,7 @@ export const ConfirmAccount = asyncHandler(async(req, res) => {
           const dbOtp = await UserVerification.find({user_id: user_id});
           
           const { uniqueOtp, expiresAt } = dbOtp[0];
-    
+     
           if(expiresAt  < Date.now()){
                 res.status(400);
                 throw new Error("Sorry the Otp code has expired. Please resend another.");
@@ -276,7 +276,7 @@ export const ResetUserPassword = asyncHandler(async(req, res) => {
 //Get User Profile
 export const GetProfile = asyncHandler(async(req, res) => {
        const user =  await User.findById(req.user._id).select('-password');
-       
+       //const user = await User.findOne({ _id: req.user._id, verified: true}).select("-password")
        if(user){
               res.status(200).json({ user})
        }else{

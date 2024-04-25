@@ -15,7 +15,9 @@ const profileSlice = createSlice({
                         localStorage.setItem("profileInfo", JSON.stringify(action.payload))
                 },
                 clearProfile: (state) => {
-                          state.profile = null
+                          state.profile = null,
+                          state.unread_notifications = null,
+                          state.all_notifications = null,
                           localStorage.removeItem('profileInfo')
                 },
                 clearProfilePic: (state) => {

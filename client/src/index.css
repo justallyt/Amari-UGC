@@ -16,6 +16,7 @@
      --font-ultralight: "Madera-UltraLight";
      --font-bold: "Madera-Bold";
      --font-thin: "Madera-Thin";
+     --box-shadow: 0px 0px 4px -1px rgba(213, 216, 216, 0.744);
 }
 
 body{
