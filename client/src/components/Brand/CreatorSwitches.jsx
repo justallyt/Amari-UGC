@@ -1,12 +1,19 @@
+import { useContext } from "react";
 import image from "../../assets/dummyprofile.png"
 import { MdLocationOn } from "react-icons/md"
 import { useSelector } from "react-redux"
+import { divSwitch } from "./context/divswitch";
 //import { NavLink } from "react-router-dom"
 const CreatorSwitches = () => {
     const { brandCreators } = useSelector(state => state.brand);
+    const [ switchStatus, setSwitchStatus ] = useContext(divSwitch)
 
+    const switchCreator = (data) => setSwitchStatus({
+            status: true,
+            data: data
+    })
   return (
-    <div className="creator-switches">
+    <div className={ switchStatus.status ? "creator-switches moved" : "creator-switches" }>
               <div className="creator-tab-options">
                      <ul>
                               <li className="active">My Creators</li>
@@ -17,7 +24,7 @@ const CreatorSwitches = () => {
               <div className="creator-tabs">
                          <div className="creator-tab-my-creators">
                                       { brandCreators && brandCreators.map(kitu => 
-                                          <div className="creator-moja" key={kitu._id}>
+                                          <div className="creator-moja" key={kitu._id} onClick={() => switchCreator(kitu)}>
                                                   <div className="profile-image">
                                                              <img src={kitu.profilePic.url !== null ? kitu.profilePic.url : image} alt="" />
                                                   </div>

@@ -3,9 +3,15 @@ import { BsSearch } from "react-icons/bs"
 import { IoCaretDownSharp } from 'react-icons/io5'
 import CreatorSwitches from "./CreatorSwitches"
 import { MobileSidebarInitiator } from "./MobileSidebarInitiator"
+import SingleCreatorSwitch from "./SingleCreatorSwitch"
+import { divSwitch } from "./context/divswitch"
 const BrandCreatorsBody = () => {
     const [sortSelect, setSortSelect] = useState(false)
     const [ activeSort, setActiveSort ] = useState('Recommended')
+    const [switchStatus, setSwitchStatus] = useState({
+            status: false,
+            data: {}
+    })
 
     const handleSelectSort = (i) => {
         setActiveSort(i);
@@ -41,7 +47,16 @@ const BrandCreatorsBody = () => {
                            </div>
                </div>
 
-               <CreatorSwitches />
+              
+               <div className="brand-creator-switches">
+                        <div className="brand-creator-switches-inner">
+                                 <divSwitch.Provider value={[switchStatus, setSwitchStatus]}>
+                                           <CreatorSwitches />
+                                           <SingleCreatorSwitch />
+                                 </divSwitch.Provider>
+                        </div>
+                      
+               </div>
     </div>
   )
 }

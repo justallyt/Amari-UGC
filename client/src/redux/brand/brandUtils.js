@@ -4,7 +4,8 @@ const initialState = {
      isBrandAssetModalOpen: false,
      brandNotifications: localStorage.getItem('BrandNotifications') ? JSON.parse(localStorage.getItem('BrandNotifications')) : null,
      brandCreators: localStorage.getItem('BrandCreators') ? JSON.parse(localStorage.getItem('BrandCreators')) : null,
-     brandAssets: localStorage.getItem('BrandAssets') ? JSON.parse(localStorage.getItem('BrandAssets')) : null
+     brandAssets: localStorage.getItem('BrandAssets') ? JSON.parse(localStorage.getItem('BrandAssets')) : null,
+     singleCreator: null
 }
 
 export const brandUtils = createSlice({
@@ -29,10 +30,17 @@ export const brandUtils = createSlice({
              closeBrandModal: (state) => {
                     state.isBrandAssetModalOpen = false
              },
+            setSingleCreator: (state, action) => {
+                  state.singleCreator = action.payload
+            },
+            clearCreator: (state) => {
+                   state.singleCreator = null
+            },
              clearBrandInfo: (state) => {
                    state.brandNotifications = null;
                    state.brandCreators = null;
                    state.brandAssets = null;
+                   state.singleCreator = null;
                    localStorage.clear();
              }
             
@@ -45,7 +53,9 @@ export const {
      setBrandAssets,
      openBrandModal,
      closeBrandModal,
-     clearBrandInfo
+     clearBrandInfo,
+     setSingleCreator,
+     clearCreator
 } = brandUtils.actions
 
 

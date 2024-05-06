@@ -23,3 +23,9 @@ export const GetAllAssetsForBrand = asyncHandler(async(req, res) => {
               res.status(500).json({ message: 'Assets could not be pulled from DB'})
         }
 })
+
+export const GetBrandAssetsByCreator = asyncHandler(asyncHandler(async(req, res) => {
+          const creatorID = new mongoose.Types.ObjectId(req.params.id);
+          const assets = await Asset.find({creator: creatorID, created_for: req.user.name})
+          res.status(200).json({ assets })
+})) 

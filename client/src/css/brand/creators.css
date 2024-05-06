@@ -251,6 +251,154 @@
        -o-transform: scale(1);
 }
 
+.brand-creator-switches{
+     padding: 5px;
+}
+.brand-creator-switches .creator-switches{
+        width: 100%;
+        flex-shrink: 0;
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+}
+.brand-creator-switches .creator-switches.moved{
+    opacity: 0;
+}
+.brand-creator-switches .single-creator-swatch.moved{
+     opacity: 1;
+}
+.brand-creator-switches .brand-creator-switches-inner{
+       position: relative;
+       width: 100%;
+       gap: 10px;
+}
+.brand-creator-switches .single-creator-swatch{
+       width: 100%;
+       flex-shrink: 0;
+       position: absolute;
+       top: 0;
+       opacity: 0;
+}
+
+.single-creator-swatch h3.back-btn{
+      display: inline-flex;
+      margin: 10px 0;
+      gap: 5px;
+      align-items: center;
+      color:white;
+      font-family: var(--font-thin);
+      font-size: 16px;
+      cursor: pointer;
+      background: var(--main-color);
+      padding: 4px 20px 8px 20px;
+      border-radius: 30px;
+      -webkit-border-radius: 30px;
+      -moz-border-radius: 30px;
+      -ms-border-radius: 30px;
+      -o-border-radius: 30px;
+}
+.single-creator-swatch h3.back-btn span{
+       display: flex;
+       margin-top: 4px;
+}
+
+.single-creator-profile{
+     display: flex;
+     gap: 5px;;
+     margin-top: 10px;
+     border-bottom: 1px solid var(--sleezy-border);
+     padding-bottom: 10px;
+}
+
+.single-creator-profile .image{
+     width: 80px;
+     height: 80px;
+     border-radius: 50%;
+     -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+     -ms-border-radius: 50%;
+     -o-border-radius: 50%;
+     overflow: hidden;
+}
+
+.single-creator-swatch .spinning-and-get-data{
+      text-align: center;
+}
+.single-creator-swatch p.fail{
+      margin: 20px 0;
+      text-align: center;
+      font-size: 15px;;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media(max-width: 1090px){
      .search-and-actions .search-bar{
