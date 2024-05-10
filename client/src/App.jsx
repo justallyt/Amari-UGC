@@ -32,6 +32,7 @@ import { clearCredentials } from "./redux/authSlice"
 import { clearProfile } from "./redux/profileSlice"
 import { clearUtils } from "./redux/utilsSlices"
 import { apiSlice } from "./redux/apiSlice"
+import BrandRewards from "./pages/Brand/BrandRewards"
 
 function App() {
   const { userInfo } = useSelector(state => state.auth)
@@ -76,6 +77,7 @@ function App() {
                             <Route path="/brand/:id/settings" element={<BrandSettings />} />
                             <Route path="/brand/:id/creators" element={<BrandCreators />} />
                             <Route path='/brand/:id/assets' element={<BrandAssets />} />
+                            <Route path="/brand/:id/rewards" element={<BrandRewards />} />
                      </Route>
 
                       { /* Admin Routes */}

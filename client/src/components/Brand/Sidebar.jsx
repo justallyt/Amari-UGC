@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import logo from "../../assets/logo.png"
 import { RxDashboard } from "react-icons/rx"
 import { GiHumanPyramid } from "react-icons/gi"
-import { BsClipboardData, BsCreditCard2Front, BsPatchQuestion } from "react-icons/bs"
+import { BsClipboardData, BsCreditCard2Front, BsGift, BsPatchQuestion } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
 import { CiLogout } from "react-icons/ci"
 import { useLogoutUserMutation } from "../../redux/usersSlice"
@@ -66,6 +66,7 @@ const Sidebar = () => {
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/assets`}><span><BsClipboardData /></span>Assets</NavLink></li>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/posts`} className='disable'><span><VscNotebook /></span>Posts</NavLink></li>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/billing`} className="disable"><span><BsCreditCard2Front /></span>Billing</NavLink></li>
+                                                      <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/rewards`}><span><BsGift /></span>Rewards</NavLink></li>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ? profile._id : profile.username}/settings`}><span><SlSettings /></span>Settings</NavLink></li>
                                              </ul>
 
