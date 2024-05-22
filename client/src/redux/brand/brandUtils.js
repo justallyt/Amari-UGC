@@ -5,7 +5,8 @@ const initialState = {
      brandNotifications: localStorage.getItem('BrandNotifications') ? JSON.parse(localStorage.getItem('BrandNotifications')) : null,
      brandCreators: localStorage.getItem('BrandCreators') ? JSON.parse(localStorage.getItem('BrandCreators')) : null,
      brandAssets: localStorage.getItem('BrandAssets') ? JSON.parse(localStorage.getItem('BrandAssets')) : null,
-     singleCreator: null
+     singleCreator: null,
+     brandRewards: localStorage.getItem("BrandRewards") ? JSON.parse(localStorage.getItem("BrandRewards")) : null
 }
 
 export const brandUtils = createSlice({
@@ -36,11 +37,16 @@ export const brandUtils = createSlice({
             clearCreator: (state) => {
                    state.singleCreator = null
             },
+            setBrandRewards: (state, action) => {
+                   state.brandRewards = action.payload
+                   localStorage.setItem("BrandRewards", JSON.stringify(action.payload))
+            },
              clearBrandInfo: (state) => {
                    state.brandNotifications = null;
                    state.brandCreators = null;
                    state.brandAssets = null;
                    state.singleCreator = null;
+                   state.brandRewards = null,
                    localStorage.clear();
              }
             
@@ -55,7 +61,8 @@ export const {
      closeBrandModal,
      clearBrandInfo,
      setSingleCreator,
-     clearCreator
+     clearCreator,
+     setBrandRewards
 } = brandUtils.actions
 
 

@@ -5,6 +5,7 @@
       align-items: flex-end;
       border-bottom: 1px solid var(--sleezy-border);
       padding-bottom: 20px;
+      flex-wrap: wrap;
 }
 .rewards-header h2{
     font-family: var(--font-light);
@@ -31,6 +32,9 @@
 
 .rewards-body{
     margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
 }
 .empty-reward{
       position: relative;
@@ -63,4 +67,162 @@
      -moz-border-radius: 7px;
      -ms-border-radius: 7px;
      -o-border-radius: 7px;
+}
+
+/* Reward Create Modal */
+.brand-reward-modal{
+     position: fixed;
+     top: 0;
+     left: 0;
+     background: rgba(244, 245, 246, 0.886);
+     bottom: 0;
+     right: 0;
+     z-index: 99;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.modal-create-body{
+    position: relative;
+     width: 550px;
+     background: white;
+     padding: 40px;
+     border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     -ms-border-radius: 10px;
+     -o-border-radius: 10px;
+}
+.modal-create-body h3{
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.modal-create-body span.close-btn{
+     position: absolute;
+     right: 10px;
+     top: 10px;
+     font-size: 23px;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 35px;
+     height: 35px;
+}
+.reward-row{
+    margin-bottom: 10px;
+}
+.reward-row label{
+      display: block;
+      font-size: 15px;
+      margin-bottom: 5px;
+}
+.reward-row .reward-control{
+    display: block;
+    width: 100%;
+    height: 50px;
+    font-family: var(--font-regular);
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    padding-left: 10px;
+    outline: none;
+}
+.reward-row button{
+     width: 180px;
+     height: 45px;
+     margin-top: 20px;
+     font-family: var(--font-medium);
+     padding-bottom: 5px;
+     background: var(--main-color);
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     color: white;
+     cursor: pointer;
+     border:none;
+     display: flex;
+     align-items: center;
+     gap: 5px;
+     justify-content: center;
+}
+
+.reward-moja{
+    position: relative;
+    border: 1px dashed var(--sleezy-border);
+    display: inline-block;
+    border-radius: 6px;
+    padding: 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+.reward-moja .reward-head{
+    display: flex;
+    align-items: center;
+    gap: 5px;;
+    justify-content: space-between;
+}
+.reward-head-col{
+      display: flex;
+      gap: 5px;
+      align-items: center;
+}
+.reward-head span{
+     width: 30px;
+     height: 30px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: var(--main-color);
+     color: white;
+     border-radius: 30px;
+     -webkit-border-radius: 30px;
+     -moz-border-radius: 30px;
+     -ms-border-radius: 30px;
+     -o-border-radius: 30px;
+}
+.reward-moja h3{
+    font-size: 18px;
+    color: #333;
+    font-family: var(--font-light);
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--sleezy-border);
+}
+.reward-moja h2{
+    margin-top: 10px;
+     font-size: 22px;
+     display: flex;
+     align-items: center;
+     gap: 5px;
+}
+.reward-moja h2 span{
+     font-size: 15px;
+}
+.reward-moja p{
+     font-size: 15px;
+}
+.reward-head-col.split span{
+      background: var(--sleezy-border);
+      cursor: pointer;
+}
+.reward-head-col.split span:nth-child(1){
+    color: black
+}
+.reward-head-col.split span:nth-child(2){
+    color: red;
+}
+
+
+@media(max-width: 768px){
+     .modal-create-body{
+            width: 90%;
+     }
 }

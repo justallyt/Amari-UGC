@@ -21,6 +21,21 @@ export const brandSlice = apiSlice.injectEndpoints({
                             url: `brand/get-all-assets-by-a-creator/${id}`,
                             method: "GET",
                      })
+               }),
+               createRewardForCreators: builder.mutation({
+                       query: (payload) => ({
+                              url: "brand/create-reward",
+                              method: "POST",
+                              body: payload
+                       }),
+                       invalidatesTags: ['Rewards']
+               }),
+               getAllCreatedRewards: builder.query({
+                     query: () => ({
+                            url: "brand/get-all-brand-rewards",
+                            method: "GET"
+                     }),
+                     providesTags: ['Rewards']
                })
         })
 })
@@ -28,5 +43,7 @@ export const brandSlice = apiSlice.injectEndpoints({
 export const {
      useGetAllCreatorsForBrandQuery,
      useGetAllAssetsForBrandQuery,
-     useGetAllAssetsByACreatorQuery
+     useGetAllAssetsByACreatorQuery,
+     useCreateRewardForCreatorsMutation,
+     useGetAllCreatedRewardsQuery
 } = brandSlice
