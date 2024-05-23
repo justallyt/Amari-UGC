@@ -329,8 +329,13 @@
        display: flex;
        justify-content: space-between;
        padding-top: 5px;
+       align-items: center;
+       flex-wrap: wrap;
 }
-.impressions-part span{
+.impression-btns{
+       display: flex;
+}
+.impression-btns span{
        font-size: 20px;
        width: 45px;
        height: 45px;
@@ -349,11 +354,11 @@
        -ms-transition:all 0.5s ease-in-out;
        -o-transition:all 0.5s ease-in-out;
 }
-.impressions-part span:hover,
-.impressions-part span.active{
+.impression-btns span:hover,
+.impression-btns span.active{
        background: rgba(126, 242, 255, 0.2);
 }
-.impressions-part span.active{
+.impression-btns span.active{
         color: var(--main-color);
 }
 .impressions-part .right-col{
@@ -361,7 +366,37 @@
        align-items: center;
        gap: 10px;
 }
-
+.brand-actions{
+       margin-top: 10px;
+       display: flex;
+       gap: 10px;
+}
+.brand-actions .action-btn{
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        gap: 5px;
+        width: 120px;
+        height: 40px;
+        border-radius: 40px;
+        -webkit-border-radius: 40px;
+        -moz-border-radius: 40px;
+        -ms-border-radius: 40px;
+        -o-border-radius: 40px;
+        justify-content: center;
+        cursor: pointer;
+        color: white;
+}
+.action-btn:nth-child(1){
+       background: rgb(248, 20, 187);
+}
+.action-btn:nth-child(2){
+       background: var(--main-color);
+}
+.brand-actions .action-btn h4{
+       font-size: 13px;
+       font-family: var(--font-ultralight);
+}
 
 /* Comments */
 .comments-wrapper h4{

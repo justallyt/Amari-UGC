@@ -31,7 +31,6 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    gap: 60px;
 }
 
 .sidebar-menu ul li {

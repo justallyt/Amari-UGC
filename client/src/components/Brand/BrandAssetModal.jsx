@@ -10,6 +10,8 @@ import toast, { Toaster } from "react-hot-toast"
 import JsFileDownloader from "js-file-downloader"
 import CommentMoja from "./CommentMoja";
 import { MdClose } from "react-icons/md";
+import { ImGift } from "react-icons/im";
+import { GiShoppingCart } from "react-icons/gi";
 
 const BrandAssetModal = ({ data, func }) => {
   const [likeFlag, setLikeFlag] = useState(false);
@@ -167,19 +169,33 @@ const BrandAssetModal = ({ data, func }) => {
                                               <p className="caption">{data && data.caption}</p>
 
                                               <div className="impressions-part">
-                                                        <div className="like-option" onClick={() => likeCreatedAsset(profile._id)} title="Like Asset">
-                                                                  <span className={likeFlag  ? 'active' : ''}>
-                                                                                { likeFlag ? <GoHeartFill />   : <GoHeart />}
-                                                                  </span>
-                                                        </div>
-                                                        <div className="right-col">
-                                                                   <div className="bookmark-option" onClick={bookmarkAsset} title="Bookmark Asset">
+                                                       <div className="impression-btns">
+                                                                <div className="like-option" onClick={() => likeCreatedAsset(profile._id)} title="Like Asset">
+                                                                           <span className={likeFlag  ? 'active' : ''}>
+                                                                                         { likeFlag ? <GoHeartFill />   : <GoHeart />}
+                                                                           </span>
+                                                                 </div>
+                                                                <div className="bookmark-option" onClick={bookmarkAsset} title="Bookmark Asset">
                                                                              <span className={bookmarkFlag ? 'active' : ''}>
                                                                          { bookmarkFlag ? <GoBookmarkFill /> : <GoBookmark /> }
                                                                             </span>
                                                                    </div>
-                                                                   <div className="download-option" onClick={DownloadFile} title="Download Asset">
+                                                       </div>
+                                                        
+                                                        <div className="right-col">
+                                                                 
+                                                                   {/* <div className="download-option" onClick={DownloadFile} title="Download Asset">
                                                                                   <span><GoDownload /></span>
+                                                                   </div> */}
+                                                                   <div className="brand-actions">
+                                                                              <div className="action-btn reward-btn">
+                                                                                        <span><ImGift /></span>
+                                                                                        <h4>Reward</h4>
+                                                                               </div>
+                                                                                <div className="action-btn purchase-btn">
+                                                                                              <span><GiShoppingCart /></span>
+                                                                                              <h4>Purchase</h4>
+                                                                                </div>
                                                                    </div>
                                                         </div>
                                               </div>

@@ -33,6 +33,10 @@ const assetsSchema = mongoose.Schema({
         bookmarked: {
                 type: Boolean,
                 default: false
+        },
+        downloadable: {
+               type: Boolean,
+               default: false
         }
 }, { timestamps: true})
 

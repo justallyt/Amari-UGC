@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png"
 import { useContext, useEffect, useRef } from "react";
 import { brandSidebarContext } from "./context/sidebar";
 import { NavLink, useNavigate } from 'react-router-dom'
-import { BsClipboardData, BsCreditCard2Front, BsPatchQuestion } from "react-icons/bs"
+import { BsClipboardData, BsCreditCard2Front, BsPatchQuestion, BsGift } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
 import { CiLogout } from "react-icons/ci"
 import { RxDashboard } from "react-icons/rx"
@@ -88,6 +88,7 @@ const BrandMobileSidebar = () => {
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/assets`}><span><BsClipboardData /></span>Assets</NavLink></li>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/posts`} className='disable'><span><VscNotebook /></span>Posts</NavLink></li>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/billing`} className="disable"><span><BsCreditCard2Front /></span>Billing</NavLink></li>
+                                                      <li><NavLink to={`/brand/${profile.username === 'null' ?  profile._id : profile.username}/rewards`}><span><BsGift /></span>Rewards</NavLink></li>
                                                       <li><NavLink to={`/brand/${profile.username === 'null' ? profile._id : profile.username}/settings`}><span><SlSettings /></span>Settings</NavLink></li>
                                              </ul>
 

@@ -7,21 +7,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBrandRewards } from "../../redux/brand/brandUtils";
 import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
+import RewardDeletePopup from "./RewardDeletePopup";
+import RewardEditPopup from "./RewardEditPopup";
 
 const BrandRewardsBody = () => {
   const [modalStatus, setModalStatus] = useState(false)
+  const [rewardId, setRewardId] = useState(null);
+  const [deleteStatus, setDeleteStatus] = useState(false)
+  const [editStatus, setEditStatus] = useState(false)
   const { brandRewards } = useSelector(state => state.brand)
  const dispatch = useDispatch();
   const { data: rewards, isLoading } = useGetAllCreatedRewardsQuery({  refetchOnMountOrArgChange: true })
-   console.log(brandRewards.rewards)
+
   useEffect(()=> {
           if(!isLoading && rewards){
                 dispatch(setBrandRewards({...rewards}))
           }
   }, [dispatch, rewards, isLoading])
 
+
+  const openDeletePopup = (id) =>{
+         setDeleteStatus(true);
+         setRewardId(id)
+  }
+
+  const openEditPopup = (id) => {
+       setEditStatus(true)
+       setRewardId(id)
+  }
   return (
-    <div className="brands-body">
+    <div className="brand-rewards-body">
                <MobileSidebarInitiator />
                <div className="rewards-header">
                           <div className="rewards-header-texts">
@@ -41,8 +56,8 @@ const BrandRewardsBody = () => {
                                                                    <p>{item.reward_type}</p>
                                                            </div>
                                                            <div className="reward-head-col split">
-                                                                      <span><CiEdit /></span>
-                                                                      <span><AiOutlineDelete /></span>
+                                                                      <span onClick={() => openEditPopup(item._id)}><CiEdit /></span>
+                                                                      <span onClick={() => openDeletePopup(item._id)}><AiOutlineDelete /></span>
                                                            </div>
                                                 </div>
                                                 <h3>{item.reward_name}</h3>
@@ -60,6 +75,10 @@ const BrandRewardsBody = () => {
                  </div>
 
                  { modalStatus && <BrandRewardModal  func={setModalStatus} />}
+
+                 { deleteStatus && <RewardDeletePopup id={rewardId} func={setDeleteStatus} />}
+
+                 { editStatus && <RewardEditPopup  id={rewardId} func={setEditStatus}/>}
     </div>
   )
 }

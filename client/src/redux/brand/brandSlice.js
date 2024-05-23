@@ -36,7 +36,23 @@ export const brandSlice = apiSlice.injectEndpoints({
                             method: "GET"
                      }),
                      providesTags: ['Rewards']
-               })
+               }),
+               deleteBrandReward: builder.mutation({
+                     query: (payload) => ({
+                            url: "brand/delete-reward",
+                            method: "DELETE",
+                            body: payload
+                     }),
+                     invalidatesTags: ['Rewards']
+               }),
+               editBrandReward: builder.mutation({
+                        query: (payload) => ({
+                                url: "/brand/edit-reward",
+                                method: "PUT",
+                                body: payload
+                        }),
+                        invalidatesTags: ['Rewards']
+               }),
         })
 })
 
@@ -45,5 +61,7 @@ export const {
      useGetAllAssetsForBrandQuery,
      useGetAllAssetsByACreatorQuery,
      useCreateRewardForCreatorsMutation,
-     useGetAllCreatedRewardsQuery
+     useGetAllCreatedRewardsQuery,
+     useDeleteBrandRewardMutation,
+     useEditBrandRewardMutation
 } = brandSlice

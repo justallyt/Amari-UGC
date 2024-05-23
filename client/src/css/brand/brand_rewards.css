@@ -1,3 +1,6 @@
+.brand-rewards-body{
+      min-height: 105vh;
+}
 .rewards-header{
       display: flex;
       gap: 20px;
@@ -33,7 +36,7 @@
 .rewards-body{
     margin-top: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
 }
 .empty-reward{
@@ -70,7 +73,8 @@
 }
 
 /* Reward Create Modal */
-.brand-reward-modal{
+.brand-reward-modal,
+.reward-delete-popup{
      position: fixed;
      top: 0;
      left: 0;
@@ -82,7 +86,8 @@
      align-items: center;
      justify-content: center;
 }
-.modal-create-body{
+.modal-create-body,
+.reward-delete-box{
     position: relative;
      width: 550px;
      background: white;
@@ -220,9 +225,56 @@
     color: red;
 }
 
+.reward-delete-box{
+       text-align: center;
+}
+.reward-delete-box h3{
+       font-size: 25px;
+       font-family: var(--font-light);
+       margin: 10px;
+}
+.reward-delete-box p{
+      color:rgb(84, 84, 84);
+}
+.reward-delete-box .box-btns{
+       display: flex;
+       justify-content: center;
+       margin: 20px 0;
+       gap: 20px;
+       flex-wrap: wrap;
+}
+.reward-delete-box button{
+        width: 130px;
+        font-family: var(--font-regular);
+        padding-bottom: 5px;
+        height: 40px;
+        border-radius: 7px;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -ms-border-radius: 7px;
+        -o-border-radius: 7px;
+        border: none;
+        color: whitesmoke;
+        cursor: pointer;
+}
+.reward-delete-box .box-btns button:nth-child(1){
+      background: rgba(76, 194, 215, 0.619);
+}
+.reward-delete-box .box-btns button:nth-child(2){
+    background: rgba(255, 72, 72, 0.619);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.reward-delete-box  button .spin-loader{
+    display: flex;
+   margin-top: 6px;
+}
 
 @media(max-width: 768px){
-     .modal-create-body{
+     .modal-create-body,
+     .reward-delete-box{
             width: 90%;
      }
 }
