@@ -398,6 +398,75 @@
        font-family: var(--font-ultralight);
 }
 
+
+/* Reward Modal */
+.modal-create-body h2{
+        font-size: 20px;
+}
+.modal-create-body p.para{
+       font-size: 15px;
+       margin-bottom: 15px;
+       color:rgb(73, 73, 73);
+}
+.reward-asset-moja{
+         margin-bottom: 10px;
+         border: 1px dashed var(--sleezy-border);
+         border-radius: 10px;
+         -webkit-border-radius: 10px;
+         -moz-border-radius: 10px;
+         -ms-border-radius: 10px;
+         -o-border-radius: 10px;
+         padding: 10px;
+}
+.reward-asset-moja h6{
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-family: var(--font-ultralight);
+}
+.reward-asset-moja h6 span{
+       display: flex;
+       color: var(--main-color);
+       margin-top: 2px;
+}
+.reward-asset-moja .column-wrap{
+       display:grid;
+       grid-template-columns: 1fr 1fr;
+       margin-top: 5px;
+       gap: 30px;
+}
+.reward-asset-moja .column-wrap .left-col{
+        border-right: 1px solid var(--sleezy-border);
+}
+.reward-asset-moja .column-wrap .left-col h5{
+        font-size: 13px;
+}
+.reward-asset-moja .column-wrap .right-col h4{
+        font-size: 15px;
+        font-family: var(--font-light);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Comments */
 .comments-wrapper h4{
         font-family: "Madera-Light";

@@ -12,6 +12,7 @@ import CommentMoja from "./CommentMoja";
 import { MdClose } from "react-icons/md";
 import { ImGift } from "react-icons/im";
 import { GiShoppingCart } from "react-icons/gi";
+import RewardChoiceModal from "./RewardChoiceModal";
 
 const BrandAssetModal = ({ data, func }) => {
   const [likeFlag, setLikeFlag] = useState(false);
@@ -23,6 +24,7 @@ const BrandAssetModal = ({ data, func }) => {
   const { profile } = useSelector(state => state.profile)
   const dispatch = useDispatch();
   const commentRef = useRef();
+  const [rewardStatus, setRewardStatus] = useState(false)
 
   const closeModal = () => {
             dispatch(closeBrandModal());
@@ -138,6 +140,7 @@ const BrandAssetModal = ({ data, func }) => {
   return (
     <div className={isBrandAssetModalOpen ? "brand-modal active" : "brand-modal"}>
            <Toaster />
+           { rewardStatus && <RewardChoiceModal  creator={creator} func={setRewardStatus} />}
             <div className="brand-modal-content">
                         <div className="brand-modal-asset-col">
                                    <div className="modal-asset-body">
@@ -188,7 +191,7 @@ const BrandAssetModal = ({ data, func }) => {
                                                                                   <span><GoDownload /></span>
                                                                    </div> */}
                                                                    <div className="brand-actions">
-                                                                              <div className="action-btn reward-btn">
+                                                                              <div className="action-btn reward-btn" onClick={() => setRewardStatus(true)}>
                                                                                         <span><ImGift /></span>
                                                                                         <h4>Reward</h4>
                                                                                </div>
