@@ -1,6 +1,6 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { closeBrandModal, setBrandAssets } from "../../redux/brand/brandUtils";
+import { closeBrandModal, setBrandAssets, setBrandRewards } from "../../redux/brand/brandUtils";
 import BrandOpenedAsset from "./BrandOpenedAsset";
 import profileImg from "../../assets/dummyprofile.png"
 import { GoHeart, GoBookmark, GoHeartFill,GoBookmarkFill, GoDownload } from "react-icons/go";
@@ -13,6 +13,7 @@ import { MdClose } from "react-icons/md";
 import { ImGift } from "react-icons/im";
 import { GiShoppingCart } from "react-icons/gi";
 import RewardChoiceModal from "./RewardChoiceModal";
+import { useGetAllCreatedRewardsQuery } from "../../redux/brand/brandSlice";
 
 const BrandAssetModal = ({ data, func }) => {
   const [likeFlag, setLikeFlag] = useState(false);
@@ -25,7 +26,14 @@ const BrandAssetModal = ({ data, func }) => {
   const dispatch = useDispatch();
   const commentRef = useRef();
   const [rewardStatus, setRewardStatus] = useState(false)
+  const { data: created_rewards } = useGetAllCreatedRewardsQuery({ refetchOnMountOrArgChange: true })
 
+  useEffect(() => {
+        if(created_rewards){
+                 dispatch(setBrandRewards({...created_rewards}))
+        }
+  }, [dispatch, created_rewards])
+  
   const closeModal = () => {
             dispatch(closeBrandModal());
             setLikeFlag(false);

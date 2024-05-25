@@ -47,12 +47,20 @@ export const brandSlice = apiSlice.injectEndpoints({
                }),
                editBrandReward: builder.mutation({
                         query: (payload) => ({
-                                url: "/brand/edit-reward",
+                                url: "brand/edit-reward",
                                 method: "PUT",
                                 body: payload
                         }),
                         invalidatesTags: ['Rewards']
                }),
+               confirmCreatorRewards: builder.mutation({
+                       query: (payload) => ({
+                              url: "brand/confirm-creator-rewards",
+                              method: "PUT",
+                              body: payload
+                       }),
+                       invalidatesTags: ['Rewards']
+               })
         })
 })
 
@@ -63,5 +71,6 @@ export const {
      useCreateRewardForCreatorsMutation,
      useGetAllCreatedRewardsQuery,
      useDeleteBrandRewardMutation,
-     useEditBrandRewardMutation
+     useEditBrandRewardMutation,
+     useConfirmCreatorRewardsMutation
 } = brandSlice

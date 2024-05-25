@@ -1,5 +1,6 @@
 import express from "express";
 import { 
+    ConfirmCreatorRewards,
     CreateRewardForCreator, 
     DeleteBrandReward, 
     EditBrandReward, 
@@ -19,6 +20,6 @@ brand_router.post("/create-reward", protect, CreateRewardForCreator);
 brand_router.get("/get-all-brand-rewards", protect, GetAllBrandRewards);
 brand_router.delete("/delete-reward", protect, DeleteBrandReward);
 brand_router.put("/edit-reward", protect, EditBrandReward);
-
+brand_router.put("/confirm-creator-rewards", protect, ConfirmCreatorRewards)
 
 export default brand_router;

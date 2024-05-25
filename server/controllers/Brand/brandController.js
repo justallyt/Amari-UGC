@@ -106,3 +106,26 @@ export const EditBrandReward = asyncHandler(async(req, res) => {
                res.status(500).json({ message: "Apologies! Your reward cannot be updated at this time"})
        }
 })
+
+
+//Confirm and assign rewards to creators
+export const  ConfirmCreatorRewards = asyncHandler(async(req, res) => {
+          const { creator, rewards } = req.body;
+         
+          try {
+              rewards.forEach(async(reward) => {
+                     const reward_id = new mongoose.Types.ObjectId(reward)
+                     //check if creator has already been awarded
+                     const creatorCheck = await Rewards.findById(reward_id)
+                     const check = creatorCheck.beneficiaries.some(item => item === creator);
+                     if(!check){
+                            const assignReward = await Rewards.findByIdAndUpdate(reward, {
+                                   $push: { beneficiaries: creator}
+                           })
+                     }
+              })
+              res.status(201).json({ message: "Rewarding successful"})
+          } catch (error) {
+                  res.status(500).json({ message: "An error occured. Rewarding not successful"})
+          }
+})
