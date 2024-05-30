@@ -6,7 +6,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa"
 import { NavLink, useNavigate} from "react-router-dom"
 import { useContext, useEffect, useRef, useState } from "react"
-import { useGetUnreadUserNotificationsQuery,  useLogoutUserMutation } from "../../redux/usersSlice"
+import { useGetUnreadUserNotificationsQuery,  useLogoutUserMutation, useReadAllUserNotificationsMutation } from "../../redux/usersSlice"
 import { clearCredentials } from "../../redux/authSlice"
 import { clearProfile, setUnreadNotifications } from "../../redux/profileSlice"
 import { useSelector, useDispatch } from "react-redux"
@@ -55,6 +55,7 @@ const Topbar = ({ user}) => {
           }
   }
  //Open notification box
+ const [ ReadNotifications ] = useReadAllUserNotificationsMutation()
  const handleNotification = (e) =>{
          if(notificationRef.current && !notificationRef.current.contains(e.target)){
                 setNotificationStatus(false)
@@ -63,6 +64,13 @@ const Topbar = ({ user}) => {
          }
  }
 
+useEffect(() => {
+         if(notificationStatus){
+              setTimeout(() => {
+                      ReadNotifications()
+              }, 1500)
+         }
+}, [notificationStatus, ReadNotifications])
   //Logout User
 const [ logoutConsumer ] = useLogoutUserMutation();
 

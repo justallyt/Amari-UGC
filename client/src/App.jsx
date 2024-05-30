@@ -33,6 +33,7 @@ import { clearProfile } from "./redux/profileSlice"
 import { clearUtils } from "./redux/utilsSlices"
 import { apiSlice } from "./redux/apiSlice"
 import BrandRewards from "./pages/Brand/BrandRewards"
+import CreatorRewards from "./pages/Creator/CreatorRewards"
 
 function App() {
   const { userInfo } = useSelector(state => state.auth)
@@ -69,6 +70,7 @@ function App() {
                              <Route path="/creator/:id/settings/:type" element={<CreatorSettings />} />
                              <Route path="/creator/:id/my-brands" element={<CreatorBrands />}/>
                              <Route path="/creator/:id/notifications" element={<CreatorNotifications />} />
+                             <Route path="/creator/:id/rewards" element={<CreatorRewards />} />
                     </Route>
 
                     {/*Brand Routes */}

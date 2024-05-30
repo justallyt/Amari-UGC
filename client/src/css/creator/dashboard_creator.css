@@ -311,8 +311,18 @@
 .box-profile span.request{
     color: rgb(202, 73, 34);
 }
+.box-profile span.upload{
+      color: rgb(171, 20, 205);
+  }
+  .box-profile span.reward{
+      color: rgb(20, 119, 205);
+  }
 .box-notification-moja .box-texts p{
     font-size: 14px;
+    font-family: var(--font-medium);
+}
+.box-notification-moja .box-texts p.read{
+      font-family: var(--font-regular);
 }
 .box-notification-moja .box-texts span{
      font-size: 10px;

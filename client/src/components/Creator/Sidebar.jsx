@@ -2,8 +2,9 @@ import { NavLink } from "react-router-dom"
 import logo from '../../assets/logo.png'
 import { IoHomeOutline, IoLayersOutline, IoCloudUploadOutline } from "react-icons/io5"
 import { IoMdNotificationsOutline } from "react-icons/io"
-import { BsDatabase, BsPiggyBank } from "react-icons/bs"
+import { BsDatabase } from "react-icons/bs"
 import { SlSettings } from "react-icons/sl"
+import { ImGift } from "react-icons/im";
 import { useSelector } from "react-redux"
 
 const CreatorSidebar = () => {
@@ -33,9 +34,9 @@ const CreatorSidebar = () => {
                                              <li>
                                                        <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/moments`}><span><BsDatabase /></span> <p>Shared Brand Moments</p></NavLink>
                                              </li>
-                                             {/* <li>
-                                                       <NavLink to={'/earnings'}><span><BsPiggyBank /></span> <p>My Earnings</p></NavLink>
-                                             </li> */}
+                                             <li>
+                                                       <NavLink to={`/creator/${profile.username !=='null' ? profile.username : profile._id}/rewards`}><span><ImGift /></span> <p>Rewards Earned</p></NavLink>
+                                             </li>
                                              <li>
                                                        <NavLink to={`/creator/${profile.username !== 'null' ? profile.username : profile._id}/settings`}><span><SlSettings /></span><p> Settings</p></NavLink>
                                              </li>

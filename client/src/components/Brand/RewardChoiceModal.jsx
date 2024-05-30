@@ -2,7 +2,7 @@ import { CgClose } from "react-icons/cg"
 import { useSelector } from "react-redux"
 import { IoGift } from "react-icons/io5";
 import { useForm } from 'react-hook-form'
-import { useConfirmCreatorRewardsMutation } from "../../redux/brand/brandSlice";
+import { useConfirmCreatorRewardsMutation, useGetAllCreatedRewardsQuery } from "../../redux/brand/brandSlice";
 import toast from "react-hot-toast"
 import Spinner3 from "../Spinner3"
 
@@ -11,7 +11,7 @@ const RewardChoiceModal = ({ creator, func }) => {
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const [ ConfirmReward, { isLoading}] = useConfirmCreatorRewardsMutation();
-
+   const { refetch } = useGetAllCreatedRewardsQuery()
     const rewards = brandRewards.rewards !== null && brandRewards.rewards.length > 0  ?
                                                brandRewards.rewards : []
 
@@ -28,6 +28,7 @@ const RewardChoiceModal = ({ creator, func }) => {
                    if(reward_init){
                          toast.success(reward_init.message, { id: "reward_init_success"})
                          func(false)
+                         refetch();
                    }
             } catch (error) {
                   toast.error("Rewarding is not possible at this time. Try again later", { id: "reward-init_error"})

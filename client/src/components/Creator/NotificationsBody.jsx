@@ -63,6 +63,7 @@ const NotificationsBody = () => {
                                                                              
                                                                              { item.notification_type === 'Request' ? <p className={item.sender.isRead ? 'read' : ''}>{item.sender.senderMsg}</p> : 
                                                                              item.notification_type === 'Upload' ? <p className={item.sender.isRead ? 'read': ''}>{item.sender.senderMsg}</p> :
+                                                                             item.notification_type === 'Reward' ? <p className={item.sender.isRead ? 'read': ''}>{item.sender.senderMsg}</p> :
                                                                              <p className={item.receipient.isRead ? 'read' : ''}>{item.receipient.receipientMsg}</p>}
                                                                             <span>{calculateTimePassed(item.createdAt)}</span>
                                                                   </div>

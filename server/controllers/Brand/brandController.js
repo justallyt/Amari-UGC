@@ -4,6 +4,7 @@ import Notifications from "../../models/NotificationsModel.js";
 import Rewards from "../../models/RewardModel.js"
 import mongoose, { Mongoose } from "mongoose";
 import Asset from "../../models/assetsModel.js";
+import { sendRewardEmail } from "../../mail/sendRewardEmail.js";
 
 
 //Get all creators subscribed to a brand
@@ -111,17 +112,27 @@ export const EditBrandReward = asyncHandler(async(req, res) => {
 //Confirm and assign rewards to creators
 export const  ConfirmCreatorRewards = asyncHandler(async(req, res) => {
           const { creator, rewards } = req.body;
-         
+          //get creator details
+          const user = await User.findById(creator)
+          const brandName = req.user.name
+
           try {
               rewards.forEach(async(reward) => {
                      const reward_id = new mongoose.Types.ObjectId(reward)
                      //check if creator has already been awarded
                      const creatorCheck = await Rewards.findById(reward_id)
-                     const check = creatorCheck.beneficiaries.some(item => item === creator);
-                     if(!check){
-                            const assignReward = await Rewards.findByIdAndUpdate(reward, {
+                     const check = creatorCheck.beneficiaries.includes(creator);
+                     if(check){
+                             return;
+                     }else{
+                           const assignReward = await Rewards.findByIdAndUpdate(reward, {
                                    $push: { beneficiaries: creator}
-                           })
+                           }, { new: true})
+
+                           if(assignReward){
+                                   const coupon = assignReward.reward_code;
+                                   const rewardEmail = await sendRewardEmail(user, brandName, coupon)
+                           }
                      }
               })
               res.status(201).json({ message: "Rewarding successful"})
