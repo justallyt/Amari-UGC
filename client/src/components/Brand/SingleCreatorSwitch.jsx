@@ -12,6 +12,7 @@ const SingleCreatorSwitch = () => {
     const [switchStatus, setSwitchStatus] = useContext(divSwitch);
     const { singleCreator, isBrandAssetModalOpen } = useSelector(state => state.brand)
     const [assetDetails, setAssetDetails] = useState();
+    
    const dispatch = useDispatch();
     const deactiveCreator = () =>{
         setSwitchStatus({ status: false, data: {}, })
