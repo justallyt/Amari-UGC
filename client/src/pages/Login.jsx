@@ -6,7 +6,6 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
-             
              <div className="inner-row">
                        <div className="login-content">
                                <header>

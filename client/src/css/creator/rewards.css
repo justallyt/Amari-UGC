@@ -1,0 +1,169 @@
+.rewards-body-header{
+    margin-bottom: 30px;
+}
+.rewards-body-header h2{
+     font-family: var(--font-light);
+     margin-bottom: 10px;
+}
+.rewards-body-header p{
+     font-size: 16px;
+     width: 90%;
+     line-height: 1.6;
+}
+
+.rewards-body-table table{
+    width: 100%;
+    border-collapse: collapse;
+   
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.rewards-body-table th{
+     padding: 15px 10px;
+     border-bottom: 1px solid var(--sleezy-border);
+     font-size: 15px;
+     text-align: left;
+     font-family: var(--font-light);
+     border-right: 1px solid var(--sleezy-border);
+     background:rgba(155, 178, 185, 0.088)
+}
+.rewards-body-table th:first-child{
+      border-radius: 8px 0px 0px 0px;
+      -webkit-border-radius: 8px 0px 0px 0px;
+      -moz-border-radius: 8px 0px 0px 0px;
+      -ms-border-radius: 8px 0px 0px 0px;
+      -o-border-radius: 8px 0px 0px 0px;
+}
+.rewards-body-table th:last-child{
+      border-right: 0;
+      border-radius: 0px 8px 0px 0px;
+      -webkit-border-radius: 0px 8px 0px 0px;
+      -moz-border-radius: 0px 8px 0px 0px;
+      -ms-border-radius: 0px 8px 0px 0px;
+      -o-border-radius: 0px 8px 0px 0px;
+}
+.rewards-body-table td{
+     border: 0;
+     padding: 10px;
+     border-bottom: 1px solid var(--sleezy-border);
+}
+.rewards-body-table tr:nth-child(even){
+      background:rgba(146, 176, 185, 0.05);
+}
+.rewards-body-table .brand{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    min-width: 200px;
+}
+.rewards-body-table .brand img{
+      width: 45px;
+      height: 45px;
+      background: white;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 45px;
+      -webkit-border-radius: 45px;
+      -moz-border-radius: 45px;
+      -ms-border-radius: 45px;
+      -o-border-radius: 45px;
+}
+.rewards-body-table .brand .brand-texts h4{
+      font-size: 16px;
+      font-family: var(--font-ultralight);
+}
+.rewards-body-table .brand .brand-texts p{
+     font-size: 14px;
+     display: flex;
+     align-items: center;
+     font-family: var(--font-regular);
+     color: rgb(98, 98, 98);
+     gap: 2px;
+}
+.rewards-body-table .brand .brand-texts p span{
+    display: flex;
+    margin-top: 2px;
+}
+.rewards-body-table .name-column{
+    min-width: 200px;
+    font-size: 16px;
+    color:rgb(61, 61, 61);
+}
+.rewards-body-table .coupon span{
+    display: flex;
+    padding: 2px 20px 6px 20px;
+    background: rgb(255, 192, 238);
+    border-radius: 20px;
+    font-size: 13px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.rewards-body-table .custom-coupon span{
+    display: flex;
+    padding: 2px 20px 6px 20px;
+    background: rgb(192, 241, 255);
+    border-radius: 20px;
+    font-size: 13px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.rewards-body-table .code{
+      font-family: var(--font-regular);
+      color: rgb(61, 61, 61);
+      padding: 0 20px;
+      text-align: center;
+      font-size: 14px;
+}
+.rewards-body-table .description p{
+       font-size: 15px;
+       line-height: 1.6;
+}
+.rewards-body-table .final span{
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-items: center;
+      background: var(--sleezy-border);
+      border-radius: 40px;
+      -webkit-border-radius: 40px;
+      -moz-border-radius: 40px;
+      -ms-border-radius: 40px;
+      -o-border-radius: 40px;
+      cursor: pointer;
+}
+.spinner-bar{
+      width: 80%;
+       display: flex;
+       justify-content: center;
+}
+
+.reward-error{
+        border-top: 1px solid var(--sleezy-border);
+        text-align: center;
+        padding-top: 20px;
+        font-size: 15px;
+        color:rgb(61, 61, 61);
+}
+
+
+
+@media(max-width: 1000px){
+         .rewards-body-table{
+              overflow-x: scroll;
+         }
+         .rewards-body-table::-webkit-scrollbar{
+                height: 6px !important;
+         }
+         .rewards-body-table table{
+               min-width: 1000px;
+         }
+}

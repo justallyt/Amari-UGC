@@ -21,9 +21,9 @@ const LoginUser = () => {
 
   // Logout pop message
   useEffect(()=> {
-        if(pop){
-               toast.success(pop.message, { id: 'logout'})
-         }
+      //   if(pop !== null){
+      //          toast.success(pop.message, { id: 'logout'})
+      //    }
         setTimeout(()=> {
               dispatch(clearPop());
          }, 3000)

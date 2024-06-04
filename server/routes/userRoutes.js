@@ -17,7 +17,8 @@ import {
      ConfirmPasswordResetRequest,
      ResendPasswordResetOtp,
      ResetUserPassword,
-     SubscribeToBrand
+     SubscribeToBrand,
+     GetAllRewardsForConsumer
 } from "../controllers/usersController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import { upload } from "../utils/multer.js";
@@ -42,5 +43,6 @@ router.get('/all-notifications', protect, GetAllUserNotifications);
 router.get('/unread-notifications', protect, GetUserUnreadNotifications);
 router.put('/update-all-notifications', protect, UpdateAllNotificationsStatus)
 router.post('/subscribe-to-brand', protect, SubscribeToBrand);
+router.get("/get-all-user-rewards", protect, GetAllRewardsForConsumer)
 
 export default router;

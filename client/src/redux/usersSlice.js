@@ -142,6 +142,14 @@ export const usersSlice = apiSlice.injectEndpoints({
                          method: 'PUT'
                    }),
                    invalidatesTags: ["Notifications"]
+            }),
+
+            //get all user rewards
+            getAllUserRewards:builder.query({
+                   query: () => ({
+                         url: `/user/get-all-user-rewards`,
+                         method: "GET"
+                   })
             })
         })
 })
@@ -164,5 +172,6 @@ export const {
        useValidatePasswordResetMutation,
        useResendPasswordResetMutation,
        useResetUserPasswordMutation,
-       useSubscribeToBrandMutation
+       useSubscribeToBrandMutation,
+       useGetAllUserRewardsQuery
 } = usersSlice;

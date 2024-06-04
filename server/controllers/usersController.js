@@ -11,6 +11,7 @@ import { sendWelcomeEmailToCreator } from "../mail/sendCreatorEmail.js";
 import { sendWelcomeEmailToBrand } from "../mail/sendBrandEmail.js";
 import { sendPasswordVerification } from "../mail/sendPasswordVerification.js";
 import { sendPasswordResetEmail } from "../mail/sendPassworResetConfirmation.js";
+import Reward from "../models/RewardModel.js";
 
 //Login User
 export const LoginUser = asyncHandler(async(req, res) => {
@@ -515,4 +516,18 @@ export const UpdateAllNotificationsStatus = asyncHandler(async(req, res) => {
         }else{
                 res.status(500).json({ msg: 'An error occured while updating notifications'})
         }
+})
+
+
+//Retrieve all Rewards for a specific creator
+export const GetAllRewardsForConsumer = asyncHandler(async(req, res) => {
+         const creatorId = req.user._id;
+         //filter rewards
+         const result = await Reward.find({ beneficiaries: { $elemMatch: { $eq: creatorId} }})
+
+         if(result){
+                 res.status(200).json({ result })
+         }else{
+                 res.status(500).json({ message: "Internal server error, getting creator rewards failure"})
+         }
 })
