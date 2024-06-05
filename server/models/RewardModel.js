@@ -16,7 +16,7 @@ const rewardSchema = mongoose.Schema({
        },
        reward_code: {
             type: String,
-            required: true
+            default: ""
        },
        reward_description: {
             type: String,

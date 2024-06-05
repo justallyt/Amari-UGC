@@ -56,8 +56,9 @@ const RewardChoiceModal = ({ creator, func }) => {
                                                                                                                <div className="left-col">
                                                                                                                         <h5>{item.reward_name}</h5>
                                                                                                               </div>
+
                                                                                                               <div className="right-col">
-                                                                                                                          <h4>Code: {item.reward_code}</h4>
+                                                                                                                          { item.reward_type !== "Custom" ? <h4>Code: {item.reward_code}</h4> : <p>{item.reward_description.slice(0, 60)}...</p>}
                                                                                                               </div>
                                                                                                     </div>
                                                                                          </div>

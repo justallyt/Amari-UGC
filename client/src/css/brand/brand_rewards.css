@@ -137,6 +137,10 @@
     padding-left: 10px;
     outline: none;
 }
+.reward-control.textarea{
+       height: 150px;
+       padding: 10px;
+}
 .reward-row button{
      width: 180px;
      height: 45px;
@@ -198,11 +202,10 @@
     font-size: 18px;
     color: #333;
     font-family: var(--font-light);
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--sleezy-border);
 }
 .reward-moja h2{
-    margin-top: 10px;
      font-size: 22px;
      display: flex;
      align-items: center;
@@ -213,6 +216,7 @@
 }
 .reward-moja p{
      font-size: 15px;
+     margin-top: 10px;
 }
 .reward-head-col.split span{
       background: var(--sleezy-border);

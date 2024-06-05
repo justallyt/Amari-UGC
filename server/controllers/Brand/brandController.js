@@ -46,18 +46,33 @@ export const CreateRewardForCreator = asyncHandler(async(req, res) => {
        const brand =  new mongoose.Types.ObjectId(req.user.id)
 
        try {
-              const reward = await Rewards.create({
-                     reward_owner: brand,
-                     reward_type: type,
-                     reward_name: name,
-                     reward_code: code.toUpperCase(),
-                     reward_description: description
-               })
-       
-              if(reward){
-                      res.status(201).json({ message: 'Reward Created Successfully'})
+              if(type === 'Custom'){
+                       const reward = await Rewards.create({
+                               reward_owner: brand,
+                               reward_type: type,
+                               reward_name: name,
+                               reward_description: description
+                       })
+
+                       if(reward){
+                            res.status(201).json({ message: 'Reward Created Successfully'})
+                       }else{
+                            res.status(500).json({ message: "Error occured during created reward"})
+                       }
               }else{
-                      res.status(500).json({ message: "Error occured during created reward"})
+                     const reward = await Rewards.create({
+                            reward_owner: brand,
+                            reward_type: type,
+                            reward_name: name,
+                            reward_code: code.toUpperCase(),
+                            reward_description: description
+                      })
+
+                      if(reward){
+                            res.status(201).json({ message: 'Reward Created Successfully'})
+                     }else{
+                            res.status(500).json({ message: "Error occured during created reward"})
+                     }
               }
        } catch (error) {
               console.log(error)
@@ -131,7 +146,9 @@ export const  ConfirmCreatorRewards = asyncHandler(async(req, res) => {
 
                            if(assignReward){
                                    const coupon = assignReward.reward_code;
-                                   const rewardEmail = await sendRewardEmail(user, brandName, coupon)
+                                   const type = assignReward.reward_type;
+                                   const description = assignReward.reward_description;
+                                   const rewardEmail = await sendRewardEmail(type, user, brandName, coupon, description)
                            }
                      }
               })

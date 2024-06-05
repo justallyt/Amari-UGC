@@ -415,9 +415,7 @@
 .brand-reward-wrap input{
         width: 16px;
 }
-.brand-reward-wrap input:checked + div{
 
-}
 .reward-asset-moja{
          flex-shrink: 0;
          width: 90%;
@@ -462,6 +460,9 @@
 .reward-asset-moja .column-wrap .right-col h4{
         font-size: 15px;
         font-family: var(--font-light);
+}
+.reward-asset-moja .column-wrap .right-col p{
+       font-size: 12px;
 }
 .confirm-btn{
         font-family: var(--font-regular);

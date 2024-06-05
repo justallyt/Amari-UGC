@@ -61,7 +61,7 @@ const BrandRewardsBody = () => {
                                                            </div>
                                                 </div>
                                                 <h3>{item.reward_name}</h3>
-                                                <h2><span>Code:</span>{item.reward_code}</h2>
+                                                  { item.reward_code === '' ? "" : <h2><span>Code:</span>{item.reward_code}</h2>}
                                                 <p>{item.reward_description}</p>
                                        </div>
                                 )

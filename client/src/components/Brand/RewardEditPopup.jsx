@@ -48,6 +48,7 @@ const RewardEditPopup = ({ id, func}) => {
                                               <select className="reward-control" {...register("type", { required: "Please choose reward type"})}>
                                                          <option value="">Set Reward Type</option>
                                                          <option value="Coupon">Coupon</option>
+                                                         <option value="Custom">Custom</option>
                                               </select>
                                               <span className="error">{errors.type && errors.type.message} </span>
                                    </div>
@@ -56,11 +57,14 @@ const RewardEditPopup = ({ id, func}) => {
                                              <input type="text" className="reward-control" placeholder="Reward name" {...register('name', { required: "Please name your reward"})} />
                                              <span className="error">{errors.name && errors.name.message}</span>
                                    </div>
-                                   <div className="reward-row">
-                                             <label htmlFor="Reward Code">Reward Code</label>
-                                             <input type="text" className="reward-control" placeholder="RMNOSJJK55" {...register("code", { required: "Please enter a reward code"})}  />
-                                             <span className="error">{errors.code && errors.code.message}</span>
-                                   </div>
+                                   { activeReward && activeReward.reward_type === "Custom" ? "" :
+                                            <div className="reward-row">
+                                                    <label htmlFor="Reward Code">Reward Code</label>
+                                                    <input type="text" className="reward-control" placeholder="RMNOSJJK55" {...register("code", { required: "Please enter a reward code"})}  />
+                                                     <span className="error">{errors.code && errors.code.message}</span>
+                                          </div>
+                                   }
+
                                    <div className="reward-row">
                                              <label htmlFor="description">Reward Description</label>
                                              <input type="text" className="reward-control" placeholder="Reward description" {...register("description", { required: "Please describe your reward"})} />

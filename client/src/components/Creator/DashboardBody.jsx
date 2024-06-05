@@ -56,7 +56,7 @@ const DashboardBody = () => {
                                                                                     <div className="icon">
                                                                                              <img src={discover} alt="" />
                                                                                     </div>
-                                                                                    <h3>Discover your Favorites</h3>
+                                                                                    <h3>Discover your Favorites Brands</h3>
                                                                           </div>
                                                                           <div className="box-column-texts">
                                                                                       {/* <p>Explore and connect with a wide array of brands, finding new favorites and rekindling love for the classics.</p> */}
