@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import Topbar from "./Topbar"
-import { IoIosTimer } from "react-icons/io";
+// import { IoIosTimer } from "react-icons/io";
 import { IoTicketOutline } from "react-icons/io5";
 import { BsDashLg } from "react-icons/bs";
 import { useGetAllUserRewardsQuery } from "../../redux/usersSlice";
@@ -17,7 +17,7 @@ const RewardsBody = () => {
 
     useEffect(() => {
              if(data){
-                   dispatch(setProfileRewards([...data.result]))
+                   dispatch(setProfileRewards([...data.sorted]))
              }
     }, [data, dispatch])
 
@@ -63,7 +63,7 @@ const RewardsBody = () => {
                                                                                                   <img src={getBrandDetails(item.reward_owner).image} alt="" />
                                                                                                   <div className="brand-texts">
                                                                                                             <h4>{ getBrandDetails(item.reward_owner).name}</h4>
-                                                                                                            <p><span><IoIosTimer /></span>{calculateTimePassed(item.updatedAt)}</p>
+                                                                                                            <p>{calculateTimePassed(item.updatedAt)}</p>
                                                                                                   </div>
                                                                                          </div>
                                                                               </td>

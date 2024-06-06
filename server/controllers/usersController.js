@@ -526,7 +526,8 @@ export const GetAllRewardsForConsumer = asyncHandler(async(req, res) => {
          const result = await Reward.find({ beneficiaries: { $elemMatch: { $eq: creatorId} }})
 
          if(result){
-                 res.status(200).json({ result })
+                 const sorted = result.sort((a, b) => b.updatedAt - a.updatedAt);
+                 res.status(200).json({ sorted })
          }else{
                  res.status(500).json({ message: "Internal server error, getting creator rewards failure"})
          }

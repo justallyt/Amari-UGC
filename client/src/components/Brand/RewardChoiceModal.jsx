@@ -41,13 +41,14 @@ const RewardChoiceModal = ({ creator, func }) => {
                 <div className="modal-create-body">
                              <h2>Reward {creator.name}</h2>
                              <span className="close-btn" onClick={() => func(false)}><CgClose /></span> 
-                             <div className="reward_form_content">
+                              <div className="reward_form_content">
                                           { brandRewards.rewards !== null && brandRewards.rewards.length > 0 ? 
                                                       <>
                                                        <p className="para">Below is a list of all available rewards</p>
                                                               { unassigned_rewards.length > 0 ? 
                                                                     <form onSubmit={handleSubmit(rewardCreator)}>
-                                                                            { unassigned_rewards.map(item => 
+                                                                            <div className="form-row-box">
+                                                                              { unassigned_rewards.map(item => 
                                                                                   <div className="brand-reward-wrap" key={item._id}>
                                                                                              <input type="checkbox" {...register("rewards", { required: "Please choose a reward"})} value={item._id} />
                                                                                            <div  className={"reward-asset-moja" } key={item._id}>
@@ -65,6 +66,7 @@ const RewardChoiceModal = ({ creator, func }) => {
                                                                                </div>
                                                                              )}
 
+                                                                              </div>
                                                                              <span className="error">{errors.rewards && errors.rewards.message}</span>
                                                                               <button type="submit" className="confirm-btn">{ isLoading ? <Spinner3 /> : 'Confirm'}</button>
                                                                     </form>

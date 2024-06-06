@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import logo from "../assets/logo.png"
 import "../css/welcome.css"
 import random1 from "../assets/reviewer1.jpg"
@@ -59,7 +59,15 @@ const Home = () => {
                      </div>   
             </div>
             <div className="footer">
-                     <p>Copyright &copy; { new Date().getFullYear() } Amari | All rights Reserved</p>
+                     <div className="inner-row">
+                              <div className="footer-content">
+                                          <p>Copyright &copy; { new Date().getFullYear() } Amari | All rights Reserved</p>
+                                         <div className="footer-policy">
+                                                  <Link to={'/privacy'}>Privacy Policy</Link>
+                                                 <Link to={"/terms-of-service"}>Terms of Use</Link>
+                                          </div>
+                              </div>
+                     </div>
             </div>
     </div>
   )

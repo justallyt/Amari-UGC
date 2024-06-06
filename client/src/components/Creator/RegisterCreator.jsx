@@ -1,7 +1,7 @@
 import { VscEye, VscEyeClosed } from "react-icons/vsc"
 import Footer from "../Footer"
 import { useState } from "react"
-import { NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { useDispatch } from "react-redux"
 import { useCreateUserMutation } from "../../redux/usersSlice"
@@ -97,7 +97,7 @@ const RegisterCreator = () => {
                                   </div> 
                                   <div className="agreement">
                                             <input type="checkbox" className="check" {...register("terms", { required: "Kindly read through our terms and policy"})} />
-                                            <p>I agree to the <a href="s">Terms of Service</a> and <a href="s">Privacy Policy</a></p>
+                                            <p>I agree to the <Link to={"/terms-of-service"}>Terms of Service</Link> and <Link to={'/privacy'}>Privacy Policy</Link></p>
                                   </div>
                                   <span className="error">{errors.terms && errors.terms.message}</span>
 

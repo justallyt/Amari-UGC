@@ -149,7 +149,7 @@ export const usersSlice = apiSlice.injectEndpoints({
                    query: () => ({
                          url: `/user/get-all-user-rewards`,
                          method: "GET"
-                   })
+                   }),
             })
         })
 })

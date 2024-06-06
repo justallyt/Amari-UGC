@@ -276,6 +276,10 @@
    margin-top: 6px;
 }
 
+.form-row-box{
+    max-height: 300px;
+    overflow-y: scroll;
+}
 @media(max-width: 768px){
      .modal-create-body,
      .reward-delete-box{

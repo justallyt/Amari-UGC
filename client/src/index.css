@@ -529,11 +529,32 @@ header .logo img{
     border-top: 1px solid rgba(220, 220, 220, 0.5);
     text-align: center;
 }
-.footer p{
-    font-size: 13px;
+.footer-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
-
+.footer p{
+     font-size: 13px;
+}
+.footer a{
+    font-size: 13px;
+    display: flex;
+    color: #333;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+.footer-policy{
+      display: flex;
+      gap: 30px;
+}
+.footer-policy a:hover{
+     color: var(--main-color);
+     font-weight: 500;
+}
 /* Error Page Styles */
 .error-crash-page{
       display: flex;
@@ -588,6 +609,38 @@ header .logo img{
 }
 
 
+/* Privacy policy and Terms */
+.policy-body{
+  padding: 50px 0;
+}
+.policy-body h2{
+      font-family: var(--font-medium);
+      font-size: 55px;
+      text-align: center;
+      border-bottom: 1px solid var(--sleezy-border);
+      padding-bottom: 10px;
+}
+.policy-wrap{
+     width: 1000px;
+     margin: 20px auto;
+}
+.policy-wrap h3{
+     font-size: 24px;
+     font-weight: 500;
+     margin-bottom: 10px;
+}
+.policy-wrap p,
+.policy-wrap h4{
+   width: 95%;
+   margin: auto;
+}
+.policy-wrap ul{
+     width: 92%;
+     margin: 10px auto;
+}
+.policy-wrap ul li {
+  margin-bottom: 10px;
+}
 @media(max-width: 1090px){
     .large{
           width: 300px;
@@ -601,6 +654,9 @@ header .logo img{
     .error-crash-page .error-crash-body{
           width: 90%;
     }
+    .policy-wrap{
+         width: 100%;;
+    }
 }
 
 @media(max-width: 768px){
@@ -613,7 +669,8 @@ header .logo img{
           width: 100%;
       }
       .small-intro.tweak h2,
-      .error-crash-body h2{
+      .error-crash-body h2,
+      .policy-body h2{
            font-size: 35px;
            line-height: 45px;
       }
@@ -623,5 +680,8 @@ header .logo img{
       .header-btns .btn.background{
             display: none;
       }
-
+      .footer-content{
+           flex-direction: column;
+           gap: 10px;
+      }
 }

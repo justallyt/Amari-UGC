@@ -2,7 +2,7 @@ import { useState } from "react"
 import Footer from "../../components/Footer"
 import { VscEye } from "react-icons/vsc"
 import { VscEyeClosed } from "react-icons/vsc"
-import { NavLink, useNavigate} from "react-router-dom"
+import { Link, NavLink, useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useCreateUserMutation } from "../../redux/usersSlice";
 import { useDispatch } from "react-redux"
@@ -111,7 +111,7 @@ const RegisterBrand = () => {
 
                                   <div className="agreement">
                                               <input type="checkbox" className="check" {...register("terms", { required: "Kindly read through our terms and policy"})} />
-                                            <p>I agree to the <a href="s">Terms of Service</a> and <a href="s">Privacy Policy</a></p>
+                                            <p>I agree to the <Link to={"/terms-of-service"}>Terms of Service</Link> and <Link to={"/privacy"}>Privacy Policy</Link></p>
                                   </div>
                                   <span className="error">{errors.terms && errors.terms.message}</span>
                                   <button type="submit" className="btn-submit">Create Account</button>

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
 import UserChoice from "./pages/UserChoice"
 import Register from "./pages/Register"
@@ -34,11 +34,14 @@ import { clearUtils } from "./redux/utilsSlices"
 import { apiSlice } from "./redux/apiSlice"
 import BrandRewards from "./pages/Brand/BrandRewards"
 import CreatorRewards from "./pages/Creator/CreatorRewards"
+import Privacy from "./pages/Privacy"
+import Terms from "./pages/Terms"
 
 function App() {
   const { userInfo } = useSelector(state => state.auth)
    const dispatch = useDispatch();
    const [ logoutUser ] = useLogoutUserMutation();
+   const location = useLocation();
 
   useEffect(() => {
          if(!userInfo){
@@ -51,6 +54,10 @@ function App() {
          }
   }, [userInfo, dispatch, logoutUser])
 
+
+useEffect(() => {
+       window.scrollTo(0, 0)
+}, [location])
   return (
        <>
               <Routes>
@@ -60,7 +67,8 @@ function App() {
                     <Route path="/user/login" element={<Login />} />
                      <Route path="/user/confirm-account" element={<Confirm />} />
                      <Route path="/user/forgot-password" element={<ForgotPassword />} />
-
+                     <Route path="/privacy" element={<Privacy />} />
+                     <Route path="/terms-of-service" element={<Terms />} />
                     {/* Consumer Routes */}
                     <Route element={<CreatorRoutes />}>
                              <Route path="/creator/:id" element={<CreatorDashboard />} />
